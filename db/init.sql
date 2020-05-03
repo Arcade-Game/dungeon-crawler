@@ -1,12 +1,12 @@
-drop table if exists players
-drop table if exists items
-drop table if exists maps
-drop table if exists monsters 
-drop table if exists player_scores
+drop table if exists players;
+drop table if exists items;
+drop table if exists maps;
+drop table if exists monsters;
+drop table if exists player_scores;
 
 create table players (
    player_id serial primary key,
-   username varcher(150) not null,
+   username varchar(150) not null,
    password varchar(300) not null
 );
 
