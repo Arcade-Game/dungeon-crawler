@@ -12,7 +12,7 @@ massive({
    connectionString: CONNECTION_STRING,
    ssl: {rejectUnauthorized: false}
 }).then(db => {
-   app.set(db, 'db')
+   app.set("db", db)
    console.log("DB connected")
    app.listen(port, () => console.log(`Server running on port: ${port}`))
 })

@@ -1,10 +1,14 @@
 import React from "react";
 
 const Dashboard = () => {
+   
+
 
    return (
       <div>
-         Dashboard
+         <button>Logout</button>
+         <button>Play</button>
+         <button>Leader board</button>
       </div>
    )
 }
