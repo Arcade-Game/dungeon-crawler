@@ -22,7 +22,8 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-promise-middleware": "^6.1.2",
-    "sass-node": "^4.11.2"
+    "sass-node": "^4.11.2",
+    "scss": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",

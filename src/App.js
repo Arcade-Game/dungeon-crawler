@@ -1,7 +1,8 @@
 import React from 'react';
 import Footer from './Components/Footer/Footer'
 import routes from "./routes";
-import './App.css';
+import './App.scss';
+import Game from './Components/Game/Game';
 
 function App() {
   return (
