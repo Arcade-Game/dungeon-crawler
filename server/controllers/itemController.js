@@ -1,5 +1,5 @@
 const itemList = require("../../db/inventory/item_list.json")
-const inventory = require("../../db/inventory/item_list.json")
+const inventory = require("../../db/inventory/inventory.json")
 const equipment = require("../../db/inventory/equipment.json");
 
 module.exports = {
