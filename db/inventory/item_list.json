@@ -1,0 +1,23 @@
+[
+   {
+      "id": 0,
+      "name":"Sword",
+      "type":"weapon",
+      "damage":2,
+      "image": "https://www.darksword-armory.com/wp-content/uploads/2018/07/the-vindaaris-sword-fantasy-medieval-weapon-1328-darksword-armory-3.jpg"
+   },
+   {
+      "id": 1,
+      "name":"Shield",
+      "type":"off-hand",
+      "armor":2,
+      "image": "https://images-na.ssl-images-amazon.com/images/I/81aJ7pR8cPL._AC_UY445_.jpg"
+   },
+   {
+      "id": 2,
+      "name":"Chest Piece",
+      "type":"armor",
+      "armor":3,
+      "image": "https://gamepedia.cursecdn.com/arksurvivalevolved_gamepedia/f/f1/Chitin_Chestpiece.png"
+   }
+]
