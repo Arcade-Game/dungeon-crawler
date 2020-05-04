@@ -3,6 +3,7 @@ import './Game.scss';
 import Map from './Map';
 import {mapObjects} from './mapObjects';
 import Footer from '../Footer/Footer';
+import axios from 'axios';
 import Inventory from './Inventory/Inventory';
 import Equipment from "./Inventory/Equipment";
 
@@ -30,10 +31,15 @@ class Game extends Component {
         let newGrid = [...this.state.grid]
         newGrid[y][x] = {type: "empty"}
         this.setState({grid: newGrid})
+        this.openChest()
         break;
     }
   }
 
+  openChest = () => {
+    axios.get(`/api/item`).then(res => console.log("res.data", res.data))
+  }
+  
   getKeyCode = (keyCode) => {
     const {charX, charY} = this.state
     if(keyCode === 37){

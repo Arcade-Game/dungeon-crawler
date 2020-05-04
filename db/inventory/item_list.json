@@ -1,23 +1,92 @@
 [
    {
       "id": 0,
-      "name":"Sword",
+      "name":"Iron Shortsword",
       "type":"weapon",
-      "damage":2,
+      "damage":1,
+      "armor": 1,
+      "health": 0,
       "image": "https://www.darksword-armory.com/wp-content/uploads/2018/07/the-vindaaris-sword-fantasy-medieval-weapon-1328-darksword-armory-3.jpg"
    },
    {
       "id": 1,
-      "name":"Shield",
+      "name":"Wooden Buckler",
       "type":"off-hand",
+      "damage": 0,
       "armor":2,
-      "image": "https://images-na.ssl-images-amazon.com/images/I/81aJ7pR8cPL._AC_UY445_.jpg"
+      "image": "https://cdn.clipart.email/7f7db044812007c33d795df10f4ac28a_wood-shield-png-picture-833377-wood-shield-png_2400-2400.png"
    },
    {
       "id": 2,
-      "name":"Chest Piece",
+      "name":"Iron Helmet",
       "type":"armor",
-      "armor":3,
-      "image": "https://gamepedia.cursecdn.com/arksurvivalevolved_gamepedia/f/f1/Chitin_Chestpiece.png"
+      "damage": 0,
+      "armor":2,
+      "health": 0,
+      "image": "App.js:28 https://res.cloudinary.com/desyiuzzn/image/upload/v1588634109/refternu/nihnurjali6cwfdbse5p.jpg"
+   },
+   {
+      "id": 3,
+      "name":"Steel Shortsword",
+      "type":"weapon",
+      "damage": 0,
+      "armor":2,
+      "health": 0,
+      "image": "https://cdn.clipart.email/3c56ccb3db7cf6eef95e7f4c018ecbfb_sword-clip-art-free-clipartsco_1052-744.svg"
+   },
+   {
+      "id": 4,
+      "name":"Iron Dagger",
+      "type":"off-hand",
+      "damage": 2,
+      "armor":0,
+      "health": 0,
+      "image": "https://cdn.clipart.email/1ba7dfd21e8e5b5bcbb92a1312077879_dagger-transparent-background-png-cliparts-free-download-hiclipart_300-421.jpeg"
+   },
+   {
+      "id": 5,
+      "name":"Mail Curass",
+      "type":"armor",
+      "damage": 0,
+      "armor":5,
+      "health": 0,
+      "image": "https://cdn.clipart.email/41df5b4f6c69ce452ca2b60cadf62840_chest-plate-armor-png-clipart-763252-pikpng_840-728.jpeg"
+   },
+   {
+      "id": 6,
+      "name":"Spear",
+      "type":"weapon",
+      "damage": 2,
+      "armor":0,
+      "health": 0,
+      "image": "https://cdn.clipart.email/e879c5110ec9552e04edfe876bd724f4_line-background-clipart-sword-knife-product-transparent-clip-art_900-900.png"
+   },
+   {
+      "id": 7,
+      "name":"Heater Shield",
+      "type":"off-hand",
+      "damage": 1,
+      "armor":6,
+      "health": 0,
+      "image": "https://www.t-nation.com/system/publishing/articles/10003985/original/Build-Bigger-Biceps-With-Isometrics-new.png?1476721195"
+   },
+   {
+      "id": 8,
+      "name":"Mage's Robe",
+      "type":"armor",
+      "damage": 0,
+      "armor":1,
+      "health": 4,
+      "image": "https://www.t-nation.com/system/publishing/articles/10003985/original/Build-Bigger-Biceps-With-Isometrics-new.png?1476721195"
+   },
+   {
+      "id": 9,
+      "name":"Axe",
+      "type":"weapon",
+      "damage": 3,
+      "armor":-1,
+      "health": 0,
+      "image": "https://cdn.clipart.email/18011760e2a734b04b029cd594e862c4_larp-axe-battle-axe-labrys-throwing-axe-axe-transparent-_637-961.jpeg"
    }
+   
 ]
