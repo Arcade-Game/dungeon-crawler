@@ -1,5 +1,5 @@
 import React from "react";
-import Inventory from "./Inventory" // remove after inventory works
+import Inventory from "./Game/Inventory/Inventory" // remove after inventory works
 const Dashboard = () => {
    
 
