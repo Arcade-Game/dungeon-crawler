@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai';
+import './Footer.scss';
 
 const Footer = props => {
    const [health, setHealth] = useState(0);
@@ -21,12 +22,18 @@ const Footer = props => {
    }
    let hearts = heartArr.map((e, i) => (e === 0) ? <AiFillHeart key={i} color={'red'} size={'40px'} /> :   <AiOutlineHeart key={i} color={'red'} size={'40px'}/> )
    return (
-      <div>
-         <button onClick={() => (health < totalHealth) ? setHealth(health + 1) :null} >-</button>
-         <button onClick={() => (health === 0) ? null: setHealth(health - 1)} >+</button>
+      <div className="footer">
+         {/* <button onClick={() => (health < totalHealth) ? setHealth(health + 1) :null} >-</button>
+         <button onClick={() => (health === 0) ? null: setHealth(health - 1)} >+</button> */}
          
-         <div>
+         <div className="health-bar">
             {hearts}
+         </div>
+         <div className="character-icon">
+
+         </div>
+         <div className="inventory-icon">
+
          </div>
       </div>
    )
