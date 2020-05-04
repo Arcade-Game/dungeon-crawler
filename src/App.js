@@ -7,8 +7,9 @@ import Game from './Components/Game/Game';
 function App() {
   return (
     <div className="App">
-      {routes}
-      <Footer />
+      {/* {routes}
+      <Footer /> */}
+      <Game />
     </div>
   );
 }

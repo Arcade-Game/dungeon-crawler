@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './Game.scss';
 import Map from './Map';
 import {mapObjects} from './mapObjects';
+import Footer from '../Footer/Footer';
 
 class Game extends Component {
   constructor(){
@@ -10,7 +11,7 @@ class Game extends Component {
       grid: mapObjects,
       charX: 15,
       charY: 14,
-      heightWidth: 800,
+      heightWidth: 700,
       viewRowCols: 9
     }
   }
@@ -18,37 +19,34 @@ class Game extends Component {
   checkWall = (x, y) => {
     return this.state.grid[y][x].type === 'wall' ? true : false
   }
-  
-  checkChest = (x, y) => {
-    return this.state.grid[y][x].type === 'chest' ? this.state.grid[y][x].type = 'empty' : null
-  }
-  
-  move = ({keyCode}) => {
-    
-    if(keyCode === 37){
-      // this.checkChest(this.state.charX-1, this.state.charY)
-      return this.checkWall(this.state.charX-1, this.state.charY) === false ? (this.setState({charX: this.state.charX-1}), this.checkTile()) : null
-    } else if(keyCode === 38){
-      // this.checkChest(this.state.charX, this.state.charY-1)
-      return this.checkWall(this.state.charX, this.state.charY-1) === false ? this.setState({charY: this.state.charY-1}) : null
-    } else if(keyCode === 39){
-      // this.checkChest(this.state.charX+1, this.state.charY)
-      return this.checkWall(this.state.charX+1, this.state.charY) === false ? this.setState({charX: this.state.charX+1}) : null
-    } else if(keyCode === 40){
-      // this.checkChest(this.state.charX, this.state.charY+1)
-      return this.checkWall(this.state.charX, this.state.charY+1) === false ? this.setState({charY: this.state.charY+1}) :  null
-    }
-  }
-  
-  checkTile = () => {
-    console.log('DING1', this.state.grid[this.state.charY][this.state.charX].type)
-    switch(this.state.grid[this.state.charY][this.state.charX].type){
+
+  checkTile = (x, y) => {
+    switch(this.state.grid[y][x].type){
       case "chest":
-        console.log("DING")
-        this.state.grid[this.state.charY][this.state.charX].type = 'empty'
+        let newGrid = [...this.state.grid]
+        newGrid[y][x] = {type: "empty"}
+        this.setState({grid: newGrid})
         break;
     }
   }
+
+  getKeyCode = (keyCode) => {
+    const {charX, charY} = this.state
+    if(keyCode === 37){
+      return this.checkWall(charX-1, charY) === false ? (this.setState({charX: charX-1}), this.checkTile(charX-1, charY)) : null
+    } else if(keyCode === 38){
+      return this.checkWall(charX, charY-1) === false ? (this.setState({charY: charY-1}), this.checkTile(charX, charY-1)) : null
+    } else if(keyCode === 39){
+      return this.checkWall(charX+1, charY) === false ? (this.setState({charX: charX+1}), this.checkTile(charX+1, charY)) : null
+    } else if(keyCode === 40){
+      return this.checkWall(charX, charY+1) === false ? (this.setState({charY: charY+1}), this.checkTile(charX, charY+1)) :  null
+    }
+  }
+
+  move = ({keyCode}) => {
+    this.getKeyCode(keyCode)
+  }
+  
 
   render() {
     console.log(this.state.charX, this.state.charY)
@@ -58,6 +56,7 @@ class Game extends Component {
       <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => this.move(e)}>
         <div className="Game">
           <Map charX={this.state.charX} charY={this.state.charY} heightWidth={this.state.heightWidth} viewRowCols={this.state.viewRowCols} grid={this.state.grid} />
+        <Footer />
         </div>
       </div>
     );

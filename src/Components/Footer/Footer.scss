@@ -1,0 +1,25 @@
+.footer {
+    border: 1px solid red;
+    width: 100%;
+    height: 12%;
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.character-icon {
+    border: 1px solid green;
+    height: 100%;
+    width: 10%;
+
+}
+
+.inventory-icon {
+    border: 1px solid green;
+    height: 100%;
+    width: 20%;
+}
