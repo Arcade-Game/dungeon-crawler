@@ -3,6 +3,7 @@ import './Game.scss';
 import Map from './Map';
 import {mapObjects} from './mapObjects';
 import Footer from '../Footer/Footer';
+import Inventory from '../Inventory';
 
 class Game extends Component {
   constructor(){
@@ -57,6 +58,7 @@ class Game extends Component {
         <div className="Game">
           <Map charX={this.state.charX} charY={this.state.charY} heightWidth={this.state.heightWidth} viewRowCols={this.state.viewRowCols} grid={this.state.grid} />
         <Footer />
+        <Inventory />
         </div>
       </div>
     );

@@ -1,16 +1,19 @@
 import React, {useState,useEffect} from "react"
 import axios from "axios";
-import "./Inventory.scss"
+import "./Inventory.scss";
+import {GiTwoCoins} from 'react-icons/gi';
 
 const Inventory = () => {
    const [inventory, setInventory] = useState([]),
              [weapon, setWeapon] = useState({}),
              [armor, setArmor] = useState({}),
-             [offHand, setOffHand] = useState({});
+             [offHand, setOffHand] = useState({}),
+             [currency, setCurrency] = useState(0);
             //  [selectedItem, setSelectedItem] = useState({});
 
    useEffect (()=> {
       axios.get("/api/inventory").then(res => {
+         console.log("res.data", res.data)
          setInventory(res.data)
       })
    },[])
@@ -58,7 +61,22 @@ const Inventory = () => {
 // console.log("armor: ", armor)
 console.log("weapon: ", weapon)
 // console.log("offHand: ", offHand)
-// console.log("inventory: ", inventory)
+console.log("inventory: ", inventory)
+
+
+
+const mappedInventory = inventory.map((el, i) => {
+   return inventory[i].type ?  <div className="inventory-square"><img key ={el.id} 
+               id={i} 
+               className={el.type}
+               src={el.image} 
+               draggable="true" 
+               onDragStart={(event) => handleDrag(event)} 
+               onDrag={(event) => event.preventDefault()} 
+               width="82%" height="88%"
+            /></div> : i < 8 ? <div className="inventory-square"></div> : null
+   })
+
 
    return (
    <div className="inventory-screen-container">
@@ -119,17 +137,10 @@ console.log("weapon: ", weapon)
       <section className="inventory-container"
                      onDrop={(event) => unEquipItem(event)}
                      onDragOver={(event) => event.preventDefault()}>
-        {inventory.map((el, index) => {
-           return  <img key ={el.id} 
-                                 id={index} 
-                                 className={el.type}
-                                 src={el.image} 
-                                 draggable="true" 
-                                 onDragStart={(event) => handleDrag(event)} 
-                                 onDrag={(event) => event.preventDefault()} 
-                                 width="60px" height="100px"/>
-         })}
+         {mappedInventory}
+
       </section>
+         <div className="currency-container">{currency}{' '}<GiTwoCoins color={"yellow"} /></div>
    </div>
    )
 }
