@@ -1,0 +1,111 @@
+@import  "../../../modules/mixins";
+*{
+   margin: 0;
+   border: none;
+}
+
+.inventory-screen-container{
+@include column;
+justify-content: flex-end;
+min-height: 0px;
+width:  320px;
+background-color: grey;
+border-radius: 10px;
+position: absolute;
+left: 10%;
+bottom: 20%;
+
+   .stats-container{
+      @include column;
+      font-weight: bold;
+      justify-content: flex-end;
+      align-items: flex-start;
+      margin-top: 15px;
+      height: 120px;
+      width:  90%;
+      background-color: rgb(54, 54, 54);
+      border-radius: 10px;
+      box-sizing: border-box;
+      padding: 10px;
+
+   }
+   .equipment-container{
+      @include column;
+      margin-top: 15px;
+      border-radius: 10px;
+      justify-content: space-evenly;
+      height: 300px;
+      width: 90%;
+      background-color: rgb(54, 54, 54);
+      margin-bottom: 12px;
+
+      .equipment-top-container{
+         @include row;
+         height: 25%;
+         width: 95%;
+
+            .helm-container{
+               border-radius: 10px;
+               height: 75px;
+               width: 75px;
+               background-color: black;
+            }
+      }
+      .equipment-middle-container{
+         @include row;
+         justify-content: space-around;
+         height: 35%;
+         width: 95%;
+
+            .middle-container{
+               border-radius: 10px;
+               height: 100px;
+               width: 75px;
+               background-color: black;
+            }
+      }
+   .equipment-bottom-container{
+      @include row;
+      height: 25%;
+      width: 95%;
+   }
+         .boot-container{
+            border-radius: 10px;
+            height: 75px;
+            width: 75px;
+            background-color: black;
+         }
+}
+
+.inventory-container{
+   // border: 2px solid green;
+   margin-top: 10px;
+   border-radius: 10px;
+   height: 150px;
+   width: 90%;
+   background-color: rgb(54, 54, 54);
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   grid-template-rows: repeat(2, 1fr);
+   grid-row-gap: 2px;
+   grid-column-gap: 2px;
+   // border: 1px solid rgb(54, 54, 54);
+
+   .inventory-square {
+      height: 100%;
+      width: 100%;
+      border-radius: 10px;
+      // border: 1px solid grey;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgb(46, 45, 45);
+   }
+   img {
+      border-radius: 10px;
+   }
+
+}
+
+
+}

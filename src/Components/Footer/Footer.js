@@ -25,15 +25,17 @@ const Footer = props => {
       <div className="footer">
          {/* <button onClick={() => (health < totalHealth) ? setHealth(health + 1) :null} >-</button>
          <button onClick={() => (health === 0) ? null: setHealth(health - 1)} >+</button> */}
-         
+         <div className ="character-menu-container">
+            <div className="character-icon" onClick={() => props.setEquipmentToggle()}>
+
+            </div>
+            <div className="inventory-icon" onClick={() => props.setInventoryToggle()}>
+
+            </div>
+         </div>
+         <div className="menu-button">MENU</div>
          <div className="health-bar">
             {hearts}
-         </div>
-         <div className="character-icon">
-
-         </div>
-         <div className="inventory-icon">
-
          </div>
       </div>
    )

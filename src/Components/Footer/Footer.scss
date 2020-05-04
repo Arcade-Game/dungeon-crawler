@@ -1,25 +1,46 @@
+@import "../../modules/mixins";
+
 .footer {
     border: 1px solid red;
-    width: 100%;
+    width: 90%;
     height: 12%;
     position: absolute;
     bottom: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 50px;
-    padding-right: 50px;
+    // padding-left: 25px;
+    // padding-right: 50px;
 }
 
-.character-icon {
+.character-menu-container{
+    @include row;
     border: 1px solid green;
     height: 100%;
-    width: 10%;
-
+    width: 30%;
+    
+    .character-icon {
+        border: 1px solid green;
+        height: 100%;
+        width: 40%;
+    }
+    .inventory-icon {
+        border: 1px solid green;
+        height: 100%;
+        width: 40%;
+    }  
 }
-
-.inventory-icon {
+.menu-button {
+    @include row;
     border: 1px solid green;
     height: 100%;
     width: 20%;
 }
+.health-bar {
+    @include row;
+    justify-content: center;
+    border: 1px solid green;
+    height: 100%;
+    width: 30%;
+}
+
