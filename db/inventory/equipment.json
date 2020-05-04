@@ -1,0 +1,23 @@
+[
+   {
+      "id": null,
+      "name":"",
+      "type":"weapon",
+      "damage": 0,
+      "image": ""
+      },
+      {
+         "id": null,
+         "name":"",
+         "type":"off-hand",
+         "armor":0,
+         "image": ""
+      },
+      {
+         "id": null,
+         "name":"",
+         "type":"armor",
+         "armor":0,
+         "image": ""
+      }
+]

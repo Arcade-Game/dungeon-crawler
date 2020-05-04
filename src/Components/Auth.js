@@ -12,6 +12,7 @@ const Auth = (props) => {
              [registerToggle, setRegisterToggle] = useState(false);
 
    const clearPlaceholder = (inputId, newValue) => {
+      console.log(newValue)
       if(newValue){
          document.getElementById(inputId).placeholder = ""
       } else {
@@ -21,7 +22,7 @@ const Auth = (props) => {
    handleRegister = () => {
       if (password === verPassword){
          props.registerUser(username, password);
-         props.history.push("/story")
+         props.history.push("/dashboard")
       }
       else {
          console.log ("password do not match");
@@ -31,7 +32,7 @@ const Auth = (props) => {
 
    handleLogin = async () => {
    await props.loginUser(username, password);
-   props.history.push("/story")
+   props.history.push("/dashboard")
    }
 
    return (

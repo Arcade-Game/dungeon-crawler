@@ -1,0 +1,62 @@
+@import  "../modules/mixins";
+*{
+   margin: 0;
+}
+
+.inventory-screen-container{
+@include column;
+justify-content: space-evenly;
+height: 500px;
+width:  320px;
+background-color: grey;
+
+   .equipment-container{
+      @include column;
+      justify-content: space-evenly;
+      height: 60%;
+      width: 90%;
+      background-color: rgb(54, 54, 54);
+
+      .equipment-top-container{
+         @include row;
+         height: 25%;
+         width: 95%;
+
+            .helm-container{
+               height: 75px;
+               width: 75px;
+               background-color: black;
+            }
+      }
+      .equipment-middle-container{
+         @include row;
+         justify-content: space-around;
+         height: 35%;
+         width: 95%;
+
+            .middle-container{
+               height: 100px;
+               width: 75px;
+               background-color: black;
+            }
+      }
+   .equipment-bottom-container{
+      @include row;
+      height: 25%;
+      width: 95%;
+   }
+         .boot-container{
+            height: 75px;
+            width: 75px;
+            background-color: black;
+         }
+}
+
+.inventory-container{
+   height: 30%;
+   width: 95%;
+   background-color: rgb(54, 54, 54);
+
+}
+
+}
