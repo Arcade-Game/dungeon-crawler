@@ -35,7 +35,7 @@ app.post("/api/auth/logout", authCtrl.logout);
 app.get("/api/auth/user", authCtrl.getCurrentUser);
 
 //item endpoints
+app.get("/api/item", itemCtrl.findItem);
 app.get("/api/inventory", itemCtrl.getInventory);
 app.put("/api/inventory/:index", itemCtrl.equipItem);
 app.put("/api/equipment/:id", itemCtrl.unEquipItem);
-app.post("/api/item/:id", itemCtrl.findItem);
