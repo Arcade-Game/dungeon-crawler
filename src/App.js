@@ -3,6 +3,7 @@ import Footer from './Components/Footer/Footer'
 import routes from "./routes";
 import './App.scss';
 import Game from './Components/Game/Game';
+import CombatStats from './Components/CombatStats/CombatStats'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       {/* {routes}
       <Footer /> */}
       <Game />
+      <CombatStats />
     </div>
   );
 }
