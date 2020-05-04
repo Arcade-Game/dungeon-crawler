@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Inventory.scss";
 import {GiTwoCoins} from 'react-icons/gi';
 
-const Inventory = () => {
+const Inventory = (props) => {
    const [inventory, setInventory] = useState([]),
              [weapon, setWeapon] = useState({}),
              [armor, setArmor] = useState({}),
@@ -16,7 +16,7 @@ const Inventory = () => {
          console.log("res.data", res.data)
          setInventory(res.data)
       })
-   },[])
+   }, [props])
 
    const equipItem = (event) => {
       event.preventDefault();
@@ -67,15 +67,15 @@ console.log("inventory: ", inventory)
 
 const mappedInventory = inventory.map((el, i) => {
    return inventory[i].type ?  <div className="inventory-square"><img key ={el.id} 
-               id={i} 
-               className={el.type}
-               src={el.image} 
-               draggable="true" 
-               onDragStart={(event) => handleDrag(event)} 
-               onDrag={(event) => event.preventDefault()} 
-               width="82%" height="88%"
-            /></div> : i < 8 ? <div className="inventory-square"></div> : null
-   })
+      id={i} 
+      className={el.type}
+      src={el.image} 
+      draggable="true" 
+      onDragStart={(event) => handleDrag(event)} 
+      onDrag={(event) => event.preventDefault()} 
+      width="82%" height="85%"
+   /></div> : i < 8 ? <div className="inventory-square"></div> : null
+})
 
 
    return (

@@ -4,6 +4,8 @@ import Map from './Map';
 import {mapObjects} from './mapObjects';
 import Footer from '../Footer/Footer';
 import Inventory from '../Inventory';
+import axios from 'axios';
+
 
 class Game extends Component {
   constructor(){
@@ -27,10 +29,15 @@ class Game extends Component {
         let newGrid = [...this.state.grid]
         newGrid[y][x] = {type: "empty"}
         this.setState({grid: newGrid})
+        this.openChest()
         break;
     }
   }
 
+  openChest = () => {
+    axios.get(`/api/item`).then(res => console.log("res.data", res.data))
+  }
+  
   getKeyCode = (keyCode) => {
     const {charX, charY} = this.state
     if(keyCode === 37){
