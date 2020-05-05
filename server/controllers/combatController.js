@@ -10,5 +10,6 @@ module.exports = {
    charStats: (req, res) => {
       const {id} = req.params;
       const character = characterList.find(char => char.id === id)
+      res.status(200).send(character)
    }
 }
