@@ -10,8 +10,8 @@ function App() {
   return (
     <div className="App">
       {/* {routes} */}
-      <Town />
-      {/* <Game /> */}
+      {/* <Town /> */}
+      <Game />
       {/* <CombatStats /> */}
     </div>
   );
