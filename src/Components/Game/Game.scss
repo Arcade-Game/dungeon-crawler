@@ -20,46 +20,6 @@
     flex-direction: column;
 }
 
-.map-grid {
-    background: url('../pictures/cave-floor.jpg');
-    // border: 30px solid $bg;
-    box-shadow: 0 0 20px 6px orangered;
-    transform-origin:center bottom;
-}
-
-
-.square {
-    border: 1px solid white;
-}
-
-.char-container {
-    text-align: center;
-    background: url('../pictures/cave-floor.jpg');
-}
-
-.char-view {
-    border: 1px solid rgba(53, 52, 52, 40%);
-    background: url('../pictures/cave-floor.jpg');
-}
-
-.char-view-chest {
-    border: 1px solid rgba(126, 120, 120, 0.4);
-    background: url('../pictures/chest-icon-png-12-transparent.png');
-    background-size: 100%;
-    background-position: center;
-}
-
-.char-view:nth-child(41) {
-    background: url('../pictures//warrior.svg');
-    background-size: 100%;
-    // box-shadow: 0 0 3px 5px grey;
-}
-
-.character {
-    background: black;
-    border-radius: 50%;
-}
-
 .mini-map-container {
     border: 1px dotted black;
     text-align: center;

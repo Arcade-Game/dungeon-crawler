@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './Game.scss';
+import './Map.scss';
 import './monsters.scss';
 import Map from './Map';
 import {mapObjects} from './mapObjects';
@@ -21,12 +22,12 @@ const Game = (props) => {
     [inventoryToggle, setInventoryToggle] = useState(false),
     [equipmentToggle, setEquipmentToggle] = useState(false),
     [newMoney, setNewMoney] = useState(0),
-    [isFight, setIsFight] = useState(true),
+    [isFight, setIsFight] = useState(false),
     [monsterType, setMonsterType] = useState('')
   
 
   const move = ({keyCode}) => {
-    getKeyCode(keyCode)
+    return !isFight ? getKeyCode(keyCode) :  null
   }
 
   const getKeyCode = (keyCode) => {
@@ -69,7 +70,7 @@ const Game = (props) => {
     
   const fightMonster = (x, y) => {
     setMonsterType(grid[y][x].monsterType)
-    setIsFight(false)
+    setIsFight(true)
   }
 
   const openChest = (x, y) => {
@@ -110,24 +111,27 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
+  let mapClassName = ''
+
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
       <div className="Game">
         <MiniMap grid={grid} mmX={grid[0].length} mmY={grid.length} isFight={isFight} />
+        <Map 
+          charX={charX} 
+          charY={charY} 
+          heightWidth={heightWidth}    
+          viewRowCols={viewRowCols} 
+          grid={grid} 
+          getMonsterFn={getMonster}
+          exploreTileFn={exploreTile}
+          isFight={isFight} 
+        />
         {
           isFight ? 
-          <Map 
-            charX={charX} 
-            charY={charY} 
-            heightWidth={heightWidth}    
-            viewRowCols={viewRowCols} 
-            grid={grid} 
-            getMonsterFn={getMonster}
-            exploreTileFn={exploreTile} 
-          /> : 
           <CombatView 
             monsterType={monsterType.toLowerCase()}
-          />
+          /> : null
         }
         
         <Footer 
