@@ -16,7 +16,7 @@ const Map = (props) => {
         width: heightWidth,
         borderRadius: "50%",
         overflow: "hidden",
-        boxShadow: "0 0 30px 6px rgb(199, 77, 6)",
+        
     };
 
     useEffect(() => {
