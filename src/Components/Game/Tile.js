@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 
 const Tile = (props) => {
     // console.log("type", props.type)
-    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn} = props
+    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName} = props
     let tileStyle = null
     let cName = "char-view"
     // console.log("monsterType", grid[charY][charX])

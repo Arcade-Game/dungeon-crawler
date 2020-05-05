@@ -3,14 +3,15 @@ import Map from './Map';
 
 const MiniMap = (props) => {
     const {grid, mmX, mmY, isFight} = props
-    let mappedGrid = grid.map((e,i) => e.map((f,j) => {
-        // console.log("TYPE", f.explored, f.type)
-        return f.explored === true ? <div className={`mini-map-${f.type}`}></div> : <div className="mini-map-unexplored"></div>
-    }))
+    let mappedGrid = grid.map((e,i,a) => i > 4 && i < a.length-5 ? e.map((f,j, z) => {
+        return j > 4 && j < z.length-5 ? (
+            f.explored === true ? <div className={`mini-map-${f.type}`}></div> : <div className="mini-map-unexplored"></div>
+        ) : null
+    }) : null)
 
     let miniStyle = {
-        gridTemplateColumns: `repeat(${mmX}, 1fr)`,
-        gridTemplateRows: `repeat(${mmY}, 1fr)`,
+        gridTemplateColumns: `repeat(${mmX-10}, 1fr)`,
+        gridTemplateRows: `repeat(${mmY-10}, 1fr)`,
         overflow: "hidden"
     }
     return (
