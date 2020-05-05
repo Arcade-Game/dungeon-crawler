@@ -1,0 +1,72 @@
+@import "../../../modules/mixins";
+
+.market-container{
+   @include column;
+   border-radius: 10px;
+   width: 60%;
+   height:400px;
+   z-index: 2;
+   background-color: grey;
+
+   .vendor-container {
+      @include row;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      width: 97%;
+      height: 70%;
+      background-color:  rgb(54, 54, 54);
+
+      .vendor-item-grid{
+
+         height: 80%;
+         width: 30%;
+         background-color: indianred;
+         display: grid;
+         grid-template-columns: 4,1fr;
+         grid-template-rows: 4,1fr;
+         
+      }
+   }
+   .vendor-tabs {
+      @include row;
+      justify-content: center;
+      border-bottom-left-radius: 10px ;
+      border-bottom-right-radius: 10px ;
+      width: 97%;
+      height:15%;
+      background-color: rgb(54, 54, 54);
+   
+      .tab {
+      @include row;
+         width: 15%;
+         height: 100%;
+         color:white;
+      }
+      .tab-start-on{
+         border-bottom-left-radius: 10px;
+      }
+      .tab-on{
+         background-color: rgb(54, 54, 54);
+      }
+      .tab-start-off{
+         background-color: black;
+         border-bottom-left-radius: 10px;
+      }
+      .tab-start-off:hover {
+         color: rgb(54, 54, 54);
+      }
+      .tab-off{
+         background-color: black;
+      }
+      .tab-off:hover {
+         color: rgb(54, 54, 54);
+      }
+      .tab-end-off{
+         background-color: black;
+         border-bottom-right-radius: 10px;
+      }
+      .tab-end-off:hover {
+         color: rgb(54, 54, 54);
+      }
+   }
+}

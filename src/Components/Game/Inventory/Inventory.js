@@ -27,6 +27,7 @@ const Inventory = (props) => {
    }, [props.newMoney])
 
    const equipItem = (event) => {
+      setOverlayToggle(!overlayToggle)
       event.preventDefault();
       const data = JSON.parse(event.dataTransfer.getData("text"))
       const {id} = data;
@@ -44,8 +45,10 @@ const Inventory = (props) => {
    },
 
    unEquipItem = (event) => {
+      setOverlayToggle(!overlayToggle)
       event.preventDefault();
       const data = JSON.parse(event.dataTransfer.getData("text"));
+      console.log(data)
       const {id} = data;
       axios.put(`/api/equipment/${id}`).then(res => {
          console.log(res.data)
@@ -60,9 +63,29 @@ const Inventory = (props) => {
          }).catch (err => console.log(err))
    },
 
+   deleteItem = (event) => {
+   setOverlayToggle(!overlayToggle)
+   event.preventDefault();
+   const data = JSON.parse(event.dataTransfer.getData("text"));
+   const {id, equipped} = data;
+   axios.put(`/api/inventory/item/${id}`, {equipped}).then(res => {
+      console.log(res.data)
+      setInventory(res.data.inventory)
+      const {equipment} = res.data
+            if (!equipment[0].id){
+               setWeapon(equipment[0])}
+            if (!equipment[1].id){
+               setOffHand(equipment[1])}
+            if (!equipment[2].id){
+               setArmor(equipment[2])}
+      }).catch (err => console.log(err))
+   },
+
    handleDrag = (event) => {
-   const {id} = event.target;
-   const data = JSON.stringify({id})
+   setOverlayToggle(!overlayToggle)
+   const {id, className} = event.target;
+   const data = JSON.stringify({id: id, equipped: className})
+   console.log(data)
    event.dataTransfer.setData("text", data)
    }
 
@@ -74,19 +97,25 @@ const Inventory = (props) => {
 
 
 const mappedInventory = inventory.map((el, i) => {
-   return inventory[i].type ?  <div className="inventory-square"><img key ={el.id} 
+   return inventory[i].type ? (
+         <div className="inventory-square"> <img key ={el.id} 
                id={i} 
-               className={el.type}
+               className="false"
                src={el.image} 
                draggable="true" 
                onDragStart={(event) => handleDrag(event)} 
                onDrag={(event) => event.preventDefault()} 
                width="82%" height="88%"
-            /></div> : i < 8 ? <div className="inventory-square"></div> : null
+            /></div>)  : i < 8 ? <div className="inventory-square"></div> : null
    })
 
-
    return (
+      <div>
+         {overlayToggle ? (<div className="overlay"
+                  onDrop={(event) => deleteItem(event)}
+                  onDragOver={(event) => event.preventDefault()}>DELETE</div>
+            ) : null
+         }
       <div className="inventory-screen-container">
          {equipmentToggle ? (
             <>
@@ -119,6 +148,7 @@ const mappedInventory = inventory.map((el, i) => {
             </>
             ) : null 
          }
+      </div>
    </div>
    )
 }
