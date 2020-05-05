@@ -20,6 +20,14 @@ const CombatStats = props => {
          setMHealth(res.data.health);
       })
       .catch(err => console.log(err))
+
+      axios.get(`/api/character-stats/${0}`)
+      .then(res => {
+         setHealth(res.data.health)
+         setArmor(res.data.armor)
+         setAttack(res.data.damage)
+      })
+      .catch(err => console.log(err))
    })
 
    return (
