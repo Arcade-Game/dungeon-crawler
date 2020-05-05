@@ -5,12 +5,15 @@ const express = require('express'),
       session = require("express-session"),
       {CONNECTION_STRING, SERVER_PORT, SESSION_SECRET} = process.env,
       authCtrl = require("./controllers/authController"),
-      itemCtrl = require("./controllers/itemController")
+      itemCtrl = require("./controllers/itemController"),
+      combatCtrl = require("./controllers/combatController"),
       port = SERVER_PORT,
       app = express();
 
 app.use(cors())
 app.use(express.json());
+
+app.use( express.static( `${__dirname}/../build` ) ); 
 
 app.use(session({
    resave: false,
@@ -39,3 +42,8 @@ app.get("/api/item", itemCtrl.findItem);
 app.get("/api/inventory", itemCtrl.getInventory);
 app.put("/api/inventory/:index", itemCtrl.equipItem);
 app.put("/api/equipment/:id", itemCtrl.unEquipItem);
+app.post("/api/item/:id", itemCtrl.findItem);
+
+//combat endpoints
+app.get('/api/monster-stats/:id', combatCtrl.monsterStats);
+app.get('/api/character-stats/:id', combatCtrl.charStats);

@@ -1,0 +1,38 @@
+@import  "../../modules//mixins";
+
+.stat-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   background: grey;
+   width: 150px;
+   height: 300px;
+   border: 1px solid black;
+   position: absolute;
+   right: 50px;
+   top: 300px;
+}
+
+.char-stats {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   width: 150px;
+}
+
+.stat-labels {
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+}
+
+.monster-stats {
+   border-top: 2px solid black;
+   padding-top: 30px;
+}
+
+.title {
+   text-decoration: underline;
+   font-size: 18px;
+   font-weight: bold;
+}
