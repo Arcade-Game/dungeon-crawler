@@ -4,7 +4,8 @@ import axios from "axios";
 import "./Inventory.scss";
 import {GiTwoCoins} from 'react-icons/gi';
 
-const Inventory = ({equipmentToggle, inventoryToggle}) => {
+const Inventory = (props) => {
+   const {equipmentToggle, inventoryToggle} = props
    const [inventory, setInventory] = useState([]),
              [weapon, setWeapon] = useState({}),
              [armor, setArmor] = useState({}),
@@ -18,7 +19,7 @@ const Inventory = ({equipmentToggle, inventoryToggle}) => {
          console.log("res.data", res.data)
          setInventory(res.data)
       })
-   },[])
+   },[props])
 
    const equipItem = (event) => {
       event.preventDefault();
