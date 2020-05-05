@@ -24,7 +24,6 @@ const Game = (props) => {
     [isFight, setIsFight] = useState(true),
     [monsterType, setMonsterType] = useState('')
   
-
   const move = ({keyCode}) => {
     getKeyCode(keyCode)
   }
@@ -110,6 +109,10 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
+  const toggleFightFn = () => {
+    setIsFight(!isFight);
+  }
+
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
       <div className="Game">
@@ -125,9 +128,10 @@ const Game = (props) => {
             getMonsterFn={getMonster}
             exploreTileFn={exploreTile} 
           /> : 
-          <CombatView 
-            monsterType={monsterType.toLowerCase()}
-          />
+            <CombatView 
+              monsterType={monsterType.toLowerCase()}
+              toggleFight={toggleFightFn}
+            />
         }
         
         <Footer 
