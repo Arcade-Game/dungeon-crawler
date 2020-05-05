@@ -7,6 +7,7 @@ const express = require('express'),
       authCtrl = require("./controllers/authController"),
       itemCtrl = require("./controllers/itemController"),
       combatCtrl = require("./controllers/combatController"),
+      monsterCtrl = require("./controllers/monsterController"),
       port = SERVER_PORT,
       app = express();
 
@@ -47,3 +48,6 @@ app.post("/api/item/:id", itemCtrl.findItem);
 //combat endpoints
 app.get('/api/monster-stats/:id', combatCtrl.monsterStats);
 app.get('/api/character-stats/:id', combatCtrl.charStats);
+
+//monster endpoints
+app.get('/api/monster', monsterCtrl.getMonster);

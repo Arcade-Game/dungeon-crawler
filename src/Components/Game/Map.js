@@ -3,13 +3,10 @@ import React, {useState, useEffect} from 'react';
 import Tile from './Tile';
 
 const Map = (props) => {
-    // const [grid, setGrid] = useState(mapObjects)
     const [charView, setCharView] = useState([])
     const [displayView, setDisplayView] = useState([])
 
-    const {charX, charY, heightWidth, viewRowCols, grid} = props
-
-    console.log("XY", charX, charY)
+    const {charX, charY, heightWidth, viewRowCols, grid, getMonsterFn, exploreTileFn} = props
 
     const charContainerStyle = {
         display: "grid",
@@ -38,23 +35,11 @@ const Map = (props) => {
     }, [charX, charY])
 
     useEffect(() => {
-        // const charViewConcat = charView.flat(1)
-
-        // let mappedCharView = charViewConcat.map((e,i) => {
-        //     return <Tile type={e.type} key={i} charX={charX} charY={charY} heightWidth={heightWidth} viewRowCols={viewRowCols} />
-        // })
-        // setDisplayView(mappedCharView)
-
         let mappedCharView = charView.map((e,i) => e.map((f,j) => {
-            return <Tile type={f.type} key={j} charX={charX} charY={charY} heightWidth={heightWidth} viewRowCols={viewRowCols} y={i} x={j} />
+            return <Tile type={f.type} key={j} charX={charX} charY={charY} heightWidth={heightWidth} viewRowCols={viewRowCols} y={charY+((4-i)*-1)} x={charX+((4-j)*-1)} getMonsterFn={getMonsterFn} grid={grid} exploreTileFn={exploreTileFn} />
         }))
 
         setDisplayView(mappedCharView)
-
-
-
-
-
 
     }, [charView])
 
@@ -63,7 +48,6 @@ const Map = (props) => {
     return (
         <div>
         <div className="map-grid" style={charContainerStyle}>
-            {/* <Character charX={charX} charY={charY} heightWidth={heightWidth} viewRowCols={viewRowCols} /> */}
             {displayView}
 
             </div>
