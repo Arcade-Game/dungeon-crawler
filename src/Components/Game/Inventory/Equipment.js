@@ -1,6 +1,7 @@
 import React from "react"
 
-const Equipment = ({offHand, armor, weapon, handleDrag, equipItem}) => {
+const Equipment = (props) => {
+   const {offHand, armor, weapon, handleDrag, equipItem} = props;
 
    return (
 <section className="equipment-container">
@@ -15,7 +16,7 @@ const Equipment = ({offHand, armor, weapon, handleDrag, equipItem}) => {
                      onDrop={(event) => equipItem(event)} 
                      onDragOver={(event) => event.preventDefault()}>
                   {offHand.id ? (
-                     <img id={offHand.id} className={offHand.type} 
+                     <img id={offHand.id} className="true" 
                      src={offHand.image}  
                      onDragStart={(event) => handleDrag(event)} 
                      onDrag={(event) => event.preventDefault()}
@@ -27,7 +28,7 @@ const Equipment = ({offHand, armor, weapon, handleDrag, equipItem}) => {
                      onDrop={(event) => equipItem(event)} 
                      onDragOver={(event) => event.preventDefault()}>
                   {armor.id ? (
-                     <img id={armor.id} className={armor.type} 
+                     <img id={armor.id} className={true} 
                               src={armor.image}  
                               onDragStart={(event) => handleDrag(event)} 
                               onDrag={(event) => event.preventDefault()}  
@@ -41,7 +42,7 @@ const Equipment = ({offHand, armor, weapon, handleDrag, equipItem}) => {
                      onDrop={(event) => equipItem(event)} 
                      onDragOver={(event) => event.preventDefault()}>
                         {weapon.id || weapon.id == 0 ? (
-                        <img id={weapon.id} className={weapon.type} 
+                        <img id={weapon.id} className="true" 
                               src={weapon.image}
                               onDragStart={(event) => handleDrag(event)} 
                               onDrag={(event) => event.preventDefault()} 

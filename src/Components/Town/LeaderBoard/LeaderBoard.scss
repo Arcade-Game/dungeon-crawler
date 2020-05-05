@@ -1,0 +1,43 @@
+@import "../../../modules/mixins";
+
+.leader-board-container{
+   @include column;
+   justify-content: space-evenly;
+   border-radius: 10px;
+   width: 60%;
+   height:600px;
+   z-index: 2;
+   background-color: grey;
+
+   .scores-container {
+      @include column;
+      border-radius: 10px;
+      width: 96%;
+      height: 45%;
+      background-color:  rgb(54, 54, 54);
+
+      h3{
+         border-top-left-radius: 10px;
+         border-top-right-radius: 10px;
+         background-color: indianred;
+         width: 96%;
+         height: 10%;
+      }
+      .scores {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      padding-top:5px;
+      margin-bottom: 5px;
+      width: 96%;
+      height: 80%;
+      background-color:  black;
+      }
+   }
+   // .your-scores-container{
+   //    @include column;
+   //    border-radius: 10px;
+   //    width: 96%;
+   //    height: 45%;
+   //    background-color:  rgb(54, 54, 54);
+   // }
+}
