@@ -6,7 +6,7 @@ const Map = (props) => {
     const [charView, setCharView] = useState([])
     const [displayView, setDisplayView] = useState([])
 
-    const {charX, charY, heightWidth, viewRowCols, grid, getMonsterFn} = props
+    const {charX, charY, heightWidth, viewRowCols, grid, getMonsterFn, exploreTileFn} = props
 
     const charContainerStyle = {
         display: "grid",
@@ -32,11 +32,11 @@ const Map = (props) => {
             setCharView(display)
         }
         makeBlock()
-    }, [charX, charY, grid])
+    }, [charX, charY])
 
     useEffect(() => {
         let mappedCharView = charView.map((e,i) => e.map((f,j) => {
-            return <Tile type={f.type} key={j} charX={charX} charY={charY} heightWidth={heightWidth} viewRowCols={viewRowCols} y={charY+((4-i)*-1)} x={charX+((4-j)*-1)} getMonsterFn={getMonsterFn} grid={grid} />
+            return <Tile type={f.type} key={j} charX={charX} charY={charY} heightWidth={heightWidth} viewRowCols={viewRowCols} y={charY+((4-i)*-1)} x={charX+((4-j)*-1)} getMonsterFn={getMonsterFn} grid={grid} exploreTileFn={exploreTileFn} />
         }))
 
         setDisplayView(mappedCharView)

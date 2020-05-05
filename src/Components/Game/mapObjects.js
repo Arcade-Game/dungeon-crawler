@@ -1,10 +1,10 @@
-const h = {type: "hero"}
-const o = {type: "empty"}
-const x = {type: "chest"}
-const l = {type: "wall"}
-const z = {type: "exit"}
+const h = {type: "hero", explored: false}
+const o = {type: "empty", explored: false}
+const x = {type: "chest", explored: false}
+const l = {type: "wall", explored: false}
+const z = {type: "exit", explored: false}
 const w = [l, l, l, l, l, l, l, l, l]
-const r = {type: "monster"}
+const r = {type: "monster", explored: false}
 
 export const mapObjects = [
     [l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l],

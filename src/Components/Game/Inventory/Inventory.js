@@ -21,6 +21,11 @@ const Inventory = (props) => {
       })
    },[props])
 
+   useEffect (() => {
+      console.log("props.newMoney", props.newMoney)
+      setCurrency(currency+props.newMoney)
+   }, [props.newMoney])
+
    const equipItem = (event) => {
       event.preventDefault();
       const data = JSON.parse(event.dataTransfer.getData("text"))

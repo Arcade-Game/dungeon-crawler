@@ -55,3 +55,42 @@
     background: black;
     border-radius: 50%;
 }
+
+.mini-map-container {
+    // border: 1px solid red;
+    text-align: center;
+    border-radius: 50%;
+    height: 250px;
+    width: 250px;
+    position: absolute;
+    top: 40px;
+    right: 12%;
+    display: grid;
+    grid-template-columns: repeat(auto, 1fr);
+    grid-template-rows: repeat(auto, 1fr);
+    background: black;
+}
+
+.mini-map-empty {
+    background: lightgrey;
+    height: 7px;
+    width: 7px;
+}
+
+.mini-map-wall {
+    background: grey;
+    height: 7px;
+    width: 7px;
+}
+
+.mini-map-monster {
+    background: red;
+    height: 7px;
+    width: 7px;
+}
+
+.mini-map-chest {
+    background: yellow;
+    height: 7px;
+    width: 7px;
+}

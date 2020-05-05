@@ -7,6 +7,7 @@ import Footer from '../Footer/Footer';
 import axios from 'axios';
 import Inventory from './Inventory/Inventory';
 import Equipment from "./Inventory/Equipment";
+import MiniMap from './MiniMap';
 
 const Game = (props) => {
 
@@ -16,10 +17,16 @@ const Game = (props) => {
     [heightWidth, setHeightWidth] = useState(700),
     [viewRowCols, setViewRowCols] = useState(9),
     [inventoryToggle, setInventoryToggle] = useState(false),
-    [equipmentToggle, setEquipmentToggle] = useState(false)
+    [equipmentToggle, setEquipmentToggle] = useState(false),
+    [newMoney, setNewMoney] = useState(0),
+    [isFight, setIsFight] = useState(false)
 
   const checkWall = (x, y) => {
     return grid[y][x].type === 'wall' ? true : false
+  }
+
+  const fightMonster = () => {
+    setIsFight(true)
   }
 
   const checkTile = (x, y) => {
@@ -30,11 +37,23 @@ const Game = (props) => {
         setGrid(newGrid)
         openChest()
         break;
+      case "monster":
+        fightMonster()
+        break;
     }
+  }
+
+  const exploreTile = (x, y) => {
+    let exploreGrid = [...grid]
+    let newObject = {...exploreGrid[y][x], explored: true}
+    exploreGrid[y][x] = newObject
+    setGrid(exploreGrid)
   }
 
   const openChest = () => {
     axios.get(`/api/item`).then(res => console.log("res.data", res.data))
+    let num = Math.floor(Math.random() * 15)
+    setNewMoney(num)
   }
 
   const getMonster = (x, y) => {
@@ -50,14 +69,18 @@ const Game = (props) => {
   }
   
   const getKeyCode = (keyCode) => {
-    if(keyCode === 37){
+    if(keyCode === 37 || keyCode === 65){
       return checkWall(charX-1, charY) === false ? (setCharX(charX-1), checkTile(charX-1, charY)) : null
-    } else if(keyCode === 38){
+    } else if(keyCode === 38 || keyCode === 87){
       return checkWall(charX, charY-1) === false ? (setCharY(charY-1), checkTile(charX, charY-1)) : null
-    } else if(keyCode === 39){
+    } else if(keyCode === 39 || keyCode === 68){
       return checkWall(charX+1, charY) === false ? (setCharX(charX+1), checkTile(charX+1, charY)) : null
-    } else if(keyCode === 40){
+    } else if(keyCode === 40 || keyCode === 83){
       return checkWall(charX, charY+1) === false ? (setCharY(charY+1), checkTile(charX, charY+1)) :  null
+    } else if(keyCode === 66){
+      inventoryToggleFn()
+    } else if(keyCode === 72){
+      equipmentToggleFn()
     }
   }
 
@@ -78,13 +101,25 @@ const Game = (props) => {
     return (
       <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
         <div className="Game">
-          <Map charX={charX} charY={charY} heightWidth={heightWidth} viewRowCols={viewRowCols} grid={grid} getMonsterFn={getMonster} />
-        <Footer setEquipmentToggle = {equipmentToggleFn}
-                      setInventoryToggle = {inventoryToggleFn}
-                            />
-        <Inventory equipmentToggle = {equipmentToggle}
-                            inventoryToggle = {inventoryToggle}
-                            />
+          <MiniMap grid={grid} mmX={grid[0].length} mmY={grid.length} />
+          <Map 
+            charX={charX} 
+            charY={charY} 
+            heightWidth={heightWidth}    
+            viewRowCols={viewRowCols} 
+            grid={grid} 
+            getMonsterFn={getMonster}
+            exploreTileFn={exploreTile} 
+          />
+          <Footer 
+            setEquipmentToggle={equipmentToggleFn}
+            setInventoryToggle={inventoryToggleFn}
+          />
+          <Inventory 
+            equipmentToggle={equipmentToggle}
+            inventoryToggle={inventoryToggle}
+            newMoney={newMoney}
+          />
         </div>
       </div>
     );
