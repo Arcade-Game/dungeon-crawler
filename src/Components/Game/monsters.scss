@@ -1,0 +1,52 @@
+@import "../../modules/mixins";
+@import "../../modules/variables";
+
+.char-view-goblin {
+    background: url('../pictures/gblin2.png');
+    @include mon-pic;
+}
+
+.char-view-demon {
+    background: url('../pictures/demon.jpg');
+    @include mon-pic;
+}
+
+.char-view-imp {
+    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR-mbmeBtUSFUTDkW6Wbi2WLe2nBIrk5HXPmXSOi24T-TrKbBYF&usqp=CAU");
+    @include mon-pic;
+}
+
+.char-view-dragon {
+    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRXHklPcBsDmjY1L0s74WVK3q9NXp-cAbWy8b0fb3GQ8b8CQ36z&usqp=CAU");
+    @include mon-pic;
+}
+
+.char-view-skeleton {
+    background: url("../pictures//skeleton2.png");
+    @include mon-pic;
+}
+
+.char-view-beholder {
+    background: url("../pictures/beholder.png");
+    @include mon-pic;
+}
+
+.char-view-wraith {
+    background: url("../pictures/reaper.png");
+    @include mon-pic;
+}
+
+.char-view-gargoyle {
+    background: url("../pictures/gargoyle.png");
+    @include mon-pic;
+}
+
+.char-view-werewolf {
+    background: url("../pictures/werewolf.png");
+    @include mon-pic;
+}
+
+.char-view-leviathan {
+    background: url("../pictures/werewolf.png");
+    @include mon-pic;
+}

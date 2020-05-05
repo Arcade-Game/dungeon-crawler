@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import './Game.scss';
+import './monsters.scss';
 import Map from './Map';
 import {mapObjects} from './mapObjects';
 import Footer from '../Footer/Footer';
@@ -7,74 +8,79 @@ import axios from 'axios';
 import Inventory from './Inventory/Inventory';
 import Equipment from "./Inventory/Equipment";
 
-class Game extends Component {
-  constructor(){
-    super()
-    this.state = {
-      grid: mapObjects,
-      charX: 15,
-      charY: 14,
-      heightWidth: 700,
-      viewRowCols: 9,
-      inventoryToggle: false,
-      equipmentToggle: false
-    }
-  }
-  
-  checkWall = (x, y) => {
-    return this.state.grid[y][x].type === 'wall' ? true : false
+const Game = (props) => {
+
+  const [grid, setGrid] = useState(mapObjects),
+    [charX, setCharX] = useState(16),
+    [charY, setCharY] = useState(22),
+    [heightWidth, setHeightWidth] = useState(700),
+    [viewRowCols, setViewRowCols] = useState(9),
+    [inventoryToggle, setInventoryToggle] = useState(false),
+    [equipmentToggle, setEquipmentToggle] = useState(false)
+
+  const checkWall = (x, y) => {
+    return grid[y][x].type === 'wall' ? true : false
   }
 
-  checkTile = (x, y) => {
-    switch(this.state.grid[y][x].type){
+  const checkTile = (x, y) => {
+    switch(grid[y][x].type){
       case "chest":
-        let newGrid = [...this.state.grid]
+        let newGrid = [...grid]
         newGrid[y][x] = {type: "empty"}
-        this.setState({grid: newGrid})
-        this.openChest()
+        setGrid(newGrid)
+        openChest()
         break;
     }
   }
 
-  openChest = () => {
+  const openChest = () => {
     axios.get(`/api/item`).then(res => console.log("res.data", res.data))
   }
+
+  const getMonster = (x, y) => {
+    if(grid[y][x].monsterType){
+      return grid[y][x].monsterType
+    }
+    axios.get(`/api/monster`).then(res => {
+      let newGrid = [...grid]
+      newGrid[y][x] = {type: "monster", monsterType: res.data.name}
+      // console.log("GETMONSTER", x, y, res.data.name)
+      setGrid(newGrid)
+    })
+  }
   
-  getKeyCode = (keyCode) => {
-    const {charX, charY} = this.state
+  const getKeyCode = (keyCode) => {
     if(keyCode === 37){
-      return this.checkWall(charX-1, charY) === false ? (this.setState({charX: charX-1}), this.checkTile(charX-1, charY)) : null
+      return checkWall(charX-1, charY) === false ? (setCharX(charX-1), checkTile(charX-1, charY)) : null
     } else if(keyCode === 38){
-      return this.checkWall(charX, charY-1) === false ? (this.setState({charY: charY-1}), this.checkTile(charX, charY-1)) : null
+      return checkWall(charX, charY-1) === false ? (setCharY(charY-1), checkTile(charX, charY-1)) : null
     } else if(keyCode === 39){
-      return this.checkWall(charX+1, charY) === false ? (this.setState({charX: charX+1}), this.checkTile(charX+1, charY)) : null
+      return checkWall(charX+1, charY) === false ? (setCharX(charX+1), checkTile(charX+1, charY)) : null
     } else if(keyCode === 40){
-      return this.checkWall(charX, charY+1) === false ? (this.setState({charY: charY+1}), this.checkTile(charX, charY+1)) :  null
+      return checkWall(charX, charY+1) === false ? (setCharY(charY+1), checkTile(charX, charY+1)) :  null
     }
   }
 
-  move = ({keyCode}) => {
-    this.getKeyCode(keyCode)
+  const move = ({keyCode}) => {
+    getKeyCode(keyCode)
   }
   
-  setInventoryToggle = () => {
-    this.setState({inventoryToggle: !this.state.inventoryToggle})
+  const inventoryToggleFn = () => {
+    setInventoryToggle(!inventoryToggle)
   }
 
-  setEquipmentToggle = () => {
-    this.setState({equipmentToggle: !this.state.equipmentToggle})
+  const equipmentToggleFn = () => {
+    setEquipmentToggle(!equipmentToggle)
   }
 
-  render() {
-    console.log(this.state.charX, this.state.charY)
-    console.log(this.state.grid)
-    const {equipmentToggle, inventoryToggle} = this.state
+    // console.log(charX, charY)
+    // console.log("monster type", grid[charY][charX])
     return (
-      <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => this.move(e)}>
+      <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
         <div className="Game">
-          <Map charX={this.state.charX} charY={this.state.charY} heightWidth={this.state.heightWidth} viewRowCols={this.state.viewRowCols} grid={this.state.grid} />
-        <Footer setEquipmentToggle = {this.setEquipmentToggle}
-                      setInventoryToggle = {this.setInventoryToggle}
+          <Map charX={charX} charY={charY} heightWidth={heightWidth} viewRowCols={viewRowCols} grid={grid} getMonsterFn={getMonster} />
+        <Footer setEquipmentToggle = {equipmentToggleFn}
+                      setInventoryToggle = {inventoryToggleFn}
                             />
         <Inventory equipmentToggle = {equipmentToggle}
                             inventoryToggle = {inventoryToggle}
@@ -82,8 +88,6 @@ class Game extends Component {
         </div>
       </div>
     );
-
-  }
 }
 
 export default Game;

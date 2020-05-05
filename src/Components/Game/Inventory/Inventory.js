@@ -16,7 +16,7 @@ const Inventory = (props) => {
 
    useEffect (()=> {
       axios.get("/api/inventory").then(res => {
-         console.log("res.data", res.data)
+         // console.log("res.data", res.data)
          setInventory(res.data)
       })
    },[props])
@@ -62,9 +62,9 @@ const Inventory = (props) => {
    }
 
 // console.log("armor: ", armor)
-console.log("weapon: ", weapon)
+// console.log("weapon: ", weapon)
 // console.log("offHand: ", offHand)
-console.log("inventory: ", inventory)
+// console.log("inventory: ", inventory)
 
 
 
