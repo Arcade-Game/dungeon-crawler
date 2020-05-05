@@ -1,4 +1,5 @@
 @import '../../modules/variables.scss';
+@import '../../modules/mixins';
 
 * {
     margin: 0;
@@ -21,8 +22,11 @@
 
 .map-grid {
     background: url('../pictures/cave-floor.jpg');
-    // margin-bottom: 12%;
+    // border: 30px solid $bg;
+    box-shadow: 0 0 20px 6px orangered;
+    transform-origin:center bottom;
 }
+
 
 .square {
     border: 1px solid white;
@@ -57,7 +61,7 @@
 }
 
 .mini-map-container {
-    // border: 1px solid red;
+    border: 1px dotted black;
     text-align: center;
     border-radius: 50%;
     height: 250px;
@@ -68,29 +72,29 @@
     display: grid;
     grid-template-columns: repeat(auto, 1fr);
     grid-template-rows: repeat(auto, 1fr);
-    background: black;
+    background: url('../pictures/ireland-map.jpg');
+    background-position: center;
+    background-size: 170%;
+    background-blend-mode: soft-light;
+    filter: blur(.2px);
 }
 
 .mini-map-empty {
-    background: lightgrey;
-    height: 7px;
-    width: 7px;
+    @include mm;
+    background: rgb(95, 19, 19); 
 }
 
 .mini-map-wall {
-    background: grey;
-    height: 7px;
-    width: 7px;
+    @include mm;
+    background: black;
 }
 
 .mini-map-monster {
+    @include mm;
     background: red;
-    height: 7px;
-    width: 7px;
 }
 
 .mini-map-chest {
+    @include mm;
     background: yellow;
-    height: 7px;
-    width: 7px;
 }

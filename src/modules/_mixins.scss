@@ -17,3 +17,10 @@
    background-position: center;
    background-repeat: no-repeat;
 }
+
+@mixin mm{
+   // height: 7px;
+   // width: 7px;
+   border: 1px solid black;
+   // border-radius: 40%;
+}
