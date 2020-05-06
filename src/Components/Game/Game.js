@@ -140,6 +140,7 @@ const Game = (props) => {
           isFight ? 
           <CombatView 
             monsterType={monsterType.toLowerCase()}
+            isFightFn={setIsFight}
           /> : null
         }
         
