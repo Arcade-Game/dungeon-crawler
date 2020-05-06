@@ -23,7 +23,9 @@ const Game = (props) => {
     [equipmentToggle, setEquipmentToggle] = useState(false),
     [newMoney, setNewMoney] = useState(0),
     [isFight, setIsFight] = useState(false),
-    [monsterType, setMonsterType] = useState('')
+    [monsterType, setMonsterType] = useState(''),
+    [monsterStats, setMonsterStats] = useState({}),
+    [characterStats, setCharacterStats] = useState({})
 
     useEffect(() => {
       let newGrid = [...grid]
@@ -35,6 +37,22 @@ const Game = (props) => {
   const move = ({keyCode}) => {
     return !isFight ? getKeyCode(keyCode) :  null
   }
+
+  const stats = ()=> {
+    axios.get(`/api/character-stats/${'rogue'}`)
+    .then(res => {
+      setCharacterStats(res.data)
+    })
+    .catch(err => console.log(err))
+    
+    
+      axios.get(`/api/monster-stats/${monsterType}`)
+    .then(res => {
+        setMonsterStats(res.data)
+    })
+    .catch(err => console.log(err))
+    
+}
 
   const getKeyCode = (keyCode) => {
     if(keyCode === 37 || keyCode === 65){
@@ -117,9 +135,6 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
-  const toggleFightFn = () => {
-    setIsFight(!isFight);
-  }
   let mapClassName = ''
 
   return (
@@ -140,6 +155,10 @@ const Game = (props) => {
           isFight ? 
           <CombatView 
             monsterType={monsterType.toLowerCase()}
+            toggleFight = {setIsFight}
+            characterStats={characterStats}
+            monsterStats={monsterStats}
+            getStats={stats}
             isFightFn={setIsFight}
           /> : null
         }

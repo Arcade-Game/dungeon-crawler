@@ -12,7 +12,6 @@ function App() {
       {/* {routes} */}
       {/* <Town /> */}
       <Game />
-      {/* <CombatStats /> */}
     </div>
   );
 }

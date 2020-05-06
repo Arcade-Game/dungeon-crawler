@@ -86,5 +86,11 @@ module.exports = {
       res.status(200).send(inventory);
       // push  from item_list to  equipment if already using an item put in inventory
    },
+   
+   equippedItems: (req, res) => {
+      const {weapon} = req.params;
+      let wep = equipment.find(item => item.type.toLowerCase() === weapon.toLowerCase())
+      res.status(200).send(wep)
+   }
 
 }
