@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {monsterImages, heroImages} from '../Game/CombatView/imageVariables';
-import Spritesheet from 'react-responsive-spritesheet';
 import Chest from '../Animations/Chest';
+import {withRouter} from 'react-router-dom';
 
 
 const Tile = (props) => {
@@ -23,7 +23,11 @@ const Tile = (props) => {
         case "chest":
             cName = "char-view-chest"
             break;
+        case "exit":
+            tileStyle = {background: "red", color: "white"}
+
     }
+
     let newMonster =''
     if(grid[y][x].monsterType){
         newMonster = grid[y][x].monsterType
@@ -41,31 +45,11 @@ const Tile = (props) => {
                 }
                 {
                 type === "chest" ? 
-                        <Chest />
-                    //    <Spritesheet
-                    //     image={require('../pictures/glowingChest.png')}
-                    //     widthFrame={300}
-                    //     heightFrame={200}
-                        
-                    //     scale={1}
-                    //     steps={5}
-                    //     fps={5}
-                    //     loop={true}
-                    //     direction={'rewind'}
-                    //     isResponsive={true}
-                    //     style={{display: 'flex', justifyContent: 'flex-start', border: '1px solid yellow'}}
-
-                    //     // startAt={1}
-                    //     // backgroundSize={'100%'}
-                    //     // backgroundPosition={`center`}
-                    //     // scale={1}
-                    //     // classname={"chest-spritesheet-element"}
-                    //     // style={"display: flex"}
-                    //     /> 
-                    : null
+                        <Chest /> 
+                    : type === "exit" ? <h2>{"EXIT"}</h2> : null
                 }
             </div>
     )
 }
 
-export default Tile;
+export default withRouter(Tile);
