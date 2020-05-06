@@ -25,7 +25,8 @@ const Game = (props) => {
     [isFight, setIsFight] = useState(false),
     [monsterType, setMonsterType] = useState(''),
     [monsterStats, setMonsterStats] = useState({}),
-    [characterStats, setCharacterStats] = useState({})
+    [characterStats, setCharacterStats] = useState({}),
+    [monsterCoor, setMonsterCoor] = useState([0,0])
 
     useEffect(() => {
       let newGrid = [...grid]
@@ -79,7 +80,18 @@ const Game = (props) => {
     
   const fightMonster = (x, y) => {
     setMonsterType(grid[y][x].monsterType)
+    setMonsterCoor([x, y])
     setIsFight(true)
+  }
+
+  const clearMonster = (x, y) => {
+    let newGrid = [...grid]
+    newGrid[y][x].type = "empty"
+    newGrid[y][x].monsterType = ""
+    setCharX(x)
+    setCharY(y)
+    setMonsterCoor([0,0])
+    setGrid(newGrid)
   }
 
   const openChest = (x, y) => {
@@ -137,8 +149,7 @@ console.log(newGrid[x][y])
     })
     .catch(err => console.log(err))
     return arr
-}
-
+  }
 
   let mapClassName = ''
 
@@ -164,6 +175,8 @@ console.log(newGrid[x][y])
             getStats={stats}
             isFightFn={setIsFight}
             setGridFn = {setGrid}
+            clearMonster = {clearMonster}
+            monsterCoor = {monsterCoor}
           /> : null
         }
         

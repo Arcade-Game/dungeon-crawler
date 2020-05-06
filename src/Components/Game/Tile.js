@@ -8,6 +8,9 @@ const Tile = (props) => {
     const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight} = props
 
     // const [monType, setMonType] = useState('')
+    useEffect(() => {
+
+    }, [isFight])
 
     let tileStyle = null
     let cName = "char-view"

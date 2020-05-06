@@ -8,7 +8,7 @@ import axios from 'axios';
 import {attackType, monAttack, charAttack, statSetupChar, statSetupMon} from './combatFns'
 
 const CombatView = (props) => {
-    const {monsterType, isFightFn} = props,
+    const {monsterType, isFightFn, clearMonster, monsterCoor} = props,
         [weapon, setWeapon] = useState(0),
         [characterHealth, setCharacterHealth] = useState(0),
         [monsterHealth, setMonsterHealth] = useState(0),
@@ -73,28 +73,22 @@ const CombatView = (props) => {
         arr.push(`You did ${cDamage} damage to the ${monsterType}!`)
         monHealth -= cDamage 
         setMonsterHealth(monHealth)
-        // if (charHealth < 0 || monHealth < 0) {
-        //     if (charHealth < 0) {
-        //         arr.push(`You have Died!`)
-        //     }
-        //     if(monHealth < 0) {
-        //         arr.push(`You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`)
-        //     }
-
-        //     setEndFight(true)
-        // }
+        
         let mDamage = monAttack(classType);
         arr.push(`${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} did ${mDamage} damage to you!`)
         charHealth -= mDamage
         setCharacterHealth(charHealth)
-        if (charHealth < 0 || monHealth < 0) {
-            if (charHealth < 0) {
+        if (charHealth <= 0 || monHealth <= 0) {
+            if (charHealth <= 0) {
                 arr.push(`You have Died!`)
             }
-            if(monHealth < 0) {
+            if(monHealth <= 0) {
                 arr.push(`You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`)
             }
             setEndFight(true)
+            clearMonster(monsterCoor[0], monsterCoor[1])
+
+
         }
         setLog([...log, ...arr])
     }
