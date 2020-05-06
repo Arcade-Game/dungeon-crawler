@@ -3,7 +3,9 @@
       "id": "0",
       "name": "Goblin",
       "health": "3",
-      "damage": "1",
+      "attack": "1",
+      "agility": "2",
+      "strength": "1",
       "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdlpng.com%2Fpng%2F6354566&psig=AOvVaw2ANxtAwytsg5ocElFVPbCV&ust=1588714284932000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMDpiIyUm-kCFQAAAAAdAAAAABAD",
       "armor": "1"
    },
@@ -11,7 +13,9 @@
       "id": "1",
       "name": "Imp",
       "health": "4",
-      "damage": "3",
+      "attack": "3",
+      "agility": "2",
+      "strength": "2",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR-mbmeBtUSFUTDkW6Wbi2WLe2nBIrk5HXPmXSOi24T-TrKbBYF&usqp=CAU",
       "armor": "1"
    },
@@ -19,7 +23,9 @@
       "id": "2",
       "name": "Dragon",
       "health": "10",
-      "damage": "6",
+      "attack": "6",
+      "agility": "4",
+      "strength": "5",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRXHklPcBsDmjY1L0s74WVK3q9NXp-cAbWy8b0fb3GQ8b8CQ36z&usqp=CAU",
       "armor": "5"
    },
@@ -27,56 +33,63 @@
       "id": "3",
       "name": "Demon",
       "health": "5",
-      "damage": "4",
+      "attack": "4",
+      "agility": "2",
+      "strength": "4",
       "armor": "2"
    },
    {
       "id": "4",
       "name": "Skeleton",
       "health": "5",
-      "damage": "2",
+      "attack": "2",
+      "agility": "2",
+      "strength": "2",
       "armor": "2"
    },
    {
       "id": "5",
       "name": "Beholder",
       "health": "5",
-      "damage": "2",
+      "attack": "2",
+      "agility": "3",
+      "strength": "1",
       "armor": "2"
    },
    {
       "id": "6",
       "name": "Wraith",
       "health": "5",
-      "damage": "2",
+      "attack": "2",
+      "agility": "4",
+      "strength": "1",
       "armor": "2"
    },
    {
       "id": "7",
       "name": "Gargoyle",
       "health": "5",
-      "damage": "2",
+      "attack": "2",
+      "agility": "2",
+      "strength": "3",
       "armor": "2"
    },
    {
       "id": "8",
       "name": "Werewolf",
       "health": "5",
-      "damage": "2",
+      "attack": "4",
+      "agility": "2",
+      "strength": "4",
       "armor": "2"
    },
    {
       "id": "9",
       "name": "Leviathan",
-      "health": "5",
-      "damage": "2",
-      "armor": "2"
-   },
-   {
-      "id": "10",
-      "name": "Skeleton",
-      "health": "5",
-      "damage": "2",
+      "health": "7",
+      "attack": "5",
+      "agility": "2",
+      "strength": "3",
       "armor": "2"
    }
 ]

@@ -37,7 +37,7 @@
    {
       "id": 4,
       "name":"Iron Dagger",
-      "type":"off-hand",
+      "type":"weapon",
       "damage": 2,
       "armor":0,
       "health": 0,

@@ -38,6 +38,8 @@
 }
 
 .combat-dialogue {
+    display: flex;
+    flex-wrap: wrap;
     border: 1px solid purple;
     height: 28%;
     width: 63%;
@@ -55,3 +57,11 @@
     top: 2%;
 }
 
+.ability-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 291.1px;
+    height: 77px;
+    border: 1px solid purple;
+}
