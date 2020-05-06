@@ -1,0 +1,76 @@
+@import '../../modules/variables.scss';
+@import '../../modules/mixins';
+
+
+.map-grid {
+    background: url('../pictures/cave-floor.jpg');
+    // border: 30px solid $bg;
+    box-shadow: 0 0 20px 6px orangered;
+    transform-origin:center bottom;
+}
+
+// .square {
+//     border: 1px solid white;
+// }
+
+.char-container {
+    text-align: center;
+    background: url('../pictures/cave-floor.jpg');
+}
+
+.char-view {
+    border: 1px solid rgba(53, 52, 52, 40%);
+    background: url('../pictures/cave-floor.jpg');
+    position: relative;
+}
+
+.char-view-chest {
+    border: 1px solid rgba(126, 120, 120, 0.4);
+    background: url('../pictures/chest-icon-png-12-transparent.png');
+    background-size: 100%;
+    background-position: center;
+    position: relative;
+}
+
+.char-view:nth-child(41) {
+    background: url('../pictures//warrior.svg');
+    background-size: 100%;
+    position: relative;
+    // box-shadow: 0 0 3px 5px grey;
+}
+
+// .character {
+//     background: black;
+//     border-radius: 50%;
+// }
+
+.monster-data-hidden {
+    visibility: hidden;
+    position: absolute;
+    height: 45%;
+    width: 15%;
+    bottom: 16%;
+    right: 15%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, .5);
+    color: white;
+    font-size: 17px;
+    overflow: visible;
+    padding: 10px;
+    text-align: left;
+}
+
+.monster-picture-hidden {
+    border: 1px solid white;
+    height: 57%;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.monster-stats-hidden {
+    border: 1px solid white;
+    height: 32%;
+    width: 100%;
+    margin-top: 10px;
+}
+

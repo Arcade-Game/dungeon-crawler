@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 // import Character from './CharView';
 import Tile from './Tile';
+import { GiHidden } from 'react-icons/gi';
 
 const Map = (props) => {
     const [charView, setCharView] = useState([])
     const [displayView, setDisplayView] = useState([])
 
-    const {charX, charY, heightWidth, viewRowCols, grid, getMonsterFn, exploreTileFn} = props
+    const {charX, charY, heightWidth, viewRowCols, grid, getMonsterFn, exploreTileFn, isFight} = props
 
     const charContainerStyle = {
         display: "grid",
@@ -16,7 +17,22 @@ const Map = (props) => {
         width: heightWidth,
         borderRadius: "50%",
         overflow: "hidden",
-        boxShadow: "0 0 30px 6px rgb(199, 77, 6)",
+    };
+
+    const charMiniContainerStyle = {
+        border: "1px dotted black",
+        textAlign: "center",
+        borderRadius: "50%",
+        height: "250px",
+        width: "250px",
+        position: "absolute",
+        top: "40px",
+        right: "12%",
+        display: "grid",
+        gridTemplateColumns: `repeat(${viewRowCols}, 1fr)`,
+        gridTemplateRows: `repeat(${viewRowCols}, 1fr)`,
+        backgroundPosition: "center",
+        overflow: "hidden",
     };
 
     useEffect(() => {
@@ -36,7 +52,7 @@ const Map = (props) => {
 
     useEffect(() => {
         let mappedCharView = charView.map((e,i) => e.map((f,j) => {
-            return <Tile type={f.type} key={j} charX={charX} charY={charY} heightWidth={heightWidth} viewRowCols={viewRowCols} y={charY+((4-i)*-1)} x={charX+((4-j)*-1)} getMonsterFn={getMonsterFn} grid={grid} exploreTileFn={exploreTileFn} />
+            return <Tile type={f.type} key={j} charX={charX} charY={charY} heightWidth={heightWidth} viewRowCols={viewRowCols} y={charY+((4-i)*-1)} x={charX+((4-j)*-1)} getMonsterFn={getMonsterFn} grid={grid} exploreTileFn={exploreTileFn} isFight={isFight} />
         }))
 
         setDisplayView(mappedCharView)
@@ -47,7 +63,7 @@ const Map = (props) => {
 
     return (
         <div>
-        <div className="map-grid" style={charContainerStyle}>
+        <div className={`map-grid`} style={isFight ? charMiniContainerStyle : charContainerStyle}>
             {displayView}
 
             </div>

@@ -3,7 +3,6 @@ import Town from './Components/Town/Town'
 import routes from "./routes";
 import './App.scss';
 import Game from './Components/Game/Game';
-import CombatStats from './Components/CombatStats/CombatStats'
 
 function App() {
   return (
@@ -11,7 +10,7 @@ function App() {
       {routes}
       {/* <Town /> */}
       {/* <Game /> */}
-      {/* <CombatStats /> */} 
+
     </div>
   );
 }
