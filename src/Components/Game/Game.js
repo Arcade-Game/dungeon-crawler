@@ -25,7 +25,6 @@ const Game = (props) => {
     [isFight, setIsFight] = useState(false),
     [monsterType, setMonsterType] = useState('')
   
-
   const move = ({keyCode}) => {
     return !isFight ? getKeyCode(keyCode) :  null
   }
@@ -111,6 +110,9 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
+  const toggleFightFn = () => {
+    setIsFight(!isFight);
+  }
   let mapClassName = ''
 
   return (

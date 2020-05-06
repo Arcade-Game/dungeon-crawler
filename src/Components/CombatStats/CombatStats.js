@@ -7,28 +7,28 @@ const CombatStats = props => {
    const [health, setHealth] = useState(0);
    const [attack, setAttack] = useState(0);
    const [armor, setArmor] = useState(0);
-   const [MAttack, setMAttack] = useState(0);
-   const [MHealth, setMHealth] = useState(0);
-   const [MArmor, setMArmor] = useState(0);
+   const [agility, setAgility] = useState(0);
+   const [strength, setStrength] = useState(0);
+   const [mAttack, setMAttack] = useState(0);
+   const [mHealth, setMHealth] = useState(0);
+   const [mArmor, setMArmor] = useState(0);
+   const [mAgility, setMAgility] = useState(0);
+   const [mStrength, setMStrength] = useState(0);
+   const {monsterStats, characterStats} = props;
 
-
-   useEffect(() => {
-      axios.get(`/api/monster-stats/${1}`)
-      .then(res => {
-         setMArmor(res.data.armor);
-         setMAttack(res.data.damage);
-         setMHealth(res.data.health);
-      })
-      .catch(err => console.log(err))
-
-      axios.get(`/api/character-stats/${0}`)
-      .then(res => {
-         setHealth(res.data.health)
-         setArmor(res.data.armor)
-         setAttack(res.data.damage)
-      })
-      .catch(err => console.log(err))
-   })
+   useEffect(()=> {
+      const {attack, armor, health, agility, strength} = characterStats;
+      setAttack(+attack)
+      setArmor(+armor)
+      setHealth(+health)
+      setAgility(+agility)
+      setStrength(+strength)
+      setMStrength(+monsterStats.strength)
+      setMHealth(+monsterStats.health)
+      setMAgility(+monsterStats.agility)
+      setMAttack(+monsterStats.attack)
+      setMArmor(+monsterStats.armor)
+   }, [characterStats, monsterStats])
 
    return (
       <div className='stat-container'>
@@ -36,9 +36,11 @@ const CombatStats = props => {
             <div className='title'>Your Stats</div>
             <div className='stat-labels'>
                <div>
+                  <p>Health: {health} </p>
                   <p>Attack: {attack}</p>
                   <p>Armor: {armor}</p>
-                  <p>Health: {health} </p>
+                  <p>Agility: {agility} </p>
+                  <p>Strength: {strength} </p>
                </div>
             </div>
          </div>
@@ -46,9 +48,11 @@ const CombatStats = props => {
             <div className='title'>Monster Stats</div>
             <div  className='stat-labels'>
                <div>
-                  <p>Attack: {MAttack}</p>
-                  <p>Armor: {MArmor}</p>
-                  <p>Health: {MHealth} </p>
+                  <p>Health: {mHealth} </p>
+                  <p>Attack: {mAttack}</p>
+                  <p>Armor: {mArmor}</p>
+                  <p>Agility: {mAgility}</p>
+                  <p>Strength: {mStrength}</p>
                </div>
             </div>
          </div>
