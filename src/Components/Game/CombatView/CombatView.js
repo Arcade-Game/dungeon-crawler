@@ -8,7 +8,7 @@ import axios from 'axios';
 import {attackType, weaponAttack, monAttack, charAttack} from './combatFns'
 
 const CombatView = (props) => {
-    const {monsterType, monsterStats, characterStats} = props,
+    const {monsterType, monsterStats, characterStats, isFightFn} = props,
         [weapon, setWeapon] = useState(0),
         [characterHealth, setCharacterHealth] = useState(0),
         [monsterHealth, setMonsterHealth] = useState(0),
@@ -60,6 +60,7 @@ const CombatView = (props) => {
     return (
         <>
             <div className="combat-view-container">
+                <div className="exit-combat-view" onClick={() => isFightFn(false)}>X</div>
                 <div className="combat-monster" style={monsterStyle} >{monsterType}</div>
                 <div className="combat-hero" style={heroStyle} >HERO</div>
                 <div className="combat-dialogue">{buttons}</div>

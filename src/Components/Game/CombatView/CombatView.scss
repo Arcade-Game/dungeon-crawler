@@ -8,6 +8,7 @@
     margin-right: 320px;
     position: relative;
     padding: 1%;
+    cursor: url('../../pictures/Mouse01standart-cursor.png'), auto;
     // display: grid;
     // flex-direction: column;
     // justify-content: space-between;
@@ -65,3 +66,13 @@
     height: 77px;
     border: 1px solid purple;
 }
+
+.exit-combat-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+}
+

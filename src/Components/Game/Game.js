@@ -16,7 +16,7 @@ const Game = (props) => {
 
   const [grid, setGrid] = useState(mapObjects),
     [charX, setCharX] = useState(16),
-    [charY, setCharY] = useState(22),
+    [charY, setCharY] = useState(26),
     [heightWidth, setHeightWidth] = useState(700),
     [viewRowCols, setViewRowCols] = useState(9),
     [inventoryToggle, setInventoryToggle] = useState(false),
@@ -26,6 +26,13 @@ const Game = (props) => {
     [monsterType, setMonsterType] = useState(''),
     [monsterStats, setMonsterStats] = useState({}),
     [characterStats, setCharacterStats] = useState({})
+
+    useEffect(() => {
+      let newGrid = [...grid]
+      newGrid.forEach((e,i,a) => i > 8 && i < a.length-8 ? e.forEach((f,j,z) => {
+        return (j > 8 && j < z.length-8 ? (newGrid[i][j].type === 'monster' ? getMonster(j, i) : null) : null)
+      }) : null)
+    }, [])
   
   const move = ({keyCode}) => {
     return !isFight ? getKeyCode(keyCode) :  null
@@ -152,6 +159,7 @@ const Game = (props) => {
             characterStats={characterStats}
             monsterStats={monsterStats}
             getStats={stats}
+            isFightFn={setIsFight}
           /> : null
         }
         

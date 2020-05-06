@@ -5,12 +5,13 @@
     width: 90%;
     height: 12%;
     position: absolute;
-    bottom: 30px;
+    bottom: 2%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     // padding-left: 25px;
     // padding-right: 50px;
+    cursor: url('../pictures/Mouse09standart-resize.png'), auto;
 }
 
 .character-menu-container{
@@ -23,11 +24,17 @@
         border: 1px solid green;
         height: 100%;
         width: 40%;
+        cursor: url('../pictures/Mouse09Green-resize.png'), auto;
+
+
     }
     .inventory-icon {
         border: 1px solid green;
         height: 100%;
         width: 40%;
+        cursor: url('../pictures/Mouse09Green-resize.png'), auto;
+
+
     }  
 }
 .menu-button {
@@ -35,6 +42,10 @@
     border: 1px solid green;
     height: 100%;
     width: 20%;
+    cursor: url('../pictures/Mouse09Green-resize.png'), auto;
+
+
+
 }
 .health-bar {
     @include row;
