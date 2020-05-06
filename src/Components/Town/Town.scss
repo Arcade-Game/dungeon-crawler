@@ -171,6 +171,23 @@
     right:1vw;
     bottom:1vh;
  }
+   .hero-selected{
+      position: fixed;
+      @include row;;
+      bottom: 3vh;
+      left:3vw;
+      z-index:2;
+      height:8vh;
+      width: 30vw;
+      background-color: rgb(155, 44, 44);
+      border-radius: 5px;
+
+   }
+   .hero-selected:hover{
+      border: 2px solid rgb(155, 44, 44);
+      background-color: rgb(105, 25, 25);
+      color:white;
+   }
  .town-overlay {
     @include row;
    background-color:rgba(0, 0, 0, 0.65);
