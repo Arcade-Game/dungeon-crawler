@@ -39,6 +39,8 @@
 }
 
 .combat-dialogue {
+    display: flex;
+    flex-wrap: wrap;
     border: 1px solid purple;
     height: 28%;
     width: 63%;
@@ -47,13 +49,23 @@
     bottom: 2%;
 }
 
-.combat-monster-info {
+.combat-log {
     border: 1px solid purple;
     height: 28%;
     width: 63%;
     position: absolute;
     left: 2%;
     top: 2%;
+    overflow-y: scroll;
+}
+
+.ability-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 291.1px;
+    height: 77px;
+    border: 1px solid purple;
 }
 
 .exit-combat-view {
@@ -64,4 +76,3 @@
     width: 50px;
     border: 1px solid black;
 }
-

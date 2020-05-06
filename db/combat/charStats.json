@@ -20,7 +20,7 @@
    {
       "id": "2",
       "class": "Rogue",
-      "health": "5",
+      "health": "100",
       "strength": "3",
       "attack": "1",
       "agility": "5",

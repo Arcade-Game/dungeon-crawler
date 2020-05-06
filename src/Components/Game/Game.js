@@ -6,8 +6,8 @@ import Map from './Map';
 import {mapObjects} from './mapObjects';
 import Footer from '../Footer/Footer';
 import axios from 'axios';
-import Inventory from './Inventory/Inventory';
-import Equipment from "./Inventory/Equipment";
+import Inventory from './Character/Inventory/Inventory';
+import Equipment from "./Character/Inventory/Equipment";
 import MiniMap from './MiniMap';
 import CombatView from './CombatView/CombatView';
 import CombatStats from '../CombatStats/CombatStats';
@@ -23,7 +23,9 @@ const Game = (props) => {
     [equipmentToggle, setEquipmentToggle] = useState(false),
     [newMoney, setNewMoney] = useState(0),
     [isFight, setIsFight] = useState(false),
-    [monsterType, setMonsterType] = useState('')
+    [monsterType, setMonsterType] = useState(''),
+    [monsterStats, setMonsterStats] = useState({}),
+    [characterStats, setCharacterStats] = useState({})
 
     useEffect(() => {
       let newGrid = [...grid]
@@ -35,6 +37,7 @@ const Game = (props) => {
   const move = ({keyCode}) => {
     return !isFight ? getKeyCode(keyCode) :  null
   }
+
 
   const getKeyCode = (keyCode) => {
     if(keyCode === 37 || keyCode === 65){
@@ -82,7 +85,7 @@ const Game = (props) => {
   const openChest = (x, y) => {
     let newGrid = [...grid]
     newGrid[y][x] = {type: "empty"}
-
+console.log(newGrid[x][y])
     setGrid(newGrid)
 
     axios.get(`/api/item`).then(res => console.log("res.data", res.data))
@@ -117,9 +120,26 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
-  const toggleFightFn = () => {
-    setIsFight(!isFight);
-  }
+  const stats = ()=> {
+    const arr = []
+    axios.get(`/api/character-stats/${'rogue'}`)
+    .then(async(res) => {
+      await setCharacterStats(res.data)
+      arr.push(res.data)
+    })
+    .catch(err => console.log(err))
+    
+    
+      axios.get(`/api/monster-stats/${monsterType}`)
+    .then(async(res) => {
+        await setMonsterStats(res.data)
+        arr.push(res.data)
+    })
+    .catch(err => console.log(err))
+    return arr
+}
+
+
   let mapClassName = ''
 
   return (
@@ -140,7 +160,10 @@ const Game = (props) => {
           isFight ? 
           <CombatView 
             monsterType={monsterType.toLowerCase()}
+            toggleFight = {setIsFight}
+            getStats={stats}
             isFightFn={setIsFight}
+            setGridFn = {setGrid}
           /> : null
         }
         
