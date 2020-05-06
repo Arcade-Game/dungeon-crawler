@@ -5,8 +5,8 @@ import Map from './Map';
 import {mapObjects} from './mapObjects';
 import Footer from '../Footer/Footer';
 import axios from 'axios';
-import Inventory from './Inventory/Inventory';
-import Equipment from "./Inventory/Equipment";
+import Inventory from './Character/Inventory/Inventory';
+import Equipment from "./Character/Inventory/Equipment";
 import MiniMap from './MiniMap';
 
 const Game = (props) => {

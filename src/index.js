@@ -10,9 +10,9 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
   <HashRouter>
     <Provider store={store}> 
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
     </Provider>
   </HashRouter>,
   document.getElementById('root')

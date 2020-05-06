@@ -8,10 +8,10 @@ import CombatStats from './Components/CombatStats/CombatStats'
 function App() {
   return (
     <div className="App">
-      {/* {routes} */}
-      <Town />
+      {routes}
+      {/* <Town /> */}
       {/* <Game /> */}
-      {/* <CombatStats /> */}
+      {/* <CombatStats /> */} 
     </div>
   );
 }
