@@ -38,21 +38,6 @@ const Game = (props) => {
     return !isFight ? getKeyCode(keyCode) :  null
   }
 
-  const stats = ()=> {
-    axios.get(`/api/character-stats/${'rogue'}`)
-    .then(res => {
-      setCharacterStats(res.data)
-    })
-    .catch(err => console.log(err))
-    
-    
-      axios.get(`/api/monster-stats/${monsterType}`)
-    .then(res => {
-        setMonsterStats(res.data)
-    })
-    .catch(err => console.log(err))
-    
-}
 
   const getKeyCode = (keyCode) => {
     if(keyCode === 37 || keyCode === 65){
@@ -100,7 +85,7 @@ const Game = (props) => {
   const openChest = (x, y) => {
     let newGrid = [...grid]
     newGrid[y][x] = {type: "empty"}
-
+console.log(newGrid[x][y])
     setGrid(newGrid)
 
     axios.get(`/api/item`).then(res => console.log("res.data", res.data))
@@ -135,6 +120,26 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
+  const stats = ()=> {
+    const arr = []
+    axios.get(`/api/character-stats/${'rogue'}`)
+    .then(async(res) => {
+      await setCharacterStats(res.data)
+      arr.push(res.data)
+    })
+    .catch(err => console.log(err))
+    
+    
+      axios.get(`/api/monster-stats/${monsterType}`)
+    .then(async(res) => {
+        await setMonsterStats(res.data)
+        arr.push(res.data)
+    })
+    .catch(err => console.log(err))
+    return arr
+}
+
+
   let mapClassName = ''
 
   return (
@@ -156,10 +161,9 @@ const Game = (props) => {
           <CombatView 
             monsterType={monsterType.toLowerCase()}
             toggleFight = {setIsFight}
-            characterStats={characterStats}
-            monsterStats={monsterStats}
             getStats={stats}
             isFightFn={setIsFight}
+            setGridFn = {setGrid}
           /> : null
         }
         
