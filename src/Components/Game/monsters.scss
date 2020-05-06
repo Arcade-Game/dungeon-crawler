@@ -50,3 +50,16 @@
     background: url("../pictures/leviathan.png");
     @include mon-pic;
 }
+
+// ON-HOVER
+
+.char-view-goblin:hover .monster-data-hidden {visibility: visible;}
+.char-view-demon:hover .monster-data-hidden {visibility: visible;}
+.char-view-imp:hover .monster-data-hidden {visibility: visible;}
+.char-view-dragon:hover .monster-data-hidden {visibility: visible;}
+.char-view-skeleton:hover .monster-data-hidden {visibility: visible;}
+.char-view-beholder:hover .monster-data-hidden {visibility: visible;}
+.char-view-wraith:hover .monster-data-hidden {visibility: visible;}
+.char-view-gargoyle:hover .monster-data-hidden {visibility: visible;}
+.char-view-werewolf:hover .monster-data-hidden {visibility: visible;}
+.char-view-leviathan:hover .monster-data-hidden {visibility: visible;}
