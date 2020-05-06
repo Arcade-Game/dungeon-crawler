@@ -32,7 +32,6 @@ const Game = (props) => {
       }) : null)
     }, [])
   
-
   const move = ({keyCode}) => {
     return !isFight ? getKeyCode(keyCode) :  null
   }
@@ -118,6 +117,9 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
+  const toggleFightFn = () => {
+    setIsFight(!isFight);
+  }
   let mapClassName = ''
 
   return (
