@@ -8,7 +8,7 @@ import Game from './Components/Game/Game'
 export default (
    <Switch>
       {/* <Route exact path="/" component = {Auth}/> */}
-      <Route exact path="/town" component = {Town}/>
+      <Route exact path="/" component = {Town}/>
       {/* <Route path="/story" component = {Story}/> */}
       <Route path="/game" component = {Game}/>
    </Switch>
