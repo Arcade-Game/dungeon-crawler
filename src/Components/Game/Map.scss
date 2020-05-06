@@ -26,11 +26,66 @@
 
 .char-view-chest {
     border: 1px solid rgba(126, 120, 120, 0.4);
-    background: url('../pictures/chest-icon-png-12-transparent.png');
-    background-size: 100%;
-    background-position: center;
+    // border: 1px solid yellow;
+    height: 100%;
+    width: 100%;
+    // background-size: 100%;
+    // background-position: center;
     position: relative;
+    cursor: url('../pictures/cursors/Mouse09YellowResize.png'), auto;
+    // overflow: hidden;
 }
+
+.chest-sprite-container {
+    height: 100%;
+    width: 100%;
+    /* border: 1px solid red; */
+
+}
+
+.chest-spritesheet {
+    height: 100%;
+    width: 100%;
+    background: url('../pictures/glowingChest.png');
+    /* border: 1px solid blue; */
+    background-size: 500%;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    animation: moveChest 3s steps(1, start) infinite;
+
+}
+
+.chest-spritesheet:hover {
+    animation: paused;
+    background-position: 100% 100%;
+}
+
+@keyframes moveChest {
+    
+
+    0% {background-position: 0% 0}
+    6.25% {background-position: 25% 0}
+    12.5% {background-position: 50% 0%}
+    18.75% {background-position: 75% 0%}
+    25% {background-position: 100% 0%}
+    31.25% {background-position: 0% 100%}
+    37.5% {background-position: 25% 100%}
+    43.75% {background-position: 50% 100%}
+    50% {background-position: 75% 100%}
+    56.25% {background-position: 100% 100%}
+    62.5% {background-position: 75% 100%}
+    68.75% {background-position: 50% 100%}
+    75% {background-position: 25% 100%}
+    81.25% {background-position: 0% 100%}
+    87.5% {background-position: 100% 0%}
+    93.75% {background-position: 75% 0%}
+    100% {background-position: 50% 0%}
+}
+
+
+
+
+
 
 .char-view:nth-child(41) {
     background: url('../pictures//warrior.svg');

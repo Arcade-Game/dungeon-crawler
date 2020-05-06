@@ -33,6 +33,7 @@ const Map = (props) => {
         gridTemplateRows: `repeat(${viewRowCols}, 1fr)`,
         backgroundPosition: "center",
         overflow: "hidden",
+        boxShadow: "0px 0px 1px 1px black"
     };
 
     useEffect(() => {
