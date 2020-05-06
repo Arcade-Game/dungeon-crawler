@@ -11,6 +11,7 @@ import Equipment from "./Character/Inventory/Equipment";
 import MiniMap from './MiniMap';
 import CombatView from './CombatView/CombatView';
 import CombatStats from '../CombatStats/CombatStats';
+import {withRouter} from 'react-router-dom';
 
 const Game = (props) => {
 
@@ -74,6 +75,11 @@ const Game = (props) => {
           openChest(x, y)
           setCharX(x)
           setCharY(y)
+          break;
+        case "exit":
+          setCharX(x)
+          setCharY(y)
+          props.history.push('/')
           break;
       }
   }
@@ -194,4 +200,4 @@ console.log(newGrid[x][y])
   );
 }
 
-export default Game;
+export default withRouter(Game);

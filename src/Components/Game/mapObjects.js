@@ -16,7 +16,7 @@ export const mapObjects = [
     [l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l],
     [l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l],
     [l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l],
-    [...w, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, ...w],
+    [...w, o, o, o, o, o, o, o, o, o, o, o, o, o, o, z, ...w],
     [...w, o, o, l, l, o, o, l, l, l, l, l, l, l, o, o, ...w],
     [...w, o, l, l, l, x, x, x, x, o, o, o, o, o, o, o, ...w],
     [...w, o, o, l, l, x, x, x, x, o, o, o, o, o, o, o, ...w],
