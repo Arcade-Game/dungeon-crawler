@@ -1,2 +1,6 @@
-DELETE FROM save_state
-WHERE player_id = $1 AND save_id = $1;
+DELETE FROM inventory_items
+WHERE file_id = $1;
+DELETE FROM equipped_items
+WHERE file_id = $1;
+DELETE FROM save_files
+WHERE file_id = $1;
