@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import axios from "axios";
 import { setUser } from "../Redux/authReducer";
 // import {withRouter} from "react-router-dom";
+import './Auth.scss';
 
 const Auth = (props) => {
    const [username, setUsername] = useState(""),
@@ -58,6 +59,7 @@ const Auth = (props) => {
 
    return (
       <div className="auth-container">
+         <audio src={require("../music/prologue.mp3")} autoPlay />
          <div className="login-container">
             <h1>{registerToggle ? "Register" : "Sign In"}</h1>
             <input id="login" value={username} placeholder="Username" 
