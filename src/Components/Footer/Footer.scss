@@ -29,11 +29,17 @@
 
     }
     .inventory-icon {
-        border: 1px solid green;
+        // border: 1px solid green;
         height: 100%;
         width: 40%;
+        background: url('../pictures/items/backpack.png');
+        background-position-y: 50%;
+        background-position-x: 50%;
+        background-size: 120%;
         cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
-
+        &:hover {
+            opacity: 70%;
+        }
 
     }  
 }

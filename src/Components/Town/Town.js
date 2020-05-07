@@ -1,4 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import {connect} from "react-redux"
+import {getCurrentUser} from "../../Redux/authReducer"
 import Trainer from "./Trainer/Trainer"
 import Market from "./Market/Market";
 import LeaderBoard from "./LeaderBoard/LeaderBoard";
@@ -15,6 +17,10 @@ const Town = (props) => {
              leaderBoard = "leaderBoard",
              heroes = "heroes",
              newHero = "newHero";
+   
+   useEffect(() => {
+      props.getCurrentUser()
+   })
 
    const setToggle = (toggleType) => {
       setToggleType(toggleType)
@@ -37,6 +43,7 @@ const Town = (props) => {
 
    return (
       <div className="town-map">
+      <audio src={require("../../music/Soliloquy.mp3")} autoPlay />
          {overlayToggle ? (
             <div className="town-overlay" 
                      onClick={()=>{resetToggle()}}>
@@ -85,10 +92,13 @@ const Town = (props) => {
                <p className="play-game"
                onClick={()=> props.history.push(`/game`)}> {`< Play >`} </p>
          </div>
-
+            {/* <div className="minstrel1"></div>
+            <div className="minstrel2"></div>
+            <div className="minstrel3"></div>
+            <div className="minstrel4"></div> */}
          <h3 className="copyright"> Picture Credit: Deep_Rights - Reddit </h3>
       </div>
    )
 }
 
-export default Town;
+export default connect(null, {getCurrentUser})(Town);

@@ -1,3 +1,3 @@
-INSERT INTO players (username, password)
-VALUES (${username}, ${password})
+INSERT INTO players (username, password, email)
+VALUES (${username}, ${password}, ${email})
 RETURNING player_id, username;

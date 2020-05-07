@@ -11,10 +11,11 @@ import Equipment from "./Character/Inventory/Equipment";
 import MiniMap from './MiniMap';
 import CombatView from './CombatView/CombatView';
 import CombatStats from '../CombatStats/CombatStats';
+import {withRouter} from 'react-router-dom';
 
 const Game = (props) => {
 
-  const [grid, setGrid] = useState(mapObjects),
+  const [grid, setGrid] = useState([...mapObjects]),
     [charX, setCharX] = useState(16),
     [charY, setCharY] = useState(26),
     [heightWidth, setHeightWidth] = useState(700),
@@ -25,7 +26,11 @@ const Game = (props) => {
     [isFight, setIsFight] = useState(false),
     [monsterType, setMonsterType] = useState(''),
     [monsterStats, setMonsterStats] = useState({}),
-    [characterStats, setCharacterStats] = useState({})
+    [characterStats, setCharacterStats] = useState({}),
+    [monsterCoor, setMonsterCoor] = useState([0,0]),
+    [health, setHealth] = useState(100),
+    [level, setLevel] = useState(1)
+    
 
     useEffect(() => {
       let newGrid = [...grid]
@@ -74,18 +79,35 @@ const Game = (props) => {
           setCharX(x)
           setCharY(y)
           break;
+        case "exit":
+          setCharX(x)
+          setCharY(y)
+          setGrid([...mapObjects])
+          props.history.push('/')
+          break;
       }
   }
     
   const fightMonster = (x, y) => {
     setMonsterType(grid[y][x].monsterType)
+    setMonsterCoor([x, y])
     setIsFight(true)
+  }
+
+  const clearMonster = (x, y) => {
+    let newGrid = [...grid]
+    newGrid[y][x].type = "empty"
+    newGrid[y][x].monsterType = ""
+    setCharX(x)
+    setCharY(y)
+    setMonsterCoor([0,0])
+    setGrid(newGrid)
   }
 
   const openChest = (x, y) => {
     let newGrid = [...grid]
     newGrid[y][x] = {type: "empty"}
-console.log(newGrid[x][y])
+    console.log(newGrid[x][y])
     setGrid(newGrid)
 
     axios.get(`/api/item`).then(res => console.log("res.data", res.data))
@@ -137,7 +159,9 @@ console.log(newGrid[x][y])
     })
     .catch(err => console.log(err))
     return arr
-}
+  }
+
+
 
 
   let mapClassName = ''
@@ -164,9 +188,11 @@ console.log(newGrid[x][y])
             getStats={stats}
             isFightFn={setIsFight}
             setGridFn = {setGrid}
+            clearMonster = {clearMonster}
+            monsterCoor = {monsterCoor}
           /> : null
         }
-        
+        <div className="coin-icon"></div>
         <Footer 
           setEquipmentToggle={equipmentToggleFn}
           setInventoryToggle={inventoryToggleFn}
@@ -181,4 +207,4 @@ console.log(newGrid[x][y])
   );
 }
 
-export default Game;
+export default withRouter(Game);

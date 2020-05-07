@@ -1,28 +1,40 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {connect} from "react-redux";
-import {registerUser, loginUser}
-from "../Redux/authReducer";
+// import {getCurrentUser} from "../Redux/authReducer";
+import axios from "axios";
+import { setUser } from "../Redux/authReducer";
 // import {withRouter} from "react-router-dom";
 
 const Auth = (props) => {
    const [username, setUsername] = useState(""),
              [password, setPassword] = useState(""),
-             [verPassword, setVerPassword] = 
-             useState(""),
+             [verPassword, setVerPassword] = useState(""),
+             [email, setEmail] = useState(""),
              [registerToggle, setRegisterToggle] = useState(false);
+
+//  useEffect (() => {
+//     props.getCurrentUser()
+//  },[])
+
 
    const clearPlaceholder = (inputId, newValue) => {
       console.log(newValue)
       if(newValue){
          document.getElementById(inputId).placeholder = ""
       } else {
-         document.getElementById(inputId).placeholder = ""
+         document.getElementById(inputId).placeholder = inputId
       }
    },
+
+
    handleRegister = () => {
       if (password === verPassword){
-         props.registerUser(username, password);
-         props.history.push("/dashboard")
+         axios.post("/api/auth/register", {username, password, email})
+         .then(({data}) => {
+            console.log(data);
+            setUser(data.userName)
+         }).catch(err => console.log(err));
+         props.history.push("/town")
       }
       else {
          console.log ("password do not match");
@@ -31,9 +43,18 @@ const Auth = (props) => {
    },
 
    handleLogin = async () => {
-   await props.loginUser(username, password);
-   props.history.push("/dashboard")
+      axios.post("/api/auth/login", {username, password})
+      .then(res => {
+         console.log(res.data);
+         setUser(res.data.userName)
+      }).catch(err => console.log(err));
+   props.history.push("/town")
    }
+
+   // handleLogout = () => {
+   //    axios.post("/api/auth/logout")
+   // }
+
 
    return (
       <div className="auth-container">
@@ -54,6 +75,10 @@ const Auth = (props) => {
                   onChange={(event) => setVerPassword(event.target.value)}
                   onFocus={() => clearPlaceholder("verPassword")}
                   onBlur={() => clearPlaceholder("verPassword", "Verify Password")}/>
+                  <input id="email" value={email} placeholder="Email" 
+                  onChange={(event) => setEmail(event.target.value)}
+                  onFocus={() => clearPlaceholder("email")}
+                  onBlur={() => clearPlaceholder("email", "Email")}/>
                </>
             ) : null
             }
@@ -81,4 +106,4 @@ const Auth = (props) => {
       </div>
       )
 }
-export default connect(null, {registerUser, loginUser})(Auth);
+export default connect(null, setUser)(Auth);
