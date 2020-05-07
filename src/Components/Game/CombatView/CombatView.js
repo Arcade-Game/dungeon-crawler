@@ -9,7 +9,7 @@ import {attackType, monAttack, charAttack, statSetupChar, statSetupMon} from './
 
 const CombatView = (props) => {
     const {monsterType, isFightFn, clearMonster, monsterCoor} = props,
-        [weapon, setWeapon] = useState(0),
+        [weapon, setWeapon] = useState(''),
         [characterHealth, setCharacterHealth] = useState(0),
         [monsterHealth, setMonsterHealth] = useState(0),
         [buttonArr, setButtonArr] = useState([]),

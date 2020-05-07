@@ -1,0 +1,78 @@
+@import '../modules/_variables.scss';
+@import '../modules/mixins.scss';
+
+.auth-container {
+   background: url('./pictures/fantasy-city-landscape-path-wallpaper-preview.jpg');
+   background-position: center;
+   background-size: cover;
+   background-repeat: no-repeat;
+   height: 100vh;
+   width: 100vw;
+   display: flex;
+}
+
+.auth-background {
+   background-color: $bg;
+}
+
+.login-register {
+   background: url('./pictures/signpost.png');
+   background-size: contain;
+   background-position: center;
+   background-repeat: no-repeat;
+   height: 900px;
+   width: 500px;
+   @include column;
+   padding-bottom: 140px;
+   position: absolute;
+   left: 75px;
+}
+
+.login-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   align-items: center;
+   height: 200px;
+   padding-top: 60px;
+}
+
+.input-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   align-items: center;
+   height: 75px;
+   position: absolute;
+   top: 400px;
+}
+
+.button {
+   border: none;
+   width: 60px;
+   height: 25px;
+   padding: 5px;
+   margin-bottom: 5px;
+   margin-top: 78px;
+}
+
+.button:Hover {
+   cursor: pointer;
+}
+
+.register-toggle {
+   font-weight: bold;
+   margin-right: 5px;
+}
+
+.login-toggle {
+   font-weight: bold;
+}
+
+.login-toggle:hover {
+   cursor: pointer;
+}
+
+.register-toggle:hover {
+   cursor: pointer;
+}
