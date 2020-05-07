@@ -141,16 +141,16 @@ console.log(newGrid[x][y])
   const stats = ()=> {
     const arr = []
     axios.get(`/api/character-stats/${'rogue'}`)
-    .then(async(res) => {
-      await setCharacterStats(res.data)
+    .then((res) => {
+      setCharacterStats(res.data)
       arr.push(res.data)
-    })
+      })
     .catch(err => console.log(err))
     
     
       axios.get(`/api/monster-stats/${monsterType}`)
-    .then(async(res) => {
-        await setMonsterStats(res.data)
+    .then((res) => {
+        setMonsterStats(res.data)
         arr.push(res.data)
     })
     .catch(err => console.log(err))

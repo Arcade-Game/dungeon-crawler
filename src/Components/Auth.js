@@ -31,8 +31,8 @@ const Auth = (props) => {
       if (password === verPassword){
          axios.post("/api/auth/register", {username, password, email})
          .then(({data}) => {
-            console.log(data);
-            setUser(data.userName)
+            console.log("data", data);
+            setUser(data)
          }).catch(err => console.log(err));
          props.history.push("/town")
       }
@@ -45,9 +45,10 @@ const Auth = (props) => {
    handleLogin = async () => {
       axios.post("/api/auth/login", {username, password})
       .then(res => {
-         console.log(res.data);
-         setUser(res.data.userName)
+         console.log("res.data", res.data);
+         setUser(res.data)
       }).catch(err => console.log(err));
+      
    props.history.push("/town")
    }
 
