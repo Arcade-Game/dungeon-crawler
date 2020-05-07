@@ -12,5 +12,5 @@ export const monsterImages = {
 }
 
 export const heroImages = {
-    warrior: `url(${require("../../pictures/warrior-silhouette.jpg")})`
+    warrior: `url(${require("../../pictures/warrior-silhouette.png")})`
 }
