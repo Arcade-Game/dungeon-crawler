@@ -83,7 +83,7 @@ const Game = (props) => {
           setCharX(x)
           setCharY(y)
           setGrid([...mapObjects])
-          props.history.push('/')
+          props.history.push('/town')
           break;
       }
   }
@@ -148,13 +148,17 @@ const Game = (props) => {
     .then((res) => {
       setCharacterStats(res.data)
       arr.push(res.data)
-    })
+      })
     .catch(err => console.log(err))
     
     
       axios.get(`/api/monster-stats/${monsterType}`)
     .then((res) => {
+<<<<<<< HEAD
          setMonsterStats(res.data)
+=======
+        setMonsterStats(res.data)
+>>>>>>> bd6d59abfd20d9a15820fbc92420a84266527a5c
         arr.push(res.data)
     })
     .catch(err => console.log(err))

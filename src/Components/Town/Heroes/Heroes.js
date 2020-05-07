@@ -1,20 +1,31 @@
 import React, {useState, useEffect} from "react";
+import {connect} from "react-redux"
+// import {getCurrentUser} from "../../../Redux/authReducer"
+import axios from "axios";
 import "./Heroes.scss";
 const Heroes = (props) => {
-   const [charList, setCharList] = useState([{name: "Jon", class: "Rogue", level: 15}, {name: "Ryan", class: "Warrior", level: 12}, {name: "Noah", class: "Ranger", level: 8}]),
+   const [heroList, setHeroList] = useState([{name: "Jon", class: "Rogue", level: 15}, {name: "Ryan", class: "Warrior", level: 12}, {name: "Noah", class: "Ranger", level: 8}]),
              [expand, setExpand] = useState(false)
 
       const newHero = "newHero";
-   // useEffect (() => {
-   //    setCharList()
-   // },[])
-
+      
+      // useEffect (() => {
+      //      props.getCurrentUser()
+      // },[])
+      // useEffect (() => {
+      //       const {player_id} = props.user
+      //       axios.get(`api/heroes/player/${player_id}`).then(res => {
+      //          console.log(res.data[0])
+      //          setHeroList(res.data[0])
+      //          })
+      // },[props])
+   console.log(props)
    return (
       <div className="hero-selector-container"
               onClick={(event)=> props.stopPropagation(event)}> 
               <h1> Your Characters </h1>
       <div className="hero-summary-container">
-         {charList.map((char, index) => {
+         {heroList.map((char, index) => {
             return ( <>
             <div className="hero-summary"
                      onClick={() => setExpand(!expand)}>
@@ -27,7 +38,7 @@ const Heroes = (props) => {
                 <h4>Strength</h4>
                <h4>Agility</h4>
                <h4>Armor</h4>
-               <button onClick={()=>{props.selectCharacter(charList[index])
+               <button onClick={()=>{props.selectCharacter(heroList[index])
                props.resetToggle()}}> Select</button>
                  </div>) : null
             }
@@ -39,5 +50,5 @@ const Heroes = (props) => {
       </div>
    )
 }
-
-export default Heroes;
+const mapStateToProps = (reduxState) => reduxState.auth
+export default connect(mapStateToProps)(Heroes);
