@@ -1,4 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import {connect} from "react-redux"
+import {getCurrentUser} from "../../Redux/authReducer"
 import Trainer from "./Trainer/Trainer"
 import Market from "./Market/Market";
 import LeaderBoard from "./LeaderBoard/LeaderBoard";
@@ -15,6 +17,10 @@ const Town = (props) => {
              leaderBoard = "leaderBoard",
              heroes = "heroes",
              newHero = "newHero";
+   
+   useEffect(() => {
+      props.getCurrentUser()
+   })
 
    const setToggle = (toggleType) => {
       setToggleType(toggleType)
@@ -95,4 +101,4 @@ const Town = (props) => {
    )
 }
 
-export default Town;
+export default connect(null, {getCurrentUser})(Town);
