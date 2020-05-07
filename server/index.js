@@ -8,6 +8,7 @@ const express = require('express'),
       itemCtrl = require("./controllers/itemController"),
       combatCtrl = require("./controllers/combatController"),
       monsterCtrl = require("./controllers/monsterController"),
+      saveFileCtrl = require("./controllers/saveFileController"),
       port = SERVER_PORT,
       app = express();
 
@@ -50,6 +51,7 @@ app.get('/api/equipped-items/:weapon', itemCtrl.equippedItems);
 //combat endpoints
 app.get('/api/monster-stats/:monsterType', combatCtrl.monsterStats);
 app.get('/api/character-stats/:classType', combatCtrl.charStats);
+app.get('/api/heroes/player/:id', saveFileCtrl.getHeroes);
 
 //monster endpoints
 app.get('/api/monster', monsterCtrl.getMonster);
