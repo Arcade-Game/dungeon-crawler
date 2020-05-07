@@ -87,11 +87,11 @@ const CombatView = (props) => {
         arr.push(`${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} did ${mDamage} damage to you!`)
         charHealth -= mDamage
         setCharacterHealth(charHealth)
-        if (charHealth < 0 || monHealth < 0) {
-            if (charHealth < 0) {
+        if (charHealth <= 0 || monHealth <= 0) {
+            if (charHealth <= 0) {
                 arr.push(`You have Died!`)
             }
-            if(monHealth < 0) {
+            if(monHealth <= 0) {
                 arr.push(`You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`)
             }
             setEndFight(true)
