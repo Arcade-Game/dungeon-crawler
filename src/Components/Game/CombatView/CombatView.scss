@@ -8,7 +8,7 @@
     margin-right: 320px;
     position: relative;
     padding: 1%;
-    cursor: url('../../pictures/Mouse01standart-cursor.png'), auto;
+    cursor: url('../../pictures/cursors/Mouse01standart-cursor.png'), auto;
     // display: grid;
     // flex-direction: column;
     // justify-content: space-between;
@@ -49,13 +49,14 @@
     bottom: 2%;
 }
 
-.combat-monster-info {
+.combat-log {
     border: 1px solid purple;
     height: 28%;
     width: 63%;
     position: absolute;
     left: 2%;
     top: 2%;
+    overflow-y: scroll;
 }
 
 .ability-buttons {
@@ -75,4 +76,3 @@
     width: 50px;
     border: 1px solid black;
 }
-

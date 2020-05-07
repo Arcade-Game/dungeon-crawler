@@ -14,21 +14,23 @@ const CombatStats = props => {
    const [mArmor, setMArmor] = useState(0);
    const [mAgility, setMAgility] = useState(0);
    const [mStrength, setMStrength] = useState(0);
-   const {monsterStats, characterStats} = props;
+   const {stats, characterHealth, monsterHealth} = props;
 
    useEffect(()=> {
-      const {attack, armor, health, agility, strength} = characterStats;
-      setAttack(+attack)
-      setArmor(+armor)
-      setHealth(+health)
-      setAgility(+agility)
-      setStrength(+strength)
-      setMStrength(+monsterStats.strength)
-      setMHealth(+monsterStats.health)
-      setMAgility(+monsterStats.agility)
-      setMAttack(+monsterStats.attack)
-      setMArmor(+monsterStats.armor)
-   }, [characterStats, monsterStats])
+      if(stats[0] && stats[1]){
+         const {attack, armor, health, agility, strength} = stats[0];
+         setAttack(+attack)
+         setArmor(+armor)
+         setHealth(+characterHealth)
+         setAgility(+agility)
+         setStrength(+strength)
+         setMStrength(+stats[1].strength)
+         setMHealth(+monsterHealth)
+         setMAgility(+stats[1].agility)
+         setMAttack(+stats[1].attack)
+         setMArmor(+stats[1].armor)
+      }
+   }, [stats[0], stats[1], monsterHealth, characterHealth])
 
    return (
       <div className='stat-container'>
