@@ -154,11 +154,7 @@ const Game = (props) => {
     
       axios.get(`/api/monster-stats/${monsterType}`)
     .then((res) => {
-<<<<<<< HEAD
-         setMonsterStats(res.data)
-=======
         setMonsterStats(res.data)
->>>>>>> bd6d59abfd20d9a15820fbc92420a84266527a5c
         arr.push(res.data)
     })
     .catch(err => console.log(err))
