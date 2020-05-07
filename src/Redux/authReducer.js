@@ -9,8 +9,8 @@ const REGISTER_USER = "REGISTER_USER",
             LOGOUT_USER = "LOGOUT_USER",
             GET_CURRENT_USER = "GET_CURRENT_USER";
 
-export  const registerUser = (username, password) =>{
-   let user = axios.post("/api/auth/register", {username, password})
+export  const registerUser = ( username, password, email) =>{
+   let user = axios.post("/api/auth/register", {username, password, email})
       .then(({data}) => {
          console.log(data);
          return data

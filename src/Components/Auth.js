@@ -7,8 +7,8 @@ from "../Redux/authReducer";
 const Auth = (props) => {
    const [username, setUsername] = useState(""),
              [password, setPassword] = useState(""),
-             [verPassword, setVerPassword] = 
-             useState(""),
+             [verPassword, setVerPassword] = useState(""),
+             [email, setEmail] = useState(""),
              [registerToggle, setRegisterToggle] = useState(false);
 
    const clearPlaceholder = (inputId, newValue) => {
@@ -16,13 +16,13 @@ const Auth = (props) => {
       if(newValue){
          document.getElementById(inputId).placeholder = ""
       } else {
-         document.getElementById(inputId).placeholder = ""
+         document.getElementById(inputId).placeholder = inputId
       }
    },
    handleRegister = () => {
       if (password === verPassword){
-         props.registerUser(username, password);
-         props.history.push("/dashboard")
+         props.registerUser(username, password, email);
+         props.history.push("/town")
       }
       else {
          console.log ("password do not match");
@@ -32,9 +32,10 @@ const Auth = (props) => {
 
    handleLogin = async () => {
    await props.loginUser(username, password);
-   props.history.push("/dashboard")
+   props.history.push("/town")
    }
-
+console.log(username)
+console.log(password)
    return (
       <div className="auth-container">
          <div className="login-container">
@@ -54,6 +55,10 @@ const Auth = (props) => {
                   onChange={(event) => setVerPassword(event.target.value)}
                   onFocus={() => clearPlaceholder("verPassword")}
                   onBlur={() => clearPlaceholder("verPassword", "Verify Password")}/>
+                  <input id="email" value={email} placeholder="Email" 
+                  onChange={(event) => setEmail(event.target.value)}
+                  onFocus={() => clearPlaceholder("email")}
+                  onBlur={() => clearPlaceholder("email", "Email")}/>
                </>
             ) : null
             }
