@@ -2,10 +2,10 @@
 @import '../../../modules/mixins';
 
 .combat-view-container {
-    // background: url('../../pictures//6axfm8uck3oy.png');
+    // background: url
     height: 60vh;
     width: 60%;
-    border: 1px solid purple;
+    border: 5px ridge black;
     margin-right: 320px;
     position: relative;
     padding: 1%;
@@ -14,7 +14,7 @@
 }
 
 .combat-monster {
-    border: 1px solid purple;
+    border-radius: 10px;
     position: absolute;
     top: 2%;
     right: 2%;
@@ -23,56 +23,63 @@
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
+    font-size: 25px;
+    font-weight: bold;
 }
 
 .combat-hero {
-    border: 1px solid purple;
     position: absolute;
     left: 2%;
     bottom: 2%;
     height: 67%;
     width: 32%;
+    border-radius: 10px;
     background-size: 100%;
     background-repeat: no-repeat;
     background-position-y: 20%;
 }
 
-.combat-dialogue {
+.combat-buttons {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid purple;
+    justify-content: center;
     height: 28%;
     width: 63%;
     position: absolute;
-    right: 2%;
-    bottom: 2%;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
 }
 
 .combat-log {
-    // background: url('../../pictures//canvas.png');
+    background: gray;
     background-position: center;
     background-size: 120%;
     background-repeat: no-repeat;
+    box-shadow: 3px 3px 3px;
+    border-radius: 10px;
     // border: 1px solid purple;
     height: 28%;
     width: 60%;
     position: absolute;
     left: 2%;
     top: 2%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .ability-buttons {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 291.1px;
-    height: 77px;
-    border: 1px solid purple;
+    width: 260px;
+    height: 60px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 5px;
 }
 
 .ability-buttons:hover {
-    background-color: purple;
+    background-color: grey;
 }
 
 .exit-combat-view {
