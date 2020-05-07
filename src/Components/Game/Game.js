@@ -15,7 +15,7 @@ import {withRouter} from 'react-router-dom';
 
 const Game = (props) => {
 
-  const [grid, setGrid] = useState(mapObjects),
+  const [grid, setGrid] = useState([...mapObjects]),
     [charX, setCharX] = useState(16),
     [charY, setCharY] = useState(26),
     [heightWidth, setHeightWidth] = useState(700),
@@ -27,7 +27,10 @@ const Game = (props) => {
     [monsterType, setMonsterType] = useState(''),
     [monsterStats, setMonsterStats] = useState({}),
     [characterStats, setCharacterStats] = useState({}),
-    [monsterCoor, setMonsterCoor] = useState([0,0])
+    [monsterCoor, setMonsterCoor] = useState([0,0]),
+    [health, setHealth] = useState(100),
+    [level, setLevel] = useState(1)
+    
 
     useEffect(() => {
       let newGrid = [...grid]
@@ -79,6 +82,7 @@ const Game = (props) => {
         case "exit":
           setCharX(x)
           setCharY(y)
+          setGrid([...mapObjects])
           props.history.push('/')
           break;
       }
@@ -103,7 +107,7 @@ const Game = (props) => {
   const openChest = (x, y) => {
     let newGrid = [...grid]
     newGrid[y][x] = {type: "empty"}
-console.log(newGrid[x][y])
+    console.log(newGrid[x][y])
     setGrid(newGrid)
 
     axios.get(`/api/item`).then(res => console.log("res.data", res.data))
@@ -157,6 +161,9 @@ console.log(newGrid[x][y])
     return arr
   }
 
+
+
+
   let mapClassName = ''
 
   return (
@@ -185,7 +192,7 @@ console.log(newGrid[x][y])
             monsterCoor = {monsterCoor}
           /> : null
         }
-        
+        <div className="coin-icon"></div>
         <Footer 
           setEquipmentToggle={equipmentToggleFn}
           setInventoryToggle={inventoryToggleFn}
