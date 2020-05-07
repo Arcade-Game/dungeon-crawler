@@ -43,6 +43,7 @@ const Town = (props) => {
 
    return (
       <div className="town-map">
+      <audio src={require("../../music/Soliloquy.mp3")} autoPlay />
          {overlayToggle ? (
             <div className="town-overlay" 
                      onClick={()=>{resetToggle()}}>
@@ -91,7 +92,10 @@ const Town = (props) => {
                <p className="play-game"
                onClick={()=> props.history.push(`/game`)}> {`< Play >`} </p>
          </div>
-
+            {/* <div className="minstrel1"></div>
+            <div className="minstrel2"></div>
+            <div className="minstrel3"></div>
+            <div className="minstrel4"></div> */}
          <h3 className="copyright"> Picture Credit: Deep_Rights - Reddit </h3>
       </div>
    )
