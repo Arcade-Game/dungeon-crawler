@@ -16,8 +16,8 @@ import {withRouter} from 'react-router-dom';
 const Game = (props) => {
 
   const [grid, setGrid] = useState([...mapObjects]),
-    [charX, setCharX] = useState(16),
-    [charY, setCharY] = useState(26),
+    [charX, setCharX] = useState(15),
+    [charY, setCharY] = useState(42),
     [heightWidth, setHeightWidth] = useState(700),
     [viewRowCols, setViewRowCols] = useState(9),
     [inventoryToggle, setInventoryToggle] = useState(false),
@@ -83,7 +83,7 @@ const Game = (props) => {
           setCharX(x)
           setCharY(y)
           setGrid([...mapObjects])
-          props.history.push('/')
+          props.history.push('/town')
           break;
       }
   }
@@ -168,6 +168,7 @@ const Game = (props) => {
 
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
+      <audio src={require("../../music/TheLoomingBattle.OGG")} autoPlay />
       <div className="Game">
         <MiniMap grid={grid} mmX={grid[0].length} mmY={grid.length} isFight={isFight} />
         <Map 

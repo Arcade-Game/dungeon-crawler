@@ -98,7 +98,7 @@ const CombatView = (props) => {
     return (
         <>
             <div className="combat-view-container">
-                <div className="exit-combat-view" onClick={() => isFightFn(false)}>X</div>
+                {/* <div className="exit-combat-view" onClick={() => isFightFn(false)}>Run</div> */}
                 <div className="combat-monster" style={monsterStyle} >{monsterType}</div>
                 <div className="combat-hero" style={heroStyle} >HERO</div>
                 <div className="combat-dialogue">{
@@ -111,7 +111,7 @@ const CombatView = (props) => {
                     }}>End Combat</div>
                     :
                     buttons}</div>
-                <div className="combat-log">Combat Log <br/> {combatLog}</div>
+                <div className="combat-log"><p style={{textDecoration: 'underline'}}>Combat Log</p><div>{combatLog}</div></div>
             </div>
             <CombatStats 
                 stats={stats} 
