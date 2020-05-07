@@ -8,7 +8,7 @@ const express = require('express'),
       itemCtrl = require("./controllers/itemController"),
       combatCtrl = require("./controllers/combatController"),
       monsterCtrl = require("./controllers/monsterController"),
-      saveFileCtrl = require("./controllers/saveFileController"),
+      saveFileCtrl = require("./controllers/heroController"),
       port = SERVER_PORT,
       app = express();
 

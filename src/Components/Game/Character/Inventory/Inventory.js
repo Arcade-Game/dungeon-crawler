@@ -19,7 +19,7 @@ const Inventory = (props) => {
          // console.log("res.data", res.data)
          setInventory(res.data)
       })
-   },[props])
+   },[])
 
    useEffect (() => {
       console.log("props.newMoney", props.newMoney)
