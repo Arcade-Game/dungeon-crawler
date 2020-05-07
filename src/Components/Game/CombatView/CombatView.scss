@@ -2,6 +2,7 @@
 @import '../../../modules/mixins';
 
 .combat-view-container {
+    // background: url('../../pictures//6axfm8uck3oy.png');
     height: 60vh;
     width: 60%;
     border: 1px solid purple;
@@ -9,9 +10,7 @@
     position: relative;
     padding: 1%;
     cursor: url('../../pictures/cursors/Mouse01standart-cursor.png'), auto;
-    // display: grid;
-    // flex-direction: column;
-    // justify-content: space-between;
+
 }
 
 .combat-monster {
@@ -21,7 +20,7 @@
     right: 2%;
     height: 67%;
     width: 32%;
-    background-size: 100%;
+    background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -50,9 +49,13 @@
 }
 
 .combat-log {
-    border: 1px solid purple;
+    // background: url('../../pictures//canvas.png');
+    background-position: center;
+    background-size: 120%;
+    background-repeat: no-repeat;
+    // border: 1px solid purple;
     height: 28%;
-    width: 63%;
+    width: 60%;
     position: absolute;
     left: 2%;
     top: 2%;
@@ -68,11 +71,18 @@
     border: 1px solid purple;
 }
 
+.ability-buttons:hover {
+    background-color: purple;
+}
+
 .exit-combat-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 50px;
-    width: 50px;
+    bottom: 15px;
+    right: 24px;
+    height: 75px;
+    width: 75px;
     border: 1px solid black;
 }

@@ -83,7 +83,7 @@ const Game = (props) => {
           setCharX(x)
           setCharY(y)
           setGrid([...mapObjects])
-          props.history.push('/')
+          props.history.push('/town')
           break;
       }
   }
