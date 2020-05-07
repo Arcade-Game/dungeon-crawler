@@ -8,13 +8,14 @@ const initialState = {
               GET_CURRENT_USER = "GET_CURRENT_USER";
 
 export const setUser = (user) => {
- 
+   console.log("userdata", user)
    return {
       type: SET_USER,
       payload: user
    }
 }
-export const  getCurrentUser = () => {
+
+export const getCurrentUser = () => {
    let user = axios.get("/api/auth/user")
       .then(res => {
          console.log(res.data);

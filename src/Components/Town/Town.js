@@ -1,16 +1,20 @@
 import React, {useState, useEffect} from "react";
 import {connect} from "react-redux"
 import {getCurrentUser} from "../../Redux/authReducer"
+import {setHeroList} from "../../Redux/heroReducer"
 import Trainer from "./Trainer/Trainer"
 import Market from "./Market/Market";
 import LeaderBoard from "./LeaderBoard/LeaderBoard";
 import Heroes from "./Heroes/Heroes";
 import NewHero from "./Heroes/NewHero";
 import "./Town.scss"
+import axios from "axios";
 const Town = (props) => {
    const [overlayToggle, setOverlayToggle] = useState(false),
              [toggleType, setToggleType] = useState(),
-             [character, setCharacter] = useState();
+             [hero, setHero] = useState();
+            //  [currentUser, setCurrentUser] = useState(),
+            //  [heroList, setHeroList] = useState()
 
    const trainer = "trainer",
              market = "market",
@@ -18,17 +22,30 @@ const Town = (props) => {
              heroes = "heroes",
              newHero = "newHero";
    
-   useEffect(() => {
-      props.getCurrentUser()
-   })
+   useEffect( () => {
+       props.getCurrentUser()
+      // console.log(user)
+      // setCurrentUser(user.value.player_id)
+   },[])
+
+   useEffect (() => {
+          const {player_id} = props.auth.user
+          console.log([player_id])
+         axios.get(`api/heroes/player/${player_id}`).then(res => {
+            console.log(res.data[0])
+            setHeroList(res.data[0])
+            })
+      },[props])
+
+
 
    const setToggle = (toggleType) => {
       setToggleType(toggleType)
       setOverlayToggle(true);
    },
 
-   selectCharacter = (char) => {
-      setCharacter(char)
+   selectCharacter = (hero) => {
+      setHero(hero)
    },
 
    resetToggle = () => {
@@ -36,11 +53,20 @@ const Town = (props) => {
       setOverlayToggle(false);
    },
 
+   // getHeroes = () => {
+   //    const {player_id} = props.user
+   //    axios.get(`api/heroes/player/${player_id}`).then(res => {
+   //       console.log(res.data)
+   //       setHeroList(res.data)
+   //    })
+   // },
+
    stopPropagation = (event) => {
       event.stopPropagation();
       event.nativeEvent.stopImmediatePropagation();
-  }
-
+   }
+   // console.log(currentUser)
+   console.log(props)
    return (
       <div className="town-map">
       <audio src={require("../../music/Soliloquy.mp3")} autoPlay />
@@ -49,12 +75,13 @@ const Town = (props) => {
                      onClick={()=>{resetToggle()}}>
             {toggleType === trainer ? (
             <Trainer stopPropagation = {stopPropagation}
-            character = {character}/>) : null }
+            hero = {hero}/>) : null }
             {toggleType === market ? <Market stopPropagation = {stopPropagation} /> : null }
             {toggleType === leaderBoard ? <LeaderBoard stopPropagation = {stopPropagation} /> : null }
             {toggleType === heroes ? <Heroes stopPropagation = {stopPropagation}
             setToggle = {setToggle} 
-            resetToggle ={resetToggle}
+            resetToggle = {resetToggle}
+            // currentUser = {currentUser}
             selectCharacter = {selectCharacter}/> : null }
             {toggleType === newHero ? <NewHero stopPropagation = {stopPropagation}/> : null }
              </div> ) : null
@@ -77,15 +104,17 @@ const Town = (props) => {
                <p className="town-leader-board">Leader Board</p>
          </div>
          <div className="town-select-hero-container"
-                 onClick={() => {setToggle(heroes)}}>
+                 onClick={() => {setToggle(heroes)
+               //   getHeroes()
+                 }}>
                <p className="town-select-hero">Heroes</p>
          </div>
-         {character ? (
+         {hero ? (
             <div className="hero-selected"
             onClick={() => {setToggle(heroes)}}>
-               <h2>{character.name}</h2>
-               <h2>{character.class}</h2>
-               <h2>Level: {character.level}</h2> 
+               <h2>{hero.name}</h2>
+               <h2>{hero.class}</h2>
+               <h2>Level: {hero.level}</h2> 
             </div>
          ): null}
          <div className="play-game-container">
@@ -100,5 +129,5 @@ const Town = (props) => {
       </div>
    )
 }
-
-export default connect(null, {getCurrentUser})(Town);
+const mapStateToProps = (reduxState) => reduxState
+export default connect(mapStateToProps, {getCurrentUser})(Town);
