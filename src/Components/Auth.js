@@ -1,10 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {connect} from "react-redux";
-// import {getCurrentUser} from "../Redux/authReducer";
 import axios from "axios";
-import { setUser } from "../Redux/authReducer";
+import { setUser } from "../Redux/reducers/authReducer";
 import './auth.scss'
-// import {withRouter} from "react-router-dom";
 
 const Auth = (props) => {
    const [username, setUsername] = useState(""),
@@ -13,29 +11,23 @@ const Auth = (props) => {
              [email, setEmail] = useState(""),
              [registerToggle, setRegisterToggle] = useState(false);
 
-//  useEffect (() => {
-//     props.getCurrentUser()
-//  },[])
-
-
    const clearPlaceholder = (inputId, newValue) => {
-      console.log(newValue)
       if(newValue){
-         document.getElementById(inputId).placeholder = ""
+         document.getElementById(inputId).placeholder = newValue
       } else {
-         document.getElementById(inputId).placeholder = inputId
+         document.getElementById(inputId).placeholder = ""
       }
    },
-
 
    handleRegister = () => {
       if (password === verPassword){
          axios.post("/api/auth/register", {username, password, email})
-         .then(({data}) => {
-            console.log("data", data);
-            setUser(data)
+         .then(res => {
+            props.setUser(res.data)
+            if (res.data){ 
+               props.history.push("/town") 
+            }
          }).catch(err => console.log(err));
-         props.history.push("/town")
       }
       else {
          console.log ("password do not match");
@@ -46,17 +38,13 @@ const Auth = (props) => {
    handleLogin = async () => {
       axios.post("/api/auth/login", {username, password})
       .then(res => {
-         console.log("res.data", res.data);
-         setUser(res.data)
+         props.setUser(res.data)
+         if (res.data){ 
+            props.history.push("/town") 
+         }
       }).catch(err => console.log(err));
       
-   props.history.push("/town")
    }
-
-   // handleLogout = () => {
-   //    axios.post("/api/auth/logout")
-   // }
-
 
    return (
       <div className='auth-background'>
@@ -68,28 +56,27 @@ const Auth = (props) => {
                <h1>{registerToggle ? "Register" : "Sign In"}</h1>
                <div className='input-container'>
                   <input id="login" value={username} placeholder="Username" 
-                  onChange={(event) => setUsername(event.target.value)}
-                  onFocus={() => clearPlaceholder ("login")}
-                  onBlur={() => clearPlaceholder("login", "Username")}/>
+                              onChange={(event) => setUsername(event.target.value)}
+                              onFocus={() => clearPlaceholder ("login")}
+                              onBlur={() => clearPlaceholder("login", "Username")}/>
                   <input id="password" value={password} type="password" placeholder="Password" 
-                  onChange={(event) => setPassword(event.target.value)}
-                  onFocus={() => clearPlaceholder("password")}
-                  onBlur={() => clearPlaceholder("password", "Password")}/>
+                              onChange={(event) => setPassword(event.target.value)}
+                              onFocus={() => clearPlaceholder("password")}
+                              onBlur={() => clearPlaceholder("password", "Password")}/>
                   {registerToggle 
-                  ? (
-                     <>
-                        <input id="verPassword" value={verPassword} type="password" placeholder="Verify Password" 
-                        onChange={(event) => setVerPassword(event.target.value)}
-                        onFocus={() => clearPlaceholder("verPassword")}
-                        onBlur={() => clearPlaceholder("verPassword", "Verify Password")}/>
-                        <input id="email" value={email} placeholder="Email" 
-                        onChange={(event) => setEmail(event.target.value)}
-                        onFocus={() => clearPlaceholder("email")}
-                        onBlur={() => clearPlaceholder("email", "Email")}/>
-                     </>
-                  ) : null
+                     ? (
+                        <>
+                           <input id="verPassword" value={verPassword} type="password" placeholder="Verify Password" 
+                                       onChange={(event) => setVerPassword(event.target.value)}
+                                       onFocus={() => clearPlaceholder("verPassword")}
+                                       onBlur={() => clearPlaceholder("verPassword", "Verify Password")}/>
+                           <input id="email" value={email} placeholder="Email" 
+                                       onChange={(event) => setEmail(event.target.value)}
+                                       onFocus={() => clearPlaceholder("email")}
+                                       onBlur={() => clearPlaceholder("email", "Email")}/>
+                        </>
+                     ) : null
                   }
-
                </div>
             </div>
             <div className="button-container">
@@ -117,4 +104,4 @@ const Auth = (props) => {
       </div>
       )
 }
-export default connect(null, setUser)(Auth);
+export default connect(null, {setUser})(Auth);
