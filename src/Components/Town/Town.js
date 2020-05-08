@@ -1,53 +1,35 @@
 import React, {useState, useEffect} from "react";
 import {connect} from "react-redux"
-import {getCurrentUser} from "../../Redux/authReducer"
-import {setHeroList} from "../../Redux/heroReducer"
+import {setHeroList} from "../../Redux/reducers/heroesReducer"
 import Trainer from "./Trainer/Trainer"
 import Market from "./Market/Market";
 import LeaderBoard from "./LeaderBoard/LeaderBoard";
 import Heroes from "./Heroes/Heroes";
 import NewHero from "./Heroes/NewHero";
+import Inn from "./Inn/Inn";
 import "./Town.scss"
 import axios from "axios";
 import {townMusic} from './townMusic';
 
 const Town = (props) => {
    const [overlayToggle, setOverlayToggle] = useState(false),
-             [toggleType, setToggleType] = useState(),
-             [hero, setHero] = useState();
-            //  [currentUser, setCurrentUser] = useState(),
-            //  [heroList, setHeroList] = useState()
+             [toggleType, setToggleType] = useState();
+
 
    const trainer = "trainer",
              market = "market",
              leaderBoard = "leaderBoard",
              heroes = "heroes",
-             newHero = "newHero";
+             newHero = "newHero",
+             inn = "inn";
    
-   useEffect( () => {
-       props.getCurrentUser()
-      // console.log(user)
-      // setCurrentUser(user.value.player_id)
-   },[])
+   // useEffect( () => {
 
-   useEffect (() => {
-          const {player_id} = props.auth.user
-          console.log([player_id])
-         axios.get(`api/heroes/player/${player_id}`).then(res => {
-            console.log(res.data[0])
-            setHeroList(res.data[0])
-            })
-      },[props])
-
-
+   // },[])
 
    const setToggle = (toggleType) => {
       setToggleType(toggleType)
       setOverlayToggle(true);
-   },
-
-   selectCharacter = (hero) => {
-      setHero(hero)
    },
 
    resetToggle = () => {
@@ -55,19 +37,19 @@ const Town = (props) => {
       setOverlayToggle(false);
    },
 
-   // getHeroes = () => {
-   //    const {player_id} = props.user
-   //    axios.get(`api/heroes/player/${player_id}`).then(res => {
-   //       console.log(res.data)
-   //       setHeroList(res.data)
-   //    })
-   // },
+   getHeroes = () => {
+      const {player_id} = props.auth
+      axios.get(`api/heroes/player/${player_id}`).then(res => {
+         console.log(res.data)
+         props.setHeroList(res.data)
+      })
+   },
 
    stopPropagation = (event) => {
       event.stopPropagation();
       event.nativeEvent.stopImmediatePropagation();
    }
-   // console.log(currentUser)
+
    console.log(props)
    let musicNumber = Math.floor(Math.random() * townMusic.length)
    console.log('musicNumber', musicNumber)
@@ -78,16 +60,15 @@ const Town = (props) => {
             <div className="town-overlay" 
                      onClick={()=>{resetToggle()}}>
             {toggleType === trainer ? (
-            <Trainer stopPropagation = {stopPropagation}
-            hero = {hero}/>) : null }
+            <Trainer stopPropagation = {stopPropagation}/>) : null }
             {toggleType === market ? <Market stopPropagation = {stopPropagation} /> : null }
             {toggleType === leaderBoard ? <LeaderBoard stopPropagation = {stopPropagation} /> : null }
             {toggleType === heroes ? <Heroes stopPropagation = {stopPropagation}
             setToggle = {setToggle} 
             resetToggle = {resetToggle}
-            // currentUser = {currentUser}
-            selectCharacter = {selectCharacter}/> : null }
+            /> : null }
             {toggleType === newHero ? <NewHero stopPropagation = {stopPropagation}/> : null }
+            {toggleType === inn ? <Inn stopPropagation = {stopPropagation}/> : null }
              </div> ) : null
          }
             
@@ -96,8 +77,8 @@ const Town = (props) => {
                  onClick={() => {setToggle(trainer)}}>
                <p className="town-trainer">Trainer</p>
          </div>
-         <div className="inn-container">
-               <p className="inn"> Inn<br/> (Logout) </p>
+         <div className="town-inn-container"onClick={() => {setToggle(inn)}}>
+               <p className="town-inn" > Inn</p>
          </div>
          <div className="town-market-container"
                  onClick={() => {setToggle(market)}}>
@@ -109,16 +90,16 @@ const Town = (props) => {
          </div>
          <div className="town-select-hero-container"
                  onClick={() => {setToggle(heroes)
-               //   getHeroes()
+                 getHeroes()
                  }}>
                <p className="town-select-hero">Heroes</p>
          </div>
-         {hero ? (
+         {props.hero ? (
             <div className="hero-selected"
             onClick={() => {setToggle(heroes)}}>
-               <h2>{hero.name}</h2>
-               <h2>{hero.class}</h2>
-               <h2>Level: {hero.level}</h2> 
+               <h2>{props.hero.hero_name}</h2>
+               <h2>{props.hero.class_name}</h2>
+               <h2>Level: {props.hero.level}</h2> 
             </div>
          ): null}
          <div className="play-game-container">
@@ -134,4 +115,4 @@ const Town = (props) => {
    )
 }
 const mapStateToProps = (reduxState) => reduxState
-export default connect(mapStateToProps, {getCurrentUser})(Town);
+export default connect(mapStateToProps, {setHeroList})(Town);

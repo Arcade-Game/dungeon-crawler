@@ -1,0 +1,35 @@
+@import "../../../modules/mixins";
+
+.inn-screen-container{
+   position: fixed;
+   bottom: 15vh;
+   left: 3vw;
+   @include column;
+   border-radius: 10px;
+   width: 15%;
+   height:200px;
+   z-index: 2;
+   background-color: grey;
+
+   .inn-container {
+      @include column;
+      align-self: center;
+      justify-self: center;
+      justify-content: space-evenly;
+      border-radius: 10px;
+      width: 90%;
+      height: 86%;
+      background-color:  rgb(54, 54, 54);
+   }
+
+   .inn-option-button {
+      @include row;
+      @include town-button;
+      width: 84%;
+      height: 35%;
+   }
+   .inn-option-button:hover{
+      @include town-button-hover;
+   }
+
+}
