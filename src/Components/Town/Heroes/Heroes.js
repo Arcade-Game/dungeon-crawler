@@ -36,7 +36,7 @@ const Heroes = (props) => {
              {expand[0] && expand[1] == index ? (<div className="hero-stat-summary">
                 <h4>Strength: {hero.strength}</h4>
                <h4>Agility: {hero.agility}</h4>
-               <h4>Armor: {heroArmor}</h4>
+               {/* <h4>Armor: {heroArmor}</h4> */}
 
                   <button onClick={()=>{props.selectHero(heroList[0][index])
                props.resetToggle()}}> Select</button>
