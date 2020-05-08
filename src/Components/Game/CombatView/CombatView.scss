@@ -2,77 +2,105 @@
 @import '../../../modules/mixins';
 
 .combat-view-container {
+    // background: url
     height: 60vh;
     width: 60%;
-    border: 1px solid purple;
+    border: 5px ridge black;
     margin-right: 320px;
     position: relative;
     padding: 1%;
     cursor: url('../../pictures/cursors/Mouse01standart-cursor.png'), auto;
-    // display: grid;
-    // flex-direction: column;
-    // justify-content: space-between;
+    background: rgba(0, 0, 0, 0.384);
+
+
+
 }
 
 .combat-monster {
-    border: 1px solid purple;
+    border-radius: 10px;
     position: absolute;
     top: 2%;
     right: 2%;
     height: 67%;
     width: 32%;
-    background-size: 100%;
+    background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
+    font-size: 25px;
+    font-weight: bold;
 }
 
 .combat-hero {
-    border: 1px solid purple;
     position: absolute;
     left: 2%;
     bottom: 2%;
     height: 67%;
     width: 32%;
+    border-radius: 10px;
     background-size: 100%;
     background-repeat: no-repeat;
     background-position-y: 20%;
 }
 
-.combat-dialogue {
+.combat-buttons {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid purple;
+    justify-content: center;
     height: 28%;
     width: 63%;
     position: absolute;
-    right: 2%;
-    bottom: 2%;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
 }
 
 .combat-log {
-    border: 1px solid purple;
+    background: rgba(0, 0, 0, 0.815);
+    background-position: center;
+    background-size: 120%;
+    background-repeat: no-repeat;
+    // box-shadow: 3px 3px 3px;
+    border-radius: 10px;
+    // border: 1px solid purple;
     height: 28%;
-    width: 63%;
+    width: 60%;
     position: absolute;
     left: 2%;
     top: 2%;
-    overflow-y: scroll;
+    overflow-y: auto;
+    border: 2px solid rgb(90, 9, 9);
+    font-size: 18px;
+    font-weight: 800;
+    color: rgb(90, 9, 9);
 }
 
 .ability-buttons {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 291.1px;
-    height: 77px;
-    border: 1px solid purple;
+    width: 260px;
+    height: 60px;
+    border-radius: 10px;
+    border: 2px solid rgb(90, 9, 9);
+    margin: 5px;
+    color: rgb(90, 9, 9);
+    font-size: 18px;
+    font-weight: 800;
+    background: rgba(0, 0, 0, 0.815);
+}
+
+.ability-buttons:hover {
+    background-color: grey;
 }
 
 .exit-combat-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 50px;
-    width: 50px;
+    bottom: 15px;
+    right: 24px;
+    height: 75px;
+    width: 75px;
     border: 1px solid black;
 }

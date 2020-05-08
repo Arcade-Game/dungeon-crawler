@@ -16,9 +16,9 @@ import {withRouter} from 'react-router-dom';
 const Game = (props) => {
 
   const [grid, setGrid] = useState([...mapObjects]),
-    [charX, setCharX] = useState(16),
-    [charY, setCharY] = useState(26),
-    [heightWidth, setHeightWidth] = useState(700),
+    [charX, setCharX] = useState(15),
+    [charY, setCharY] = useState(42),
+    [heightWidth, setHeightWidth] = useState(650),
     [viewRowCols, setViewRowCols] = useState(9),
     [inventoryToggle, setInventoryToggle] = useState(false),
     [equipmentToggle, setEquipmentToggle] = useState(false),
@@ -29,7 +29,9 @@ const Game = (props) => {
     [characterStats, setCharacterStats] = useState({}),
     [monsterCoor, setMonsterCoor] = useState([0,0]),
     [health, setHealth] = useState(100),
-    [level, setLevel] = useState(1)
+    [level, setLevel] = useState(1),
+    [quicksandCounter, setQuicksandCounter] = useState(0),
+    [lavaRockCounter, setLavaRockCounter] = useState([{}])
     
 
     useEffect(() => {
@@ -46,13 +48,25 @@ const Game = (props) => {
 
   const getKeyCode = (keyCode) => {
     if(keyCode === 37 || keyCode === 65){
-      checkTile(charX-1, charY)
-    } else if(keyCode === 38 || keyCode === 87){
-      checkTile(charX, charY-1)
-    } else if(keyCode === 39 || keyCode === 68){
-      checkTile(charX+1, charY)
-    } else if(keyCode === 40 || keyCode === 83){
-      checkTile(charX, charY+1)
+      if(grid[charY][charX-1].type === "pushable"){ // Push Left
+        pushObstacle(charX-1, charY, charX-2, charY)
+      } else {checkTile(charX-1, charY)}
+      
+    } else if(keyCode === 38 || keyCode === 87){ // Push Up
+      if(grid[charY-1][charX].type === "pushable"){
+        pushObstacle(charX, charY-1, charX, charY-2)
+      } else {checkTile(charX, charY-1)}
+      
+    } else if(keyCode === 39 || keyCode === 68){ // Push Right
+      if(grid[charY][charX+1].type === "pushable"){
+        pushObstacle(charX+1, charY, charX+2, charY)
+      } else {checkTile(charX+1, charY)}
+      
+    } else if(keyCode === 40 || keyCode === 83){ // Push Down
+      if(grid[charY+1][charX].type === "pushable"){
+        pushObstacle(charX, charY+1, charX, charY+2)
+      } else {checkTile(charX, charY+1)}
+      
     } else if(keyCode ===  66){
       inventoryToggleFn()
     } else if(keyCode === 72){
@@ -70,22 +84,78 @@ const Game = (props) => {
         case "empty":
           setCharX(x)
           setCharY(y)
+          setQuicksandCounter(0)
           break;
         case "monster":
           fightMonster(x, y)
+          setQuicksandCounter(0)
           break;
         case "chest":
           openChest(x, y)
           setCharX(x)
           setCharY(y)
+          setQuicksandCounter(0)
           break;
         case "exit":
+          setQuicksandCounter(0)
           setCharX(x)
           setCharY(y)
           setGrid([...mapObjects])
-          props.history.push('/')
+          props.history.push('/town')
+          break;
+        case "push-bridge":
+          setQuicksandCounter(0)
+          setCharX(x)
+          setCharY(y)
+          break;
+        case "quicksand":
+          walkQuicksand(x,y)
+          setCharX(x)
+          setCharY(y)
+          break;
+        case "lava":
+          die()
+          break;
+        case "push-bridge-lava-bridge":
+          setCharX(x)
+          setCharY(y)
           break;
       }
+  }
+
+  const walkQuicksand = (x,y) => {
+    setQuicksandCounter(quicksandCounter + 1)
+    return quicksandCounter === 3 ? die() : null
+  }
+
+  const pushObstacle = (x,y,xx,yy) => {
+    let newGrid = [...grid]
+    let pushTo = getType(xx,yy)
+    if(pushTo === 'water'){
+      newGrid[yy][xx].type = 'push-bridge'
+      newGrid[y][x].type = "empty"
+    } else if(pushTo === 'quicksand'){
+      newGrid[y][x].type = 'empty'
+    } else if (pushTo === 'lava'){
+      newGrid[yy][xx].type = 'push-bridge-lava2'
+      newGrid[y][x].type = 'empty'
+      setCharX(x)
+      setCharY(y)
+      
+    } else if(pushTo === "empty"){
+      newGrid[yy][xx].type = 'pushable'
+      newGrid[y][x].type = 'empty'
+      setCharX(x)
+      setCharY(y)
+    }
+    setGrid(newGrid)
+  }
+
+  const setNewLava = (x,y) => {
+    return grid[y][x].type === 'push-bridge-lava-bridge' ? grid[y][x].type = 'lava' :
+      grid[y][x].type === 'push-bridge-lava1' ? grid[y][x].type = 'push-bridge-lava-bridge' :
+      grid[y][x].type === 'push-bridge-lava2' ? grid[y][x].type = 'push-bridge-lava1' :
+      null
   }
     
   const fightMonster = (x, y) => {
@@ -161,15 +231,20 @@ const Game = (props) => {
     return arr
   }
 
+  const die = ()  => {
+    props.history.push('/death')
+  }
 
+  console.log('COUNTER', quicksandCounter)
 
 
   let mapClassName = ''
 
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
+      <audio src={require("../../music/TheLoomingBattle.OGG")} autoPlay />
       <div className="Game">
-        <MiniMap grid={grid} mmX={grid[0].length} mmY={grid.length} isFight={isFight} />
+        <MiniMap grid={grid} mmX={grid[0].length} mmY={grid.length} isFight={isFight} charX={charX} charY={charY} />
         <Map 
           charX={charX} 
           charY={charY} 
@@ -179,6 +254,7 @@ const Game = (props) => {
           getMonsterFn={getMonster}
           exploreTileFn={exploreTile}
           isFight={isFight} 
+          setNewLava={setNewLava}
         />
         {
           isFight ? 

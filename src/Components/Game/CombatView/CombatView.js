@@ -58,7 +58,7 @@ const CombatView = (props) => {
             onClick = {() => {
                 battle(e)
             }}
-            >{e}</div>)
+            >{e.charAt(0).toUpperCase() + e.slice(1)}</div>)
     })
     
     const battle = (weaponMove) => {
@@ -98,10 +98,10 @@ const CombatView = (props) => {
     return (
         <>
             <div className="combat-view-container">
-                <div className="exit-combat-view" onClick={() => isFightFn(false)}>X</div>
-                <div className="combat-monster" style={monsterStyle} >{monsterType}</div>
-                <div className="combat-hero" style={heroStyle} >HERO</div>
-                <div className="combat-dialogue">{
+                {/* <div className="exit-combat-view" onClick={() => isFightFn(false)}>Run</div> */}
+                <div className="combat-monster" style={monsterStyle} >{monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}</div>
+                <div className="combat-hero" style={heroStyle} ></div>
+                <div className="combat-buttons">{
                     (endFight)?
                     <div 
                     className = 'ability-buttons'
@@ -111,7 +111,7 @@ const CombatView = (props) => {
                     }}>End Combat</div>
                     :
                     buttons}</div>
-                <div className="combat-log">Combat Log <br/> {combatLog}</div>
+                <div className="combat-log"><p style={{fontWeight: 'bold'}}>Combat Log:</p><div>{combatLog}</div></div>
             </div>
             <CombatStats 
                 stats={stats} 
