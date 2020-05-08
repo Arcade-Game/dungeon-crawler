@@ -14,14 +14,14 @@ module.exports = {
       res.status(200).send([heroes])
 },
 
-// createHero: (req, res) => {
+createHero: (req, res) => {
 //       const {player_id, hero_name, class_id} = req.body;
 //       db = req.app.get("db");
 //       console.log(player_id);
 //       console.log("hit");
 //       let heroes = await db.hero.create_hero(player_id),
 
-// }
+}
 
 
 }

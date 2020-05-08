@@ -1,4 +1,5 @@
 @import "../../../modules/mixins";
+@import "../../../modules/variables";
 
 .hero-selector-container{
    @include column;
@@ -7,7 +8,7 @@
    width: 40%;
    height:600px;
    z-index: 2;
-   background-color: grey;
+   background-color: $pal-one;
    
    .hero-summary-container{
       @include column;
@@ -15,32 +16,33 @@
       border-radius: 10px;
       width: 95%;
       height: 80%;
-      background-color:  rgb(54, 54, 54);
+      background-color:  $pal-three;
    }
    .hero-summary{
       @include row;
       margin-top: 10px;
       justify-content: space-around;
       width: 95%;
-      background-color: rgb(155, 44, 44);
+      height: 8%;
+      background-color: $pal-seven;
       border-radius: 5px;
       
          h2{
-            width: 170px;
+            width: 180px;
          }
       }
       .hero-summary:hover{
-         border: 2px solid rgb(155, 44, 44);
-         background-color: rgb(105, 25, 25);
-         color:white;
+         border: 2px solid $pal-eight;
+         background-color: $pal-six;
+         color:$pal-eight;
       }
       .hero-stat-summary {
-         background-color: rgb(31, 30, 30);
+         background-color: $pal-four;
          margin-top: 5px;
          min-height: 100px;
          width: 95%;
          border-radius: 5px;
-         color:white;
+         color:$pal-eight;
       }
 
 }
@@ -54,22 +56,22 @@
    width: 55%;
    height:575px;
    z-index: 2;
-   background-color: grey;
+   background-color: $pal-one;
 
    .new-hero-screen{
       @include row;
       border-radius: 10px;
       width: 97%;
       height: 94%;
-      background-color:  rgb(54, 54, 54);
+      background-color:  $pal-three;
       
          .new-hero-class-container{
             @include column;
             justify-content: flex-start;
             height: 100%;
             width: 15%;
-            color:white;
-            // background-color: rgb(31, 30, 30);
+            color:$pal-eight;
+            // background-color: $pal-four;
 
             h3 {
                @include row;
@@ -80,27 +82,27 @@
 
             .tab-start-on{
                border-top-left-radius: 10px;
-               color: black;
+               color: $pal-five;
             }
             .tab-start-off{
                border-top-left-radius: 10px;
-               background-color: rgb(31, 30, 30);
-               color: white;
+               background-color: $pal-four;
+               color: $pal-eight;
             }
             .tab-start-off:hover{
-               background-color: rgb(97, 97, 97);
-               color: black;
+               background-color: $pal-two;
+               color: $pal-four;
             }
             .tab-on{
-               background-color: rgb(54, 54, 54);
-               color: black;
+               background-color: $pal-three;
+               color: $pal-five;
             }
             .tab-off{
-               background-color: rgb(31, 30, 30);
+               background-color: $pal-four;
             }
             .tab-off:hover{
-               background-color: rgb(97, 97, 97);
-               color: black;
+               background-color: $pal-two;
+               color: $pal-five;
             }
          }
 
@@ -119,7 +121,7 @@
                .new-hero-gender-selector{
                   @include column;
                   padding: 4px 0 4px;
-                  background-color: black;
+                  background-color: $pal-five;
                   border-radius: 10px 0 0 10px;
 
                   .male-icon{
@@ -129,7 +131,7 @@
                   }
                   .female-icon{
                      padding: 8px 0 5px;
-                     border-top: 2px solid white;
+                     border-top: 2px solid $pal-eight;
                      height: 50%;
                      width: 35px;
                   }
@@ -139,7 +141,7 @@
                   border-radius: 0 10px 10px 10px;
                   height: 450px;
                   min-width:200px;
-                  background-color: black;
+                  background-color: $pal-five;
 
                   .char-image{
                      border-radius: 10px;
@@ -176,7 +178,7 @@
             .new-hero-class{
                width:95%;
                height:40px;
-               border-bottom: 2px solid rgb(97, 97, 97) ;
+               border-bottom: 2px solid $pal-two;
             }
             .new-hero-stats-container{
                @include column;
@@ -199,16 +201,8 @@
 }
 }
 .create-hero{
-   height: 40px;
-   width: 175px;
-   font-size: 25px;
-   font-weight: bold;
-   background-color: rgb(155, 44, 44);
-   border: 2px solid rgb(105, 25, 25);
-   color:white;
+   @include town-button;
 }
 .create-hero:hover{
-border: 2px solid rgb(155, 44, 44);
-background-color: rgb(105, 25, 25);
-color:black;
+   @include town-button-hover;
 }

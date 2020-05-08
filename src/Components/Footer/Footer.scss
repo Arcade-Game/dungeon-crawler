@@ -21,7 +21,7 @@
     width: 30%;
     
     .character-icon {
-        border: 1px solid green;
+        // border: 1px solid green;
         height: 100%;
         width: 40%;
         cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
@@ -29,16 +29,17 @@
 
     }
     .inventory-icon {
-        // border: 1px solid green;
+        border: 1px solid green;
         height: 100%;
-        width: 40%;
+        width: 25%;
         background: url('../pictures/items/backpack.png');
         background-position-y: 50%;
         background-position-x: 50%;
-        background-size: 120%;
+        background-size: 90%;
+        background-repeat: no-repeat;
         cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
         &:hover {
-            opacity: 70%;
+            opacity: 90%;
         }
 
     }  

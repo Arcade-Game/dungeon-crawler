@@ -6,16 +6,26 @@
     background: url('../pictures/cave-floor.jpg');
     // border: 30px solid $bg;
     box-shadow: 0 0 20px 6px orangered;
-    transform-origin:center bottom;
+    // transform-origin:center bottom;
+    border: 1px solid blue;
+    // width: 20%;
+    // padding-top: 20%;
 }
-
-// .square {
-//     border: 1px solid white;
-// }
 
 .char-container {
     text-align: center;
     background: url('../pictures/cave-floor.jpg');
+    border: 100px solid yellow;
+}
+
+.hero-div {
+    background: url('../pictures/warrior.svg');
+    background-size: 100%;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    position: absolute;
 }
 
 .char-view {
@@ -26,21 +36,59 @@
 
 .char-view-chest {
     border: 1px solid rgba(126, 120, 120, 0.4);
-    // border: 1px solid yellow;
     height: 100%;
     width: 100%;
-    // background-size: 100%;
-    // background-position: center;
     position: relative;
     cursor: url('../pictures/cursors/Mouse09YellowResize.png'), auto;
-    // overflow: hidden;
+}
+
+.char-view-pushable {
+    background: url('../pictures/terrain/ForestRock_basecolor.png');
+    border-radius: 50%;
+}
+
+.char-view-water {
+    background: blue;
+    position: relative;
+}
+
+.char-view-push-bridge {
+    background: blue;
+    z-index: 1;
+    position: relative;
+}
+
+.push-bridge {
+    background: url('../pictures/terrain/ForestRock_basecolor.png');
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.char-view-lava {
+    border: 1px solid rgba(126, 120, 120, 0.4);
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.char-view-push-lava {
+    background: purple;
+    position: relative;
+}
+.char-view-push-lava2 {background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative;}
+.char-view-push-lava1 {background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative;}
+.char-view-push-lava-bridge {background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative; z-index: 1;}
+
+
+.char-view-quicksand {
+    background: url('../pictures/terrain/ForestWetMud_baseColor.png');
+    position: relative;
 }
 
 .chest-sprite-container {
     height: 100%;
     width: 100%;
-    /* border: 1px solid red; */
-
 }
 
 .chest-spritesheet {
@@ -61,8 +109,6 @@
 }
 
 @keyframes moveChest {
-    
-
     0% {background-position: 0% 0}
     6.25% {background-position: 25% 0}
     12.5% {background-position: 50% 0%}
@@ -84,20 +130,6 @@
 
 
 
-
-
-
-.char-view:nth-child(41) {
-    background: url('../pictures//warrior.svg');
-    background-size: 100%;
-    position: relative;
-    // box-shadow: 0 0 3px 5px grey;
-}
-
-// .character {
-//     background: black;
-//     border-radius: 50%;
-// }
 
 .monster-data-hidden {
     visibility: hidden;
@@ -128,4 +160,8 @@
     width: 100%;
     margin-top: 10px;
 }
+
+
+
+
 

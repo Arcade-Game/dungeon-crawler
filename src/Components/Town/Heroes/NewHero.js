@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
 import "./Heroes.scss";
+import axios from "axios";
 const NewHeros = (props) => {
    const [classToggle, setClassToggle] = useState("Warrior"),
              [genderToggle, setGenderToggle] = useState("Male"),
@@ -12,9 +14,10 @@ const NewHeros = (props) => {
                Male = "Male",
                Female = "Female";
 
-   // useEffect (() => {
-   //    getCharImage()
-   // }, [classToggle, genderToggle])
+   // const createHero = () => {
+   //    const {player_id} = 
+   //    axios.post(`/api/hero/player/${id}`)
+   // }
 
    const getCharImage = () => {
       console.log(classToggle, genderToggle)
@@ -104,5 +107,5 @@ const NewHeros = (props) => {
       </div>
    )
 }
-
-export default withRouter(NewHeros);
+const mapStateToProps = reduxState => reduxState
+export default withRouter(connect(mapStateToProps)(NewHeros));

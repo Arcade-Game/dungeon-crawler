@@ -111,7 +111,7 @@ const CombatView = (props) => {
                     }}>End Combat</div>
                     :
                     buttons}</div>
-                <div className="combat-log"><p style={{textDecoration: 'underline', fontWeight: 'bold'}}>Combat Log</p><div>{combatLog}</div></div>
+                <div className="combat-log"><p style={{fontWeight: 'bold'}}>Combat Log:</p><div>{combatLog}</div></div>
             </div>
             <CombatStats 
                 stats={stats} 

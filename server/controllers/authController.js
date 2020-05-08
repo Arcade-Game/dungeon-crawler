@@ -15,12 +15,10 @@ module.exports = {
           newUser = await db.auth.register_user({username, password: hash, email});
 
             req.session.user = newUser[0];
-            console.log(req.session.user);
             res.status(201).send(req.session.user)
    },
 
    login: async (req, res) => {
-      console.log(req.body);
       const {username, password} = req.body,
             db = req.app.get("db");
       let user = await db.auth.check_user(username);
@@ -35,7 +33,6 @@ module.exports = {
          }
             delete user[0].password;
             req.session.user = user[0];
-            console.log("Login: ", req.session.user);
             res.status(202).send(req.session.user);
    },
 
@@ -43,14 +40,5 @@ module.exports = {
       req.session.destroy();
       res.sendStatus(200);
    },
-   
-   getCurrentUser: (req, res) => {
-      console.log("getUser: ", req.session);
-      if (req.session.user) {
-         const {user} = req.session;
-         res.status(200).send(user);
-      } else {
-         res.status(200).send(message = "no user is logged in")
-      }
-   }
+
 }

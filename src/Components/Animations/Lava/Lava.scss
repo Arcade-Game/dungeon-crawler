@@ -1,0 +1,35 @@
+.lava-sprite-container {
+    height: 100%;
+    width: 100%;
+}
+
+.lava-spritesheet {
+    height: 100%;
+    width: 100%;
+    background: url('../../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png');
+    background-size: 400%;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    animation: moveLava 6s steps(1, start) infinite;
+
+}
+
+@keyframes moveLava {
+    0% {background-position: 1% 0}
+    6.25% {background-position: 33% 0}
+    12.5% {background-position: 66% 0%}
+    18.75% {background-position: 100% 0%}
+    25% {background-position: 0% 100%}
+    31.25% {background-position: 33% 100%}
+    37.5% {background-position: 66% 100%}
+    43.75% {background-position: 100% 100%}
+    50% {background-position: 66% 100%}
+    56.25% {background-position: 33% 100%}
+    62.5% {background-position: 0% 100%}
+    68.75% {background-position: 50% 100%}
+    75% {background-position: 25% 100%}
+    81.25% {background-position: 0% 100%}
+    87.5% {background-position: 100% 0%}
+    93.75% {background-position: 75% 0%}
+    100% {background-position: 50% 0%}
+}
