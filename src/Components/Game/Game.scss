@@ -10,6 +10,7 @@
 
 
 .Game {
+    border: 1px solid blue;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -60,6 +61,31 @@
 .mini-map-chest {
     @include mm;
     background: yellow;
+}
+
+.mini-map-char {
+    @include mm;
+    background: green;
+}
+
+.mini-map-pushable {
+    @include mm;
+    background: grey;
+}
+
+.mini-map-water {
+    @include mm;
+    background: blue;
+}
+
+.mini-map-push-bridge {
+    @include mm;
+    background: pink;
+}
+
+.mini-map-quicksand {
+    @include mm;
+    background: rgb(156, 95, 53);
 }
 
 .coin-icon {
