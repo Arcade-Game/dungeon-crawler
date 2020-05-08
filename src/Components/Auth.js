@@ -60,7 +60,7 @@ const Auth = (props) => {
 
    return (
       <div className='auth-background'>
-         <audio src={require("../music/Heroic\ Demise\ (New).mp3")} autoPlay />
+         <audio src={require("../music/Soliloquy.mp3")} autoPlay />
          <div className="auth-container">
          <div className='login-register'>
          <h1 style={{position: 'absolute', top: '225px'}}>Vindermere</h1>

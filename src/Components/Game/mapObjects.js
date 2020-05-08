@@ -1,4 +1,4 @@
-const h = {type: "hero", explored: false}
+// const h = {type: "hero", explored: false}
 const o = {type: "empty", explored: false}
 const x = {type: "chest", explored: false}
 const l = {type: "wall", explored: false}
@@ -9,6 +9,8 @@ const p = {type: "pushable", explored: false}
 const a = {type: "water", explored: false}
 const q = {type: "quicksand", explored: false}
 const m = {type: "lava", explored: false}
+const h = {type: "hiddenDoor", explored: false}
+const y = {type: "lookout", explored: false}
 
 export const mapObjects3 = [
     [l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l],
@@ -85,15 +87,15 @@ export const mapObjects3 = [
             [...w, o,o,o,o,o,o,o,o,o,l,o,l,l,o,o,o,l,l,l,l,o,o,o,l,l,l,o,l,o,l,o,o,o,r,l,o,l,o,...w],
             [...w, o,o,o,o,o,o,l,o,o,l,o,l,l,l,o,o,o,o,o,o,o,o,l,o,o,o,o,o,o,o,l,o,o,l,o,o,l,o,...w],
             [...w, o,o,l,o,o,o,l,o,o,r,o,l,l,l,l,l,l,l,l,l,l,o,o,o,l,o,l,l,l,o,o,l,l,o,o,l,l,o,...w],
-            [...w, l,a,l,r,l,l,l,l,l,l,l,l,l,o,o,o,o,o,o,o,o,l,o,o,o,l,o,o,o,l,o,o,o,o,l,l,l,o,...w],
+            [...w, l,a,l,r,l,l,l,l,y,l,l,l,l,o,o,o,o,o,o,o,o,l,o,o,o,l,o,o,o,l,o,o,o,o,l,l,l,o,...w],
             [...w, l,o,l,o,o,o,l,l,o,o,o,l,l,o,o,l,l,o,l,l,o,o,l,o,o,o,o,l,o,l,o,l,o,l,l,l,l,o,...w],
             [...w, o,p,o,o,l,o,l,l,o,l,o,l,l,o,o,l,l,o,o,o,l,o,l,l,l,o,o,l,o,l,r,l,o,l,l,l,l,o,...w],
             [...w, o,o,o,o,l,o,o,l,o,l,o,l,o,r,o,o,l,l,l,o,l,o,o,o,o,o,o,o,o,l,x,l,o,l,l,l,l,o,...w],
             [...w, l,o,o,o,o,o,m,o,o,l,o,o,o,o,l,o,o,o,l,o,l,o,o,l,l,o,r,l,l,l,l,l,o,l,l,l,l,o,...w],
             [...w, l,l,l,l,o,o,o,o,o,l,l,l,o,l,l,o,l,o,o,o,l,l,l,o,o,l,x,l,l,l,l,l,o,l,l,l,l,o,...w],
-            [...w, l,l,l,l,m,o,p,l,l,q,q,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,l,l,l,o,o,...w],
-            [...w, l,l,l,l,l,m,o,l,q,q,q,q,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,o,o,l,o,l,...w],
-            [...w, l,l,l,l,l,l,o,q,q,q,q,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,l,o,l,...w],
+            [...w, l,l,l,l,m,o,p,l,l,h,h,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,l,l,l,o,o,...w],
+            [...w, l,l,l,l,l,m,o,l,h,h,h,h,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,o,o,l,o,l,...w],
+            [...w, l,l,l,l,l,l,o,h,h,h,h,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,l,o,l,...w],
             [...w, l,l,l,l,l,l,o,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,o,o,l,...w],
             [...w, l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,...w],
             [...w, l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,...w],

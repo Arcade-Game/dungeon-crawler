@@ -4,6 +4,7 @@ import Chest from '../Animations/Chest';
 import {withRouter} from 'react-router-dom';
 import Lava from '../Animations/Lava/Lava';
 import Quicksand from '../Animations/Quicksand/Quicksand';
+import Lookout from './Lookout/Lookout';
 
 
 
@@ -56,7 +57,9 @@ const Tile = (props) => {
             cName = "char-view-push-lava-bridge"
             setNewLava(x,y)
             break;
-
+        // case "lookout":
+        //     cName = "char-view-lookout"
+        //     break;
     }
 
     let newMonster =''
@@ -80,6 +83,7 @@ const Tile = (props) => {
                     : type === 'quicksand' ? <Quicksand />
                     : type === "exit" ? <h2>{"EXIT"}</h2> 
                     : type === 'lava' ? <Lava /> 
+                    : type === 'lookout' ? <Lookout />
                     : type === "push-bridge" 
                     || type === "push-bridge-lava-bridge" 
                     || type === "push-bridge-lava1" 

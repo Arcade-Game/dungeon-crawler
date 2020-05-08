@@ -72,13 +72,16 @@
     width: 100%;
     position: relative;
 }
-.char-view-push-lava {
-    background: purple;
-    position: relative;
-}
+
 .char-view-push-lava2 {background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative;}
 .char-view-push-lava1 {background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative;}
 .char-view-push-lava-bridge {background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative; z-index: 1;}
+
+.char-view-lookout {
+    height: 100%;
+    width: 100%;
+    background: purple;
+}
 
 
 .char-view-quicksand {

@@ -12,6 +12,7 @@ import MiniMap from './MiniMap';
 import CombatView from './CombatView/CombatView';
 import CombatStats from '../CombatStats/CombatStats';
 import {withRouter} from 'react-router-dom';
+import { dungeonMusic, musicNumber } from './dungeonMusic';
 
 const Game = (props) => {
 
@@ -120,6 +121,11 @@ const Game = (props) => {
           setCharX(x)
           setCharY(y)
           break;
+        case "lookout":
+          seeLookout(x,y)
+          setCharX(x)
+          setCharY(y)
+          break;
       }
   }
 
@@ -185,6 +191,21 @@ const Game = (props) => {
     
     setNewMoney(num)
   }
+  
+  const seeLookout = (x,y) => {
+      let x1 = x - 10
+      let x2 = x + 10
+      let y1 = y - 10
+      let y2 = y + 10
+
+      console.log("COORS", x, y)
+      console.log("NEWCOORS", x1, x2, y1, y2)
+      for(let i = x1; i <= x2; i++){
+          for(let j = y1; j <= y2; j++){
+            exploreTile(i,j)
+          }
+      }
+  }
 
   const exploreTile = (x, y) => {
     let exploreGrid = [...grid]
@@ -234,15 +255,11 @@ const Game = (props) => {
   const die = ()  => {
     props.history.push('/death')
   }
-
-  console.log('COUNTER', quicksandCounter)
-
-
-  let mapClassName = ''
+  console.log("music", dungeonMusic[musicNumber])
 
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
-      <audio src={require("../../music/TheLoomingBattle.OGG")} autoPlay />
+      <audio src={`${dungeonMusic[musicNumber]}`} autoPlay />
       <div className="Game">
         <MiniMap grid={grid} mmX={grid[0].length} mmY={grid.length} isFight={isFight} charX={charX} charY={charY} />
         <Map 
