@@ -46,12 +46,24 @@ const Game = (props) => {
 
   const getKeyCode = (keyCode) => {
     if(keyCode === 37 || keyCode === 65){
+      if(grid[charY][charX-1].type === "pushable"){ // Push Left
+        pushObstacle(charX-1, charY, charX-2, charY)
+      }
       checkTile(charX-1, charY)
-    } else if(keyCode === 38 || keyCode === 87){
+    } else if(keyCode === 38 || keyCode === 87){ // Push Up
+      if(grid[charY-1][charX].type === "pushable"){
+        pushObstacle(charX, charY-1, charX, charY-2)
+      }
       checkTile(charX, charY-1)
-    } else if(keyCode === 39 || keyCode === 68){
+    } else if(keyCode === 39 || keyCode === 68){ // Push Right
+      if(grid[charY][charX+1].type === "pushable"){
+        pushObstacle(charX+1, charY, charX+2, charY)
+      }
       checkTile(charX+1, charY)
-    } else if(keyCode === 40 || keyCode === 83){
+    } else if(keyCode === 40 || keyCode === 83){ // Push Down
+      if(grid[charY+1][charX].type === "pushable"){
+        pushObstacle(charX, charY+1, charX, charY+2)
+      }
       checkTile(charX, charY+1)
     } else if(keyCode ===  66){
       inventoryToggleFn()
@@ -85,7 +97,24 @@ const Game = (props) => {
           setGrid([...mapObjects])
           props.history.push('/town')
           break;
+        // case "pushable":
+        //   pushObstacle(x, y, z)
+        //   break;
       }
+  }
+
+  const pushObstacle = (x,y,xx,yy) => {
+    console.log("PUSH OBSTACLE DING")
+    let newGrid = [...grid]
+    let pushTo = getType(xx,yy)
+    console.log("PUSH-TO", pushTo)
+    if(pushTo === "empty"){
+      newGrid[yy][xx].type = 'pushable'
+      newGrid[y][x].type = 'empty'
+      setCharX(x)
+      setCharY(y)
+    }
+    setGrid(newGrid)
   }
     
   const fightMonster = (x, y) => {

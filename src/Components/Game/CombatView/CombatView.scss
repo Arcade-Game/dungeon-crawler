@@ -10,6 +10,9 @@
     position: relative;
     padding: 1%;
     cursor: url('../../pictures/cursors/Mouse01standart-cursor.png'), auto;
+    background: rgba(0, 0, 0, 0.384);
+
+
 
 }
 
@@ -52,11 +55,11 @@
 }
 
 .combat-log {
-    background: gray;
+    background: rgba(0, 0, 0, 0.815);
     background-position: center;
     background-size: 120%;
     background-repeat: no-repeat;
-    box-shadow: 3px 3px 3px;
+    // box-shadow: 3px 3px 3px;
     border-radius: 10px;
     // border: 1px solid purple;
     height: 28%;
@@ -65,6 +68,10 @@
     left: 2%;
     top: 2%;
     overflow-y: auto;
+    border: 2px solid rgb(90, 9, 9);
+    font-size: 18px;
+    font-weight: 800;
+    color: rgb(90, 9, 9);
 }
 
 .ability-buttons {
@@ -74,8 +81,12 @@
     width: 260px;
     height: 60px;
     border-radius: 10px;
-    border: 1px solid black;
+    border: 2px solid rgb(90, 9, 9);
     margin: 5px;
+    color: rgb(90, 9, 9);
+    font-size: 18px;
+    font-weight: 800;
+    background: rgba(0, 0, 0, 0.815);
 }
 
 .ability-buttons:hover {

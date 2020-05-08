@@ -9,10 +9,6 @@
     transform-origin:center bottom;
 }
 
-// .square {
-//     border: 1px solid white;
-// }
-
 .char-container {
     text-align: center;
     background: url('../pictures/cave-floor.jpg');
@@ -61,8 +57,6 @@
 }
 
 @keyframes moveChest {
-    
-
     0% {background-position: 0% 0}
     6.25% {background-position: 25% 0}
     12.5% {background-position: 50% 0%}
@@ -82,22 +76,12 @@
     100% {background-position: 50% 0%}
 }
 
-
-
-
-
-
 .char-view:nth-child(41) {
     background: url('../pictures//warrior.svg');
     background-size: 100%;
     position: relative;
-    // box-shadow: 0 0 3px 5px grey;
 }
 
-// .character {
-//     background: black;
-//     border-radius: 50%;
-// }
 
 .monster-data-hidden {
     visibility: hidden;
@@ -127,5 +111,10 @@
     height: 32%;
     width: 100%;
     margin-top: 10px;
+}
+
+.char-view-pushable {
+    background: url('../pictures/terrain/ForestRock_basecolor.png');
+    border-radius: 50%;
 }
 
