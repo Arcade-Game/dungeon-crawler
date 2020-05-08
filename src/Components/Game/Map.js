@@ -7,7 +7,7 @@ const Map = (props) => {
     const [charView, setCharView] = useState([])
     const [displayView, setDisplayView] = useState([])
 
-    const {charX, charY, heightWidth, viewRowCols, grid, getMonsterFn, exploreTileFn, isFight} = props
+    const {charX, charY, heightWidth, viewRowCols, grid, getMonsterFn, exploreTileFn, isFight, setNewLava} = props
 
     const charContainerStyle = {
         display: "grid",
@@ -53,7 +53,7 @@ const Map = (props) => {
 
     useEffect(() => {
         let mappedCharView = charView.map((e,i) => e.map((f,j) => {
-            return <Tile type={f.type} key={j} charX={charX} charY={charY} heightWidth={heightWidth} viewRowCols={viewRowCols} y={charY+((4-i)*-1)} x={charX+((4-j)*-1)} getMonsterFn={getMonsterFn} grid={grid} exploreTileFn={exploreTileFn} isFight={isFight} />
+            return <Tile type={f.type} key={j} setNewLava={setNewLava} charX={charX} charY={charY} gridX={j} gridY={i} heightWidth={heightWidth} viewRowCols={viewRowCols} y={charY+((4-i)*-1)} x={charX+((4-j)*-1)} getMonsterFn={getMonsterFn} grid={grid} exploreTileFn={exploreTileFn} isFight={isFight} />
         }))
 
         setDisplayView(mappedCharView)
@@ -63,11 +63,9 @@ const Map = (props) => {
     
 
     return (
-        <div>
         <div className={`map-grid`} style={isFight ? charMiniContainerStyle : charContainerStyle}>
             {displayView}
 
-            </div>
         </div>
     )
 }
