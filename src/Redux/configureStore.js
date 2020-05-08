@@ -1,0 +1,23 @@
+import {createStore, applyMiddleware} from "redux";
+import rootReducer from "./store";
+import {loadState, saveState} from "./localStorage";
+import throttle from "lodash/throttle";
+import promiseMiddleware from "redux-promise-middleware";
+
+const configureStore = () => {
+const persistedState = loadState();
+const store = createStore(rootReducer, persistedState);
+
+store.subscribe(throttle(() => {
+   saveState({
+      auth: store.getState().auth,
+      heroes: store.getState().heroes,
+      hero: store.getState().hero
+   });
+}, 1000));
+
+console.log(store)
+   return store;
+};
+
+export default configureStore;

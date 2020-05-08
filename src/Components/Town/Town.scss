@@ -42,7 +42,7 @@
          left: 30%
       }
    }
-      .inn-container{
+      .town-inn-container{
          color:white;
          font-weight: bold;
          position: fixed;
@@ -54,7 +54,7 @@
          transform:skew(-40deg, 25deg);
          cursor: url('../pictures/cursors/Mouse10RedResize.png'), auto;
 
-         .inn {
+         .town-inn {
             transform:skew(40deg, -25deg);
             font-size: 25px;
             text-shadow: 5px 5px 12px black;
@@ -158,7 +158,7 @@
       background-color: rgba(41, 199, 41, 0.25);
       color: black;
    }
-   .inn-container:hover{
+   .town-inn-container:hover{
       background-color: rgba(199, 41, 41, 0.25);
       color: black;
    }
