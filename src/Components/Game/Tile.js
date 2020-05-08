@@ -25,6 +25,10 @@ const Tile = (props) => {
             break;
         case "exit":
             tileStyle = {background: "red", color: "white"}
+            break;
+        case "pushable":
+            cName = "char-view-pushable"
+            break;
 
     }
 

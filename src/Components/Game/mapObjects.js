@@ -6,6 +6,7 @@ const z = {type: "exit", explored: false}
 const w = [l, l, l, l, l, l, l, l, l]
 const r = {type: "monster", explored: false}
 const p = {type: "pushable", explored: false}
+const a = {type: "water", explored: false}
 
 export const mapObjects3 = [
     [l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l],
@@ -61,12 +62,12 @@ export const mapObjects3 = [
             [...w, z,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,o,o,o,o,z,o,l,x,x,x,x,x,...w],
             [...w, o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,o,o,o,o,o,o,o,l,x,l,l,l,r,...w],
             [...w, o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,l,l,l,l,l,l,l,l,o,o,o,o,o,o,o,l,l,x,l,o,r,r,...w],
-            [...w, o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,l,x,x,x,l,r,...w],
+            [...w, o,o,o,o,o,o,o,p,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,l,x,x,x,l,r,...w],
             [...w, o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,l,l,l,l,o,o,...w],
-            [...w, o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,o,o,l,l,l,x,o,...w],
-            [...w, o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,l,l,l,l,l,l,l,l,l,l,l,l,o,o,l,o,o,l,l,l,r,...w],
-            [...w, o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,o,o,o,l,o,...w],
-            [...w, o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,l,o,l,o,l,o,l,o,...w],
+            [...w, o,o,o,o,o,p,o,p,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,o,o,l,l,l,x,o,...w],
+            [...w, o,o,o,p,o,o,o,o,o,o,o,o,o,o,o,o,l,l,l,l,l,l,l,l,l,l,l,l,l,o,o,l,o,o,l,l,l,r,...w],
+            [...w, o,o,o,o,o,o,p,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,o,o,o,l,o,...w],
+            [...w, o,o,o,o,o,o,o,o,p,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,l,o,l,o,l,o,l,o,...w],
             [...w, o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,o,o,o,l,l,o,l,o,l,o,...w],
             [...w, o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,o,r,o,l,o,l,o,...w],
             [...w, o,o,o,o,o,o,o,o,o,o,o,o,o,o,l,o,l,o,o,o,o,o,o,o,o,l,l,o,o,l,o,o,x,l,l,o,l,o,...w],
@@ -88,7 +89,7 @@ export const mapObjects3 = [
             [...w, o,o,o,o,l,o,l,l,o,l,o,l,o,r,o,o,l,l,l,o,l,o,o,o,o,o,o,o,o,l,x,l,o,l,l,l,l,o,...w],
             [...w, l,o,o,o,o,o,o,o,o,l,o,o,o,o,l,o,o,o,l,o,l,o,o,l,l,o,r,l,l,l,l,l,o,l,l,l,l,o,...w],
             [...w, l,l,l,l,o,o,o,o,o,l,l,l,o,l,l,o,l,o,o,o,l,l,l,o,o,l,x,l,l,l,l,l,o,l,l,l,l,o,...w],
-            [...w, l,l,l,l,l,l,o,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,l,l,l,o,o,...w],
+            [...w, l,l,l,l,l,l,p,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,l,l,l,o,o,...w],
             [...w, l,l,l,l,l,l,o,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,o,o,l,o,l,...w],
             [...w, l,l,l,l,l,l,o,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,l,o,l,...w],
             [...w, l,l,l,l,l,l,o,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,o,o,o,l,...w],
