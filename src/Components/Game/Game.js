@@ -15,11 +15,12 @@ import {withRouter} from 'react-router-dom';
 import { dungeonMusic, musicNumber } from './dungeonMusic';
 import {pushObstacle} from './pushObstacle';
 import {tutorial} from './Map Variables/tutorial';
-import {puzzles} from './Map Variables/puzzles';
+import {puzzles, levelOne} from './Map Variables/puzzles';
 
 const Game = (props) => {
   // const {mapArray, mapX, mapY} = mapObject
   const {mapArray, mapX, mapY} = tutorial
+  // const {mapArray, mapX, mapY} = levelOne
 
   const [grid, setGrid] = useState([...mapArray]),
     [charX, setCharX] = useState(mapX),
@@ -54,21 +55,32 @@ const Game = (props) => {
 
   const getKeyCode = (keyCode) => {
     if(keyCode === 37 || keyCode === 65){
-      if(grid[charY][charX-1].pushable){ // Push Left
+      if(grid[charY][charX-1].itemObject){
+        determineObject(charX-1, charY)
+      } else if(grid[charY][charX-1].pushable){ // Push Left
         pushObstacle(charX-1, charY, charX-2, charY, charX, charY, setCharX, setCharY, grid, getType, setGrid)
       } else {checkTile(charX-1, charY)}
       
     } else if(keyCode === 38 || keyCode === 87){ // Push Up
+      if(grid[charY-1][charX].itemObject){
+        determineObject(charX, charY-1)
+      } else
       if(grid[charY-1][charX].pushable){
         pushObstacle(charX, charY-1, charX, charY-2, charX, charY, setCharX, setCharY, grid, getType, setGrid)
       } else {checkTile(charX, charY-1)}
       
     } else if(keyCode === 39 || keyCode === 68){ // Push Right
+      if(grid[charY][charX].itemObject){
+        determineObject(charX+1, charY)
+      } else
       if(grid[charY][charX+1].pushable){
         pushObstacle(charX+1, charY, charX+2, charY, charX, charY, setCharX, setCharY, grid, getType, setGrid)
       } else {checkTile(charX+1, charY)}
       
     } else if(keyCode === 40 || keyCode === 83){ // Push Down
+      if(grid[charY+1][charX].itemObject){
+        determineObject(charX, charY+1)
+      } else
       if(grid[charY+1][charX].pushable){
         pushObstacle(charX, charY+1, charX, charY+2, charX, charY, setCharX, setCharY, grid, getType, setGrid)
       } else {checkTile(charX, charY+1)}
@@ -78,6 +90,10 @@ const Game = (props) => {
     } else if(keyCode === 72){
       equipmentToggleFn()
     }
+  }
+
+  const determineObject = () => {
+
   }
   
   const getType = (x, y) => {
@@ -131,7 +147,7 @@ const Game = (props) => {
           setCharX(x)
           setCharY(y)
           break;
-        case "hiddenDoor":
+        case "hidden-door":
           setCharX(x)
           setCharY(y)
           findHidden(x, y)
@@ -198,6 +214,9 @@ const Game = (props) => {
         if (boulder.elevation < pushTo.elevation){return}
         else if (boulder.elevation === pushTo.elevation && pushTo.pushable === true){return}
         else if (boulder.elevation > pushTo.elevation){
+          if(grid[yy][xx].type === 'monster'){
+            newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true, type: 'empty', monsterType: null}
+          }
           if (pushTo.type === 'uneven'){
             newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true}
             newGrid[y][x] = {...newGrid[y][x], pushable: false}
@@ -234,7 +253,7 @@ const Game = (props) => {
           
         }
         else if (boulder.elevation === pushTo.elevation){
-          if(pushTo.type === 'uneven'){return}
+          if(pushTo.type === 'uneven' || pushTo.type === 'monster'){return}
           if (pushTo.type === 'water'){
                   newGrid[yy][xx] = {...newGrid[yy][xx], type: 'push-bridge', pushable: false}
                   newGrid[y][x] = {...newGrid[y][x], pushable: false}

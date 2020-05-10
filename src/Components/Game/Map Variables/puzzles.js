@@ -1,8 +1,12 @@
-import {tileVariables, treasureChests, monsters} from './tileVariables';
+import {tileVariables, treasureChests, monsters, visionTiles, doors, keys} from './tileVariables';
 
-const {o, ll, zz, wl, p, pk, w, Q, F, hd, lt, uT, MI, h, mi, MX, hc, Cl, Pl, PP, T, G, WL} = tileVariables;
+const {o, ll, zz, wl, p, pk, w, Q, F, uT, MI, h, mi, MX, hc, Cl, Pl, PP, T, G, WL} = tileVariables;
 const {x, x2, x3, x4, x5, X, X2, X3, X4, X5, X6, X7, X8, X9, XX} = treasureChests;
 const {m, m2, m3, m4, m5, M, M2, M3, M4, M5, M6, M7, M8, M9, MM} = monsters;
+const {hd, lt} = visionTiles;
+const {k3} = keys;
+const {d3} = doors;
+
 
 
     export const seedPuzzle = {
@@ -61,6 +65,71 @@ const {m, m2, m3, m4, m5, M, M2, M3, M4, M5, M6, M7, M8, M9, MM} = monsters;
         [...WL, ...WL, ...WL, ...WL],
         [...WL, ...WL, ...WL, ...WL],
         [...WL, ...WL, ...WL, ...WL]]
+    }
+
+
+
+
+    export const levelOne = {
+            mapX: 20,
+            mapY: "mapArray.length-11",
+            mapArray:[
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+    
+    
+    
+    
+    
+            [...WL,              ll, o, o, o, o,Pl, o, o, o, o, o, o, o, o,ll, o, o, o, o, o,                ...WL],
+            [...WL,              ll, o,pk,Cl,Cl, o, o, o, o, o, o, o, o, o,ll, o, o, o, o, o,                ...WL],
+            [...WL,              ll, o,Cl,Cl,Cl, o, o, o, o, o, o, o, o, o,ll, o, o, o, o, o,                ...WL],
+            [...WL,              ll, o,Cl,Cl,Cl, o, o,Cl,Cl,Cl,Cl,Cl, o, o,ll, o, o, o, o, o,                ...WL],
+            [...WL,              ll, o,Cl,Cl,k3,Cl,Cl, F, F, o, o, o, o, o,ll, o, o, o, o, o,                ...WL],
+            [...WL,              ll, o, o,Cl,Cl,Cl, Q, Q, Q, o, F, o, o, o,ll, o, o, o, o, o,                ...WL],
+            [...WL,               o, o, o, o,Cl,Cl, Q, m, Q, F, F, p, o,ll,ll, o, o, o, o, o,                ...WL],
+            [...WL,               o, o, o, o, o,ll, Q, Q, Q, Q, o, o,ll,ll,ll, o, o, o, o, o,                ...WL],
+            [...WL,              ll, o, o,ll, p, o, Q, Q, Q,ll,ll, G,ll,ll,ll, o, o, o, o, o,                ...WL],
+            [...WL,              ll, o, o, o, o,ll, Q,ll, m, o, G,ll,ll,ll,ll,ll,ll, o, o, o,                ...WL],
+            [...WL,              ll,ll, o,ll, w,ll, Q, o,ll, G, G, x,ll, o, o, o,ll,zz, o, o,                ...WL],
+            [...WL,              ll, o, Q, Q, w, Q, Q,ll, o,ll,ll,ll, o, o, o, o,ll, o, o, o,                ...WL],
+            [...WL,              ll,ll, o, o, o,ll,ll, o, o, o, o, o, o, o, o, o, o, o, o, o,                ...WL],
+            [...WL,              ll, o, o, o, p, o, o, o,lt, o, o, o, o, o, o, o, o, o, o, o,                ...WL],
+            [...WL,              ll,ll,ll,ll, o, o, o, o, o, o, o, o, o, o, o, o, o, o,ll, o,                ...WL],
+            [...WL,              ll, o, o, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, o, o,                ...WL],
+            [...WL,              ll,ll, o, o, o, o, o, o, o, o, h, h, h, h, h, h, o, o,ll, o,                ...WL],
+            [...WL,              ll, o, o,ll,ll, o, o, o, o,ll,ll,ll,ll,ll,ll,ll, o, o,ll, o,                ...WL],
+            [...WL,              ll, o, Q,Cl,Cl,ll,ll,ll, w,pk,Cl,ll, o,ll, G, x,ll,ll, o, o,                ...WL],
+            [...WL,              ll,ll, Q,Cl,Cl,Pl,PP,Pl, o,Cl,Cl,ll, o, o, m,ll,ll, o, o, o,                ...WL],
+            [...WL,              ll, o, o, o,Pl, F, o, o, Q, o, p, o, o, o, o,zz,ll, o, o, o,                ...WL],
+            [...WL,              ll, o, o, o, Q, Q, o, o, w, o, p, o, o, o,Pl, p,ll, o, o, o,                ...WL],
+            [...WL,              ll,ll, o, o, o, o, o, o,Cl,Cl,Cl,Cl,Cl,Cl,Cl,Cl,Cl,ll, o, o,                ...WL],
+            [...WL,              ll, o, o, o,ll,ll,ll,ll,Cl,Cl,Cl,Cl,Cl,Cl,Cl,Cl,Cl,ll, o, o,                ...WL],
+            [...WL,              ll,ll,ll,ll,ll,ll,ll,ll,ll,ll,Cl,ll,ll,ll,ll,ll,ll,ll,ll,ll,                ...WL],
+    
+    
+    
+    
+    
+    
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL],
+            [...WL, ...WL, ...WL, ...WL]]
     }
 
 
