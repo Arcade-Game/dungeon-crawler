@@ -10,29 +10,44 @@
 
 
 .Game {
-    border: 1px solid blue;
+    --notchSize: 70px;
     height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
     background: url('../pictures/6axfm8uck3oy.png');
+    // background-blend-mode: 
+    border: 40px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     cursor: url('../pictures/cursors/Mouse09standart-resize.png'), auto;
+    
+    // clip-path: // Experimenting with cutting the corners off.
+    //     polygon(
+    //         0% var(--notchSize), 
+    //         var(--notchSize) 0%, 
+    //         calc(100% - var(--notchSize)) 0%, 
+    //         100% var(--notchSize), 
+    //         100% calc(100% - var(--notchSize)), 
+    //         calc(100% - var(--notchSize)) 100%, 
+    //         var(--notchSize) 100%, 
+    //         0% calc(100% - var(--notchSize))
+    //     );   
+
 }
 
 .mini-map-container {
-    border: 1px dotted black;
+    border: 4px solid black;
     text-align: center;
     border-radius: 50%;
     height: 250px;
     width: 250px;
     position: absolute;
-    top: 40px;
-    right: 12%;
+    top: 80px;
+    right: 80px;
     display: grid;
     grid-template-columns: repeat(auto, 1fr);
     grid-template-rows: repeat(auto, 1fr);

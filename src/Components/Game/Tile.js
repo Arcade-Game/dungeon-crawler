@@ -9,7 +9,7 @@ import Lookout from './Lookout/Lookout';
 
 
 const Tile = (props) => {
-    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava} = props
+    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject} = props
 
     // const [monType, setMonType] = useState('')
     useEffect(() => {
@@ -18,20 +18,18 @@ const Tile = (props) => {
 
     let tileStyle = null
     let cName = "char-view"
+    let mName = ''
     exploreTileFn(x, y)
 
     switch(type){
         case "wall":
-            tileStyle = {background: "black"}
+            tileStyle = {background: "black", border: "none"}
             break;
         case "chest":
             cName = "char-view-chest"
             break;
         case "exit":
             tileStyle = {background: "red", color: "white"}
-            break;
-        case "pushable":
-            cName = "char-view-pushable"
             break;
         case "water":
             cName ="char-view-water"
@@ -57,15 +55,30 @@ const Tile = (props) => {
             cName = "char-view-push-lava-bridge"
             setNewLava(x,y)
             break;
-        // case "lookout":
-        //     cName = "char-view-lookout"
-        //     break;
+        case "hiddenDoor":
+            cName = "char-view-hidden-door"
+            break;
+        case "uneven":
+            cName ="char-view-uneven"
+            break;
+        case "platform":
+            cName = "char-view-platform"
+            break;
+        case "cliff":
+            cName = "char-view-cliff"
+            break;
+        case "teleporter-1":
+            cName = "char-view-teleporter-1"
+            break;
+        case "gold-pile":
+            cName = "char-view-gold-pile"
+            break;
     }
 
     let newMonster =''
     if(grid[y][x].monsterType){
         newMonster = grid[y][x].monsterType
-        cName = `char-view-${grid[y][x].monsterType.toLowerCase()}`
+        mName = `char-view-${grid[y][x].monsterType.toLowerCase()}`
     }
         
     return (
@@ -77,9 +90,11 @@ const Tile = (props) => {
                     <div className="monster-stats-hidden"></div>
                 </div>) : null
                 }
-                {gridX === 4 && gridY === 4 ? <div className="hero-div"></div> : null} 
                 {
-                    type === "chest" ? <Chest /> 
+                    gridX === 4 && gridY === 4 ? <div className="hero-div"></div> : null}    
+                {
+                    type === 'monster' ? <div className={`${mName}`}></div>  
+                    : type === "chest" ? <Chest /> 
                     : type === 'quicksand' ? <Quicksand />
                     : type === "exit" ? <h2>{"EXIT"}</h2> 
                     : type === 'lava' ? <Lava /> 
@@ -90,6 +105,10 @@ const Tile = (props) => {
                     || type === "push-bridge-lava2" ? <div className="push-bridge"></div> 
                     : null
                 }
+                {pushable ? <div className="char-view-pushable"></div> : null}
+                {hidden ? <div className="hidden">HIDDEN</div> : null}
+                {mist ? <div className="mist-div"></div> : null}
+                {itemObject === 'broken-teleporter' ? <div className="char-view-broken-teleporter"></div> : null}
             </div>
     )
 }

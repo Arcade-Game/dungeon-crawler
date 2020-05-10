@@ -3,7 +3,7 @@ import './Game.scss';
 import './Map.scss';
 import './monsters.scss';
 import Map from './Map';
-import {mapObjects} from './mapObjects';
+import {mapObject} from './Map Variables/mapObjects';
 import Footer from '../Footer/Footer';
 import axios from 'axios';
 import Inventory from './Character/Inventory/Inventory';
@@ -13,12 +13,17 @@ import CombatView from './CombatView/CombatView';
 import CombatStats from '../CombatStats/CombatStats';
 import {withRouter} from 'react-router-dom';
 import { dungeonMusic, musicNumber } from './dungeonMusic';
+import {pushObstacle} from './pushObstacle';
+import {tutorial} from './Map Variables/tutorial';
+import {puzzles} from './Map Variables/puzzles';
 
 const Game = (props) => {
+  // const {mapArray, mapX, mapY} = mapObject
+  const {mapArray, mapX, mapY} = tutorial
 
-  const [grid, setGrid] = useState([...mapObjects]),
-    [charX, setCharX] = useState(15),
-    [charY, setCharY] = useState(42),
+  const [grid, setGrid] = useState([...mapArray]),
+    [charX, setCharX] = useState(mapX),
+    [charY, setCharY] = useState(mapY),
     [heightWidth, setHeightWidth] = useState(650),
     [viewRowCols, setViewRowCols] = useState(9),
     [inventoryToggle, setInventoryToggle] = useState(false),
@@ -49,23 +54,23 @@ const Game = (props) => {
 
   const getKeyCode = (keyCode) => {
     if(keyCode === 37 || keyCode === 65){
-      if(grid[charY][charX-1].type === "pushable"){ // Push Left
-        pushObstacle(charX-1, charY, charX-2, charY)
+      if(grid[charY][charX-1].pushable){ // Push Left
+        pushObstacle(charX-1, charY, charX-2, charY, charX, charY, setCharX, setCharY, grid, getType, setGrid)
       } else {checkTile(charX-1, charY)}
       
     } else if(keyCode === 38 || keyCode === 87){ // Push Up
-      if(grid[charY-1][charX].type === "pushable"){
-        pushObstacle(charX, charY-1, charX, charY-2)
+      if(grid[charY-1][charX].pushable){
+        pushObstacle(charX, charY-1, charX, charY-2, charX, charY, setCharX, setCharY, grid, getType, setGrid)
       } else {checkTile(charX, charY-1)}
       
     } else if(keyCode === 39 || keyCode === 68){ // Push Right
-      if(grid[charY][charX+1].type === "pushable"){
-        pushObstacle(charX+1, charY, charX+2, charY)
+      if(grid[charY][charX+1].pushable){
+        pushObstacle(charX+1, charY, charX+2, charY, charX, charY, setCharX, setCharY, grid, getType, setGrid)
       } else {checkTile(charX+1, charY)}
       
     } else if(keyCode === 40 || keyCode === 83){ // Push Down
-      if(grid[charY+1][charX].type === "pushable"){
-        pushObstacle(charX, charY+1, charX, charY+2)
+      if(grid[charY+1][charX].pushable){
+        pushObstacle(charX, charY+1, charX, charY+2, charX, charY, setCharX, setCharY, grid, getType, setGrid)
       } else {checkTile(charX, charY+1)}
       
     } else if(keyCode ===  66){
@@ -92,7 +97,7 @@ const Game = (props) => {
           setQuicksandCounter(0)
           break;
         case "chest":
-          openChest(x, y)
+          openChest(x, y, grid[y][x].level)
           setCharX(x)
           setCharY(y)
           setQuicksandCounter(0)
@@ -101,7 +106,7 @@ const Game = (props) => {
           setQuicksandCounter(0)
           setCharX(x)
           setCharY(y)
-          setGrid([...mapObjects])
+          setGrid([...mapArray])
           props.history.push('/town')
           break;
         case "push-bridge":
@@ -126,35 +131,183 @@ const Game = (props) => {
           setCharX(x)
           setCharY(y)
           break;
+        case "hiddenDoor":
+          setCharX(x)
+          setCharY(y)
+          findHidden(x, y)
+          break;
+        case "uneven":
+          setCharX(x)
+          setCharY(y)
+          break;
+        case "cliff":
+          if(
+            grid[charY][charX].pushable === true || grid[charY][charX].type === 'cliff'){
+            setCharX(x)
+            setCharY(y)
+          }
+          break;
+        case "platform":
+          setCharX(x)
+          setCharY(y)
+          break;
+        case "teleporter-1":
+          setCharX(x)
+          setCharY(y)
+          teleport(x,y)
+          break;
+        case "broken-teleporter":
+          setCharX(x)
+          setCharY(y)
+          break;
+        case "gold-pile":
+          goldPile(x,y,grid[y][x].level)
+          let newGrid = [...grid]
+          newGrid[y][x] = {...newGrid[y][x], type: "empty"}
+          setGrid(newGrid)
+          setCharX(x)
+          setCharY(y)
+          break;
       }
+  }
+
+
+  const pushObstacle = (x,y,xx,yy, charX, charY, setCharX, setCharY, grid, getType, setGrid) => {
+    let newGrid = [...grid]
+    let hero = grid[charY][charX]
+    let boulder = grid[y][x]
+    let pushTo = grid[yy][xx]
+
+    if (hero.elevation < boulder.elevation){
+      console.log("CLIMP UP")
+      if (hero.pushable !== true || pushTo.elevation > boulder.elevation){return}
+      else if (boulder.elevation > pushTo.elevation){
+        newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true}
+        newGrid[y][x] = {...newGrid[y][x], pushable: false}
+        setCharX(x)
+        setCharY(y)
+      }
+    } else if (hero.elevation === boulder.elevation){
+      console.log('PUSH ME')
+      if (hero.pushable === true){
+        setCharX(x)
+        setCharY(y)
+      }
+      if (hero.pushable !== true){
+        console.log('NOT STANDING ON A ROCK')
+        if (boulder.elevation < pushTo.elevation){return}
+        else if (boulder.elevation === pushTo.elevation && pushTo.pushable === true){return}
+        else if (boulder.elevation > pushTo.elevation){
+          if (pushTo.type === 'uneven'){
+            newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true}
+            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+            setCharX(x)
+            setCharY(y)
+          }
+          if (pushTo.type === 'water'){
+            newGrid[yy][xx] = {...newGrid[yy][xx], type: 'push-bridge', pushable: false}
+            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+          } else if (pushTo.type === 'quicksand'){
+            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+          } else if (pushTo.type === 'lava'){
+            newGrid[yy][xx] = {...newGrid[yy][xx], type: 'push-bridge-lava2', pushable: false}
+            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+            setCharX(x)
+            setCharY(y)
+          } else if (pushTo.type === 'teleporter-1'){
+            newGrid[newGrid[yy][xx].end[1]][newGrid[yy][xx].end[0]] = {...newGrid[newGrid[yy][xx].end[1]][newGrid[yy][xx].end[0]], pushable: true}
+            newGrid[yy][xx] = {...newGrid[yy][xx], type: 'broken-teleporter', pushable: false}
+            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+            setCharX(x)
+            setCharY(y)
+          } else if (pushTo.type === "empty" && grid[yy][xx].pushable !== true){
+            newGrid[yy][xx].pushable = true
+            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+            setCharX(x)
+            setCharY(y)
+          } else {
+            newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true}
+            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+            setCharX(x)
+            setCharY(y)
+          }
+          
+        }
+        else if (boulder.elevation === pushTo.elevation){
+          if(pushTo.type === 'uneven'){return}
+          if (pushTo.type === 'water'){
+                  newGrid[yy][xx] = {...newGrid[yy][xx], type: 'push-bridge', pushable: false}
+                  newGrid[y][x] = {...newGrid[y][x], pushable: false}
+                } else if (pushTo.type === 'quicksand'){
+                  newGrid[y][x] = {...newGrid[y][x], pushable: false}
+                } else if (pushTo.type === 'lava'){
+                  newGrid[yy][xx] = {...newGrid[yy][xx], type: 'push-bridge-lava2', pushable: false}
+                  newGrid[y][x] = {...newGrid[y][x], pushable: false}
+                  setCharX(x)
+                  setCharY(y)
+                } else if (pushTo.type === 'teleporter-1'){
+                  newGrid[newGrid[yy][xx].end[1]][newGrid[yy][xx].end[0]] = {...newGrid[newGrid[yy][xx].end[1]][newGrid[yy][xx].end[0]], pushable: true}
+                  newGrid[yy][xx] = {...newGrid[yy][xx], type: 'broken-teleporter', pushable: false}
+                  newGrid[y][x] = {...newGrid[y][x], pushable: false}
+                  setCharX(x)
+                  setCharY(y)
+                } else if (pushTo.type === "empty" && grid[yy][xx].pushable !== true){
+                  newGrid[yy][xx].pushable = true
+                  newGrid[y][x] = {...newGrid[y][x], pushable: false}
+                  setCharX(x)
+                  setCharY(y)
+                } else {
+                  newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true}
+                  newGrid[y][x] = {...newGrid[y][x], pushable: false}
+                  setCharX(x)
+                  setCharY(y)
+                }
+          
+        }
+      }
+    } else if (hero.elevation > boulder.elevation){
+      console.log('JUMP DOWN')
+      setCharX(x)
+      setCharY(y)
+    }
+    setGrid(newGrid)
+}
+
+
+  const teleport = (x,y) => {
+    setCharX(grid[y][x].end[0])
+    setCharY(grid[y][x].end[1])
+  }
+
+  const findHidden = (x,y) => {
+    console.log('DING')
+    let newGrid =[...grid]
+    let north = y-1
+    let east = x+1
+    let south = y+1
+    let west = x-1
+    if(newGrid[north][x].hidden){
+      newGrid[north][x] = {...newGrid[north][x], hidden: false}
+      findHidden(x,north)
+    }
+    if(newGrid[y][east].hidden){
+      newGrid[y][east] = {...newGrid[y][east], hidden: false}
+      findHidden(east,y)
+    }
+    if(newGrid[south][x].hidden){
+      newGrid[south][x] = {...newGrid[south][x], hidden: false}
+      findHidden(x,south)
+    }
+    if(newGrid[y][west].hidden){
+      newGrid[y][west] = {...newGrid[y][west], hidden: false}
+      findHidden(west,y)
+    }
+    setGrid(newGrid)
   }
 
   const walkQuicksand = (x,y) => {
     setQuicksandCounter(quicksandCounter + 1)
     return quicksandCounter === 3 ? die() : null
-  }
-
-  const pushObstacle = (x,y,xx,yy) => {
-    let newGrid = [...grid]
-    let pushTo = getType(xx,yy)
-    if(pushTo === 'water'){
-      newGrid[yy][xx].type = 'push-bridge'
-      newGrid[y][x].type = "empty"
-    } else if(pushTo === 'quicksand'){
-      newGrid[y][x].type = 'empty'
-    } else if (pushTo === 'lava'){
-      newGrid[yy][xx].type = 'push-bridge-lava2'
-      newGrid[y][x].type = 'empty'
-      setCharX(x)
-      setCharY(y)
-      
-    } else if(pushTo === "empty"){
-      newGrid[yy][xx].type = 'pushable'
-      newGrid[y][x].type = 'empty'
-      setCharX(x)
-      setCharY(y)
-    }
-    setGrid(newGrid)
   }
 
   const setNewLava = (x,y) => {
@@ -172,23 +325,29 @@ const Game = (props) => {
 
   const clearMonster = (x, y) => {
     let newGrid = [...grid]
-    newGrid[y][x].type = "empty"
-    newGrid[y][x].monsterType = ""
+    newGrid[y][x] = {...newGrid[y][x], type: "empty", monsterType: ""}
+    // newGrid[y][x].monsterType = ""
     setCharX(x)
     setCharY(y)
     setMonsterCoor([0,0])
     setGrid(newGrid)
   }
 
-  const openChest = (x, y) => {
+  const openChest = (x, y, z) => {
     let newGrid = [...grid]
-    newGrid[y][x] = {type: "empty"}
-    console.log(newGrid[x][y])
+    newGrid[y][x] = {...newGrid[y][x], type: "empty"}
     setGrid(newGrid)
-
     axios.get(`/api/item`).then(res => console.log("res.data", res.data))
-    let num = Math.floor(Math.random() * 15)
-    
+    goldPile(x,y,z)
+  }
+
+  const goldPile = (x, y, z) => { // NEED MINIMUMS SET AND CORRECT NUMBERS. Z STANDS FOR THE LEVEL OF CHEST/GOLD PILE.
+    let num = z === 1 ? Math.floor(Math.random() * (8-1)) + 1 :
+              z === 2 ? Math.floor(Math.random() * (22-7)) + 7 :
+              z === 3 ? Math.floor(Math.random() * (35-15)) + 15 :
+              z === 4 ? Math.floor(Math.random() * (100-30)) + 30 :
+              z === 5 ? Math.floor(Math.random() * (250-100)) + 100 : null
+    console.log('GOLD', num)
     setNewMoney(num)
   }
   
@@ -220,7 +379,7 @@ const Game = (props) => {
     }
     axios.get(`/api/monster`).then(res => {
       let newGrid = [...grid]
-      newGrid[y][x] = {type: "monster", monsterType: res.data.name}
+      newGrid[y][x] = {...newGrid[y][x], monsterType: res.data.name}
       setGrid(newGrid)
     })
   }
@@ -255,7 +414,7 @@ const Game = (props) => {
   const die = ()  => {
     props.history.push('/death')
   }
-  console.log("music", dungeonMusic[musicNumber])
+  // console.log("music", dungeonMusic[musicNumber])s
 
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
@@ -285,7 +444,7 @@ const Game = (props) => {
             monsterCoor = {monsterCoor}
           /> : null
         }
-        <div className="coin-icon"></div>
+        {/* <div className="coin-icon"></div> */}
         <Footer 
           setEquipmentToggle={equipmentToggleFn}
           setInventoryToggle={inventoryToggleFn}
