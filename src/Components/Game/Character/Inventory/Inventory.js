@@ -90,7 +90,7 @@ console.log(props)
 console.log(props.inventory)
       const mappedInventory = props.inventory.map((el, i) => {
          return el.item_type ? (
-            <div className="inventory-square"> <img key ={el.item_id} 
+            <div className="inventory-square"> <img className="inventory-square-image" key ={el.item_id} 
                      id={i} 
                      className="false"
                      src={el.image} 
@@ -98,11 +98,20 @@ console.log(props.inventory)
                      onDragStart={(event) => handleDrag(event)} 
                      onDrag={(event) => event.preventDefault()} 
                      width="82%" height="88%"
-                  /></div>)  : i < 8 ? <div className="inventory-square"></div> : null
+         /><div className="inventory-square-hover">
+            <span>{el.item_name}</span>
+            <div className="i-square-hover-stats">
+               <div><span>Attack: </span>{el.attack}</div>
+               <div><span>Armor: </span>{el.armor}</div>
+               <div><span>Strength: </span>{el.strength ? el.strength : 0}</div>
+               <div><span>Agility: </span>{el.agility ? el.agility : 0}</div>
+            </div>
+            </div>
+            </div>)  : i < 8 ? <div className="inventory-square"></div> : null
          })
 
 
-   console.log(props)
+   console.log("props", props)
    return (
       <div>
          {overlayToggle ? (<div className="overlay"

@@ -43,6 +43,7 @@ app.get("/api/item", itemCtrl.findItem);
 app.put("/api/inventory/item/:id", itemCtrl.deleteItem)
 app.post("/api/item/:id", itemCtrl.findItem);
 app.get('/api/equipped-items/:weapon', itemCtrl.equippedItems);
+app.get('/api/key', itemCtrl.findKey);
 
 //combat endpoints
 app.get('/api/monster-stats/:monsterType', combatCtrl.monsterStats);

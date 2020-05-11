@@ -23,7 +23,7 @@ width:  320px;
 background-color: $menus;
 border-radius: 10px;
 position: absolute;
-left: 5%;
+left: 3%;
 bottom: 200px;
 z-index: 1;
 font-size: 17px;
@@ -114,7 +114,6 @@ font-weight: 800;
    grid-row-gap: 2px;
    grid-column-gap: 2px;
    border: 3px solid rgb(17, 17, 17);
-
    .inventory-square {
       height: 100%;
       width: 100%;
@@ -125,11 +124,37 @@ font-weight: 800;
       align-items: center;
       background: rgb(46, 45, 45);
    }
+   .inventory-square:hover .inventory-square-hover {
+      visibility: visible;
+   }
    img {
       border-radius: 10px;
    }
 
 }
+   .inventory-square-hover {
+      visibility: hidden;
+      position: absolute;
+      right: -205px;
+      border: 3px solid $menus;
+      border-radius: 10%;
+      height: 180px;
+      width: 200px;
+      top: 0px;
+      text-align: start;
+      padding: 8px;
+      background: grey;
+   }
+}
 
-
+.i-square-hover-stats {
+   margin-top: 10px;
+   margin-left: 10px;
+   margin-right: 5px;
+   display: flex;
+   flex-direction: column;
+   div {
+      display: flex;
+      justify-content: space-between;
+   }
 }

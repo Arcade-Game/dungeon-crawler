@@ -47,7 +47,17 @@ export const treasureChests = {
     XX: {type: "chest", elevation: 3, level: 5},
 }
 
+export const keys = {
+    k1: {type: "empty", elevation: 0, level: 1, itemObject: "door-key", name: "Bronze Key", code: "k1"},
+    k2: {type: "platform", elevation: 1, level: 1, itemObject: "door-key", door: []},
+    k3: {type: "cliff", elevation: 3, level: 1, itemObject: "door-key", door: []},
+    // k4: {type: "empty", elevation: 0, level: 1, item: "quest-key", door: []},
+    // k5: {type: "empty", elevation: 0, level: 1, item: "quest-key", door: []},
+}
 
+export const doors = {
+    d1: {type: "locked-door", elevation: 0, key: "k1"}
+}
 
 export const monsters = {
      m: {type: "monster", elevation: 0, level: 1},
@@ -67,19 +77,6 @@ export const monsters = {
     M8: {type: "monster", elevation: 3, level: 3},
     M9: {type: "monster", elevation: 3, level: 4},
     MM: {type: "monster", elevation: 3, level: 5},
-}
-
-
-export const keys = {
-    k1: {type: "empty", elevation: 0, level: 1, itemObject: "quest-key", name: "Bronze Key", code: "k1"},
-    k2: {type: "platform", elevation: 1, level: 1, itemObject: "quest-key", door: []},
-    k3: {type: "cliff", elevation: 3, level: 1, itemObject: "quest-key", door: []},
-    // k4: {type: "empty", elevation: 0, level: 1, item: "quest-key", door: []},
-    // k5: {type: "empty", elevation: 0, level: 1, item: "quest-key", door: []},
-}
-
-export const doors = {
-    d1: {type: "locked-door", elevation: 0, key: "k1"}
 }
 
 export const visionTiles = {

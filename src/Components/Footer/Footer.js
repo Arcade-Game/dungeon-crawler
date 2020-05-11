@@ -64,10 +64,14 @@ const Footer = props => {
                statsToggle === true ?
                <section className="stats-container">
                   <div>Name: </div>
-                  <div>Level: </div>
-                  <div>Health: </div>
-                  <div>Armor: </div>
-                  <div>Damage: </div>
+                  <div className="stats-container-stats">
+                     <div><span>Level:</span>{}</div>
+                     <div><span>Health:</span>{}</div>
+                     <div><span>Armor:</span>{}</div>
+                     <div><span>Damage:</span>{}</div>
+                  </div>
+                  
+                  
                </section> : null
             }
             
