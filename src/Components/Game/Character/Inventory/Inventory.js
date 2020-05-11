@@ -1,12 +1,12 @@
 import React, {useState,useEffect} from "react";
 import {connect} from "react-redux";
-import {equipItem, unequipItem} from "../../../../Redux/reducers/heroReducer";
+import {equipItem, unequipItem, deleteItem} from "../../../../Redux/reducers/heroReducer";
 import Equipment from "./Equipment";
 import "./Inventory.scss";
 import {GiTwoCoins} from 'react-icons/gi';
 
 const Inventory = (props) => {
-   const {hero, stats, inventory} = props
+   const {hero, stats, inventory, equipment} = props
    const {equipmentToggle, inventoryToggle} = props
    const [currency, setCurrency] = useState(0),
              [overlayToggle, setOverlayToggle] = useState(false);
@@ -35,9 +35,11 @@ console.log("hit")
       event.preventDefault();
       const data = JSON.parse(event.dataTransfer.getData("text"));
       console.log(data)
-      const {id} = data;
+      const {id, equipped} = data;
       console.log("remove: ", id)
+      if (equipped ==="true"){
       props.unequipItem(id)
+      }
    },
 
    deleteItem = (event) => {
@@ -46,6 +48,12 @@ console.log("hit")
    const data = JSON.parse(event.dataTransfer.getData("text"));
    const {id, equipped} = data;
    console.log("delete: ", id, equipped)
+   if (equipped ==="true"){
+      props.deleteItem(equipment[id].item_type)
+      } else {
+         props.deleteItem(id)
+      }
+
    // props.deleteItem(id, equipped)
 
    // axios.put(`/api/inventory/item/${id}`, {equipped}).then(res => {
@@ -84,7 +92,6 @@ console.log(props.inventory)
                   /></div>)  : i < 8 ? <div className="inventory-square"></div> : null
          })
 
-
    console.log(props)
    return (
       <div>
@@ -96,7 +103,6 @@ console.log(props.inventory)
       <div className="inventory-screen-container">
          {equipmentToggle ? (
             <>
-             
                <Equipment handleDrag = {handleDrag}
                                        equipItem = {equipItem}
                               />
@@ -120,4 +126,4 @@ console.log(props.inventory)
    )
 }
 const mapStateToProps = reduxState => reduxState.hero
-export default connect(mapStateToProps, {equipItem, unequipItem})(Inventory);
+export default connect(mapStateToProps, {equipItem, unequipItem, deleteItem})(Inventory);

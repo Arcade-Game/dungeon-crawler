@@ -56,10 +56,10 @@ export const equipItem = (item, index) => {
       }
    }
 
-   export const deleteItem = (item) => {
+   export const deleteItem = (type, index) => {
       return {
          type: DELETE_ITEM,
-         payload: item
+         payload: {type, index}
       }
    }
 
@@ -149,7 +149,36 @@ export default function reducer (state = initialState, action) {
 
 
             case DELETE_ITEM:
-               return state
+               if (payload.id) {
+               state.inventory.splice(+payload.index, 1, 0)
+               } else {
+            switch (payload.type){
+               case weapon:
+                  state.equipment[0] = {type: "weapon"};
+                  break;
+               case twoHand:
+                     state.equipment[1] = {type: "two-hand"};
+                     break;
+               case offHand:
+                     state.equipment[2] = {type: "off-hand"};
+                     break;
+               case armor:
+                      state.equipment[3] = {type: "armor"};
+                      break;
+               case helm:
+                      state.equipment[4] = {type: "helm"};
+                      break;
+               case boots:
+                      state.equipment[5] = {type: "boots"};
+                      break;
+               }
+            }
+            return {
+               hero: {...state.hero},
+                        stats: {...state.stats},
+                        equipment: [...state.equipment],
+                        inventory: [...state.inventory]
+               }
 
       default:
          return state;
