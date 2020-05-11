@@ -31,5 +31,9 @@
    .inn-option-button:hover{
       @include town-button-hover;
    }
+   .inn-option-button:disabled{
+      @include town-button;
+      opacity: .6;
+   }
 
 }

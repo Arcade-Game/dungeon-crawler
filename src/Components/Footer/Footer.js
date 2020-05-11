@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai';
 import './Footer.scss';
+import {withRouter} from 'react-router-dom';
 
 const Footer = props => {
    const [health, setHealth] = useState(0);
@@ -35,7 +36,7 @@ const Footer = props => {
          {
             menuToggle === true ? <div className="game-menu">
                <h3>Menu</h3>
-            <button className="return-to-town">Return to Town</button>
+            <button className="return-to-town" onClick={() => props.history.push('/town')}>Return to Town</button>
             <button className="return">Settings</button>
             <button className="return">Quests</button>
             <button className="return">Key</button>
@@ -76,6 +77,6 @@ const Footer = props => {
    )
 }
 
-export default Footer;
+export default withRouter(Footer);
 //AiFillHeart
 //AiOutlineHeart

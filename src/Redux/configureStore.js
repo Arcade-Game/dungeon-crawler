@@ -6,7 +6,7 @@ import promiseMiddleware from "redux-promise-middleware";
 
 const configureStore = () => {
 const persistedState = loadState();
-const store = createStore(rootReducer, persistedState);
+const store = createStore(rootReducer, persistedState ,applyMiddleware(promiseMiddleware));
 
 store.subscribe(throttle(() => {
    saveState({
@@ -16,7 +16,6 @@ store.subscribe(throttle(() => {
    });
 }, 1000));
 
-console.log(store)
    return store;
 };
 

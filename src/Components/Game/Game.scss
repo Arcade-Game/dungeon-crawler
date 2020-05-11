@@ -95,12 +95,22 @@
 
 .mini-map-push-bridge {
     @include mm;
-    background: pink;
+    background: purple;
 }
 
 .mini-map-quicksand {
     @include mm;
-    background: rgb(156, 95, 53);
+    background: tan;
+}
+
+.mini-map-hidden-door {
+    @include mm;
+    background: black;
+}
+
+.hidden {
+    @include mm;
+    background: black;
 }
 
 .coin-icon {

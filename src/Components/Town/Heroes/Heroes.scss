@@ -9,6 +9,7 @@
    height:600px;
    z-index: 2;
    background-color: $pal-one;
+   box-shadow: 10px 10px 5px black;
    
    .hero-summary-container{
       @include column;
@@ -17,8 +18,11 @@
       width: 95%;
       height: 80%;
       background-color:  $pal-three;
+
    }
-   .hero-summary{
+
+   // hero
+   .hero-title{
       @include row;
       margin-top: 10px;
       justify-content: space-around;
@@ -26,27 +30,87 @@
       height: 8%;
       background-color: $pal-seven;
       border-radius: 5px;
-      
+
+
          h2{
             width: 180px;
          }
       }
-      .hero-summary:hover{
+      .hero-title:hover{
          border: 2px solid $pal-eight;
          background-color: $pal-six;
          color:$pal-eight;
       }
-      .hero-stat-summary {
+      .hero-summary-expand {
+         @include row;
+         // justify-content: space-around;
          background-color: $pal-four;
          margin-top: 5px;
          min-height: 100px;
          width: 95%;
          border-radius: 5px;
          color:$pal-eight;
+
+         .hero-summary {
+            @include row;
+            justify-content: space-around;
+            width: 80%;
+         
+         .hero-stats-summary {
+            @include column;
+            box-sizing: border-box;
+            padding: 10px 10px 10px 10px;
+            width: 60%;
+
+            .stat {
+               @include row;
+               justify-content: space-between;
+               font-weight: bold;
+               width: 70%;
+               padding-left:30px;
+            }
+
+            div {
+               @include row;
+               width: 60px;
+            }
+         }
+
+         .hero-button-container {
+            @include column;
+            justify-content: space-evenly;
+            width:40%;
+            height: 110px;
+
+            button {
+               background-color: $pal-two;
+               color: $pal-five;
+               border: 2px solid $pal-three;
+               font-size: 20px;
+               box-shadow: 5px 5px 15px;
+               width: 150px;
+               height: 30px;
+            }
+
+            button:hover{
+               background-color: $pal-seven;
+               border-color: $pal-six;
+               color:$pal-five;
+            }
+         }
       }
-
+   }
 }
-
+.create-hero{
+   @include town-button;
+}
+.create-hero:hover{
+   @include town-button-hover;
+}
+.create-hero:disabled{
+   opacity: .6;
+   width: 40px;
+}
 //newHero
 
 .new-hero-screen-container{
@@ -57,6 +121,7 @@
    height:575px;
    z-index: 2;
    background-color: $pal-one;
+   box-shadow: 10px 10px 5px black;
 
    .new-hero-screen{
       @include row;
@@ -169,7 +234,6 @@
             justify-content: space-between;
             height:75%;
             width: 35%;
-            // background-color: lightseagreen;
 
             .new-hero-name{
                width:95%;
@@ -199,10 +263,4 @@
             } 
    }
 }
-}
-.create-hero{
-   @include town-button;
-}
-.create-hero:hover{
-   @include town-button-hover;
 }

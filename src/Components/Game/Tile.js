@@ -9,7 +9,7 @@ import Lookout from './Lookout/Lookout';
 
 
 const Tile = (props) => {
-    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject} = props
+    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item} = props
 
     // const [monType, setMonType] = useState('')
     useEffect(() => {
@@ -29,7 +29,7 @@ const Tile = (props) => {
             cName = "char-view-chest"
             break;
         case "exit":
-            tileStyle = {background: "red", color: "white"}
+            cName = "char-view-exit-tile"
             break;
         case "water":
             cName ="char-view-water"
@@ -55,7 +55,7 @@ const Tile = (props) => {
             cName = "char-view-push-lava-bridge"
             setNewLava(x,y)
             break;
-        case "hiddenDoor":
+        case "hidden-door":
             cName = "char-view-hidden-door"
             break;
         case "uneven":
@@ -96,7 +96,7 @@ const Tile = (props) => {
                     type === 'monster' ? <div className={`${mName}`}></div>  
                     : type === "chest" ? <Chest /> 
                     : type === 'quicksand' ? <Quicksand />
-                    : type === "exit" ? <h2>{"EXIT"}</h2> 
+                    : type === "exit" ? <div className="char-view-exit"></div>
                     : type === 'lava' ? <Lava /> 
                     : type === 'lookout' ? <Lookout />
                     : type === "push-bridge" 
@@ -106,6 +106,7 @@ const Tile = (props) => {
                     : null
                 }
                 {pushable ? <div className="char-view-pushable"></div> : null}
+                {item === 'quest-key' ? <div className="char-view-quest-key"></div> : null}
                 {hidden ? <div className="hidden">HIDDEN</div> : null}
                 {mist ? <div className="mist-div"></div> : null}
                 {itemObject === 'broken-teleporter' ? <div className="char-view-broken-teleporter"></div> : null}

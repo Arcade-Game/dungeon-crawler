@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {connect} from "react-redux";
 import axios from "axios";
 import { setUser } from "../Redux/reducers/authReducer";
@@ -11,6 +11,10 @@ const Auth = (props) => {
              [email, setEmail] = useState(""),
              [registerToggle, setRegisterToggle] = useState(false);
 
+
+   // useEffect (() => {
+   //    window.location.reload()
+   // },[props])
    const clearPlaceholder = (inputId, newValue) => {
       if(newValue){
          document.getElementById(inputId).placeholder = newValue
@@ -23,7 +27,7 @@ const Auth = (props) => {
       if (password === verPassword){
          axios.post("/api/auth/register", {username, password, email})
          .then(res => {
-            props.setUser(res.data)
+            props.setUser(res.data.player_id)
             if (res.data){ 
                props.history.push("/town") 
             }

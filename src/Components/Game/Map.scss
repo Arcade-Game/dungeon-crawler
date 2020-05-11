@@ -69,10 +69,13 @@
 }
 
 .char-view-pushable {
-    border: 1px solid grey;
-    background: url('../pictures/terrain/ForestRock_basecolor.png');
+    // border: 1px solid grey;
+    // background: url('../pictures/terrain/ForestRock_basecolor.png');
+    background: url('../pictures/terrain/yellowBoulder.png');
+    background-size: 130%;
+    background-position: center;
     // filter: blur(.6px);
-    border-radius: 50%;
+    // border-radius: 50%;
     position: absolute;
     height: 100%;
     width: 100%;
@@ -80,48 +83,96 @@
 }
 
 .char-view-water {
-    background: blue;
+    background: url('../pictures/terrain/water.png');
+    background-size: 240%;
+    background-position-y: 100%;
     position: relative;
 }
 
 .char-view-push-bridge {
-    background: blue;
+    background: url('../pictures/terrain/water.png');
+    background-size: 240%;
+    background-position-y: 100%;
     z-index: 1;
     position: relative;
-    filter: blur(.6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    // filter: blur(.6px);
 }
 
 .push-bridge {
-    // border: 1px solid rgb(107, 172, 233);
+    border: .3px solid rgb(20, 92, 160);
     // box-shadow: 0 0 2.5px 2px rgb(102, 191, 221);
-    box-shadow: 0 0 9px 2px blue;
+    box-shadow: 0 0 5px 2px rgb(0, 45, 128);
     background: url('../pictures/terrain/ForestRock_basecolor.png');
     border-radius: 50%;
-    height: 100%;
-    width: 100%;
+    height: 94%;
+    width: 94%;
     z-index: 1;
     position: absolute;
+    
 }
 
 .char-view-lava {
-    // border: 1px solid rgba(126, 120, 120, 0.4);
     height: 100%;
     width: 100%;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-.char-view-push-lava2 {background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative;}
-.char-view-push-lava1 {background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative;}
-.char-view-push-lava-bridge {background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative; z-index: 1;}
+.char-view-push-lava2 {
+    .push-bridge {
+        box-shadow: 0 0 5px 2px rgb(160, 19, 19);
+        background: url('../pictures/terrain/ForestRock_basecolor.png');
+        border-radius: 50%;
+        height: 94%;
+        width: 94%;
+        z-index: 1;
+        position: absolute;
+    }
+    background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative; display: flex; justify-content: center; align-items: center;}
+.char-view-push-lava1 {
+    .push-bridge {
+        box-shadow: 0 0 3px 2px rgb(243, 26, 26);
+        background: url('../pictures/terrain/ForestRock_basecolor.png');
+        border-radius: 50%;
+        height: 94%;
+        width: 94%;
+        z-index: 1;
+        position: absolute;
+    }
+    background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative; display: flex; justify-content: center; align-items: center;}
+.char-view-push-lava-bridge {
+    .push-bridge {
+        box-shadow: 0 0 3px 2px rgb(243, 26, 26);
+        background: url('../pictures/terrain/ForestRock_basecolor.png');
+        border-radius: 50%;
+        height: 94%;
+        width: 94%;
+        z-index: 1;
+        position: absolute;
+    }
+    background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative; z-index: 1; display: flex; justify-content: center; align-items: center;}
 
 .char-view-lookout {
     height: 100%;
     width: 100%;
-    background: purple;
+    background: url('../pictures/terrain/tower3.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    
 }
 
 .char-view-platform {
-    background: khaki;
+    background: url('../pictures/terrain/platformRock.png');
+    background-size: 165%;
+    background-repeat: no-repeat;
+    background-position-y: 350%;
+    background-position-x: 58%;
     position: relative;
 }
 
@@ -147,9 +198,12 @@
 }
 
 .char-view-teleporter-1 {
-    background: url('../pictures/terrain/teleport.jpg');
-    background-size: 200%;
-    background-position: 100% 0;
+    background: url('../pictures/terrain/teleporter.png');
+    background-size: 135%;
+    background-position: center;
+
+    // background-size: 200%;
+    // background-position: 100% 0;
     position: relative;
 }
 
@@ -174,7 +228,7 @@
 }
 
 .char-view-hidden-door {
-    background: teal;
+    background: black;
     position: relative;
 }
 
@@ -184,6 +238,24 @@
     background: black;
     position: absolute;
     z-index: 101;
+}
+
+.char-view-exit-tile {
+    height: 100%;
+    width: 100%;
+    background: skyblue;
+}
+
+.char-view-exit {
+    height: 100%;
+    width: 100%;
+
+    background: url('../pictures/terrain/city-gate.png');
+    background-size: 116%;
+    background-repeat: no-repeat;
+    background-position: 100%;
+    background-position-x: 50%;
+    z-index: 1;
 }
 
 .char-view-gold-pile {
