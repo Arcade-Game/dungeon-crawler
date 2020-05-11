@@ -5,7 +5,8 @@ import { AiOutlineConsoleSql } from 'react-icons/ai';
 import {weapon} from './combatFns';
 import CombatStats from '../../CombatStats/CombatStats';
 import axios from 'axios';
-import {attackType, monAttack, charAttack, statSetupChar, statSetupMon} from './combatFns'
+import {attackType, monAttack, charAttack, statSetupChar, statSetupMon} from './combatFns';
+
 
 const CombatView = (props) => {
     const {monsterType, isFightFn, clearMonster, monsterCoor} = props,

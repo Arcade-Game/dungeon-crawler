@@ -74,11 +74,13 @@ console.log(props)
             {
                statsToggle === true ?
                <section className="stats-container">
-                  <div>Name: {hero.hero_name}</div>
-                  <div>Level: {hero.level}</div>
-                  <div>Health: {stats.health}</div>
-                  <div>Armor: {heroArmor}</div>
-                  <div>Damage: {heroAttack} - {heroAttack + stats.strength}</div>
+                  <div><span>Name:</span>{hero.hero_name}</div>
+                  <div className="stats-container-stats">
+                     <div><span>Level:</span>{hero.level}</div>
+                     <div><span>Health:</span>{stats.health}</div>
+                     <div><span>Armor:</span>{heroArmor}</div>
+                     <div><span>Damage:</span>{heroAttack} - {heroAttack + stats.strength}</div>
+                  </div>
                </section> : null
             }
             
