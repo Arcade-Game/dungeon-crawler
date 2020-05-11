@@ -62,24 +62,27 @@ const Inventory = (props) => {
 
       const mappedInventory = props.inventory.map((el, i) => {
          return el.item_type ? (
-            <div className="inventory-square"> <img key ={el.item_id} 
-                     id={i} 
-                     className="false"
-                     src={el.image} 
-                     draggable="true" 
-                     onDragStart={(event) => handleDrag(event)} 
-                     onDrag={(event) => event.preventDefault()} 
-                     width="82%" height="88%"
-                  /></div>)  : i < 8 ? <div className="inventory-square"></div> : null
+            <div className="inventory-square"> 
+               <img key ={el.item_id} 
+                        id={i} 
+                        className="false"
+                        src={el.image} 
+                        draggable="true" 
+                        onDragStart={(event) => handleDrag(event)} 
+                        onDrag={(event) => event.preventDefault()} 
+                        width="82%" height="88%"
+                     />
+            </div>)  : i < 8 ? <div className="inventory-square"></div> : null
          })
 
       console.log(props)
 
    return (
       <div>
-         {overlayToggle ? (<div className="overlay"
-                  onDrop={(event) => deleteItem(event)}
-                  onDragOver={(event) => event.preventDefault()}>DELETE</div>
+         {overlayToggle ? (
+            <div className="overlay"
+                     onDrop={(event) => deleteItem(event)}
+                     onDragOver={(event) => event.preventDefault()}>DELETE</div>
             ) : null
          }
       <div className="inventory-screen-container">
@@ -88,8 +91,7 @@ const Inventory = (props) => {
                <Equipment handleDrag = {handleDrag}
                                        equipItem = {equipItem}
                               />
-            </>
-            ) : null
+            </> ) : null
          }
          {inventoryToggle ? (
             <>

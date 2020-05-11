@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {connect} from "react-redux";
 import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai';
 import './Footer.scss';
+import {withRouter} from 'react-router-dom';
 
 const Footer = props => {
    const {inventory, stats, hero} = props
@@ -46,7 +47,7 @@ console.log(props)
          {
             menuToggle === true ? <div className="game-menu">
                <h3>Menu</h3>
-            <button className="return-to-town">Return to Town</button>
+            <button className="return-to-town" onClick={() => props.history.push('/town')}>Return to Town</button>
             <button className="return">Settings</button>
             <button className="return">Quests</button>
             <button className="return">Key</button>
@@ -88,8 +89,6 @@ console.log(props)
 }
 
 const MapStateToProps = reduxState => reduxState.hero
-export default connect(MapStateToProps)(Footer);
-
-
+export default withRouter(connect(MapStateToProps)(Footer));
 //AiFillHeart
 //AiOutlineHeart
