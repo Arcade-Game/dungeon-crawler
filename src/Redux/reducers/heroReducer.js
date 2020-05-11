@@ -87,7 +87,7 @@ export default function reducer (state = initialState, action) {
                    return state.equipment[5] = item
             }})
          return {...state, 
-            hero: {file_id: payload.file_id, hero_name: payload.hero_name, class_name: payload.class_name,gold: payload.gold}, 
+            hero: {file_id: payload.file_id, hero_name: payload.hero_name, class_name: payload.class_name, level: payload.level, gold: payload.gold}, 
             stats: {health: payload.health, attack: payload.attack, armor: payload.armor, strength: payload.strength, agility: payload.agility},
             equipment: [...state.equipment],
             inventory: 
@@ -106,7 +106,7 @@ export default function reducer (state = initialState, action) {
          if (index !== -1){
             return {...state, ...state.inventory[index] = payload}
          } 
-         
+
          case EQUIP_ITEM:
             state.inventory.splice(+payload.index, 1, 0)
             switch (payload.item.item_type){

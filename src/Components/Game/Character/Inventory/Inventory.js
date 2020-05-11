@@ -2,7 +2,6 @@ import React, {useState,useEffect} from "react";
 import {connect} from "react-redux";
 import {equipItem, unequipItem} from "../../../../Redux/reducers/heroReducer";
 import Equipment from "./Equipment";
-import axios from "axios";
 import "./Inventory.scss";
 import {GiTwoCoins} from 'react-icons/gi';
 
@@ -11,22 +10,6 @@ const Inventory = (props) => {
    const {equipmentToggle, inventoryToggle} = props
    const [currency, setCurrency] = useState(0),
              [overlayToggle, setOverlayToggle] = useState(false);
-
-const equArmor = Object.values(props.equipment)
-      const heroArmor = (+stats.armor) + (+equArmor.reduce((acc, el) => {
-         return acc += ((+el.armor) ? +el.armor : +0)}, 0));
-                 
-         
-         
-         
-         
-         const heroAttack = (+stats.attack) + (+equArmor.reduce((acc, el) => {
-            return acc += ((+el.attack) ? +el.attack : +0)}, 0));
-
-console.log (equArmor)
-console.log (typeof equipment)
-console.log (stats.armor)
-console.log(heroArmor)
 
    useEffect (() => {
 console.log("hit")
@@ -113,15 +96,7 @@ console.log(props.inventory)
       <div className="inventory-screen-container">
          {equipmentToggle ? (
             <>
-               <section className="stats-container">
-                  <div>Name: {hero.hero_name}</div>
-                  <div>Level: </div>
-                  <div>Health: {stats.health} </div>
-                  <div>Attack: {heroAttack}</div>
-                  <div>Armor: {heroArmor}</div>
-                  <div>Strength: {stats.strength}</div>
-                  <div>Agility: {stats.agility}</div>
-               </section>
+             
                <Equipment handleDrag = {handleDrag}
                                        equipItem = {equipItem}
                               />
