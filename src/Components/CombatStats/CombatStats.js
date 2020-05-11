@@ -47,7 +47,7 @@ const CombatStats = props => {
             </div>
          </div>
          <div className='monster-stats'>
-            <div className='title'>Monster Stats</div>
+            <div className='title'>{props.monsterType.charAt(0).toUpperCase() + props.monsterType.slice(1)} Stats</div>
             <div  className='stat-labels'>
                <div>
                   <p>Health: {mHealth} </p>
