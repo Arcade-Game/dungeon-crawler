@@ -2,15 +2,20 @@ import React, {useState, useEffect} from "react"
 import {connect} from "react-redux"
 const Equipment = (props) => {
    const {handleDrag, equipItem} = props;
-   const [weapon] = useState(props.equipment[0]),
-             [twoHand] = useState(props.equipment[1]),
-             [offHand] = useState(props.equipment[2]),
-             [armor] = useState(props.equipment[3]),
-             [helm] = useState(props.equipment[4]),
-             [boots] = useState(props.equipment[5]);
+   const [weapon, setWeapon] = useState(props.equipment[0]),
+             [twoHand, setTwoHandWeapon] = useState(props.equipment[1]),
+             [offHand, setOffHand] = useState(props.equipment[2]),
+             [armor, setArmor] = useState(props.equipment[3]),
+             [helm, setHelm] = useState(props.equipment[4]),
+             [boots, setBoots] = useState(props.equipment[5]);
 
       useEffect (() => {
-         console.log(props)
+         setWeapon(props.equipment[0])
+         setTwoHandWeapon(props.equipment[1])
+         setOffHand(props.equipment[2])
+         setArmor(props.equipment[3])
+         setHelm(props.equipment[4])
+         setBoots(props.equipment[5])
       },[props])
       console.log(props)
    return (

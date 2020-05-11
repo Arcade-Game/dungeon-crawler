@@ -4,36 +4,6 @@ const equipment = require("../../db/inventory/equipment.json");
 
 
 module.exports = {
-   deleteItem: (req, res) => { 
-      const {id} = req.params,
-                {equipped} = req.body;
-      console.log("id: ", id, "equ: ",equipped)
-      if (equipped === "true"){
-         console.log("delete true")
-         const index = equipment.findIndex(item => item.id ===+id);
-         // let zeroIndex = inventory.findIndex(e => e === 0)
-         const equipped = equipment[index]
-         equipped.id = null;
-         equipped.name = "";
-         equipped.damage = "" ;
-         equipped.armor = "";
-         equipped.image ="";
-         console.log(equipment)
-      } else  if (equipped === "false"){
-         console.log("delete false")
-         inventory.splice(id, 1, 0)
-         console.log(inventory)
-      } else {
-         console.log("DELETE ITEM ERROR")
-      }
-      // const equipped = equipment[index]
-      // equipped.id = null;
-      // equipped.name = "";
-      // equipped.damage = "" ;
-      // equipped.armor = "";
-      // equipped.image ="";
-      res.status(200).send({equipment, inventory});
-   },
    findItem: (req, res) => {
       let num = Math.floor(Math.random() * itemList.length)
       console.log("inventory1", inventory)

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import {connect} from "react-redux";
 import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai';
 import './Footer.scss';
 import {withRouter} from 'react-router-dom';
 
 const Footer = props => {
+   const {inventory, stats, hero} = props
    const [health, setHealth] = useState(0);
    const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
    const [totalHealth, setTotalHealth] = useState(5)
@@ -22,12 +24,21 @@ const Footer = props => {
    const handleMenuClick = () => {
       setMenuToggle(!menuToggle)
    }
-   
 
+   const equArr = Object.values(props.equipment)
+   const heroArmor = (+stats.armor) + (+equArr.reduce((acc, el) => {
+      return acc += ((el.armor) ? el.armor : 0)}, 0));
+
+   const heroAttack = (+stats.attack) + (+equArr.reduce((acc, el) => {
+         return acc += ((el.attack) ? el.attack : 0)}, 0));
+
+
+console.log(props)
    for (let i = 0; i < health; i++) {
       heartArr.splice(i, 1, 1)
    }
    let hearts = heartArr.map((e, i) => (e === 0) ? <AiFillHeart key={i} color={'red'} size={'40px'} /> :   <AiOutlineHeart key={i} color={'red'} size={'40px'}/> )
+
    return (
       <>
       <div className="footer-top" onClick={handleMenuClick}>
@@ -63,11 +74,11 @@ const Footer = props => {
             {
                statsToggle === true ?
                <section className="stats-container">
-                  <div>Name: </div>
-                  <div>Level: </div>
-                  <div>Health: </div>
-                  <div>Armor: </div>
-                  <div>Damage: </div>
+                  <div>Name: {hero.hero_name}</div>
+                  <div>Level: {hero.level}</div>
+                  <div>Health: {stats.health}</div>
+                  <div>Armor: {heroArmor}</div>
+                  <div>Damage: {heroAttack} - {heroAttack + stats.strength}</div>
                </section> : null
             }
             
@@ -77,6 +88,7 @@ const Footer = props => {
    )
 }
 
-export default withRouter(Footer);
+const MapStateToProps = reduxState => reduxState.hero
+export default withRouter(connect(MapStateToProps)(Footer));
 //AiFillHeart
 //AiOutlineHeart
