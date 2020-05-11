@@ -10,6 +10,7 @@ import Inn from "./Inn/Inn";
 import "./Town.scss"
 import axios from "axios";
 const Town = (props) => {
+   const {hero} = props.hero
    const [overlayToggle, setOverlayToggle] = useState(false),
              [toggleType, setToggleType] = useState();
 
@@ -21,10 +22,10 @@ const Town = (props) => {
              newHero = "newHero",
              inn = "inn";
    
-   // useEffect( () => {
-
-   // },[])
-
+   useEffect( () => {
+      getHeroes()
+   },[])
+   
    const setToggle = (toggleType) => {
       setToggleType(toggleType)
       setOverlayToggle(true);
@@ -36,11 +37,15 @@ const Town = (props) => {
    },
 
    getHeroes = () => {
+      // if (props.heroes){
       const {player_id} = props.auth
       axios.get(`api/heroes/player/${player_id}`).then(res => {
          console.log(res.data)
          props.setHeroList(res.data)
       })
+   // } else {
+   //    console.log("exists")
+   // }
    },
 
    stopPropagation = (event) => {
@@ -64,7 +69,8 @@ const Town = (props) => {
             resetToggle = {resetToggle}
             /> : null }
             {toggleType === newHero ? <NewHero stopPropagation = {stopPropagation}/> : null }
-            {toggleType === inn ? <Inn stopPropagation = {stopPropagation}/> : null }
+            {toggleType === inn ? <Inn stopPropagation = {stopPropagation}
+            hero = {props.hero}/> : null }
              </div> ) : null
          }
             
@@ -85,23 +91,25 @@ const Town = (props) => {
                <p className="town-leader-board">Leader Board</p>
          </div>
          <div className="town-select-hero-container"
-                 onClick={() => {setToggle(heroes)
-                 getHeroes()
-                 }}>
+                 onClick={() => {setToggle(heroes)}}>
                <p className="town-select-hero">Heroes</p>
          </div>
-         {props.hero ? (
+         {hero ? (
+            <>
             <div className="hero-selected"
             onClick={() => {setToggle(heroes)}}>
-               <h2>{props.hero.hero_name}</h2>
-               <h2>{props.hero.class_name}</h2>
-               <h2>Level: {props.hero.level}</h2> 
+               <h2>{hero.hero_name}</h2>
+               <h2>{hero.class_name}</h2>
+               <h2>Deaths: X</h2>
+               <h2>Gold: {hero.gold}</h2> 
             </div>
-         ): null}
+         
          <div className="play-game-container">
                <p className="play-game"
                onClick={()=> props.history.push(`/game`)}> {`< Play >`} </p>
          </div>
+         </>
+         ): null}
             {/* <div className="minstrel1"></div>
             <div className="minstrel2"></div>
             <div className="minstrel3"></div>

@@ -1,4 +1,6 @@
 @import "../../modules/mixins";
+@import "../../modules/variables";
+
 .town-map{
    background-image: url(https://i.redd.it/9juo9zg2k7541.jpg);
    background-size: 100% 110%;
@@ -175,7 +177,7 @@
       color: black;
    }
    .play-game:hover{
-      color: rgb(190, 0, 0);
+      color: $pal-seven;
    }
  .copyright {
     position: fixed;
@@ -185,19 +187,21 @@
  }
    .hero-selected{
       position: fixed;
-      @include row;;
-      bottom: 3vh;
+      @include row;
+      bottom: 4vh;
       left:3vw;
       z-index:2;
-      height:8vh;
-      width: 30vw;
-      background-color: rgb(155, 44, 44);
+      height:6vh;
+      width: 35vw;
+      border: 4px solid $pal-six;
+      background-color: $pal-seven;
+      box-shadow: 10px 10px 20px black;
       border-radius: 5px;
 
    }
    .hero-selected:hover{
-      border: 2px solid rgb(155, 44, 44);
-      background-color: rgb(105, 25, 25);
+      border: 4px solid $pal-eight;
+      background-color: $pal-six;
       color:white;
    }
  .town-overlay {
