@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
+import {selectHero} from "../../../Redux/reducers/heroReducer";
 import "./Heroes.scss";
 import axios from "axios";
 const NewHeros = (props) => {
    const [classToggle, setClassToggle] = useState("Warrior"),
              [genderToggle, setGenderToggle] = useState("Male"),
-             [charName, setCharName] = useState("Jon");
+             [heroName, setHeroName] = useState("Jon");
 
    const  Warrior = "Warrior",
                Ranger = "Ranger",
@@ -14,12 +15,31 @@ const NewHeros = (props) => {
                Male = "Male",
                Female = "Female";
 
-   // const createHero = () => {
-   //    const {player_id} = 
-   //    axios.post(`/api/hero/player/${id}`)
-   // }
+   const createHero = () => {
+      const {player_id} = props.auth
+      let class_id = null
+         switch (classToggle){
+            case Warrior:
+              class_id = 1;
+              break;
+            case Ranger:
+               class_id = 2;
+               break;
+            case Rogue:
+               class_id = 3;
+               break;
+         }
+         console.log("player: ", player_id)
+         console.log("class: ", class_id)
+         console.log("hero: ", heroName)
+      axios.post("/api/heroes", {player_id, heroName, class_id}).then(res => {
+            console.log(res.data)
+         props.selectHero(res.data[0])
+         props.history.push("/game")
+      })
+   }
 
-   const getCharImage = () => {
+   const getHeroImage = () => {
       console.log(classToggle, genderToggle)
          switch (classToggle+genderToggle){
             case (Warrior+Male):
@@ -34,10 +54,10 @@ const NewHeros = (props) => {
                   return "https://i.pinimg.com/originals/4d/9d/47/4d9d47202f9bcfacfc3982fe65d2eea1.png" // Fantasy Pics Inc Pinterest
                case (Rogue+Female):
                   return "https://i.pinimg.com/originals/27/f3/4e/27f34ee5490f6ee9bfcffeb7497fe6c6.jpg" // ArtStation Pinterest
-               
-
          }
    }
+
+   console.log(props)
    return (
       <div className="new-hero-screen-container"
               onClick={(event)=> props.stopPropagation(event)}> 
@@ -79,28 +99,28 @@ const NewHeros = (props) => {
                   </div>
                   <div className="char-image-container">
                     <img className="char-image" 
-                              src={getCharImage()} height="450px"/>
+                              src={getHeroImage()} height="450px"/>
                   </div>
 
                </div>
-               <h3 className="new-hero-name-input">Name: <input placeholder="Name" value={charName} onChange={(event) => setCharName(event.target.value)} /></h3> 
+               <h3 className="new-hero-name-input">Name: <input placeholder="Name" value={heroName} onChange={(event) => setHeroName(event.target.value)} /></h3> 
                </div>
             <div className="new-hero-info-container" >
                <div>
 
-            <h1 className="new-hero-name"> {charName}</h1>
+            <h1 className="new-hero-name"> {heroName}</h1>
             <h3 className="new-hero-class">Level 1 {classToggle}</h3>
             <div className="new-hero-stats-container">
-            <h3 className="new-hero-stats">Health: <h3>100</h3></h3>
-            <h3 className="new-hero-stats">Strength:<h3>4</h3></h3>
-            <h3 className="new-hero-stats">Agility:<h3>1</h3></h3>
-            <h3 className="new-hero-stats">Armor:<h3>1</h3></h3>
-            <h3 className="new-hero-stats">Other:<h3>unknown</h3></h3>
-            <h3 className="new-hero-stats">Other:<h3>unknown</h3></h3>
+            <div className="new-hero-stats">Health: <h3>100</h3></div>
+            <div className="new-hero-stats">Strength:<h3>4</h3></div>
+            <div className="new-hero-stats">Agility:<h3>1</h3></div>
+            <div className="new-hero-stats">Armor:<h3>1</h3></div>
+            <div className="new-hero-stats">Other:<h3>unknown</h3></div>
+            <div className="new-hero-stats">Other:<h3>unknown</h3></div>
                </div>
             </div>
             <button className="create-hero"
-                           onClick={()=> props.history.push(`/game`)}> Begin</button>
+                           onClick={()=> createHero()}> Begin</button>
                 </div>
                
          </div>
@@ -108,4 +128,4 @@ const NewHeros = (props) => {
    )
 }
 const mapStateToProps = reduxState => reduxState
-export default withRouter(connect(mapStateToProps)(NewHeros));
+export default withRouter(connect(mapStateToProps, {selectHero})(NewHeros));
