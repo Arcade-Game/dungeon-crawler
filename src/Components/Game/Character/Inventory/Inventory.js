@@ -119,13 +119,13 @@ const mappedInventory = inventory.map((el, i) => {
       <div className="inventory-screen-container">
          {equipmentToggle ? (
             <>
-               <section className="stats-container">
+               {/* <section className="stats-container">
                   <div>Name: </div>
                   <div>Level: </div>
                   <div>Health: </div>
                   <div>Armor: </div>
                   <div>Damage: </div>
-               </section>
+               </section> */}
                <Equipment  offHand = {offHand}
                                        armor = {armor}
                                        weapon = {weapon}

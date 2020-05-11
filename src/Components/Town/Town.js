@@ -9,6 +9,8 @@ import NewHero from "./Heroes/NewHero";
 import Inn from "./Inn/Inn";
 import "./Town.scss"
 import axios from "axios";
+import {townMusic} from './townMusic';
+
 const Town = (props) => {
    const [overlayToggle, setOverlayToggle] = useState(false),
              [toggleType, setToggleType] = useState();
@@ -49,9 +51,11 @@ const Town = (props) => {
    }
 
    console.log(props)
+   let musicNumber = Math.floor(Math.random() * townMusic.length)
+   console.log('musicNumber', musicNumber)
    return (
       <div className="town-map">
-      <audio src={require("../../music/Soliloquy.mp3")} autoPlay />
+      <audio src={`${townMusic[musicNumber]}`} autoPlay />
          {overlayToggle ? (
             <div className="town-overlay" 
                      onClick={()=>{resetToggle()}}>
