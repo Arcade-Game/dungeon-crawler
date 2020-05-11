@@ -11,7 +11,7 @@ const Equipment = (props) => {
 
       useEffect (() => {
          console.log(props)
-      },[])
+      },[props])
       console.log(props)
    return (
 <section className="equipment-container">

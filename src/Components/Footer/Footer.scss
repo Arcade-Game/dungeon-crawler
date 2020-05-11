@@ -1,64 +1,181 @@
 @import "../../modules/mixins";
+@import "../../modules/variables.scss";
 
-.footer {
-    border: 1px solid red;
-    width: 90%;
+
+.footer-left {
+    border-radius: 0px 100px 0px 0px;
+    background: $menus;
+    border: 4px solid black;
+    width: 30%;
     height: 12%;
     position: absolute;
     bottom: 2%;
+    left: 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // padding-left: 25px;
-    // padding-right: 50px;
     cursor: url('../pictures/cursors/Mouse09standart-resize.png'), auto;
 }
 
-.character-menu-container{
-    @include row;
-    border: 1px solid green;
-    height: 100%;
+.footer-right {
+    border-radius: 100px 0px 0px 0px;
+    background: $menus;
+    border: 4px solid black;
     width: 30%;
-    
-    .character-icon {
+    height: 12%;
+    position: absolute;
+    bottom: 2%;
+    right: 5%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: url('../pictures/cursors/Mouse09standart-resize.png'), auto;
+}
+
+
+
+.inventory-icon-container {
+    position: absolute;
+    bottom: 11px;
+    left: 11px;
+    height: 160px;
+    width: 160px;
+    border: 6px solid black;
+    border-radius: 50%;
+    background: green;
+
+    .inventory-icon {
         // border: 1px solid green;
         height: 100%;
-        width: 40%;
-        cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
-
-
-    }
-    .inventory-icon {
-        border: 1px solid green;
-        height: 100%;
-        width: 25%;
+        width: 100%;
         background: url('../pictures/items/backpack.png');
         background-position-y: 50%;
         background-position-x: 50%;
-        background-size: 90%;
+        background-size: 140%;
         background-repeat: no-repeat;
         cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
         &:hover {
             opacity: 90%;
         }
+    } 
+    
 
-    }  
 }
-.menu-button {
+
+.character-icon-container{
+
+    height: 100%;
+    width: 30%;
+    height: 110px;
+    width: 110px;
+    bottom: 11px;
+    position: absolute; 
+    left: 182px;
+    background: blue;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid black;
+}
+
+.character-icon {
+    background: url('../pictures/items/warrior-clipart-icon-transparent.png');
+    background-position: top;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
+}
+
+.footer-top {
+    position: absolute;
+    top: 2%;
+    left: 4%;
+    height: 80px;
+    width: 80px;
+    background: $menus;
+    border: 4px solid black;
+    font-family: 'Bilbo Swash Caps', cursive;
+    font-size: 30px;
+    display: flex;
+    padding: 5px;
+    border-bottom-right-radius: 30px;
+    cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
+    z-index: 1;
+}
+
+.game-menu {
+    font-family: 'Playball', cursive;
+    position: absolute;
+    height: 330px;
+    width: 230px;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    top: 66px;
+    left: calc(80px + 2%);
+    background: blue;
+    padding: 10px;
+    border-radius: 0 20px 0 20px;
+    button {
+        cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
+        border: none;
+        background: transparent;
+        font-size: 17px;
+        font-weight: 800px;
+        height: 40px;
+        width: 90%;
+        border: 2px solid black;
+
+    }
+}
+
+.menu-button { 
     @include row;
     border: 1px solid green;
     height: 100%;
     width: 20%;
     cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
-
-
-
+    z-index: 1;
 }
+
+
 .health-bar {
-    @include row;
+    position: absolute;
+    right: 11px;
+    bottom: 11px;
+    height: 160px;
+    width: 160px;
     justify-content: center;
-    border: 1px solid green;
-    height: 100%;
-    width: 30%;
+    border: 5px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(58, 57, 57);
+    cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
 }
+
+
+.stats-container{
+    @include column;
+    position: absolute;
+    right: 5%;
+    bottom: 180px;
+    font-weight: 800px;
+    font-size: 17px;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-top: 15px;
+    height: 150px;
+    width:  250px;
+    background-color: rgb(54, 54, 54);
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 4px solid black;
+
+ }
 

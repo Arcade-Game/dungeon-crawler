@@ -13,8 +13,15 @@ const Inventory = (props) => {
              [overlayToggle, setOverlayToggle] = useState(false);
 
 const equArmor = Object.values(props.equipment)
-      const heroArmor = (+stats.armor) + (+equArmor.reduce((acc, el) => acc += (el.armor) ? +el.armor : +0)),
-                 heroAttack = (stats.attack) + (props.equipment.map(el => el.attack));
+      const heroArmor = (+stats.armor) + (+equArmor.reduce((acc, el) => {
+         return acc += ((+el.armor) ? +el.armor : +0)}, 0));
+                 
+         
+         
+         
+         
+         const heroAttack = (+stats.attack) + (+equArmor.reduce((acc, el) => {
+            return acc += ((+el.attack) ? +el.attack : +0)}, 0));
 
 console.log (equArmor)
 console.log (typeof equipment)
@@ -23,7 +30,7 @@ console.log(heroArmor)
 
    useEffect (() => {
 console.log("hit")
-   },[])
+   },[props])
 
    useEffect (() => {
       
