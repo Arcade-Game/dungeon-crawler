@@ -47,14 +47,15 @@ create table save_files (
 
 create table items (
    item_id serial primary key,
+   item_type VARCHAR(50),
    item_name VARCHAR(50),
    attack INT NOT NULL,
    armor integer not null,
    image text
 );
 
-      INSERT INTO items (item_name, attack, armor, image)
-         VALUES ('Mail Curass', 0, 4, 'https://cdn.clipart.email/41df5b4f6c69ce452ca2b60cadf62840_chest-plate-armor-png-clipart-763252-pikpng_840-728.jpeg' );
+      INSERT INTO items (item_name, item_type, attack, armor, image)
+         VALUES ('Mail Curass', 'armor' ,0, 4, 'https://cdn.clipart.email/41df5b4f6c69ce452ca2b60cadf62840_chest-plate-armor-png-clipart-763252-pikpng_840-728.jpeg' );
 
 
 create table equipped_items (

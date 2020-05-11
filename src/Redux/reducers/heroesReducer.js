@@ -12,7 +12,7 @@
       switch(type){
 
          case SET_HERO_LIST: 
-         return {...state, heroList: payload};
+         return {...state, ...payload};
          
          default:
             return state;
