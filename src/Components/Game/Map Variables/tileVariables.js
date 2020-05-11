@@ -12,8 +12,6 @@ export const tileVariables = {
     w: {type: "water", elevation: 0},
     Q: {type: "quicksand", elevation: 0},
     F: {type: "lava", elevation: 0},
-    hd: {type: "hiddenDoor", elevation: 0},
-    lt: {type: "lookout", elevation: 0},
     uT: {type: "uneven", elevation: 0},
     MI: {type: "empty", mist: true, elevation: 0},
     h: {type: "empty", hidden: true, elevation: 0},
@@ -72,10 +70,22 @@ export const monsters = {
 }
 
 
-export const questItems = {
-    k1: {type: "empty", elevation: 0, level: 1, item: "quest-key", door: []},
-    k2: {type: "empty", elevation: 1, level: 1, item: "quest-key", door: []},
-    k3: {type: "empty", elevation: 3, level: 1, item: "quest-key", door: []},
-    k4: {type: "empty", elevation: 0, level: 1, item: "quest-key", door: []},
-    k5: {type: "empty", elevation: 0, level: 1, item: "quest-key", door: []},
+export const keys = {
+    k1: {type: "empty", elevation: 0, level: 1, itemObject: "quest-key", name: "Bronze Key", code: "k1"},
+    k2: {type: "platform", elevation: 1, level: 1, itemObject: "quest-key", door: []},
+    k3: {type: "cliff", elevation: 3, level: 1, itemObject: "quest-key", door: []},
+    // k4: {type: "empty", elevation: 0, level: 1, item: "quest-key", door: []},
+    // k5: {type: "empty", elevation: 0, level: 1, item: "quest-key", door: []},
+}
+
+export const doors = {
+    d1: {type: "locked-door", elevation: 0, key: "k1"}
+}
+
+export const visionTiles = {
+    lt: {type: "lookout", elevation: 0},
+    lT: {type: "lookout", elevation: 1},
+    LT: {type: "lookout", elevation: 3},
+    HT: {type: "lookout-hidden-door", elevation: 0, area: []},
+    hd: {type: "hidden-door", elevation: 0},
 }
