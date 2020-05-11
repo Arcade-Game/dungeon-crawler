@@ -107,7 +107,7 @@ export default function reducer (state = initialState, action) {
             return {...state, ...state.inventory[index] = payload}
          } 
 
-         case EQUIP_ITEM:
+      case EQUIP_ITEM:
             state.inventory.splice(+payload.index, 1, 0)
             switch (payload.item.item_type){
                case weapon:
@@ -136,7 +136,7 @@ export default function reducer (state = initialState, action) {
                         inventory: [...state.inventory]
                }
 
-         case UNEQUIP_ITEM:
+      case UNEQUIP_ITEM:
             const equIndex = state.equipment.findIndex(item => item.item_id === +payload);
             const invIndex = state.inventory.findIndex(e => e === 0)
                state.inventory.splice(invIndex, 1, state.equipment[equIndex])
@@ -148,7 +148,7 @@ export default function reducer (state = initialState, action) {
             inventory: [...state.inventory]}
 
 
-            case DELETE_ITEM:
+         case DELETE_ITEM:
                if (payload.id) {
                state.inventory.splice(+payload.index, 1, 0)
                } else {
@@ -173,8 +173,7 @@ export default function reducer (state = initialState, action) {
                       break;
                }
             }
-            return {
-               hero: {...state.hero},
+            return {hero: {...state.hero},
                         stats: {...state.stats},
                         equipment: [...state.equipment],
                         inventory: [...state.inventory]
