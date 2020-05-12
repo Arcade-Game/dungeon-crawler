@@ -87,7 +87,8 @@ const Game = (props) => {
         pushObstacle(charX, charY+1, charX, charY+2, charX, charY, setCharX, setCharY, grid, getType, setGrid)
       } else {checkTile(charX, charY+1)}
       
-    } else if(keyCode ===  66){
+    } 
+    else if(keyCode ===  66){
       inventoryToggleFn()
     } else if(keyCode === 72){
       equipmentToggleFn()
@@ -478,14 +479,17 @@ const Game = (props) => {
         }
         {/* <div className="coin-icon"></div> */}
         <Footer 
+          newMoney={newMoney}
           setEquipmentToggle={equipmentToggleFn}
           setInventoryToggle={inventoryToggleFn}
+          equipmentToggle={equipmentToggle}
+          inventoryToggle={inventoryToggle}
         />
-        <Inventory 
+        {/* <Inventory 
           equipmentToggle={equipmentToggle}
           inventoryToggle={inventoryToggle}
           newMoney={newMoney}
-        />
+        /> */}
       </div>
     </div>
   );
