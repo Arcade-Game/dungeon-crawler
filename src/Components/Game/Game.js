@@ -19,12 +19,12 @@ import {puzzles, levelOne} from './Map Variables/puzzles';
 
 const Game = (props) => {
   // const {mapArray, mapX, mapY} = mapObject
-  const {mapArray, mapX, mapY} = tutorial
-  // const {mapArray, mapX, mapY} = levelOne
+  // const {mapArray, mapX, mapY} = tutorial
+  const {mapArray, mapX, mapY} = levelOne
 
   const [grid, setGrid] = useState([...mapArray]),
     [charX, setCharX] = useState(mapX),
-    [charY, setCharY] = useState(mapY),
+    [charY, setCharY] = useState(mapArray.length - 11),
     [heightWidth, setHeightWidth] = useState(650),
     [viewRowCols, setViewRowCols] = useState(9),
     [inventoryToggle, setInventoryToggle] = useState(false),
@@ -411,24 +411,17 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
-  const stats = ()=> {
-    const arr = []
-    axios.get(`/api/character-stats/${'rogue'}`)
-    .then((res) => {
-      setCharacterStats(res.data)
-      arr.push(res.data)
-      })
-    .catch(err => console.log(err))
-    
-    
-      axios.get(`/api/monster-stats/${monsterType}`)
-    .then((res) => {
-        setMonsterStats(res.data)
-        arr.push(res.data)
-    })
-    .catch(err => console.log(err))
-    return arr
-  }
+  // const stats = async()=> {
+  //   const arr = {}
+  //   await axios.get(`/api/monster-stats/${monsterType}`)
+  //   .then((res) => {
+  //       setMonsterStats(res.data)
+  //       arr = res.data
+  //   })
+  //   .catch(err => console.log(err))
+  //   console.log(arr)
+  //   return arr
+  // }
 
   const die = ()  => {
     props.history.push('/death')
@@ -456,7 +449,7 @@ const Game = (props) => {
           <CombatView 
             monsterType={monsterType.toLowerCase()}
             toggleFight = {setIsFight}
-            getStats={stats}
+            // getStats={stats}
             isFightFn={setIsFight}
             setGridFn = {setGrid}
             clearMonster = {clearMonster}

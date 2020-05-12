@@ -42,7 +42,7 @@ export function attackType (weapon) {
         return arr = ['Stab', 'Slash', 'Lunge']
      case 'Steel Shortsword':
         return arr = ['Stab', 'Slash', 'Lunge']
-     case 'Iron Dagger':
+     case 'Stone Dagger':
         return arr = ['Stab', 'Slash', 'Lunge']
      case 'Spear':
         return arr = ['Stab', 'Lunge']
