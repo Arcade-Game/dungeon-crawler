@@ -35,15 +35,15 @@ const Game = (props) => {
     [isFight, setIsFight] = useState(false),
     [monsterType, setMonsterType] = useState(''),
     [monsterStats, setMonsterStats] = useState({}),
-    [characterStats, setCharacterStats] = useState({}),
+    [characterHealth, setCharacterHealth] = useState(0),
     [monsterCoor, setMonsterCoor] = useState([0,0]),
-    [health, setHealth] = useState(100),
     [level, setLevel] = useState(1),
     [quicksandCounter, setQuicksandCounter] = useState(0),
     [lavaRockCounter, setLavaRockCounter] = useState([{}])
     
 
     useEffect(() => {
+      setCharacterHealth(props.stats.health)
       let newGrid = [...grid]
       newGrid.forEach((e,i,a) => i > 8 && i < a.length-8 ? e.forEach((f,j,z) => {
         return (j > 8 && j < z.length-8 ? (newGrid[i][j].type === 'monster' ? getMonster(j, i) : null) : null)
@@ -468,6 +468,8 @@ const Game = (props) => {
             setGridFn = {setGrid}
             clearMonster = {clearMonster}
             monsterCoor = {monsterCoor}
+            characterHealth = {characterHealth}
+            setCharacterHealthFn = {setCharacterHealth}
           /> : null
         }
         {/* <div className="coin-icon"></div> */}
@@ -477,6 +479,7 @@ const Game = (props) => {
           setInventoryToggle={inventoryToggleFn}
           equipmentToggle={equipmentToggle}
           inventoryToggle={inventoryToggle}
+          characterHealth = {characterHealth}
         />
         {/* <Inventory 
           equipmentToggle={equipmentToggle}
