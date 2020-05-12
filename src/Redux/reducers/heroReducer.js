@@ -49,10 +49,10 @@ export const equipItem = (item, index) => {
       }
    }
 
-   export const deleteItem = (type, index) => {
+   export const deleteItem = (data, equipped) => {
       return {
          type: DELETE_ITEM,
-         payload: {type, index}
+         payload: {data, equipped}
       }
    }
 
@@ -144,12 +144,11 @@ export default function reducer (state = initialState, action) {
             equipment: [...state.equipment], 
             inventory: [...state.inventory]}
 
-
          case DELETE_ITEM:
-               if (payload.id) {
-               state.inventory.splice(+payload.index, 1, 0)
+               if (payload.equipped === "false") {
+               state.inventory.splice(+payload.data, 1, 0)
                } else {
-            switch (payload.type){
+            switch (payload.data){
                case weapon:
                   state.equipment[0] = {type: "weapon"};
                   break;

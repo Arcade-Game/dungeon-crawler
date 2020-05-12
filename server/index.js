@@ -40,7 +40,6 @@ app.post("/api/auth/logout", authCtrl.logout);
 
 //item endpoints
 app.get("/api/item", itemCtrl.findItem);
-// app.put("/api/inventory/item/:id", itemCtrl.deleteItem)
 app.post("/api/item/:id", itemCtrl.findItem);
 app.get('/api/equipped-items/:weapon', itemCtrl.equippedItems);
 app.get('/api/key', itemCtrl.findKey);
