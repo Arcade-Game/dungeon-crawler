@@ -6,8 +6,6 @@ import Map from './Map';
 import {mapObject} from './Map Variables/mapObjects';
 import Footer from '../Footer/Footer';
 import axios from 'axios';
-import Inventory from './Character/Inventory/Inventory';
-import Equipment from "./Character/Inventory/Equipment";
 import MiniMap from './MiniMap';
 import CombatView from './CombatView/CombatView';
 import CombatStats from '../CombatStats/CombatStats';
@@ -43,12 +41,15 @@ const Game = (props) => {
     [level, setLevel] = useState(1),
     [quicksandCounter, setQuicksandCounter] = useState(0),
     [lavaRockCounter, setLavaRockCounter] = useState([{}]),
-    [XPforLevel, setXPforLevel] = useState()
+    [XPforLevel, setXPforLevel] = useState(),
+    [hero, setHero] = useState(props.hero),
+    [heroStats, setHeroStats] = useState(props.stats),
+    [equipment, setEquipment] = useState(props.equipment),
+    [inventory, setInventory] = useState(props.inventory);
+
 
     let coinFade = useRef('');
     let newXP = useRef('');
-
-  const {stats} = props;
     
     useEffect(() => {
       let needXP = ((level*100)+((level-1)*.5))
@@ -57,7 +58,7 @@ const Game = (props) => {
     }, [experience, level])
 
     useEffect(() => {
-      setCharacterHealth(props.stats.health)
+      setCharacterHealth(heroStats.health)
       let newGrid = [...grid]
       newGrid.forEach((e,i,a) => i > 8 && i < a.length-8 ? e.forEach((f,j,z) => {
         return (j > 8 && j < z.length-8 ? (newGrid[i][j].type === 'monster' ? getMonster(j, i) : null) : null)
@@ -520,7 +521,7 @@ const Game = (props) => {
     props.history.push('/death')
   }
   // console.log("music", dungeonMusic[musicNumber])s
-  // console.log('PROPS', props)
+
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
       <audio src={`${dungeonMusic[musicNumber]}`} autoPlay />
