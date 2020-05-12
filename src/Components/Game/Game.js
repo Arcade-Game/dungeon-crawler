@@ -19,15 +19,16 @@ import {puzzles, levelOne} from './Map Variables/puzzles';
 import {connect} from 'react-redux';
 import { updateInventory } from '../../Redux/reducers/heroReducer';
 import {TweenMax, Power3} from 'gsap';
+// import {setHonor, setLevel} from '../../Redux/reducers/titlesReducer';
 
 const Game = (props) => {
   // const {mapArray, mapX, mapY} = mapObject
-  // const {mapArray, mapX, mapY} = tutorial
-  const {mapArray, mapX, mapY} = levelOne
+  const {mapArray, mapX, mapY} = tutorial
+  // const {mapArray, mapX, mapY} = levelOne
 
   const [grid, setGrid] = useState([...mapArray]),
     [charX, setCharX] = useState(mapX),
-    [charY, setCharY] = useState(mapArray.length-11),
+    [charY, setCharY] = useState(mapY),
     [heightWidth, setHeightWidth] = useState(650),
     [viewRowCols, setViewRowCols] = useState(9),
     [inventoryToggle, setInventoryToggle] = useState(false),
@@ -145,6 +146,7 @@ const Game = (props) => {
           break;
         case "exit":
           setQuicksandCounter(0)
+          updateExperience(x,y,"complete")
           setCharX(x)
           setCharY(y)
           setGrid([...mapArray])
@@ -398,7 +400,15 @@ const Game = (props) => {
           xpVar = experience+15 - XPforLevel
           setExperience(xpVar)
           updateLevel(x,y)
-        }
+        } else {setExperience(experience+15)}
+      break;
+      case "complete":
+        if(experience + 50 > xpVar){
+          xpVar = experience+50 - XPforLevel
+          setExperience(xpVar)
+          updateLevel(x,y)
+        } else {setExperience(experience + 50)}
+      break;
     }
 
     // if(experience + (20 * (level - grid[y][x].level)) >= XPforLevel){
@@ -560,4 +570,4 @@ const Game = (props) => {
   );
 }
 const mapStateToProps = reduxState => reduxState.hero
-export default withRouter(connect(mapStateToProps, {updateInventory})(Game));
+export default withRouter(connect(mapStateToProps, {updateInventory}, )(Game));
