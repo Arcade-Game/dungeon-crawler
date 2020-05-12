@@ -122,7 +122,8 @@
 
 .menu-x-button {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    background: url('../pictures/menus/papyrus.jpg');
+    // background: url('../pictures/menus/papyrus.jpg');
+    background: $inventory;
     height: 25px;
     width: 25px;
     border: 3px solid black;
@@ -220,13 +221,13 @@
     position: absolute;
     right: -4px;
     // bottom: 160px;
-    bottom: 85px;
+    bottom: 100%;
     font-weight: 800px;
     font-size: 17px;
     // justify-content: flex-end;
     // align-items: flex-start;
     // margin-top: 15px;
-    height: 265px;
+    height: 270px;
     width:  250px;
     background-color: $inventory;
     border-radius: 10px 10px 0 0;
@@ -244,6 +245,7 @@
     background: $pal-three;
     padding: 8px;
     border-radius: 5px;
+    border: 3px solid black;
     div {
             display: flex;
             justify-content: space-between;

@@ -28,7 +28,7 @@ const Heroes = (props) => {
               onClick={(event)=> props.stopPropagation(event)}> 
               <h1> Your Characters </h1>
       <div className="hero-summary-container">
-         {heroes[0].map((hero, index) => {
+         {heroes[0] ? heroes[0].map((hero, index) => {
             return <Hero  key = {index}
                                     hero = {hero}
                                     index = {index}
@@ -37,11 +37,14 @@ const Heroes = (props) => {
                                     resetToggle = {props.resetToggle}
                                     expand = {expand}
                                     />
-            })
+            }) : null
          }
       </div>
-      {(heroes[0].length < 8) ? (<button className="create-hero" onClick={() => props.setToggle(newHero)}>New Hero</button>
-      ) : (<button className="create-hero" disabled>New Hero</button>)}
+      {
+         heroes[0] ?
+      (heroes[0].length < 8) ? (<button className="create-hero" onClick={() => props.setToggle(newHero)}>New Hero</button>
+      ) : (<button className="create-hero" disabled>New Hero</button>) : <button className="create-hero" onClick={() => props.setToggle(newHero)}>New Hero</button>
+      }
       </div>
    )
 }
