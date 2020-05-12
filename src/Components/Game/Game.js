@@ -518,6 +518,7 @@ const Game = (props) => {
 
   const die = ()  => {
     props.history.push('/death')
+
   }
   // console.log("music", dungeonMusic[musicNumber])s
   // console.log('PROPS', props)
@@ -572,4 +573,4 @@ const Game = (props) => {
   );
 }
 const mapStateToProps = reduxState => reduxState.hero
-export default withRouter(connect(mapStateToProps, {updateInventory}, )(Game));
+export default withRouter(connect(mapStateToProps, {updateInventory, deathCounter})(Game));
