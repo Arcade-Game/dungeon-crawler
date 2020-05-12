@@ -425,24 +425,17 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
-  const stats = ()=> {
-    const arr = []
-    axios.get(`/api/character-stats/${'rogue'}`)
-    .then((res) => {
-      setCharacterStats(res.data)
-      arr.push(res.data)
-      })
-    .catch(err => console.log(err))
-    
-    
-      axios.get(`/api/monster-stats/${monsterType}`)
-    .then((res) => {
-        setMonsterStats(res.data)
-        arr.push(res.data)
-    })
-    .catch(err => console.log(err))
-    return arr
-  }
+  // const stats = async()=> {
+  //   const arr = {}
+  //   await axios.get(`/api/monster-stats/${monsterType}`)
+  //   .then((res) => {
+  //       setMonsterStats(res.data)
+  //       arr = res.data
+  //   })
+  //   .catch(err => console.log(err))
+  //   console.log(arr)
+  //   return arr
+  // }
 
   const die = ()  => {
     props.history.push('/death')
@@ -470,7 +463,7 @@ const Game = (props) => {
           <CombatView 
             monsterType={monsterType.toLowerCase()}
             toggleFight = {setIsFight}
-            getStats={stats}
+            // getStats={stats}
             isFightFn={setIsFight}
             setGridFn = {setGrid}
             clearMonster = {clearMonster}

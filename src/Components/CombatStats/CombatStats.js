@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './CombatStats.scss'
-import axios from 'axios';
+import {connect} from 'react-redux';
 
 
 const CombatStats = props => {
@@ -14,24 +14,25 @@ const CombatStats = props => {
    const [mArmor, setMArmor] = useState(0);
    const [mAgility, setMAgility] = useState(0);
    const [mStrength, setMStrength] = useState(0);
-   const {stats, characterHealth, monsterHealth} = props;
+   const {stats, monsterHealth, monsterStats, characterHealth} = props;
 
    useEffect(()=> {
-      if(stats[0] && stats[1]){
-         const {attack, armor, health, agility, strength} = stats[0];
+      if(monsterStats && stats){
+         const {attack, armor, agility, strength} = stats;
          setAttack(+attack)
          setArmor(+armor)
          setHealth(+characterHealth)
          setAgility(+agility)
          setStrength(+strength)
-         setMStrength(+stats[1].strength)
+         setMStrength(+monsterStats.strength)
          setMHealth(+monsterHealth)
-         setMAgility(+stats[1].agility)
-         setMAttack(+stats[1].attack)
-         setMArmor(+stats[1].armor)
+         setMAgility(+monsterStats.agility)
+         setMAttack(+monsterStats.attack)
+         setMArmor(+monsterStats.armor)
       }
-   }, [stats[0], stats[1], monsterHealth, characterHealth])
+   }, [stats, monsterHealth, characterHealth, monsterStats])
 
+   console.log(props)
    return (
       <div className='stat-container'>
          <div className='char-stats'>
@@ -47,7 +48,7 @@ const CombatStats = props => {
             </div>
          </div>
          <div className='monster-stats'>
-            <div className='title'>Monster Stats</div>
+            <div className='title'>{props.monsterType.charAt(0).toUpperCase() + props.monsterType.slice(1)} Stats</div>
             <div  className='stat-labels'>
                <div>
                   <p>Health: {mHealth} </p>
@@ -62,4 +63,6 @@ const CombatStats = props => {
    )
 }
 
-export default CombatStats;
+const mapStateToProps = reduxState => reduxState.hero
+
+export default connect(mapStateToProps)(CombatStats);
