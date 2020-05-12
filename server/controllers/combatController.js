@@ -5,7 +5,7 @@ module.exports = {
    monsterStats: (req, res) => {
       const {monsterType} = req.params;
       console.log(monsterType)
-      const monster = monsterList.find(monster => monster.name === monsterType)
+      const monster = monsterList.find(monster => monster.name.toLowerCase() === monsterType)
       res.status(200).send(monster)
    },
    charStats: (req, res) => {

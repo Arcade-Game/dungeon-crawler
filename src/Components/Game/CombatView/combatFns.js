@@ -5,10 +5,12 @@ let cStrength = 0
 let cArmor = 0
 let cAgility = 0
 let cAttack = 0
+let cLevel = 0 
 let mStrength = 0
 let mAttack = 0
 let mArmor = 0
 let mAgility = 0
+let mLevel = 0
 
 //function to set the starting values for combat
 ///////////////////////////////////////////////
@@ -18,6 +20,7 @@ export const statSetupChar = ({attack, agility, strength, armor}) => {
   cArmor = +armor
   cAgility = +agility
   cAttack = +attack
+  // cLevel  //need to add the character level as a parameter
 }
 
 export const statSetupMon = ({attack, strength, armor, agility}) => {
@@ -25,6 +28,7 @@ export const statSetupMon = ({attack, strength, armor, agility}) => {
   mArmor = +armor
   mAgility = +agility
   mAttack = +attack
+  // mLevel //need to add the monster level as a parameter
 }
 
 
@@ -38,7 +42,7 @@ export function attackType (weapon) {
         return arr = ['Stab', 'Slash', 'Lunge']
      case 'Steel Shortsword':
         return arr = ['Stab', 'Slash', 'Lunge']
-     case 'Iron Dagger':
+     case 'Stone Dagger':
         return arr = ['Stab', 'Slash', 'Lunge']
      case 'Spear':
         return arr = ['Stab', 'Lunge']
@@ -60,19 +64,16 @@ const weaponAttack = (weapon, attackType) => {
          case 'Stab':
         //  console.log('iron sword stab')
            cAttack += 2
-           cStrength += 2
            cArmor -= 1
            break;
          case 'Slash':
         //  console.log('iron sword slash')
            cAttack += 3
-           cStrength += 1
            cArmor -= 0
            break;
          case 'Lunge':
         //  console.log('iron sword lunge')
            cAttack += 4
-           cStrength += 4
            cArmor -= 3
        }
        break;
@@ -81,19 +82,16 @@ const weaponAttack = (weapon, attackType) => {
          case 'Stab':
         //  console.log('Steel sword stab')
            cAttack += 4
-          cStrength += 4
            cArmor -= 1
            break;
          case 'Slash':
         //  console.log('Steel sword slash')
            cAttack += 6
-          cStrength += 2
            cArmor -= 0
            break;
          case 'Lunge':
         //  console.log('Steel sword lunge')
            cAttack += 10
-          cStrength += 10
            cArmor -= 6
            break;
        }
@@ -103,19 +101,16 @@ const weaponAttack = (weapon, attackType) => {
          case 'Stab':
         //  console.log('dagger stab')
            cAttack += 1
-           cStrength += 1
            cArmor -= 1
            break;
          case 'BackStab':
         //  console.log('dagger BackStab')
            cAttack += 5
-           cStrength += 5
            cArmor -= 3
            break;
          case 'Counter':
         //  console.log('dagger counter')
            cAttack += 1
-           cStrength += 0
            cArmor += 5 
            break;
        }
@@ -125,13 +120,11 @@ const weaponAttack = (weapon, attackType) => {
          case 'Stab':
         //  console.log('spear stab')
            cAttack += 3
-           cStrength += 3
            cArmor -= 0
            break;
          case 'Lunge':
         //  console.log('spear lunge')
            cAttack += 14
-           cStrength += 6
            cArmor -= 5
            break;
          // case 'Lunge':
@@ -146,18 +139,15 @@ const weaponAttack = (weapon, attackType) => {
          case 'Chop':
         //  console.log('axe chop')
            cAttack += 3
-           cStrength += 9
            cArmor -= 3
            break;
          case 'Slash':
         //  console.log('axe slash')
            cAttack += 4
-           cStrength += 4
            cArmor -= 1
            break;
          // case 'Lunge':
          //   cAttack += 4
-         //   cStrength += 4
          //   cArmor -= 3
          //   break;
        }
@@ -167,13 +157,11 @@ const weaponAttack = (weapon, attackType) => {
           case 'punch':
             // console.log('punch')
               cAttack += 1
-              cStrength += 1
               cArmor -= 0
               break;
             case 'kick':
             // console.log('kick')
               cAttack += 2
-              cStrength += 1
               cArmor -= 1
               break;
             case 'block':
@@ -238,7 +226,7 @@ export const monAttack = (monsterAttacks) => {
 /////////////////////////////
 
 const warriorAttack = (strength, agility, attack, armor) => {  
-  let crit = Math.floor((Math.random() * 1000))
+  let crit = Math.floor((Math.random() * ((mLevel - cLevel) * 100) + 1000))
   if (crit <= agility){
     strength += attack
     attack += attack
@@ -257,11 +245,13 @@ const warriorAttack = (strength, agility, attack, armor) => {
 };
 
 const rogueAttack = (strength, agility, attack, armor) => {  
-  let crit = Math.floor((Math.random() * ((200 - (agility/2)) + (agility/2))))
+  let crit = Math.floor((Math.random() * ((mLevel - cLevel) * 100) + 200))
   if (crit <= agility){
     strength += attack
     attack += attack
   }
+  strength = (strength/2)
+  strength += (agility/2)
   let damage = Math.floor((Math.random() * ((strength + attack) - attack) + attack))
   let block = Math.floor(Math.random() * 1000)
   if(block <= armor) {
@@ -278,7 +268,7 @@ const rogueAttack = (strength, agility, attack, armor) => {
 
 
 const rangerAttack = (strength, agility, attack, armor) => {  
-  let crit = Math.floor((Math.random() * 800))
+  let crit = Math.floor((Math.random() * ((mLevel - cLevel) * 100) + 800))
   if (crit <= agility){
     strength += attack
     attack += attack
@@ -306,7 +296,7 @@ const monsterAttackRogue = (strength, agility, attack, armor) => {
     attack += attack
   }
   let damage = Math.floor((Math.random() * ((strength + attack) - attack) + attack))
-  let dodge = Math.floor(Math.random() * 250)
+  let dodge = Math.floor(Math.random() * 500)
   if(dodge <= (armor + agility)) {
      damage = 0
   } else {
@@ -325,16 +315,16 @@ const monsterAttackRanger = (strength, agility, attack, armor) => {
     attack += attack
   }
   let damage = Math.floor((Math.random() * ((strength + attack) - attack) + attack))
-  let dodge = Math.floor(Math.random() * 250)
-  console.log('dodge', dodge)
-  if(dodge <= (armor + agility)) {
-     damage = 0
-  } else {
-    damage -= armor
-    if(damage <= 0) {
-      damage = 1
-    }
-  }
+  let block = Math.floor(Math.random() * 300)
+  // console.log('dodge', dodge)
+  if(block <= armor) {
+    damage = 0
+ } else {
+   damage -= armor
+   if(damage <= 0) {
+     damage = 1
+   }
+ }
   return damage
 };
 
@@ -345,15 +335,15 @@ const monsterAttackWarrior = (strength, agility, attack, armor) => {
     attack += attack
   }
   let damage = Math.floor((Math.random() * ((strength + attack) - attack) + attack))
-  let dodge = Math.floor(Math.random() * 250)
-  console.log('dodge', dodge)
-  if(dodge <= (armor + agility)) {
-     damage = 0
-  } else {
-    damage -= armor
-    if(damage <= 0) {
-      damage = 1
-    }
-  }
+  let block = Math.floor(Math.random() * 250)
+  // console.log('dodge', dodge)
+  if(block <= armor) {
+    damage = 0
+ } else {
+   damage -= armor
+   if(damage <= 0) {
+     damage = 1
+   }
+ }
   return damage
 };
