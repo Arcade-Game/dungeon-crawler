@@ -12,7 +12,7 @@ import {attackType, monAttack, charAttack, statSetupChar, statSetupMon} from './
 const CombatView = (props) => {
     const {monsterType, isFightFn, clearMonster, monsterCoor} = props,
         [weapon, setWeapon] = useState(''),
-        [characterHealth, setCharacterHealth] = useState(0),
+        // [characterHealth, setCharacterHealth] = useState(0),
         [monsterHealth, setMonsterHealth] = useState(0),
         [buttonArr, setButtonArr] = useState([]),
         [stats, setStats] = useState({}),
@@ -36,12 +36,11 @@ const CombatView = (props) => {
 
     useEffect(() => {
         if(stats) {
-            setCharacterHealth(props.stats.health)
             setMonsterHealth(stats.health)
             setClassType(props.hero.class_name)
         }
         
-    }, [stats.health, props.stats.health])
+    }, [stats.health])
 
     const getStats = async()=> {
         await axios.get(`/api/monster-stats/${monsterType}`)
@@ -71,31 +70,58 @@ const CombatView = (props) => {
     
     const battle = async(weaponMove) => {
         let arr = []
-        let charHealth = props.stats.health
-        let monHealth = monsterHealth
+        let charHealth = 0
+        let monHealth = 0
+        if(charHealth !== props.characterHealth) {
+            charHealth = props.characterHealth
+            monHealth = monsterHealth
+
+        }
         let monster = stats
         let character = props.stats
         await statSetupChar(character)
         await statSetupMon(monster)
         if (character.agility > monster.agility) {
             let cDamage = charAttack(classType, weapon, weaponMove);
-            arr.push(`You did ${cDamage} damage to the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`)
+            if(cDamage === 0) {
+                arr.push(`You missed the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}.`)
+            } else {
+                arr.push(`You did ${cDamage} damage to the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}.`)
+            }
             monHealth -= cDamage 
+            if(monHealth <= 0) {
+                setMonsterHealth(0)
+            }
             setMonsterHealth(monHealth)
 
             let mDamage = monAttack(classType);
-            arr.push(`${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} did ${mDamage} damage to you!`)
+            if(mDamage === 0) {
+                arr.push(`You dodged ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} attack.`)
+            } else {
+                arr.push(`${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} did ${mDamage} damage to you.`)
+            }
             charHealth -= mDamage
-            setCharacterHealth(charHealth)
+            props.setCharacterHealthFn(charHealth)
         } else {
             let mDamage = monAttack(classType);
-            arr.push(`${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} did ${mDamage} damage to you!`)
+            if(mDamage === 0) {
+                arr.push(`You dodged ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} attack.`)
+            } else {
+                arr.push(`${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} did ${mDamage} damage to you.`)
+            }
             charHealth -= mDamage
-            setCharacterHealth(charHealth)
+            props.setCharacterHealthFn(charHealth)
 
             let cDamage = charAttack(classType, weapon, weaponMove);
-            arr.push(`You did ${cDamage} damage to the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`)
+            if(cDamage === 0) {
+                arr.push(`You missed the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}.`)
+            } else {
+                arr.push(`You did ${cDamage} damage to the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}.`)
+            }
             monHealth -= cDamage 
+            if(monHealth <= 0) {
+                setMonsterHealth(0)
+            }
             setMonsterHealth(monHealth)
         }
         
@@ -136,7 +162,7 @@ const CombatView = (props) => {
             <CombatStats  
                 monsterStats = {stats}
                 monsterHealth = {monsterHealth} 
-                characterHealth = {characterHealth}
+                characterHealth = {props.characterHealth}
                 monsterType = {monsterType}
                 />
         </>

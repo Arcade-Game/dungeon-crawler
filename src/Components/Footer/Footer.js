@@ -1,31 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {connect} from "react-redux";
-import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai';
 import './Footer.scss';
 import {withRouter} from 'react-router-dom';
 import Inventory from '../Game/Character/Inventory/Inventory';
 // import {BsArrowLeft} from 'react-icons/bs';
 
 const Footer = props => {
-   const {inventory, stats, hero, equipmentToggle, inventoryToggle, newMoney, experience, level} = props
+   const {inventory, stats, hero, equipmentToggle, inventoryToggle, newMoney, experience, level, characterHealth} = props
    const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
    const [totalHealth, setTotalHealth] = useState(5)
    const [statsToggle, setStatsToggle] = useState(false)
    const [menuToggle, setMenuToggle] = useState(false)
-
-
-   // useEffect(() => {
-   //    setTotalHealth(5)
-   //    let arr = []
-   //    for (let i = 0; i < totalHealth; i++) {
-   //       arr.push(0)
-   //    }
-   //    setHeartArr(arr)
-   // }, [health])
-
-   useEffect(() => {
-      setTotalHealth(stats.health)
-   }, [props])
 
 
    const handleMenuClick = () => {
@@ -40,11 +25,6 @@ const Footer = props => {
          return acc += ((el.attack) ? el.attack : 0)}, 0));
 
 
-console.log(props)
-   // for (let i = 0; i < health; i++) {
-   //    heartArr.splice(i, 1, 1)
-   // }
-   // let hearts = heartArr.map((e, i) => (e === 0) ? <AiFillHeart key={i} color={'red'} size={'40px'} /> :   <AiOutlineHeart key={i} color={'red'} size={'40px'}/> )
 
    return (
       <>
@@ -82,8 +62,7 @@ console.log(props)
             {`XP: ${experience}`}
          </div>
             <div className="health-bar" onClick={() => setStatsToggle(!statsToggle)}>
-            {/* {hearts} */}
-            {totalHealth}
+         {characterHealth}
             
             
          </div>
@@ -93,7 +72,7 @@ console.log(props)
                   <div className="stats-container-for-styling">
                      <div><span>{hero.hero_name}</span></div>
                         <div className="stats-container-stats">
-                           <div><span>Health:</span>{stats.health}</div>
+                           <div><span>Health:</span>{characterHealth}</div>
                            <div><span>Armor:</span>{heroArmor}</div>
                            <div><span>Strength:</span>{stats.strength}</div>
                            <div><span>Agility:</span>{stats.agility}</div>
