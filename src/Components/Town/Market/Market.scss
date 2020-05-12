@@ -3,37 +3,186 @@
 .market-container{
    @include column;
    border-radius: 10px;
-   width: 60%;
-   height:400px;
+   width: 85%;
+   height:85%;
    z-index: 2;
    background-color: grey;
+   position: fixed;
+   bottom: 11vh;
 
    .vendor-container {
       @include row;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
-      width: 97%;
-      height: 70%;
+      width: 96%;
+      height: 84%;
       background-color:  rgb(54, 54, 54);
 
       .vendor-item-grid{
-
-         height: 80%;
-         width: 30%;
+         // @include column;
+         height: 92%;
+         width: 50%;
          background-color: indianred;
-         display: grid;
-         grid-template-columns: 4,1fr;
-         grid-template-rows: 4,1fr;
+         // display: grid;
+         // grid-template-columns: 4,1fr;
+         // grid-template-rows: 4,1fr;
          
       }
+      .market-inventory-screen-container {
+         @include row;
+         justify-content: center ;
+         align-items: flex-start;
+         height: 92%;
+         width: 35%;
+         // background-color: lightseagreen;
+      }
+      .one {
+         @include column;
+         justify-content: space-between; ;
+         background-color: lightgoldenrodyellow;
+         width: 83%;
+         height:100%;
+      }
+      .market-equipment {
+         border-radius: 10px;
+         height: 67%;
+         width: 100%;
+         background-color: indianred;
+
+         .market-equipment-container{
+            // @include column;
+            // margin-top: 15px;
+            border-radius: 10px;
+            justify-content: space-evenly;
+            height: 200px;
+            width: 90%;
+            // background-color: rgb(17, 17, 17);
+            // margin-bottom: 12px;
+            // border: 4px solid black;
+            img {
+               height: 100%;
+               width: 100%;
+               border-radius: 10px;
+            }
+      
+            .market-equipment-top-container{
+               @include row;
+               height: 25%;
+               width: 95%;
+               div:hover .inventory-square-hover {
+                  visibility: visible;
+               }
+      
+                  .market-helm-container{
+                     border-radius: 10px;
+                     height: 75px;
+                     width: 75px;
+                     background-color: rgb(46, 45, 45);
+                     border: 4px solid black;
+      
+                  }
+            }
+            .market-equipment-middle-container{
+               @include row;
+               justify-content: space-around;
+               height: 35%;
+               width: 95%;
+               div:hover .inventory-square-hover {
+                  visibility: visible;
+               }
+      
+      
+                  .market-middle-container{
+                     border-radius: 10px;
+                     height: 100px;
+                     width: 75px;
+                     background-color: rgb(46, 45, 45);
+                     border: 4px solid black;
+      
+                  }
+            }
+         .market-equipment-bottom-container{
+            @include row;
+            height: 25%;
+            width: 95%;
+            div:hover .inventory-square-hover {
+               visibility: visible;
+            }
+            
+         }
+               .market-boot-container{
+                  border-radius: 10px;
+                  height: 75px;
+                  width: 75px;
+                  background-color: rgb(46, 45, 45);
+                  border: 4px solid black;
+      
+               }
+      }
+      }
+      
+      .market-inventory-container {
+         @include row;
+         // justify-content: center ;
+         // flex-wrap: inherit;
+         height: 31%;
+         width: 100%;
+         background-color: lightskyblue;
+         padding: 7px 10px 5px 15px;
+         border-radius: 10px;
+         display: grid;
+         grid-template-columns: repeat(4, 1fr);
+         grid-template-rows: repeat(2, 1fr);
+      }
+      
+
+      .market-inventory-square {
+         display: flex;
+         // box-sizing: border-box;
+         height: 70px;
+         width: 70px;
+         border-radius: 10px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         background: rgb(46, 45, 45);
+      }
+
+      .market-inventory-tab-container{
+         margin-top: 20px;
+         height: 30%;
+         width: 15%;
+         border-radius: 0 10px 10px 0;
+         background-color: lightblue;
+      }
+      // .inventory-square:hover .inventory-square-hover {
+      //    visibility: visible;
+      // }
+      // img {
+      //    border-radius: 10px;
+      // }
+   
+      // .market-inventory-square-hover {
+      //    visibility: hidden;
+      //    position: absolute;
+      //    right: -210px;
+      //    border: 3px solid $inventory;
+      //    border-radius: 10%;
+      //    height: 180px;
+      //    width: 200px;
+      //    top: 0px;
+      //    text-align: start;
+      //    padding: 8px;
+      //    background: grey;
+      // }
    }
    .vendor-tabs {
       @include row;
       justify-content: center;
       border-bottom-left-radius: 10px ;
       border-bottom-right-radius: 10px ;
-      width: 97%;
-      height:15%;
+      width: 96%;
+      height:10%;
       background-color: rgb(54, 54, 54);
    
       .tab {
@@ -69,4 +218,5 @@
          color: rgb(54, 54, 54);
       }
    }
+
 }

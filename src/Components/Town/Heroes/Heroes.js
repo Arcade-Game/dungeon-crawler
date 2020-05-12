@@ -26,23 +26,32 @@ const Heroes = (props) => {
    return (
       <div className="hero-selector-container"
               onClick={(event)=> props.stopPropagation(event)}> 
-              <h1> Your Characters </h1>
-      <div className="hero-summary-container">
-         {heroes[0].map((hero, index) => {
-            return <Hero  key = {index}
-                                    hero = {hero}
-                                    index = {index}
+        {heroes[0] && heroes[0].length !== 0 ?  (
+           <>
+               <h1> Your Characters </h1>
+               <div className="hero-summary-container">
+                  {heroes[0].map((hero, index) => {
+                     return <Hero  key = {index}
+                                             hero = {hero}
+                                             index = {index}
 
-                                    handleHeroToggle = {handleHeroToggle}
-                                    resetToggle = {props.resetToggle}
-                                    expand = {expand}
-                                    />
-            })
-         }
+                                             handleHeroToggle = {handleHeroToggle}
+                                             resetToggle = {props.resetToggle}
+                                             expand = {expand}
+                                             /> })}
+
+                  </div>
+                      {(heroes[0].length < 8) ? (
+                           <button className="create-hero" onClick={() => props.setToggle(newHero)}>New Hero</button>
+                        ) : (<button className="create-hero" disabled>New Hero</button>)}
+            </>
+         ) : (<>
+         <div><h1> Welcome to Vindermere!</h1> <h2>Please create your hero</h2></div>
+            <button className="create-hero" onClick={() => props.setToggle(newHero)}>Create Hero</button> 
+            </>
+         )}
       </div>
-      {(heroes[0].length < 8) ? (<button className="create-hero" onClick={() => props.setToggle(newHero)}>New Hero</button>
-      ) : (<button className="create-hero" disabled>New Hero</button>)}
-      </div>
+         
    )
 }
 const mapStateToProps = (reduxState) => reduxState
