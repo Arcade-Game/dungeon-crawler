@@ -9,7 +9,7 @@ import {attackType, monAttack, charAttack, statSetupChar, statSetupMon} from './
 
 
 const CombatView = (props) => {
-    const {monsterType, isFightFn, clearMonster, monsterCoor} = props,
+    const {monsterType, isFightFn, clearMonster, monsterCoor, getStats} = props,
         [weapon, setWeapon] = useState(''),
         [characterHealth, setCharacterHealth] = useState(0),
         [monsterHealth, setMonsterHealth] = useState(0),
@@ -20,7 +20,7 @@ const CombatView = (props) => {
         [endFight, setEndFight] = useState(false)
 
     useEffect(()=> {
-        setStats(props.getStats())
+        setStats(getStats())
         getWeapon()
     }, [])
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {connect} from "react-redux";
 import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai';
 import './Footer.scss';
@@ -8,21 +8,25 @@ import Inventory from '../Game/Character/Inventory/Inventory';
 // import Equipment from '../Game/Character/Equipment/Equipment';
 
 const Footer = props => {
-   const {inventory, stats, hero, equipmentToggle, inventoryToggle, newMoney} = props
-   const [health, setHealth] = useState(0);
+   const {inventory, stats, hero, equipmentToggle, inventoryToggle, newMoney, experience, level} = props
    const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
    const [totalHealth, setTotalHealth] = useState(5)
    const [statsToggle, setStatsToggle] = useState(false)
    const [menuToggle, setMenuToggle] = useState(false)
 
+
+   // useEffect(() => {
+   //    setTotalHealth(5)
+   //    let arr = []
+   //    for (let i = 0; i < totalHealth; i++) {
+   //       arr.push(0)
+   //    }
+   //    setHeartArr(arr)
+   // }, [health])
+
    useEffect(() => {
-      setTotalHealth(5)
-      let arr = []
-      for (let i = 0; i < totalHealth; i++) {
-         arr.push(0)
-      }
-      setHeartArr(arr)
-   }, [health])
+      setTotalHealth(stats.health)
+   }, [props])
 
 
    const handleMenuClick = () => {
@@ -38,10 +42,10 @@ const Footer = props => {
 
 
 console.log(props)
-   for (let i = 0; i < health; i++) {
-      heartArr.splice(i, 1, 1)
-   }
-   let hearts = heartArr.map((e, i) => (e === 0) ? <AiFillHeart key={i} color={'red'} size={'40px'} /> :   <AiOutlineHeart key={i} color={'red'} size={'40px'}/> )
+   // for (let i = 0; i < health; i++) {
+   //    heartArr.splice(i, 1, 1)
+   // }
+   // let hearts = heartArr.map((e, i) => (e === 0) ? <AiFillHeart key={i} color={'red'} size={'40px'} /> :   <AiOutlineHeart key={i} color={'red'} size={'40px'}/> )
 
    return (
       <>
@@ -52,13 +56,14 @@ console.log(props)
          menuToggle === true ? <div className="game-menu">
                <div className="menu-title"><span>indermere</span></div>
                <button className="return-to-town" onClick={() => props.history.push('/town')}>Return to Town</button>
-               <button className="return">Restart Dungeon</button>
+               <button className="return" onClick={() => window.location.reload(false)}>Restart Dungeon</button>
                <button className="return">Settings</button>
                <button className="return">Quests</button>
                <button className="return">Key</button>
                <div className="menu-x-button" onClick={handleMenuClick}><span>X</span></div>   </div> : null
          }
       <div className="footer-left">
+         
          <Inventory 
             equipmentToggle={equipmentToggle}
             inventoryToggle={inventoryToggle}
@@ -75,10 +80,11 @@ console.log(props)
       </div>
       <div className="footer-right">
          <div className="experience-bar">
-            
+            {`XP: ${experience}`}
          </div>
             <div className="health-bar" onClick={() => setStatsToggle(!statsToggle)}>
-            {hearts}
+            {/* {hearts} */}
+            {totalHealth}
             
             
          </div>
@@ -95,7 +101,7 @@ console.log(props)
                            <div><span>Damage:</span>{heroAttack} - {heroAttack + stats.strength}</div>
                         </div>
                   </div>
-                  <div className="stats-level"><span>{hero.level ? hero.level : 1}</span></div>
+                  <div className="stats-level"><span>{level}</span></div>
                </section> : null
             }
       </div>
