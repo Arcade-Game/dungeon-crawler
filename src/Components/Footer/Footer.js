@@ -3,9 +3,12 @@ import {connect} from "react-redux";
 import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai';
 import './Footer.scss';
 import {withRouter} from 'react-router-dom';
+import Inventory from '../Game/Character/Inventory/Inventory';
+// import {BsArrowLeft} from 'react-icons/bs';
+// import Equipment from '../Game/Character/Equipment/Equipment';
 
 const Footer = props => {
-   const {inventory, stats, hero} = props
+   const {inventory, stats, hero, equipmentToggle, inventoryToggle, newMoney} = props
    const [health, setHealth] = useState(0);
    const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
    const [totalHealth, setTotalHealth] = useState(5)
@@ -20,6 +23,7 @@ const Footer = props => {
       }
       setHeartArr(arr)
    }, [health])
+
 
    const handleMenuClick = () => {
       setMenuToggle(!menuToggle)
@@ -45,46 +49,55 @@ console.log(props)
          <h1>V</h1>
       </div>
          {
-            menuToggle === true ? <div className="game-menu">
-               <h3>Menu</h3>
-            <button className="return-to-town" onClick={() => props.history.push('/town')}>Return to Town</button>
-            <button className="return">Settings</button>
-            <button className="return">Quests</button>
-            <button className="return">Key</button>
-            <button className="return">Return to Dungeon</button>
-                                 </div> : null
+         menuToggle === true ? <div className="game-menu">
+               <div className="menu-title"><span>indermere</span></div>
+               <button className="return-to-town" onClick={() => props.history.push('/town')}>Return to Town</button>
+               <button className="return">Restart Dungeon</button>
+               <button className="return">Settings</button>
+               <button className="return">Quests</button>
+               <button className="return">Key</button>
+               <div className="menu-x-button" onClick={handleMenuClick}><span>X</span></div>   </div> : null
          }
       <div className="footer-left">
-         {/* <button onClick={() => (health < totalHealth) ? setHealth(health + 1) :null} >-</button>
-         <button onClick={() => (health === 0) ? null: setHealth(health - 1)} >+</button> */}
-         <div className ="character-icon-container">
-            <div className="character-icon" onClick={() => props.setEquipmentToggle()}>
-            </div>
-         </div>
-         {/* <div className="menu-button">MENU</div> */}
-         
+         <Inventory 
+            equipmentToggle={equipmentToggle}
+            inventoryToggle={inventoryToggle}
+            newMoney={newMoney}
+         />
          <div className="inventory-icon-container">
             <div className="inventory-icon" onClick={() => props.setInventoryToggle()}> 
             </div>
          </div>
+         <div className ="character-icon-container">
+            <div className="character-icon" onClick={() => props.setEquipmentToggle()}>
+            </div>
+         </div>
       </div>
       <div className="footer-right">
-         <div className="health-bar" onClick={() => setStatsToggle(!statsToggle)}>
-            {hearts}
-            {
-               statsToggle === true ?
-               <section className="stats-container">
-                  <div><span>Name:</span>{hero.hero_name}</div>
-                  <div className="stats-container-stats">
-                     <div><span>Level:</span>{hero.level}</div>
-                     <div><span>Health:</span>{stats.health}</div>
-                     <div><span>Armor:</span>{heroArmor}</div>
-                     <div><span>Damage:</span>{heroAttack} - {heroAttack + stats.strength}</div>
-                  </div>
-               </section> : null
-            }
+         <div className="experience-bar">
             
          </div>
+            <div className="health-bar" onClick={() => setStatsToggle(!statsToggle)}>
+            {hearts}
+            
+            
+         </div>
+         {
+               statsToggle === true ?
+               <section className="stats-container">
+                  <div className="stats-container-for-styling">
+                     <div><span>{hero.hero_name}</span></div>
+                        <div className="stats-container-stats">
+                           <div><span>Health:</span>{stats.health}</div>
+                           <div><span>Armor:</span>{heroArmor}</div>
+                           <div><span>Strength:</span>{stats.strength}</div>
+                           <div><span>Agility:</span>{stats.agility}</div>
+                           <div><span>Damage:</span>{heroAttack} - {heroAttack + stats.strength}</div>
+                        </div>
+                  </div>
+                  <div className="stats-level"><span>{hero.level ? hero.level : 1}</span></div>
+               </section> : null
+            }
       </div>
       </>
    )
