@@ -16,7 +16,6 @@ const Town = (props) => {
    const [overlayToggle, setOverlayToggle] = useState(false),
              [toggleType, setToggleType] = useState();
 
-
    const trainer = "trainer",
              market = "market",
              leaderBoard = "leaderBoard",
@@ -66,15 +65,20 @@ const Town = (props) => {
                      onClick={()=>{resetToggle()}}>
             {toggleType === trainer ? (
             <Trainer stopPropagation = {stopPropagation}/>) : null }
-            {toggleType === market ? <Market stopPropagation = {stopPropagation} /> : null }
-            {toggleType === leaderBoard ? <LeaderBoard stopPropagation = {stopPropagation} /> : null }
-            {toggleType === heroes ? <Heroes stopPropagation = {stopPropagation}
-            setToggle = {setToggle} 
-            resetToggle = {resetToggle}
-            /> : null }
-            {toggleType === newHero ? <NewHero stopPropagation = {stopPropagation}/> : null }
-            {toggleType === inn ? <Inn stopPropagation = {stopPropagation}
-            hero = {props.hero}/> : null }
+            {toggleType === market ? 
+               <Market stopPropagation = {stopPropagation}/> : null }
+            {toggleType === leaderBoard ? 
+               <LeaderBoard stopPropagation = {stopPropagation} /> : null }
+            {toggleType === heroes ? 
+               <Heroes stopPropagation = {stopPropagation}
+                              setToggle = {setToggle} 
+                              resetToggle = {resetToggle}
+                              /> : null }
+            {toggleType === newHero ? 
+               <NewHero stopPropagation = {stopPropagation}/> : null }
+            {toggleType === inn ? 
+               <Inn stopPropagation = {stopPropagation}
+                     hero = {props.hero}/> : null }
              </div> ) : null
          }
             
@@ -98,13 +102,13 @@ const Town = (props) => {
                  onClick={() => {setToggle(heroes)}}>
                <p className="town-select-hero">Heroes</p>
          </div>
-         {hero ? (
+         {hero.hero_name ? (
             <>
             <div className="hero-selected"
             onClick={() => {setToggle(heroes)}}>
                <h2>{hero.hero_name}</h2>
                <h2>{hero.class_name}</h2>
-               <h2>Deaths: X</h2>
+               <h2>Deaths: {hero.deaths}</h2>
                <h2>Gold: {hero.gold}</h2> 
             </div>
          

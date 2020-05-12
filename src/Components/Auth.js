@@ -27,7 +27,7 @@ const Auth = (props) => {
       if (password === verPassword){
          axios.post("/api/auth/register", {username, password, email})
          .then(res => {
-            props.setUser(res.data.player_id)
+            props.setUser(res.data)
             if (res.data){ 
                props.history.push("/town") 
             }

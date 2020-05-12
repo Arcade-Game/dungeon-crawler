@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {connect} from "react-redux";
 import './Footer.scss';
 import {withRouter} from 'react-router-dom';
@@ -6,8 +6,7 @@ import Inventory from '../Game/Character/Inventory/Inventory';
 // import {BsArrowLeft} from 'react-icons/bs';
 
 const Footer = props => {
-   const {inventory, stats, hero, equipmentToggle, inventoryToggle, newMoney, characterHealth} = props
-   const [health, setHealth] = useState(0);
+   const {inventory, stats, hero, equipmentToggle, inventoryToggle, newMoney, experience, level, characterHealth} = props
    const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
    const [totalHealth, setTotalHealth] = useState(5)
    const [statsToggle, setStatsToggle] = useState(false)
@@ -27,7 +26,6 @@ const Footer = props => {
 
 
 
-
    return (
       <>
       <div className="footer-top" onClick={handleMenuClick}>
@@ -37,13 +35,14 @@ const Footer = props => {
          menuToggle === true ? <div className="game-menu">
                <div className="menu-title"><span>indermere</span></div>
                <button className="return-to-town" onClick={() => props.history.push('/town')}>Return to Town</button>
-               <button className="return">Restart Dungeon</button>
+               <button className="return" onClick={() => window.location.reload(false)}>Restart Dungeon</button>
                <button className="return">Settings</button>
                <button className="return">Quests</button>
                <button className="return">Key</button>
                <div className="menu-x-button" onClick={handleMenuClick}><span>X</span></div>   </div> : null
          }
       <div className="footer-left">
+         
          <Inventory 
             equipmentToggle={equipmentToggle}
             inventoryToggle={inventoryToggle}
@@ -60,7 +59,7 @@ const Footer = props => {
       </div>
       <div className="footer-right">
          <div className="experience-bar">
-            
+            {`XP: ${experience}`}
          </div>
             <div className="health-bar" onClick={() => setStatsToggle(!statsToggle)}>
          {characterHealth}
@@ -80,7 +79,7 @@ const Footer = props => {
                            <div><span>Damage:</span>{heroAttack} - {heroAttack + stats.strength}</div>
                         </div>
                   </div>
-                  <div className="stats-level"><span>{hero.level ? hero.level : 1}</span></div>
+                  <div className="stats-level"><span>{level}</span></div>
                </section> : null
             }
       </div>

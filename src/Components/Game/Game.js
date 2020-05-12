@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './Game.scss';
 import './Map.scss';
 import './monsters.scss';
@@ -18,15 +18,17 @@ import {tutorial} from './Map Variables/tutorial';
 import {puzzles, levelOne} from './Map Variables/puzzles';
 import {connect} from 'react-redux';
 import { updateInventory } from '../../Redux/reducers/heroReducer';
+import {TweenMax, Power3} from 'gsap';
+// import {setHonor, setLevel} from '../../Redux/reducers/titlesReducer';
 
 const Game = (props) => {
   // const {mapArray, mapX, mapY} = mapObject
-  // const {mapArray, mapX, mapY} = tutorial
-  const {mapArray, mapX, mapY} = levelOne
+  const {mapArray, mapX, mapY} = tutorial
+  // const {mapArray, mapX, mapY} = levelOne
 
   const [grid, setGrid] = useState([...mapArray]),
     [charX, setCharX] = useState(mapX),
-    [charY, setCharY] = useState(mapArray.length-11),
+    [charY, setCharY] = useState(mapY),
     [heightWidth, setHeightWidth] = useState(650),
     [viewRowCols, setViewRowCols] = useState(9),
     [inventoryToggle, setInventoryToggle] = useState(false),
@@ -37,10 +39,22 @@ const Game = (props) => {
     [monsterStats, setMonsterStats] = useState({}),
     [characterHealth, setCharacterHealth] = useState(0),
     [monsterCoor, setMonsterCoor] = useState([0,0]),
+    [experience, setExperience] = useState(0),
     [level, setLevel] = useState(1),
     [quicksandCounter, setQuicksandCounter] = useState(0),
-    [lavaRockCounter, setLavaRockCounter] = useState([{}])
+    [lavaRockCounter, setLavaRockCounter] = useState([{}]),
+    [XPforLevel, setXPforLevel] = useState()
+
+    let coinFade = useRef('');
+    let newXP = useRef('');
+
+  const {stats} = props;
     
+    useEffect(() => {
+      let needXP = ((level*100)+((level-1)*.5))
+      setXPforLevel(needXP)
+
+    }, [experience, level])
 
     useEffect(() => {
       setCharacterHealth(props.stats.health)
@@ -132,6 +146,7 @@ const Game = (props) => {
           break;
         case "exit":
           setQuicksandCounter(0)
+          updateExperience(x,y,"complete")
           setCharX(x)
           setCharY(y)
           setGrid([...mapArray])
@@ -228,6 +243,7 @@ const Game = (props) => {
         else if (boulder.elevation > pushTo.elevation){
           if(grid[yy][xx].type === 'monster'){
             newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true, type: 'empty', monsterType: null}
+            updateExperience(x, y, "crush")
           }
           if (pushTo.type === 'uneven'){
             newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true}
@@ -356,12 +372,74 @@ const Game = (props) => {
 
   const clearMonster = (x, y) => {
     let newGrid = [...grid]
-    newGrid[y][x] = {...newGrid[y][x], type: "empty", monsterType: ""}
-    // newGrid[y][x].monsterType = ""
+    updateExperience(x, y, "monster", grid[y][x].level)
+    newGrid[y][x] = {...newGrid[y][x], type: "empty", monsterType: "", level: ''}
     setCharX(x)
     setCharY(y)
     setMonsterCoor([0,0])
+    
     setGrid(newGrid)
+  }
+
+  const updateExperience = (x, y, type, monsterLevel) => {
+    console.log("first", level, XPforLevel)
+    let xpVar = XPforLevel
+    switch(type){
+      case "monster":
+        console.log("ding")
+        if(experience + (20 + (20 * (level - monsterLevel) * -.25)) > xpVar){
+          xpVar = experience + (20 + (20 * (level - monsterLevel) * -.25)) - XPforLevel
+          setExperience(xpVar)
+          updateLevel(x, y)
+        } else {
+          setExperience(experience + (20 + (20 * (level - monsterLevel) * -.25)) > XPforLevel ? (experience + (20 + (20 * (level - monsterLevel) * -.25)) - XPforLevel) : experience + (20 + (20 * (level - monsterLevel) * -.25)))
+        }
+      break;
+      case "crush":
+        if(experience + 15 > xpVar){
+          xpVar = experience+15 - XPforLevel
+          setExperience(xpVar)
+          updateLevel(x,y)
+        } else {setExperience(experience+15)}
+      break;
+      case "complete":
+        if(experience + 50 > xpVar){
+          xpVar = experience+50 - XPforLevel
+          setExperience(xpVar)
+          updateLevel(x,y)
+        } else {setExperience(experience + 50)}
+      break;
+    }
+
+    // if(experience + (20 * (level - grid[y][x].level)) >= XPforLevel){
+    //   updateLevel(x, y)}
+      console.log("NEW", experience + (20 + (20 * (level - monsterLevel) * -.25)))
+    
+    let expRemaining = (XPforLevel - experience)
+    console.log(level, XPforLevel, expRemaining)
+  }
+
+  const updateLevel = (x,y) => {
+    setLevel(level + 1)
+  }
+
+  const moneyAnimation = () => {
+    TweenMax.to(
+      coinFade,
+      .001,
+      {
+        opacity: 1,
+        ease: Power3.easeOut,
+      }
+    )
+    TweenMax.to(
+      coinFade,
+      3,
+      {
+        opacity: 0,
+        ease: Power3.easeOut,
+      }
+    )
   }
 
   const openChest = (x, y, z) => {
@@ -380,7 +458,8 @@ const Game = (props) => {
               z === 3 ? Math.floor(Math.random() * (35-15)) + 15 :
               z === 4 ? Math.floor(Math.random() * (100-30)) + 30 :
               z === 5 ? Math.floor(Math.random() * (250-100)) + 100 : null
-    console.log('GOLD', num)
+    // console.log('GOLD', num)
+    moneyAnimation()
     setNewMoney(num)
   }
   
@@ -390,8 +469,8 @@ const Game = (props) => {
       let y1 = y - 10
       let y2 = y + 10
 
-      console.log("COORS", x, y)
-      console.log("NEWCOORS", x1, x2, y1, y2)
+      // console.log("COORS", x, y)
+      // console.log("NEWCOORS", x1, x2, y1, y2)
       for(let i = x1; i <= x2; i++){
           for(let j = y1; j <= y2; j++){
             exploreTile(i,j)
@@ -441,7 +520,7 @@ const Game = (props) => {
     props.history.push('/death')
   }
   // console.log("music", dungeonMusic[musicNumber])s
-  console.log('PROPS', props)
+  // console.log('PROPS', props)
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
       <audio src={`${dungeonMusic[musicNumber]}`} autoPlay />
@@ -472,13 +551,15 @@ const Game = (props) => {
             setCharacterHealthFn = {setCharacterHealth}
           /> : null
         }
-        {/* <div className="coin-icon"></div> */}
+        <div className="coin-icon" ref={e => {coinFade = e}}></div>
         <Footer 
           newMoney={newMoney}
           setEquipmentToggle={equipmentToggleFn}
           setInventoryToggle={inventoryToggleFn}
           equipmentToggle={equipmentToggle}
           inventoryToggle={inventoryToggle}
+          experience={experience}
+          level={level}
           characterHealth = {characterHealth}
         />
         {/* <Inventory 
@@ -491,4 +572,4 @@ const Game = (props) => {
   );
 }
 const mapStateToProps = reduxState => reduxState.hero
-export default withRouter(connect(mapStateToProps, {updateInventory})(Game));
+export default withRouter(connect(mapStateToProps, {updateInventory}, )(Game));
