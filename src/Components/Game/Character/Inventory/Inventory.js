@@ -46,9 +46,9 @@ const Inventory = (props) => {
       const data = JSON.parse(event.dataTransfer.getData("text"));
       const {id, equipped} = data;
       if (equipped ==="true"){
-         props.deleteItem(equipment[id].item_type)
+         props.deleteItem(equipment[id].item_type, equipped)
          } else {
-            props.deleteItem(id)
+            props.deleteItem(id, equipped)
          }
       },
 

@@ -5,7 +5,6 @@ import './Footer.scss';
 import {withRouter} from 'react-router-dom';
 import Inventory from '../Game/Character/Inventory/Inventory';
 // import {BsArrowLeft} from 'react-icons/bs';
-// import Equipment from '../Game/Character/Equipment/Equipment';
 
 const Footer = props => {
    const {inventory, stats, hero, equipmentToggle, inventoryToggle, newMoney} = props
