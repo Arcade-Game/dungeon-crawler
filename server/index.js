@@ -51,7 +51,8 @@ app.get('/api/character-stats/:classType', combatCtrl.charStats);
 //hero endpoints
 app.get("/api/heroes/player/:id", heroCtrl.getHeroes);
 app.post("/api/heroes", heroCtrl.createHero);
-app.put("/api/hero/:id", heroCtrl.saveHero)
+app.put("/api/hero/:id", heroCtrl.saveHero);
+app.get("/api/classes", heroCtrl.getClasses);
 
 
 //monster endpoints

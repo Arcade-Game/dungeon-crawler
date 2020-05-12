@@ -39,7 +39,8 @@ const Equipment = (props) => {
                   <div><span>Attack: </span>{helm.attack}</div>
                   <div><span>Armor: </span>{helm.armor}</div>
                   <div><span>Strength: </span>{helm.strength ? helm.strength : 0}</div>
-                  <div><span>Agility: </span>{helm.agility ? helm.agility : 0}</div>
+                  <div><span>Agility: </span>{helm.agility ? helm.agility : 0}
+                  </div>
                </div>
             </div>
          </div>
