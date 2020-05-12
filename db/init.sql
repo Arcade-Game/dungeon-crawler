@@ -42,7 +42,8 @@ create table save_files (
    hero_name VARCHAR(20),
    class_id int references classes(class_id),
    hero_level INT,
-   gold INT
+   gold INT,
+   deaths INT
 );
 
 create table items (
@@ -51,6 +52,7 @@ create table items (
    item_name VARCHAR(50),
    attack INT NOT NULL,
    armor integer not null,
+   rarity VARCHAR(15),
    image text
 );
 
