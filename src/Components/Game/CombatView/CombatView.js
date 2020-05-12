@@ -75,7 +75,6 @@ const CombatView = (props) => {
         if(charHealth !== props.characterHealth) {
             charHealth = props.characterHealth
             monHealth = monsterHealth
-
         }
         let monster = stats
         let character = props.stats
@@ -140,8 +139,7 @@ const CombatView = (props) => {
     }
 
     const combatLog  = log.map((e, i) => <p key={i}>{e}</p>)
-    console.log('character stats', props.hero)
-    console.log('monster Stats', stats)
+
     return (
         <>
             <div className="combat-view-container">
