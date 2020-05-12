@@ -86,19 +86,22 @@ const Inventory = (props) => {
 
    console.log("props", props)
    return (
-      <div>
+      <>
          {overlayToggle ? (
             <div className="overlay"
                      onDrop={(event) => deleteItem(event)}
                      onDragOver={(event) => event.preventDefault()}>DELETE</div>
             ) : null
          }
-      <div className="inventory-screen-container">
+      {equipmentToggle || inventoryToggle ?
+         <div className="inventory-screen-container">
          {equipmentToggle ? (
             <>
-               <Equipment handleDrag = {handleDrag}
-                                       equipItem = {equipItem}
-                              />
+               <Equipment 
+                  handleDrag = {handleDrag}
+                  equipItem = {equipItem}
+                  inventoryToggle={inventoryToggle}
+               />
             </> ) : null
          }
          {inventoryToggle ? (
@@ -108,13 +111,15 @@ const Inventory = (props) => {
                               onDragOver={(event) => event.preventDefault()}>
                   {mappedInventory}
 
+               <div className="currency-container"><span>{currency}</span><GiTwoCoins color={"yellow"} /></div>
                </section>
-               <div className="currency-container">{currency}{' '}<GiTwoCoins color={"yellow"} /></div>
             </>
             ) : null 
          }
-      </div>
-   </div>
+      </div> : null
+      }
+      
+   </>
    )
 }
 const mapStateToProps = reduxState => reduxState.hero

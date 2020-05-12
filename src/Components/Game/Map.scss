@@ -48,7 +48,7 @@
     height: 100%;
     width: 100%;
     position: relative;
-    z-index: 3;
+    z-index: 10;
     position: absolute;
 }
 
@@ -58,6 +58,9 @@
     background: url('../pictures/cave-floor.jpg');
     filter: blur(.4px);
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .char-view-chest {
@@ -79,7 +82,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: 2;
+    z-index: 5;
 }
 
 .char-view-water {
@@ -168,6 +171,8 @@
 }
 
 .char-view-platform {
+    height: 100%;
+    width: 100%;
     background: url('../pictures/terrain/platformRock.png');
     background-size: 165%;
     background-repeat: no-repeat;
@@ -177,9 +182,11 @@
 }
 
 .char-view-cliff {
-    background: url('../pictures/terrain/cliff2.png');
+    height: 90%;
+    width: 90%;
+    background: url('../pictures/terrain/dark-cliff.png');
     position: relative;
-    background-size: 125%;
+    background-size: 135%;
     background-position: center;
     background-repeat: no-repeat;
     // background-position: 5% 12%;
@@ -268,9 +275,21 @@
 .char-view-door-key {
     height: 100%;
     width: 100%;
- background: url('../pictures/items/KeyIron.PNG');
- background-size: 100%;
- background-position: 100%;
+    background: url('../pictures/items/KeyIron.PNG');
+    background-size: 100%;
+    background-position: 100%;
+}
+
+.char-view-locked-door {
+    height: 100%;
+    width: 100%;
+    background: url('../pictures/terrain/fairy-door.png');
+    background-size: 66%;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    &:hover {
+        opacity: 90%;
+    }
 }
 
 .chest-sprite-container {
