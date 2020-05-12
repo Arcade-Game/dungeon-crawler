@@ -62,16 +62,19 @@ const Tile = (props) => {
             cName ="char-view-uneven"
             break;
         case "platform":
-            cName = "char-view-platform"
+            tileStyle = {background: "#181818", border: "none"}
             break;
         case "cliff":
-            cName = "char-view-cliff"
+            tileStyle = {background: "black", border: "none"}
             break;
         case "teleporter-1":
             cName = "char-view-teleporter-1"
             break;
         case "gold-pile":
             cName = "char-view-gold-pile"
+            break;
+        case "locked-door":
+            tileStyle = {background: "black", border: "none"}
             break;
     }
 
@@ -93,7 +96,10 @@ const Tile = (props) => {
                 {
                     gridX === 4 && gridY === 4 ? <div className="hero-div"></div> : null}    
                 {
-                    type === 'monster' ? <div className={`${mName}`}></div>  
+                    type === 'locked-door' ? <div className="char-view-locked-door"></div>
+                    : type === 'cliff' ? <div className="char-view-cliff"></div> 
+                    : type === 'platform' ? <div className="char-view-platform"></div>
+                    : type === 'monster' ? <div className={`${mName}`}></div>  
                     : type === "chest" ? <Chest /> 
                     : type === 'quicksand' ? <Quicksand />
                     : type === "exit" ? <div className="char-view-exit"></div>
@@ -106,7 +112,7 @@ const Tile = (props) => {
                     : null
                 }
                 {pushable ? <div className="char-view-pushable"></div> : null}
-                {item === 'quest-key' ? <div className="char-view-quest-key"></div> : null}
+                {itemObject === 'door-key' ? <div className="char-view-door-key"></div> : null}
                 {hidden ? <div className="hidden">HIDDEN</div> : null}
                 {mist ? <div className="mist-div"></div> : null}
                 {itemObject === 'broken-teleporter' ? <div className="char-view-broken-teleporter"></div> : null}

@@ -16,6 +16,8 @@ import { dungeonMusic, musicNumber } from './dungeonMusic';
 import {pushObstacle} from './pushObstacle';
 import {tutorial} from './Map Variables/tutorial';
 import {puzzles, levelOne} from './Map Variables/puzzles';
+import {connect} from 'react-redux';
+import { updateInventory } from '../../Redux/reducers/heroReducer';
 
 const Game = (props) => {
   // const {mapArray, mapX, mapY} = mapObject
@@ -24,7 +26,7 @@ const Game = (props) => {
 
   const [grid, setGrid] = useState([...mapArray]),
     [charX, setCharX] = useState(mapX),
-    [charY, setCharY] = useState(mapArray.length - 11),
+    [charY, setCharY] = useState(mapArray.length-11),
     [heightWidth, setHeightWidth] = useState(650),
     [viewRowCols, setViewRowCols] = useState(9),
     [inventoryToggle, setInventoryToggle] = useState(false),
@@ -85,15 +87,25 @@ const Game = (props) => {
         pushObstacle(charX, charY+1, charX, charY+2, charX, charY, setCharX, setCharY, grid, getType, setGrid)
       } else {checkTile(charX, charY+1)}
       
-    } else if(keyCode ===  66){
+    } 
+    else if(keyCode ===  66){
       inventoryToggleFn()
     } else if(keyCode === 72){
       equipmentToggleFn()
     }
   }
 
-  const determineObject = () => {
-
+  const determineObject = (x, y) => {
+    let tileObject = grid[y][x].itemObject
+    let newGrid = [...grid]
+    switch (tileObject) {
+      case 'door-key':
+        setCharX(x)
+        setCharY(y)
+        axios.get('/api/key').then(res => console.log(res.data))
+        newGrid[y][x] = {...newGrid[y][x], itemObject: ''}
+      break;
+    }
   }
   
   const getType = (x, y) => {
@@ -356,7 +368,9 @@ const Game = (props) => {
     let newGrid = [...grid]
     newGrid[y][x] = {...newGrid[y][x], type: "empty"}
     setGrid(newGrid)
-    axios.get(`/api/item`).then(res => console.log("res.data", res.data))
+    axios.get(`/api/item`).then(res => {
+      console.log("res.data", res.data)
+      props.updateInventory(res.data)})
     goldPile(x,y,z)
   }
 
@@ -427,7 +441,7 @@ const Game = (props) => {
     props.history.push('/death')
   }
   // console.log("music", dungeonMusic[musicNumber])s
-
+  console.log('PROPS', props)
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
       <audio src={`${dungeonMusic[musicNumber]}`} autoPlay />
@@ -458,17 +472,20 @@ const Game = (props) => {
         }
         {/* <div className="coin-icon"></div> */}
         <Footer 
+          newMoney={newMoney}
           setEquipmentToggle={equipmentToggleFn}
           setInventoryToggle={inventoryToggleFn}
+          equipmentToggle={equipmentToggle}
+          inventoryToggle={inventoryToggle}
         />
-        <Inventory 
+        {/* <Inventory 
           equipmentToggle={equipmentToggle}
           inventoryToggle={inventoryToggle}
           newMoney={newMoney}
-        />
+        /> */}
       </div>
     </div>
   );
 }
-
-export default withRouter(Game);
+const mapStateToProps = reduxState => reduxState.hero
+export default withRouter(connect(mapStateToProps, {updateInventory})(Game));

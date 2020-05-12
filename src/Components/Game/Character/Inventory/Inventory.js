@@ -1,96 +1,68 @@
 import React, {useState,useEffect} from "react";
 import {connect} from "react-redux";
-import {equipItem, unequipItem} from "../../../../Redux/reducers/heroReducer";
+import {equipItem, unequipItem, deleteItem} from "../../../../Redux/reducers/heroReducer";
 import Equipment from "./Equipment";
-import axios from "axios";
 import "./Inventory.scss";
 import {GiTwoCoins} from 'react-icons/gi';
 
 const Inventory = (props) => {
-   const {hero, stats, inventory} = props
+   const {hero, stats, inventory, equipment} = props
    const {equipmentToggle, inventoryToggle} = props
    const [currency, setCurrency] = useState(0),
              [overlayToggle, setOverlayToggle] = useState(false);
 
-const equArmor = Object.values(props.equipment)
-      const heroArmor = (+stats.armor) + (+equArmor.reduce((acc, el) => {
-         return acc += ((+el.armor) ? +el.armor : +0)}, 0));
-                 
+         useEffect (() => {
+      console.log("hit")
+         },[props])
+
+      useEffect (() => {
          
-         
-         
-         
-         const heroAttack = (+stats.attack) + (+equArmor.reduce((acc, el) => {
-            return acc += ((+el.attack) ? +el.attack : +0)}, 0));
-
-console.log (equArmor)
-console.log (typeof equipment)
-console.log (stats.armor)
-console.log(heroArmor)
-
-   useEffect (() => {
-console.log("hit")
-   },[props])
-
-   useEffect (() => {
-      
-      console.log("props.newMoney", props.newMoney)
-      setCurrency(currency+props.newMoney)
-   }, [props.newMoney])
+         console.log("props.newMoney", props.newMoney)
+         setCurrency(currency+props.newMoney)
+      }, [props.newMoney])
 
 
-   const equipItem = (event) => {
-      setOverlayToggle(!overlayToggle)
-      event.preventDefault();
-      const data = JSON.parse(event.dataTransfer.getData("text"))
-      const {id} = data;
-      props.equipItem(inventory[id], id)
-   },
+      const equipItem = (event) => {
+         setOverlayToggle(!overlayToggle)
+         event.preventDefault();
+         const data = JSON.parse(event.dataTransfer.getData("text"))
+         const {id} = data;
+         props.equipItem(inventory[id], id)
+      },
 
-   unEquipItem = (event) => {
+      unEquipItem = (event) => {
+         setOverlayToggle(!overlayToggle)
+         event.preventDefault();
+         const data = JSON.parse(event.dataTransfer.getData("text"));
+         const {id, equipped} = data;
+         if (equipped ==="true"){
+         props.unequipItem(id)
+         }
+      },
+
+      deleteItem = (event) => {
       setOverlayToggle(!overlayToggle)
       event.preventDefault();
       const data = JSON.parse(event.dataTransfer.getData("text"));
+      const {id, equipped} = data;
+      if (equipped ==="true"){
+         props.deleteItem(equipment[id].item_type, equipped)
+         } else {
+            props.deleteItem(id, equipped)
+         }
+      },
+
+      handleDrag = (event) => {
+      setOverlayToggle(!overlayToggle)
+      const {id, className} = event.target;
+      const data = JSON.stringify({id: id, equipped: className})
       console.log(data)
-      const {id} = data;
-      console.log("remove: ", id)
-      props.unequipItem(id)
-   },
+      event.dataTransfer.setData("text", data)
+      }
 
-   deleteItem = (event) => {
-   setOverlayToggle(!overlayToggle)
-   event.preventDefault();
-   const data = JSON.parse(event.dataTransfer.getData("text"));
-   const {id, equipped} = data;
-   console.log("delete: ", id, equipped)
-   // props.deleteItem(id, equipped)
-
-   // axios.put(`/api/inventory/item/${id}`, {equipped}).then(res => {
-   //    console.log(res.data)
-      // setInventory(res.data.inventory)
-      // const {equipment} = res.data
-      //       if (!equipment[0].id){
-      //          setWeapon(equipment[0])}
-      //       if (!equipment[1].id){
-      //          setOffHand(equipment[1])}
-      //       if (!equipment[2].id){
-      //          setArmor(equipment[2])}
-      // }).catch (err => console.log(err))
-   },
-
-   handleDrag = (event) => {
-   setOverlayToggle(!overlayToggle)
-   const {id, className} = event.target;
-   const data = JSON.stringify({id: id, equipped: className})
-   console.log(data)
-   event.dataTransfer.setData("text", data)
-   }
-
-console.log(props)
-console.log(props.inventory)
       const mappedInventory = props.inventory.map((el, i) => {
          return el.item_type ? (
-            <div className="inventory-square"> <img key ={el.item_id} 
+            <div className="inventory-square"> <img className="inventory-square-image" key ={el.item_id} 
                      id={i} 
                      className="false"
                      src={el.image} 
@@ -98,35 +70,39 @@ console.log(props.inventory)
                      onDragStart={(event) => handleDrag(event)} 
                      onDrag={(event) => event.preventDefault()} 
                      width="82%" height="88%"
-                  /></div>)  : i < 8 ? <div className="inventory-square"></div> : null
+         /><div className="inventory-square-hover">
+            <span>{el.item_name}</span>
+            <div className="i-square-hover-stats">
+               <div><span>Attack: </span>{el.attack}</div>
+               <div><span>Armor: </span>{el.armor}</div>
+               <div><span>Strength: </span>{el.strength ? el.strength : 0}</div>
+               <div><span>Agility: </span>{el.agility ? el.agility : 0}</div>
+            </div>
+            </div>
+            </div>)  : i < 8 ? <div className="inventory-square"></div> : null
          })
 
+      console.log(props)
 
-   console.log(props)
+   console.log("props", props)
    return (
-      <div>
-         {overlayToggle ? (<div className="overlay"
-                  onDrop={(event) => deleteItem(event)}
-                  onDragOver={(event) => event.preventDefault()}>DELETE</div>
+      <>
+         {overlayToggle ? (
+            <div className="overlay"
+                     onDrop={(event) => deleteItem(event)}
+                     onDragOver={(event) => event.preventDefault()}>DELETE</div>
             ) : null
          }
-      <div className="inventory-screen-container">
+      {equipmentToggle || inventoryToggle ?
+         <div className="inventory-screen-container">
          {equipmentToggle ? (
             <>
-               <section className="stats-container">
-                  <div>Name: {hero.hero_name}</div>
-                  <div>Level: </div>
-                  <div>Health: {stats.health} </div>
-                  <div>Attack: {heroAttack}</div>
-                  <div>Armor: {heroArmor}</div>
-                  <div>Strength: {stats.strength}</div>
-                  <div>Agility: {stats.agility}</div>
-               </section>
-               <Equipment handleDrag = {handleDrag}
-                                       equipItem = {equipItem}
-                              />
-            </>
-            ) : null
+               <Equipment 
+                  handleDrag = {handleDrag}
+                  equipItem = {equipItem}
+                  inventoryToggle={inventoryToggle}
+               />
+            </> ) : null
          }
          {inventoryToggle ? (
             <>
@@ -135,14 +111,16 @@ console.log(props.inventory)
                               onDragOver={(event) => event.preventDefault()}>
                   {mappedInventory}
 
+               <div className="currency-container"><span>{currency}</span><GiTwoCoins color={"yellow"} /></div>
                </section>
-               <div className="currency-container">{currency}{' '}<GiTwoCoins color={"yellow"} /></div>
             </>
             ) : null 
          }
-      </div>
-   </div>
+      </div> : null
+      }
+      
+   </>
    )
 }
 const mapStateToProps = reduxState => reduxState.hero
-export default connect(mapStateToProps, {equipItem, unequipItem})(Inventory);
+export default connect(mapStateToProps, {equipItem, unequipItem, deleteItem})(Inventory);

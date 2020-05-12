@@ -40,9 +40,9 @@ app.post("/api/auth/logout", authCtrl.logout);
 
 //item endpoints
 app.get("/api/item", itemCtrl.findItem);
-app.put("/api/inventory/item/:id", itemCtrl.deleteItem)
 app.post("/api/item/:id", itemCtrl.findItem);
 app.get('/api/equipped-items/:weapon', itemCtrl.equippedItems);
+app.get('/api/key', itemCtrl.findKey);
 
 //combat endpoints
 app.get('/api/monster-stats/:monsterType', combatCtrl.monsterStats);
@@ -50,7 +50,8 @@ app.get('/api/character-stats/:classType', combatCtrl.charStats);
 
 //hero endpoints
 app.get("/api/heroes/player/:id", heroCtrl.getHeroes);
-app.post("/api/hero/player/:id", heroCtrl.createHero);
+app.post("/api/heroes", heroCtrl.createHero);
+app.put("/api/hero/:id", heroCtrl.saveHero)
 
 
 //monster endpoints

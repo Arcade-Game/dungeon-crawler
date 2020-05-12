@@ -26,18 +26,11 @@ export const selectHero = (hero) => {
    }
 }
 
-export const updateInventory = (data,index) => {
-// console.log(hero)
-   // let data = hero.inventory
-console.log(data)
-data.map(item => {
-   console.log(item)
+export const updateInventory = (item) => {
    return {
-   type: UPDATE_INVENTORY,
-   payload: item
+      type: UPDATE_INVENTORY,
+      payload: item
    }
-})
-
 }
 
 export const equipItem = (item, index) => {
@@ -56,16 +49,17 @@ export const equipItem = (item, index) => {
       }
    }
 
-   export const deleteItem = (item) => {
+   export const deleteItem = (data, equipped) => {
       return {
          type: DELETE_ITEM,
-         payload: item
+         payload: {data, equipped}
       }
    }
 
 
 
 export default function reducer (state = initialState, action) {
+   console.log('REDUCER DING')
    const {type, payload} = action;
    console.log(payload)
    switch(type){
@@ -87,7 +81,7 @@ export default function reducer (state = initialState, action) {
                    return state.equipment[5] = item
             }})
          return {...state, 
-            hero: {file_id: payload.file_id, hero_name: payload.hero_name, class_name: payload.class_name,gold: payload.gold}, 
+            hero: {file_id: payload.file_id, hero_name: payload.hero_name, class_name: payload.class_name, level: payload.level, gold: payload.gold}, 
             stats: {health: payload.health, attack: payload.attack, armor: payload.armor, strength: payload.strength, agility: payload.agility},
             equipment: [...state.equipment],
             inventory: 
@@ -102,12 +96,15 @@ export default function reducer (state = initialState, action) {
          }; 
 
       case UPDATE_INVENTORY:
+         console.log("ding")
          let index = state.inventory.findIndex(e => e === 0)
+         state.inventory[index] = payload
+         console.log("UPDATED INVENTORY", state)
          if (index !== -1){
-            return {...state, ...state.inventory[index] = payload}
+            return {...state}
          } 
-         
-         case EQUIP_ITEM:
+
+      case EQUIP_ITEM:
             state.inventory.splice(+payload.index, 1, 0)
             switch (payload.item.item_type){
                case weapon:
@@ -136,7 +133,7 @@ export default function reducer (state = initialState, action) {
                         inventory: [...state.inventory]
                }
 
-         case UNEQUIP_ITEM:
+      case UNEQUIP_ITEM:
             const equIndex = state.equipment.findIndex(item => item.item_id === +payload);
             const invIndex = state.inventory.findIndex(e => e === 0)
                state.inventory.splice(invIndex, 1, state.equipment[equIndex])
@@ -147,9 +144,36 @@ export default function reducer (state = initialState, action) {
             equipment: [...state.equipment], 
             inventory: [...state.inventory]}
 
-
-            case DELETE_ITEM:
-               return state
+         case DELETE_ITEM:
+               if (payload.equipped === "false") {
+               state.inventory.splice(+payload.data, 1, 0)
+               } else {
+            switch (payload.data){
+               case weapon:
+                  state.equipment[0] = {type: "weapon"};
+                  break;
+               case twoHand:
+                     state.equipment[1] = {type: "two-hand"};
+                     break;
+               case offHand:
+                     state.equipment[2] = {type: "off-hand"};
+                     break;
+               case armor:
+                      state.equipment[3] = {type: "armor"};
+                      break;
+               case helm:
+                      state.equipment[4] = {type: "helm"};
+                      break;
+               case boots:
+                      state.equipment[5] = {type: "boots"};
+                      break;
+               }
+            }
+            return {hero: {...state.hero},
+                        stats: {...state.stats},
+                        equipment: [...state.equipment],
+                        inventory: [...state.inventory]
+               }
 
       default:
          return state;

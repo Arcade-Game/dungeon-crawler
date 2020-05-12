@@ -4,13 +4,13 @@
 
 .footer-left {
     border-radius: 0px 100px 0px 0px;
-    background: $menus;
+    background: $inventory;
     border: 4px solid black;
     width: 30%;
     height: 12%;
     position: absolute;
     bottom: 2%;
-    left: 5%;
+    left: 6%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,13 +19,13 @@
 
 .footer-right {
     border-radius: 100px 0px 0px 0px;
-    background: $menus;
+    background: $inventory;
     border: 4px solid black;
     width: 30%;
     height: 12%;
     position: absolute;
     bottom: 2%;
-    right: 5%;
+    right: 6%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -42,7 +42,10 @@
     width: 160px;
     border: 6px solid black;
     border-radius: 50%;
-    background: green;
+    background: #003000;
+    &:hover {
+        background: #013f01;
+    }
 
     .inventory-icon {
         // border: 1px solid green;
@@ -54,9 +57,9 @@
         background-size: 140%;
         background-repeat: no-repeat;
         cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
-        &:hover {
-            opacity: 90%;
-        }
+        // &:hover {
+        //     opacity: 90%;
+        // }
     } 
     
 
@@ -71,10 +74,13 @@
     bottom: 11px;
     position: absolute; 
     left: 182px;
-    background: blue;
+    background: #020169;
     border-radius: 50%;
     overflow: hidden;
     border: 5px solid black;
+    &:hover {
+        background: #040280;
+    }
 }
 
 .character-icon {
@@ -89,11 +95,13 @@
 
 .footer-top {
     position: absolute;
-    top: 2%;
-    left: 4%;
+    // top: 2%;
+    // left: 4%;
+    top: 0;
+    left: 0;
     height: 80px;
     width: 80px;
-    background: $menus;
+    background: $inventory;
     border: 4px solid black;
     font-family: 'Bilbo Swash Caps', cursive;
     font-size: 30px;
@@ -101,33 +109,72 @@
     padding: 5px;
     border-bottom-right-radius: 30px;
     cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
-    z-index: 1;
+    z-index: 2;
+}
+
+.menu-title {
+    width: 100%;
+    height: 80px;
+    font-size: 30px;
+    margin-left: 140px;
+    text-align: left;
+}
+
+.menu-x-button {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: url('../pictures/menus/papyrus.jpg');
+    height: 25px;
+    width: 25px;
+    border: 3px solid black;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -12px;
+    right: -12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: url('../pictures/cursors/Mouse09RedResize.png'), auto;
+    &:hover {
+        box-shadow: 0 0 0 .5px black;
+    }
 }
 
 .game-menu {
+    z-index: 1;
     font-family: 'Playball', cursive;
     position: absolute;
     height: 330px;
     width: 230px;
-    border: 3px solid black;
+    border: 4px solid black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    top: 66px;
-    left: calc(80px + 2%);
-    background: blue;
+    // top: 66px;
+    // left: calc(80px + 2%);
+    top: 0;
+    left: 0;
+    background: url('../pictures/menus/papyrus.jpg');
     padding: 10px;
     border-radius: 0 20px 0 20px;
     button {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
         border: none;
         background: transparent;
-        font-size: 17px;
-        font-weight: 800px;
+        font-size: 22px;
+        font-weight: bold;
         height: 40px;
         width: 90%;
-        border: 2px solid black;
+        text-align: start;
+        padding-left: 4px;
+        border-radius: 15px;
+    }
+    button:hover {
+        background: rgba(0, 0, 0, 0.226);
+        box-shadow: 0 0 0px 3px black;
 
     }
 }
@@ -141,6 +188,14 @@
     z-index: 1;
 }
 
+.experience-bar {
+    height: 90%;
+    min-width: 35%;
+    max-width: 35%;
+    border: 1px solid black;
+    margin-right: 180px;
+    border-radius: 25%;
+}
 
 .health-bar {
     position: absolute;
@@ -156,26 +211,63 @@
     align-items: center;
     background: rgb(58, 57, 57);
     cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
+    z-index: 2;
 }
 
-
-.stats-container{
-    @include column;
+.stats-container {
+    font-size: 17px;
+    font-weight: 800;
     position: absolute;
-    right: 5%;
-    bottom: 180px;
+    right: -4px;
+    // bottom: 160px;
+    bottom: 85px;
     font-weight: 800px;
     font-size: 17px;
-    justify-content: flex-end;
-    align-items: flex-start;
-    margin-top: 15px;
-    height: 150px;
+    // justify-content: flex-end;
+    // align-items: flex-start;
+    // margin-top: 15px;
+    height: 265px;
     width:  250px;
-    background-color: rgb(54, 54, 54);
-    border-radius: 10px;
+    background-color: $inventory;
+    border-radius: 10px 10px 0 0;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 8px;
     border: 4px solid black;
+    border-bottom: none;
+    text-align: start;
+    padding-right: 13px;
 
+    
+ }
+
+ .stats-container-for-styling {
+    background: $pal-three;
+    padding: 8px;
+    border-radius: 5px;
+    div {
+            display: flex;
+            justify-content: space-between;
+            // margin-right: 5px;
+        }
+
+ }
+
+ .stats-level {
+    //  border: 1px solid black;
+     width: 62px;
+     height: 37%;
+     display: flex;
+     font-size: 70px;
+     justify-content: center;
+     align-items: flex-end;
+ }
+
+ .stats-container-stats {
+     margin-top: 10px;
+    margin-left: 10px;
+    
+    display: flex;
+    flex-direction: column;
+    
  }
 

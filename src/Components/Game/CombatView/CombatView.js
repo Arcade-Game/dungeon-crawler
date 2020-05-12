@@ -8,6 +8,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {attackType, monAttack, charAttack, statSetupChar, statSetupMon} from './combatFns'
 
+
 const CombatView = (props) => {
     const {monsterType, isFightFn, clearMonster, monsterCoor} = props,
         [weapon, setWeapon] = useState(''),
