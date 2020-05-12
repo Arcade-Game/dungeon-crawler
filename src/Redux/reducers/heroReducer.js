@@ -26,18 +26,11 @@ export const selectHero = (hero) => {
    }
 }
 
-export const updateInventory = (data,index) => {
-// console.log(hero)
-   // let data = hero.inventory
-console.log(data)
-data.map(item => {
-   console.log(item)
+export const updateInventory = (item) => {
    return {
-   type: UPDATE_INVENTORY,
-   payload: item
+      type: UPDATE_INVENTORY,
+      payload: item
    }
-})
-
 }
 
 export const equipItem = (item, index) => {
@@ -66,6 +59,7 @@ export const equipItem = (item, index) => {
 
 
 export default function reducer (state = initialState, action) {
+   console.log('REDUCER DING')
    const {type, payload} = action;
    console.log(payload)
    switch(type){
@@ -102,9 +96,12 @@ export default function reducer (state = initialState, action) {
          }; 
 
       case UPDATE_INVENTORY:
+         console.log("ding")
          let index = state.inventory.findIndex(e => e === 0)
+         state.inventory[index] = payload
+         console.log("UPDATED INVENTORY", state)
          if (index !== -1){
-            return {...state, ...state.inventory[index] = payload}
+            return {...state}
          } 
 
       case EQUIP_ITEM:

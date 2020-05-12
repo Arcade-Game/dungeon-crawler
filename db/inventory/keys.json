@@ -1,0 +1,11 @@
+[
+    {
+        "id": 0,
+      "name":"Bronze Door Key",
+      "type":"key",
+      "damage":0,
+      "armor": 0,
+      "health": 0,
+      "image": "https://www.darksword-armory.com/wp-content/uploads/2018/07/the-vindaaris-sword-fantasy-medieval-weapon-1328-darksword-armory-3.jpg"
+    }
+]

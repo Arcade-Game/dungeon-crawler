@@ -106,7 +106,7 @@ const Tile = (props) => {
                     : null
                 }
                 {pushable ? <div className="char-view-pushable"></div> : null}
-                {item === 'quest-key' ? <div className="char-view-quest-key"></div> : null}
+                {itemObject === 'door-key' ? <div className="char-view-door-key"></div> : null}
                 {hidden ? <div className="hidden">HIDDEN</div> : null}
                 {mist ? <div className="mist-div"></div> : null}
                 {itemObject === 'broken-teleporter' ? <div className="char-view-broken-teleporter"></div> : null}
