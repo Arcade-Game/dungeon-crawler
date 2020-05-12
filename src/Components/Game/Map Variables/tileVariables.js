@@ -6,7 +6,7 @@ export const tileVariables = {
     ll: {type: "wall", elevation: 10},
     zz: {type: "exit", elevation: 0},
     wl: [ll, ll, ll, ll, ll, ll, ll, ll, ll],
-    m: {type: "monster", elevation: 0},
+    // m: {type: "monster", elevation: 0, level: 1},
     p: {type: "empty", pushable: true, elevation: 0},
     pk: {type: "cliff", pushable: true, elevation: 3},
     w: {type: "water", elevation: 0},

@@ -107,12 +107,12 @@ const {d1} = doors;
             [...WL,              ll, o, o, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, o, o,                ...WL],
             [...WL,              ll,ll, o, o, o, o, o, o, o, o, h, h, h, h, h, h, h, p,ll, o,                ...WL],
             [...WL,              ll, o, o,ll,ll, o, o, o, m,ll,ll,ll,ll,ll,ll,ll, h, h,ll, o,                ...WL],
-            [...WL,              ll, o, Q,Cl,Cl,ll,ll,ll, w,pk,k3,ll, o,ll, G, x,ll,ll, o, o,                ...WL],
-            [...WL,              ll,ll, Q,Cl,Cl,Pl,PP,Pl, o,Cl,Cl,ll, o, o, m,ll,ll, o, o, o,                ...WL],
-            [...WL,              ll, o, o, o,Pl, F, o, o, Q, o, p, o, o, o, o, o,d1, o, o, o,                ...WL],
-            [...WL,              ll, o, o, o, Q, Q, o, o, w, o, p, o, o, o,Pl, p,ll, o, o, o,                ...WL],
-            [...WL,              ll,ll, o, o, o, o, o, o,Cl,Cl,Cl,Cl,Cl,Cl,Cl,Cl,Cl,ll, o, o,                ...WL],
-            [...WL,              ll, G, m, o,ll,ll,ll,ll,Cl,Cl,Cl,Cl,Cl,Cl,Cl,Cl,Cl,ll, o, o,                ...WL],
+            [...WL,              ll, o, Q,Cl,Cl,ll,ll,ll, w,pk,Cl,ll, o,ll, G, x,ll,ll, o, o,                ...WL],
+            [...WL,              ll,ll, Q,Cl,Cl,Pl,PP,Pl, o,Cl,Cl,ll, o, o,m2,ll,ll, m,m2,m3,                ...WL],
+            [...WL,              ll, o, o, o,Pl, F, o, o, Q, o, p, o, o, o, o, o, o, G, G,m4,                ...WL],
+            [...WL,              ll, o, o, o, Q, Q, o, o, w, o, p, o, o, o,Pl, p,ll, o, o,m5,                ...WL],
+            [...WL,              ll,ll, o, o, o, o, o, o,Cl,Cl,Cl,Cl,Cl,Cl,Cl,Cl,Cl,ll, o, m,                ...WL],
+            [...WL,              ll, G, m, o,ll,ll,ll,ll,Cl,Cl,Cl,Cl,Cl,Cl,Cl,Cl,Cl,ll,m3,m2,                ...WL],
             [...WL,              ll,ll,ll,ll,ll,ll,ll,ll,ll,ll,Cl,ll,ll,ll,ll,ll,ll,ll,ll,ll,                ...WL],
     
     
