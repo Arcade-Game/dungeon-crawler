@@ -7,7 +7,15 @@ import axios from "axios";
 const NewHeros = (props) => {
    const [classToggle, setClassToggle] = useState("Warrior"),
              [genderToggle, setGenderToggle] = useState("Male"),
-             [heroName, setHeroName] = useState("Jon");
+             [heroName, setHeroName] = useState("Jon"),
+            //  [heroClasses, setHeroClasses] = useState(),
+             [heroStats, setHeroStats] = useState()
+
+      useEffect (() => {
+         // axios.get("/api/classes").then(res => {
+            // setHeroClasses(res.data)})
+            setStartingStats()
+      },[classToggle])
 
    const  Warrior = "Warrior",
                Ranger = "Ranger",
@@ -17,7 +25,7 @@ const NewHeros = (props) => {
 
    const createHero = () => {
       const {player_id} = props.auth
-      let class_id = null
+      let class_id = 0
          switch (classToggle){
             case Warrior:
               class_id = 1;
@@ -29,11 +37,7 @@ const NewHeros = (props) => {
                class_id = 3;
                break;
          }
-         console.log("player: ", player_id)
-         console.log("class: ", class_id)
-         console.log("hero: ", heroName)
       axios.post("/api/heroes", {player_id, heroName, class_id}).then(res => {
-            console.log(res.data)
          props.selectHero(res.data[0])
          props.history.push("/game")
       })
@@ -56,8 +60,25 @@ const NewHeros = (props) => {
                   return "https://i.pinimg.com/originals/27/f3/4e/27f34ee5490f6ee9bfcffeb7497fe6c6.jpg" // ArtStation Pinterest
          }
    }
+   const setStartingStats = () => {
+      switch (classToggle) {
+         case Warrior:
+
+               setHeroStats({health:100, attack: 1,armor: 1, strength: 4, agility: 0 })
+         break;
+         case Ranger:
+            setHeroStats({health: 80, attack: 1,armor: 0, strength: 1, agility: 4 })
+            break;
+         case Rogue:
+            setHeroStats({health:60,attack: 2,armor: 0, strength: 0, agility: 6 })
+         break;
+      }
+   }
+
+
 
    console.log(props)
+   console.log(heroStats)
    return (
       <div className="new-hero-screen-container"
               onClick={(event)=> props.stopPropagation(event)}> 
@@ -111,7 +132,10 @@ const NewHeros = (props) => {
             <h1 className="new-hero-name"> {heroName}</h1>
             <h3 className="new-hero-class">Level 1 {classToggle}</h3>
             <div className="new-hero-stats-container">
-            <div className="new-hero-stats">Health: <h3>100</h3></div>
+
+            <div className="new-hero-stats">Health: 
+            <h3>100</h3>
+            </div>
             <div className="new-hero-stats">Strength:<h3>4</h3></div>
             <div className="new-hero-stats">Agility:<h3>1</h3></div>
             <div className="new-hero-stats">Armor:<h3>1</h3></div>

@@ -12,6 +12,13 @@ module.exports = {
       res.status(200).send([heroes])
 },
 
+getClasses: (req, res) => {
+      const db = req.app.get("db");
+            db.hero.get_classes().then(classes => {
+                  res.status(200).send(classes)
+            })
+},
+
       createHero: async (req, res) => {
             const { player_id, heroName, class_id } = req.body;
                         db = req.app.get("db");
@@ -32,10 +39,10 @@ module.exports = {
             db.session.delete_inventory(id)
             db.session.delete_equipment(id)
             await inventory.forEach (el => ( el.item_id ? ( console.log(el),
-                  db.hero.save_inventory(id,el.item_id))
+                  db.session.save_inventory(id,el.item_id))
                   : null ))
             await equipment.forEach (el => ( el.item_id ? ( console.log(el),
-                  db.hero.save_equipment(id,el.item_id))
+                  db.session.save_equipment(id,el.item_id))
                   : null ))
 
             console.log(id)
