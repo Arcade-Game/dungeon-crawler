@@ -505,6 +505,11 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
+  const updateSessionInventory = (inventory, equipment) => {
+    setInventory(inventory);
+    setEquipment(equipment)
+  }
+
   // const stats = async()=> {
   //   const arr = {}
   //   await axios.get(`/api/monster-stats/${monsterType}`)
@@ -521,6 +526,11 @@ const Game = (props) => {
     props.history.push('/death')
   }
   // console.log("music", dungeonMusic[musicNumber])s
+
+  console.log(hero)
+  console.log(heroStats)
+  console.log(inventory)
+  console.log(equipment)
 
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
@@ -559,15 +569,15 @@ const Game = (props) => {
           setInventoryToggle={inventoryToggleFn}
           equipmentToggle={equipmentToggle}
           inventoryToggle={inventoryToggle}
+          inventory = {inventory}
+          equipment = {equipment}
+          updateSessionInventory = {updateSessionInventory}
+          heroStats = {setHeroStats}
+          hero = {hero}
           experience={experience}
           level={level}
           characterHealth = {characterHealth}
         />
-        {/* <Inventory 
-          equipmentToggle={equipmentToggle}
-          inventoryToggle={inventoryToggle}
-          newMoney={newMoney}
-        /> */}
       </div>
     </div>
   );

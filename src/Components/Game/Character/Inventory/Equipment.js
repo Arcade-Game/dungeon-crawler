@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react"
-import {connect} from "react-redux"
 const Equipment = (props) => {
    const {handleDrag, equipItem, inventoryToggle} = props;
    const [weapon, setWeapon] = useState(props.equipment[0]),
@@ -156,5 +155,5 @@ const Equipment = (props) => {
    </section>
    )
 }
-const MapStateToProps = reduxState => reduxState.hero
-export default connect(MapStateToProps)(Equipment);
+
+export default Equipment;

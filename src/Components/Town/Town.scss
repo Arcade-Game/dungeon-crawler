@@ -204,6 +204,10 @@
       background-color: $pal-six;
       color:white;
    }
+
+   .town-hero-name{
+      width: 30%;
+   }
  .town-overlay {
     @include row;
    background-color:rgba(0, 0, 0, 0.65);

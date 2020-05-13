@@ -106,10 +106,9 @@ const Town = (props) => {
             <>
             <div className="hero-selected"
             onClick={() => {setToggle(heroes)}}>
-               <h2>{hero.hero_name}</h2>
+               <h2 className="town-hero-name">{hero.hero_name}</h2>
                <h2>{hero.class_name}</h2>
-               <h2>Deaths: {hero.deaths}</h2>
-               <h2>Gold: {hero.gold}</h2> 
+               <h2>{hero.deaths} Deaths</h2>
             </div>
          
          <div className="play-game-container">

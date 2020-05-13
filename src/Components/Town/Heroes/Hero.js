@@ -18,10 +18,11 @@ const Hero = (props) => {
    return (
       <>
          <div className="hero-title"
-            onClick={() => {handleHeroToggle(index)}}>
+            onClick={() => {handleHeroToggle(index)
+            handleHeroSelect()}}>
                <h2>{hero.hero_name}</h2>
                <h2>{hero.class_name}</h2>
-               <h2>Deaths: X</h2>
+               <h2>{hero.deaths} Deaths</h2>
             </div> 
 
          {expand[index] ? (<div className="hero-summary-expand">
