@@ -40,10 +40,11 @@ create table save_files (
    file_id serial primary key,
    player_id int references players(player_id),
    hero_name VARCHAR(20),
+   gender VARCHAR(6),
    class_id int references classes(class_id),
    hero_level INT,
    gold INT,
-   deaths INT
+   deaths INT,
 );
 
 create table items (
@@ -106,4 +107,30 @@ CREATE TABLE monster_stats (
 
 
 
+INSERT INTO items (item_name, item_type, attack, armor, rarity, price, image)
+VALUES ('Iron Axe', 'weapon', 2, -1, 'common', 25, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589328802/refternu/pq6xevay9hzpqfxtq5ux.png'),
+ ('Steel Axe', 'weapon', 3, -1, 'common', 50, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589339737/refternu/rceamsfs1qit4seclwwv.png'),
+ ('Wooden Sword', 'weapon', 1, 0, 'common', 15,'https://res.cloudinary.com/desyiuzzn/image/upload/v1589335839/refternu/k4wvluqqfz5n7gxj9me2.png'),
+ ('Iron Dagger', 'off-hand', 1, 0, 'common', 25,'https://res.cloudinary.com/desyiuzzn/image/upload/v1589339584/refternu/vsfvlakfpydhnakoligp.png'),
+ ('Steel Dagger', 'off-hand', 2, 0, 'common', 50,'https://res.cloudinary.com/desyiuzzn/image/upload/v1589339790/refternu/nprv2gge8ocayy0drots.png'),
+ ('Frostbite', 'weapon', 9, 0, 'Epic', 10000, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589337168/refternu/iiykiulzc3ie23psbil6.png'),
+ ('Broad Sword', 'weapon', 3, 0, 'uncommon', 125, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589337583/refternu/naqao6uxwozfl2ay3gbf.png'),
+ ('Falchion', 'weapon', 3, 0, 'uncommon', 125, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589338693/refternu/agcnxxykev2z4ejqv1pr.png'),
+ ('Steel Shortsword', 'weapon', 3, 0, 'uncommon', 125, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589338775/refternu/lczbos5t8v89qa03ococ.png'),
+ ('Iron Battleaxe', 'weapon', 4, -2, 'common', 100, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589339427/refternu/zor7zcqzwmmquxqp2saa.png'),
+ ('Steel Battleaxe', 'weapon', 5, -2, 'uncommon', 175, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589339648/refternu/y0zhjairzrrzuxbygs1p.png'),
+ ('Banded Leather','armor', 0, 2, 'common', 100, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589342010/refternu/dgbhz8okdhv2cdxq7x93.png'),
+('Expert Crafted Banded Leather','armor', 0, 4, 'rare', 250, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589342714/refternu/xqxowjlq48pt5laurzhq.png'),
+('Master Crafted Banded Leather','armor', 0, 5, 'rare', 300, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589342764/refternu/pqgoavlwipgvkboeuou4.png'),
+('Chainmail','armor', 0, 6, 'rare', 1500, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589344258/refternu/cnuqu4pi8vwaqvh95aza.png')
+('Quilted Armor','armor', 0, 1, 'common', 75, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589345070/refternu/jtiqhbcvajzf3rydrdgx.png'),
+('Red Dragon Scale Mail','armor', 0, 15, 'legendary', 25000, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589345414/refternu/cs6eqe1t1eykup8axzaz.png'),
+('Gladiator Armor','armor', 0, 5, 'uncommon', 450, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589347796/refternu/dbbgdyde0vqvtqzwfbsq.png'),
+('Studded Leather','armor', 0, 3, 'uncommon', 200, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589348003/refternu/gmaanaugzawxrhxkdu8o.png'),
+('Light Leather','armor', 0, 1, 'uncommon', 75, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589348638/refternu/decfiywnw3ctdbnt1ptt.png'),
+('Pheonix Rising','off-hand', 0, 5, 'epic', 10000, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589349902/refternu/dgiaixfofjne1sqt8ffx.png'),
+('Royal Buckler','off-hand', 0, 1, 'common', 75, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589350379/refternu/mwdvevdqnbcut7fe94rr.png'),
+('Dragon''s Buckler','off-hand', 0, 2, 'uncommon', 175, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589350750/refternu/wg8k0frb2ex0dsintgxy.png'),
+('Dwarven Buckler','off-hand', 0, 2, 'uncommon', 175, 'https://res.cloudinary.com/desyiuzzn/image/upload/v1589351189/refternu/tasxtogqormk7joyorvu.png');
 
+ 
