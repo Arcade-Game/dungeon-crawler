@@ -6,11 +6,12 @@ import Lava from '../Animations/Lava/Lava';
 import Quicksand from '../Animations/Quicksand/Quicksand';
 import Lookout from './Lookout/Lookout';
 import {TweenMax, SteppedEase} from 'gsap';
+import './hero.scss';
 
 
 
 const Tile = (props) => {
-    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item, elevation, direction} = props
+    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item, elevation, direction, hero} = props
 
     // const [monType, setMonType] = useState('')
     useEffect(() => {

@@ -53,50 +53,7 @@
 //     position: absolute;
 // }
 
-.hero-div-up {
-    background: url('../pictures/character/trimmed-test-char.png');
-    background-size: 900%;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    z-index: 10;
-    position: absolute;
-    overflow: hidden;
-}.hero-div-right {
-    background: url('../pictures/character/trimmed-test-char.png');
-    background-size: 900%;
-    background-position-y: 100%;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    z-index: 10;
-    position: absolute;
-    overflow: hidden;
-}.hero-div-down {
-    background: url('../pictures/character/trimmed-test-char.png');
-    background-size: 900%;
-    background-position-y: 66%;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    z-index: 10;
-    position: absolute;
-    overflow: hidden;
-}.hero-div-left {
-    background: url('../pictures/character/trimmed-test-char.png');
-    background-size: 900%;
-    background-position-y: 33%;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    z-index: 10;
-    position: absolute;
-    overflow: hidden;
-}
+
 
 .char-view {
     // border: 1px solid yellow;
