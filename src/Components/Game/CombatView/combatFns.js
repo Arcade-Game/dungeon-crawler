@@ -67,7 +67,7 @@ export function attackType (weapon) {
      case 'axe':
         return arr = ['Chop'/*, 'Slash'*/]
       default:
-        return arr = ['Punch'/*, 'kick', 'block'*/]
+        return arr = ['Punch'/*, 'Kick', 'Block'*/]
   }
 }
 
