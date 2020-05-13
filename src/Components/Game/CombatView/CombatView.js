@@ -5,7 +5,6 @@ import { AiOutlineConsoleSql } from 'react-icons/ai';
 import CombatStats from '../../CombatStats/CombatStats';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
-import {connect} from 'react-redux';
 import {attackType, monAttack, charAttack, statSetupChar, statSetupMon} from './combatFns'
 
 
@@ -20,8 +19,6 @@ const CombatView = (props) => {
         [endFight, setEndFight] = useState(false)
 
     useEffect(()=> {
-        //move where the equipment is coming from to game.js
-        //////////////////////////////////////////////////
         getStats()
         if(props.equipment[0].item_name){
             setButtonArr(attackType(props.equipment[0].item_name))
@@ -38,11 +35,9 @@ const CombatView = (props) => {
     useEffect(() => {
         if(stats) {
             setMonsterHealth(stats.health)
-            //move this to a prop from game.js
-            //////////////////////////////////
             setClassType(props.hero.class_name)
-        }
-        
+        }  
+
     }, [stats.health])
 
     const getStats = async()=> {
@@ -80,8 +75,6 @@ const CombatView = (props) => {
             monHealth = monsterHealth
         }
         let monster = stats
-        //pass the stats object from game.js
-        ////////////////////////////////////
         let character = props.heroStats
         await statSetupChar(character)
         await statSetupMon(monster)
@@ -177,7 +170,6 @@ const CombatView = (props) => {
 
     const combatLog  = log.map((e, i) => (e.id === 'm') ? <p key={i} style={{color: 'red'}}>{e.message}</p> : <p key={i} style={{color: 'green'}}>{e.message}</p>)
 
-    console.log(log)
 
     return (
         <>
@@ -199,9 +191,6 @@ const CombatView = (props) => {
             <CombatStats  
                 monsterStats = {stats}
                 monsterHealth = {monsterHealth} 
-                //pass the props of the character health from  game.js instead of from here
-                //also pass the stats down to combat stats
-                ////////////////////////////////////////////////////////////////////////
                 characterHealth = {props.characterHealth}
                 stats = {props.heroStats}
                 monsterType = {monsterType}
@@ -210,6 +199,5 @@ const CombatView = (props) => {
     )
 }
 
-// const mapStateToProps = reduxState => reduxState.hero
 
 export default withRouter(CombatView);
