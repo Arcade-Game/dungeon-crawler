@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {connect} from "react-redux";
 import './Footer.scss';
 import {withRouter} from 'react-router-dom';
 import Inventory from '../Game/Character/Inventory/Inventory';
@@ -7,10 +6,11 @@ import titlesReducer from '../../Redux/reducers/titlesReducer';
 // import {BsArrowLeft} from 'react-icons/bs';
 
 const Footer = props => {
-   const {inventory, stats, hero, characterHealth} = props.hero
+   const {inventory, equipment, updateSessionInventory,equipmentToggle, inventoryToggle, heroStats, hero,  newMoney, experience, level, characterHealth} = props
+
    const {title, equipmentToggle, inventoryToggle, newMoney, level, experience} = props
    const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
-   const [totalHealth, setTotalHealth] = useState(5)
+   const [totalHealth, setTotalHealth] = useState(heroStats.health)
    const [statsToggle, setStatsToggle] = useState(false)
    const [menuToggle, setMenuToggle] = useState(false)
 
@@ -19,11 +19,11 @@ const Footer = props => {
       setMenuToggle(!menuToggle)
    }
 
-   const equArr = Object.values(props.hero.equipment)
-   const heroArmor = (+stats.armor) + (+equArr.reduce((acc, el) => {
+   const equArr = Object.values(props.equipment)
+   const heroArmor = (+heroStats.armor) + (+equArr.reduce((acc, el) => {
       return acc += ((el.armor) ? el.armor : 0)}, 0));
 
-   const heroAttack = (+stats.attack) + (+equArr.reduce((acc, el) => {
+   const heroAttack = (+heroStats.attack) + (+equArr.reduce((acc, el) => {
          return acc += ((el.attack) ? el.attack : 0)}, 0));
 
 
@@ -47,6 +47,9 @@ const Footer = props => {
          <Inventory 
             equipmentToggle={equipmentToggle}
             inventoryToggle={inventoryToggle}
+            inventory = {inventory}
+            equipment = {equipment}
+            updateSessionInventory = {updateSessionInventory}
             newMoney={newMoney}
          />
          <div className="inventory-icon-container">
@@ -77,11 +80,11 @@ const Footer = props => {
                   <div className="stats-container-for-styling">
                      <div><span>{hero.hero_name}</span></div>
                         <div className="stats-container-stats">
-                           <div><span>Health:</span>{characterHealth}</div>
+                           <div><span>Health:</span>{heroStats.health}</div>
                            <div><span>Armor:</span>{heroArmor}</div>
-                           <div><span>Strength:</span>{stats.strength}</div>
-                           <div><span>Agility:</span>{stats.agility}</div>
-                           <div><span>Damage:</span>{heroAttack} - {heroAttack + stats.strength}</div>
+                           <div><span>Strength:</span>{heroStats.strength}</div>
+                           <div><span>Agility:</span>{heroStats.agility}</div>
+                           <div><span>Damage:</span>{heroAttack} - {heroAttack + heroStats.strength}</div>
                         </div>
                   </div>
                   <div className="stats-level" style={{color: 'white'}}><span>{level}</span></div>
@@ -92,7 +95,6 @@ const Footer = props => {
    )
 }
 
-const MapStateToProps = reduxState => reduxState
-export default withRouter(connect(MapStateToProps, {titlesReducer})(Footer));
+export default withRouter(Footer);
 //AiFillHeart
 //AiOutlineHeart
