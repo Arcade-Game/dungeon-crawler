@@ -62,6 +62,5 @@ const CombatStats = props => {
    )
 }
 
-const mapStateToProps = reduxState => reduxState.hero
 
-export default connect(mapStateToProps)(CombatStats);
+export default CombatStats;

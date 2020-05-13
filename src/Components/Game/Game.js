@@ -34,7 +34,6 @@ const Game = (props) => {
     [newMoney, setNewMoney] = useState(0),
     [isFight, setIsFight] = useState(false),
     [monsterType, setMonsterType] = useState(''),
-    [monsterStats, setMonsterStats] = useState({}),
     [characterHealth, setCharacterHealth] = useState(0),
     [monsterCoor, setMonsterCoor] = useState([0,0]),
     [experience, setExperience] = useState(0),
@@ -505,23 +504,10 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
-  // const stats = async()=> {
-  //   const arr = {}
-  //   await axios.get(`/api/monster-stats/${monsterType}`)
-  //   .then((res) => {
-  //       setMonsterStats(res.data)
-  //       arr = res.data
-  //   })
-  //   .catch(err => console.log(err))
-  //   console.log(arr)
-  //   return arr
-  // }
-
   const die = ()  => {
     props.history.push('/death')
   }
   // console.log("music", dungeonMusic[musicNumber])s
-
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
       <audio src={`${dungeonMusic[musicNumber]}`} autoPlay />
@@ -543,13 +529,16 @@ const Game = (props) => {
           <CombatView 
             monsterType={monsterType.toLowerCase()}
             toggleFight = {setIsFight}
-            // getStats={stats}
             isFightFn={setIsFight}
             setGridFn = {setGrid}
             clearMonster = {clearMonster}
             monsterCoor = {monsterCoor}
             characterHealth = {characterHealth}
             setCharacterHealthFn = {setCharacterHealth}
+            level = {level}
+            heroStats = {heroStats}
+            equipment = {equipment}
+            hero = {hero}
           /> : null
         }
         <div className="coin-icon" ref={e => {coinFade = e}}></div>

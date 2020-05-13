@@ -82,7 +82,7 @@ const CombatView = (props) => {
         let monster = stats
         //pass the stats object from game.js
         ////////////////////////////////////
-        let character = props.stats
+        let character = props.heroStats
         await statSetupChar(character)
         await statSetupMon(monster)
         if (character.agility > monster.agility) {
@@ -203,12 +203,13 @@ const CombatView = (props) => {
                 //also pass the stats down to combat stats
                 ////////////////////////////////////////////////////////////////////////
                 characterHealth = {props.characterHealth}
+                stats = {props.heroStats}
                 monsterType = {monsterType}
                 />
         </>
     )
 }
 
-const mapStateToProps = reduxState => reduxState.hero
+// const mapStateToProps = reduxState => reduxState.hero
 
-export default connect(mapStateToProps)(withRouter(CombatView));
+export default withRouter(CombatView);
