@@ -7,8 +7,6 @@ import Inventory from '../Game/Character/Inventory/Inventory';
 
 const Footer = props => {
    const {inventory, stats, hero, equipmentToggle, inventoryToggle, newMoney, experience, level, characterHealth} = props
-   const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
-   const [totalHealth, setTotalHealth] = useState(5)
    const [statsToggle, setStatsToggle] = useState(false)
    const [menuToggle, setMenuToggle] = useState(false)
 
