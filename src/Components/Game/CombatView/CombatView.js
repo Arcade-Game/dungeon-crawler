@@ -93,10 +93,11 @@ const CombatView = (props) => {
                 })
             }
             monHealth -= cDamage 
-            if(monHealth <= 0) {
+            if(monHealth < 0) {
                 setMonsterHealth(0)
+            } else {
+                setMonsterHealth(monHealth)
             }
-            setMonsterHealth(monHealth)
 
             let mDamage = monAttack(classType);
             if(mDamage === 0) {
@@ -142,10 +143,11 @@ const CombatView = (props) => {
                 })
             }
             monHealth -= cDamage 
-            if(monHealth <= 0) {
+            if(monHealth < 0) {
                 setMonsterHealth(0)
+            } else {
+                setMonsterHealth(monHealth)
             }
-            setMonsterHealth(monHealth)
         }
         
         if (charHealth <= 0 || monHealth <= 0) {
