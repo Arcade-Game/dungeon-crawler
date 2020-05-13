@@ -32,7 +32,6 @@ const CombatStats = props => {
       }
    }, [stats, monsterHealth, characterHealth, monsterStats])
 
-   console.log(props)
    return (
       <div className='stat-container'>
          <div className='char-stats'>

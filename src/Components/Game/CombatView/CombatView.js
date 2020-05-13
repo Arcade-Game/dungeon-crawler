@@ -12,7 +12,6 @@ import {attackType, monAttack, charAttack, statSetupChar, statSetupMon} from './
 const CombatView = (props) => {
     const {monsterType, isFightFn, clearMonster, monsterCoor} = props,
         [weapon, setWeapon] = useState(''),
-        // [characterHealth, setCharacterHealth] = useState(0),
         [monsterHealth, setMonsterHealth] = useState(0),
         [buttonArr, setButtonArr] = useState([]),
         [stats, setStats] = useState({}),
@@ -21,6 +20,8 @@ const CombatView = (props) => {
         [endFight, setEndFight] = useState(false)
 
     useEffect(()=> {
+        //move where the equipment is coming from to game.js
+        //////////////////////////////////////////////////
         getStats()
         if(props.equipment[0].item_name){
             setButtonArr(attackType(props.equipment[0].item_name))
@@ -37,6 +38,8 @@ const CombatView = (props) => {
     useEffect(() => {
         if(stats) {
             setMonsterHealth(stats.health)
+            //move this to a prop from game.js
+            //////////////////////////////////
             setClassType(props.hero.class_name)
         }
         
@@ -75,18 +78,26 @@ const CombatView = (props) => {
         if(charHealth !== props.characterHealth) {
             charHealth = props.characterHealth
             monHealth = monsterHealth
-
         }
         let monster = stats
+        //pass the stats object from game.js
+        ////////////////////////////////////
         let character = props.stats
         await statSetupChar(character)
         await statSetupMon(monster)
         if (character.agility > monster.agility) {
             let cDamage = charAttack(classType, weapon, weaponMove);
             if(cDamage === 0) {
-                arr.push(`You missed the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}.`)
+                arr.push(
+                    {
+                        id: 'c',
+                        message: `You missed the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}.`
+                    })
             } else {
-                arr.push(`You did ${cDamage} damage to the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}.`)
+                arr.push({
+                    id: 'c',
+                    message: `You did ${cDamage} damage to the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}.`
+                })
             }
             monHealth -= cDamage 
             if(monHealth <= 0) {
@@ -96,27 +107,46 @@ const CombatView = (props) => {
 
             let mDamage = monAttack(classType);
             if(mDamage === 0) {
-                arr.push(`You dodged ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} attack.`)
+                arr.push({
+                    id: 'c',
+                    message: `You dodged ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} attack.`
+                })
             } else {
-                arr.push(`${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} did ${mDamage} damage to you.`)
+                arr.push({
+                    id: 'm',
+                    message: `${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} did ${mDamage} damage to you.`
+                })
             }
             charHealth -= mDamage
             props.setCharacterHealthFn(charHealth)
         } else {
             let mDamage = monAttack(classType);
             if(mDamage === 0) {
-                arr.push(`You dodged ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} attack.`)
+                arr.push({
+                    id: 'c',
+                    message: `You dodged ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} attack.`
+                })
             } else {
-                arr.push(`${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} did ${mDamage} damage to you.`)
+                arr.push({
+                    id: 'm',
+                    message: `${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)} did ${mDamage} damage to you.`
+                })
             }
             charHealth -= mDamage
             props.setCharacterHealthFn(charHealth)
 
             let cDamage = charAttack(classType, weapon, weaponMove);
             if(cDamage === 0) {
-                arr.push(`You missed the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}.`)
+                arr.push(
+                    {
+                        id: 'c',
+                        message: `You missed the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}.`
+                    })
             } else {
-                arr.push(`You did ${cDamage} damage to the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}.`)
+                arr.push({
+                    id: 'c',
+                    message: `You did ${cDamage} damage to the ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}.`
+                })
             }
             monHealth -= cDamage 
             if(monHealth <= 0) {
@@ -127,11 +157,17 @@ const CombatView = (props) => {
         
         if (charHealth <= 0 || monHealth <= 0) {
             if (charHealth <= 0) {
-                arr.push(`You have Died!`)
+                arr.push({
+                    id: 'm',
+                    message: `You have Died!`
+                })
                 setTimeout(() => {props.history.push('/death')}, 2000)
             }
             if(monHealth <= 0) {
-                arr.push(`You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`)
+                arr.push({
+                    id: 'c',
+                    message: `You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`
+                })
             }
             setEndFight(true)
             clearMonster(monsterCoor[0], monsterCoor[1])
@@ -139,9 +175,10 @@ const CombatView = (props) => {
         setLog([...log, ...arr])
     }
 
-    const combatLog  = log.map((e, i) => <p key={i}>{e}</p>)
-    console.log('character stats', props.hero)
-    console.log('monster Stats', stats)
+    const combatLog  = log.map((e, i) => (e.id === 'm') ? <p key={i} style={{color: 'red'}}>{e.message}</p> : <p key={i} style={{color: 'green'}}>{e.message}</p>)
+
+    console.log(log)
+
     return (
         <>
             <div className="combat-view-container">
@@ -157,11 +194,14 @@ const CombatView = (props) => {
                     }}>End Combat</div>
                     :
                     buttons}</div>
-                <div className="combat-log"><p style={{fontWeight: 'bold', position: 'absolute', top: '5px', left: '5px'}}>Combat Log:</p><div>{combatLog}</div></div>
+                <div className="combat-log"><div>{combatLog}</div></div>
             </div>
             <CombatStats  
                 monsterStats = {stats}
                 monsterHealth = {monsterHealth} 
+                //pass the props of the character health from  game.js instead of from here
+                //also pass the stats down to combat stats
+                ////////////////////////////////////////////////////////////////////////
                 characterHealth = {props.characterHealth}
                 monsterType = {monsterType}
                 />
