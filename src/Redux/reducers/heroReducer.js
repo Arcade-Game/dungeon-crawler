@@ -16,7 +16,8 @@ const SELECT_HERO = "SELECT_HERO",
           armor = "armor",
           offHand = "off-hand",
           helm = "helm",
-          boots = "boots";
+          boots = "boots",
+          DEATH_COUNTER = "DEATH_COUNTER"
 
 
 export const selectHero = (hero) => {
@@ -56,6 +57,12 @@ export const equipItem = (item, index) => {
       }
    }
 
+   export const deathCounter = () => {
+      return {
+         type: DEATH_COUNTER
+      }
+   }
+
 
 
 export default function reducer (state = initialState, action) {
@@ -63,6 +70,9 @@ export default function reducer (state = initialState, action) {
    const {type, payload} = action;
    console.log(payload)
    switch(type){
+      case DEATH_COUNTER:
+         let newDeaths = state.hero.deaths+1;
+         return {...state, hero: {...state.hero, deaths: newDeaths}}
       
       case SELECT_HERO: 
          payload.equipment.map(item => {
