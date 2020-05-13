@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './CombatStats.scss'
-import {connect} from 'react-redux';
 
 
 const CombatStats = props => {
