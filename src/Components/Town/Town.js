@@ -10,6 +10,7 @@ import Inn from "./Inn/Inn";
 import "./Town.scss"
 import axios from "axios";
 import {townMusic} from './townMusic';
+import {setHonor} from '../../Redux/reducers/titlesReducer';
 
 const Town = (props) => {
    const {hero} = props.hero
@@ -59,6 +60,7 @@ const Town = (props) => {
    console.log('musicNumber', musicNumber)
    return (
       <div className="town-map">
+         <div className="town-title-container">{props.title.title}</div>
       <audio src={`${townMusic[musicNumber]}`} autoPlay />
          {overlayToggle ? (
             <div className="town-overlay" 
@@ -126,4 +128,4 @@ const Town = (props) => {
    )
 }
 const mapStateToProps = (reduxState) => reduxState
-export default connect(mapStateToProps, {setHeroList})(Town);
+export default connect(mapStateToProps, {setHeroList, setHonor})(Town);

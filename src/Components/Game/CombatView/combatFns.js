@@ -37,21 +37,38 @@ export const statSetupMon = ({attack, strength, armor, agility}) => {
 
 export function attackType (weapon) {
   let arr = [];
-  switch(weapon) {
-     case 'Iron Shortsword':
-        return arr = ['Stab', 'Slash', 'Lunge']
-     case 'Steel Shortsword':
-        return arr = ['Stab', 'Slash', 'Lunge']
-     case 'Stone Dagger':
-        return arr = ['Stab', 'Slash', 'Lunge']
-     case 'Spear':
-        return arr = ['Stab', 'Lunge']
-     case 'Axe':
-        return arr = ['Slash', 'Slash']
-      default:
-        return arr = ['punch', 'kick', 'block']
+  let weaponType;
+  weapon = weapon.toLowerCase()
+  if (weapon.includes('sword')){
+    weaponType = 'sword'
+  } else if(weapon.includes('axe')) {
+    weaponType = 'axe'
+  } else if (weapon.includes('dagger')) {
+    weaponType = 'dagger'
+  } else if (weapon.includes('spear')) {
+    weaponType = 'spear'
+  } else if (weapon.includes('falchion')) {
+    weaponType = 'dagger'
+  } else if (weapon.includes('frostbite')) {
+    weaponType = 'sword'
+  } else if (weapon.includes('Echo')) {
+    weaponType = 'sword'
   }
-  return arr
+
+  switch(weaponType) {
+     case 'shortsword':
+        return arr = ['Stab' /*, 'Slash', 'Lunge'*/]
+     case 'sword':
+        return arr = ['Stab' /*, 'Slash', 'Lunge'*/]
+     case 'dagger':
+        return arr = ['Stab'/*, 'Slash', 'Lunge'*/]
+     case 'spear':
+        return arr = ['Stab' /*, 'Lunge'*/]
+     case 'axe':
+        return arr = ['Chop'/*, 'Slash'*/]
+      default:
+        return arr = ['Punch'/*, 'Kick', 'Block'*/]
+  }
 }
 
 //Switch statement that changes the stats before attack damage is calculated
@@ -63,8 +80,8 @@ const weaponAttack = (weapon, attackType) => {
        switch(attackType){
          case 'Stab':
         //  console.log('iron sword stab')
-           cAttack += 2
-           cArmor -= 1
+           cAttack += 0
+           cArmor -= 0
            break;
          case 'Slash':
         //  console.log('iron sword slash')
@@ -81,8 +98,8 @@ const weaponAttack = (weapon, attackType) => {
        switch(attackType){
          case 'Stab':
         //  console.log('Steel sword stab')
-           cAttack += 4
-           cArmor -= 1
+           cAttack += 0
+           cArmor -= 0
            break;
          case 'Slash':
         //  console.log('Steel sword slash')
@@ -100,8 +117,8 @@ const weaponAttack = (weapon, attackType) => {
        switch(attackType){
          case 'Stab':
         //  console.log('dagger stab')
-           cAttack += 1
-           cArmor -= 1
+           cAttack += 0
+           cArmor -= 0
            break;
          case 'BackStab':
         //  console.log('dagger BackStab')
@@ -119,7 +136,7 @@ const weaponAttack = (weapon, attackType) => {
        switch(attackType){
          case 'Stab':
         //  console.log('spear stab')
-           cAttack += 3
+           cAttack += 0
            cArmor -= 0
            break;
          case 'Lunge':
@@ -138,8 +155,8 @@ const weaponAttack = (weapon, attackType) => {
        switch(attackType){
          case 'Chop':
         //  console.log('axe chop')
-           cAttack += 3
-           cArmor -= 3
+           cAttack += 0
+           cArmor -= 0
            break;
          case 'Slash':
         //  console.log('axe slash')

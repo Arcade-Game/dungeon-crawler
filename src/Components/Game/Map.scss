@@ -34,6 +34,7 @@
     // padding-top: 20%;
 
     border: 4px solid black;
+    box-shadow: 0 0 55px 23px black;
 }
 
 // .char-container {
@@ -42,14 +43,59 @@
 //     border: 100px solid yellow;
 // }
 
-.hero-div {
-    background: url('../pictures/warrior.svg');
-    background-size: 100%;
+// .hero-div {
+//     background: url('../pictures/warrior.svg');
+//     background-size: 100%;
+//     height: 100%;
+//     width: 100%;
+//     position: relative;
+//     z-index: 10;
+//     position: absolute;
+// }
+
+.hero-div-up {
+    background: url('../pictures/character/trimmed-test-char.png');
+    background-size: 900%;
+    background-repeat: no-repeat;
     height: 100%;
     width: 100%;
     position: relative;
     z-index: 10;
     position: absolute;
+    overflow: hidden;
+}.hero-div-right {
+    background: url('../pictures/character/trimmed-test-char.png');
+    background-size: 900%;
+    background-position-y: 100%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    position: absolute;
+    overflow: hidden;
+}.hero-div-down {
+    background: url('../pictures/character/trimmed-test-char.png');
+    background-size: 900%;
+    background-position-y: 66%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    position: absolute;
+    overflow: hidden;
+}.hero-div-left {
+    background: url('../pictures/character/trimmed-test-char.png');
+    background-size: 900%;
+    background-position-y: 33%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    position: absolute;
+    overflow: hidden;
 }
 
 .char-view {
@@ -71,6 +117,19 @@
     position: relative;
     cursor: url('../pictures/cursors/Mouse09YellowResize.png'), auto;
 }
+
+.char-view-monster {
+    // border: 1px solid yellow;
+    // border: 1px solid rgba(53, 52, 52, 40%);
+    background: url('../pictures/cave-floor.jpg');
+    // background: url('../pictures/terrain/ForestDirt_diffuse.png');
+    filter: blur(.4px);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .char-view-pushable {
     // border: 1px solid grey;
@@ -193,6 +252,26 @@
     // background-position: 5% 12%;
 }
 
+.char-view-chest-cliff {
+    height: 100%;
+    width: 100%;
+    background: url('../pictures/terrain/dark-cliff.png'), black;
+    position: relative;
+    background-size: 135%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.char-view-monster-cliff {
+    height: 100%;
+    width: 100%;
+    background: url('../pictures/terrain/dark-cliff.png'), darkred;
+    position: relative;
+    background-size: 135%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 
 .char-view-quicksand {
     background: url('../pictures/terrain/ForestWetMud_baseColor.png');
@@ -289,7 +368,7 @@
     background-position: bottom;
     background-repeat: no-repeat;
     &:hover {
-        opacity: 90%;
+        opacity: 85%;
     }
 }
 

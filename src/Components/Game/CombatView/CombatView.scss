@@ -32,7 +32,7 @@
 
 .combat-hero {
     position: absolute;
-    left: 2%;
+    left: 5%;
     bottom: 2%;
     height: 67%;
     width: 32%;
@@ -52,6 +52,16 @@
     right: 0;
     bottom: 0;
     padding: 10px;
+}
+
+div::-webkit-scrollbar {
+    background-color: black;
+    width: 20px;
+}
+
+div::-webkit-scrollbar-thumb {
+    background-color: $comLog;
+    border-radius: 15px;
 }
 
 .combat-log {
@@ -74,6 +84,11 @@
     display: flex;
     flex-direction: column-reverse;
     color: $comLog;
+    padding: 10px;
+    text-align: center;
+    padding-right: 5%;
+    line-height: 140%;
+    
 }
 
 .ability-buttons {

@@ -20,7 +20,7 @@ const Equipment = (props) => {
    return (
 <section className="equipment-container" style={!inventoryToggle ? {marginBottom: "88px"} : null}>
          <div className="equipment-top-container">
-            <div className="helm-container" 
+            <div className={helm.rarity === 'epic' || helm.rarity === 'rare' || helm.rarity === 'legendary' ? `helm-container-${helm.rarity}` : `helm-container`} 
                     onDrop={(event) => equipItem(event)} 
                     onDragOver={(event) => event.preventDefault()}>
                {helm.item_id ? (
@@ -33,7 +33,7 @@ const Equipment = (props) => {
                }
             </div>
             <div className="inventory-square-hover">
-               <span>{helm.item_name}</span>
+               <span style={helm.rarity === 'epic' ? {color: 'indigo'} : helm.rarity === 'rare' ? {color: 'darkblue'} : helm.rarity === 'legendary' ? {color: '#600000'} : null}>{helm.item_name}</span>
                <div className="i-square-hover-stats">
                   <div><span>Attack: </span>{helm.attack}</div>
                   <div><span>Armor: </span>{helm.armor}</div>
@@ -44,37 +44,41 @@ const Equipment = (props) => {
             </div>
          </div>
          <div className="equipment-middle-container">
-         <div 
-                    className="middle-container" value={weapon}
-                     onDrop={(event) => equipItem(event)} 
-                     onDragOver={(event) => event.preventDefault()}>
-                  {weapon.item_id ? (
-                        <img id={weapon.item_id} className="true" 
-                                 src={weapon.image}
-                                 onDragStart={(event) => handleDrag(event)} 
-                                 onDrag={(event) => event.preventDefault()} 
-                                 width="70px" height="100px" />
-                  ) : null
-                  }
-                  <div className="inventory-square-hover">
-                     <span>{weapon.item_name}</span>
-                     <div className="i-square-hover-stats">
-                        <div><span>Attack: </span>{weapon.attack}</div>
-                        <div><span>Armor: </span>{weapon.armor}</div>
-                        <div><span>Strength: </span>{weapon.strength ? weapon.strength : 0}</div>
-                        <div><span>Agility: </span>{weapon.agility ? weapon.agility : 0}</div>
-                     </div>
-                  </div>
+         <div className={weapon.rarity === 'epic' || weapon.rarity === 'rare' || weapon.rarity === 'legendary' ? `middle-container-${weapon.rarity}` : `middle-container`} value={weapon}
+               onDrop={(event) => equipItem(event)} 
+               onDragOver={(event) => event.preventDefault()}>
+            {weapon.item_id ? (
+               <>
+               <div className="inventory-square-hover-e">
+               <span style={weapon.rarity === 'epic' ? {color: 'indigo'} : weapon.rarity === 'rare' ? {color: 'darkblue'} : weapon.rarity === 'legendary' ? {color: '#600000'} : null}>{weapon.item_name}</span>
+               <div className="i-square-hover-stats">
+                  <div><span>Attack: </span>{weapon.attack}</div>
+                  <div><span>Armor: </span>{weapon.armor}</div>
+                  <div><span>Strength: </span>{weapon.strength ? weapon.strength : 0}</div>
+                  <div><span>Agility: </span>{weapon.agility ? weapon.agility : 0}</div>
+               </div>
             </div>
+               <img id={weapon.item_id} className="true" 
+                           src={weapon.image}
+                           onDragStart={(event) => handleDrag(event)} 
+                           onDrag={(event) => event.preventDefault()} 
+                           width="70px" height="100px" />
+                           </>
+            ) : null
+               
+                  
+            }
             
-            <div className="middle-container" value={armor}
+      </div>
+   
+            <div className={armor.rarity === 'epic' || armor.rarity === 'rare' || armor.rarity === 'legendary' ? `middle-container-${armor.rarity}` : `middle-container`} value={armor}
                      onDrop={(event) => equipItem(event)} 
                      onDragOver={(event) => event.preventDefault()}>
                   {armor.item_id ? (
                      <>
-                     <div className="inventory-square-hover">
-                     <span>{armor.item_name}</span>
-                     <div className="i-square-hover-stats">
+                     <div className="inventory-square-hover-e">
+                     <span style={armor.rarity === 'epic' ? {color: 'indigo'} : armor.rarity === 'rare' ? {color: 'darkblue'} : armor.rarity === 'legendary' ? {color: '#600000'} : null}>{armor.item_name}</span>
+                     <div className="i-square-hover-stats" >
                         <div><span>Attack: </span>{armor.attack}</div>
                         <div><span>Armor: </span>{armor.armor}</div>
                         <div><span>Strength: </span>{armor.strength ? armor.strength : 0}</div>
@@ -90,13 +94,13 @@ const Equipment = (props) => {
                   }
                   
             </div>
-            <div className="middle-container" value={offHand}
+            <div className={offHand.rarity === 'epic' || offHand.rarity === 'rare' || offHand.rarity === 'legendary' ? `middle-container-${offHand.rarity}` : `middle-container`} value={offHand}
                      onDrop={(event) => equipItem(event)} 
                      onDragOver={(event) => event.preventDefault()}>
                {offHand.item_id ? (
                   <>
-                  <div className="inventory-square-hover">
-                     <span>{offHand.item_name}</span>
+                  <div className="inventory-square-hover-e">
+                     <span style={offHand.rarity === 'epic' ? {color: 'indigo'} : offHand.rarity === 'rare' ? {color: 'darkblue', fontWeight: '600'} : offHand.rarity === 'legendary' ? {color: '#600000'} : null}>{offHand.item_name}</span>
                      <div className="i-square-hover-stats">
                         <div><span>Attack: </span>{offHand.attack}</div>
                         <div><span>Armor: </span>{offHand.armor}</div>
@@ -127,14 +131,14 @@ const Equipment = (props) => {
                   }
             </div> */}
          </div>
-         <div className="equipment-bottom-container">
-            <div className="boot-container" 
+         <div className="bottom-container">
+            <div className={boots.rarity === 'epic' || boots.rarity === 'rare' || boots.rarity === 'legendary' ? `boot-container-${boots.rarity}` : `boot-container`} 
                     onDrop={(event) => equipItem(event)} 
                     onDragOver={(event) => event.preventDefault()}>
                {boots.item_id ? (
                   <>
                   <div className="inventory-square-hover">
-                  <span>{boots.item_name}</span>
+                  <span style={armor.rarity === 'epic' ? {color: 'indigo'} : armor.rarity === 'rare' ? {color: 'darkblue'} : armor.rarity === 'legendary' ? {color: '#600000'} : null}>{boots.item_name}</span>
                   <div className="i-square-hover-stats">
                      <div><span>Attack: </span>{boots.attack}</div>
                      <div><span>Armor: </span>{boots.armor}</div>

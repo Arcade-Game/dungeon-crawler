@@ -21,7 +21,6 @@ export const tileVariables = {
     Cl: {type: "cliff", elevation: 3},
     Pl: {type: "platform", elevation: 2},
     PP: {type: "platform", pushable: true, elevation: 2},
-    T: {type: "teleporter-1", end: [15, 42], elevation: 0},
     G: {type: "gold-pile", level: 0, level: 1},
     WL: [ll, ll, ll, ll, ll, ll, ll, ll, ll, ll]
 }
@@ -56,7 +55,21 @@ export const keys = {
 }
 
 export const doors = {
-    d1: {type: "locked-door", elevation: 0, key: "k1"}
+    d1: {type: "locked-door", elevation: 0, key: "k1"},
+    d2: {type: "locked-door", elevation: 1, key: "k1"},
+    d3: {type: "locked-door", elevation: 2, key: "k1"},
+    d4: {type: "unlocked-door", elevation: 1, key: "k1"},
+    d5: {type: "unlocked-door", elevation: 2, key: "k1"},
+    d6: {type: "unlocked-door", elevation: 3, key: "k1"},
+
+}
+
+export const teleporters = {
+    t1: {type: "teleporter-1", end: [15, 42], elevation: 0},
+    t2: {type: "teleporter-2", end: [15, 42], elevation: 0},
+    t3: {type: "teleporter-3", end: [15, 42], elevation: 0},
+    t4: {type: "teleporter-4", end: [15, 42], elevation: 0},
+    t5: {type: "teleporter-5", end: [15, 42], elevation: 0},
 }
 
 export const monsters = {

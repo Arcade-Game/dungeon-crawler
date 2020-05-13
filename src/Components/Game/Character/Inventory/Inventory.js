@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from "react";
 import Equipment from "./Equipment";
 import "./Inventory.scss";
+import "./RareInventory.scss";
 import {GiTwoCoins} from 'react-icons/gi';
 import { unequipItem } from "../../../../Redux/reducers/heroReducer";
 
@@ -163,7 +164,9 @@ const Inventory = (props) => {
 
       const mappedInventory = inventory.map((el, i) => {
          return el.item_type ? (
-            <div className="inventory-square"> <img className="inventory-square-image" key ={el.item_id} 
+            <div className="inventory-square" style={el.rarity === 'epic' ? {background: 'radial-gradient(indigo, black 90%)'} : el.rarity === 'rare' ? {background: 'radial-gradient(darkblue, black 90%)'} : el.rarity === 'legendary' ? {background: 'radial-gradient(#600000, black 90%)'} : null}
+            
+            > <img className="inventory-square-image" key ={el.item_id} 
                      id={i} 
                      className="false"
                      src={el.image} 
@@ -172,7 +175,7 @@ const Inventory = (props) => {
                      onDrag={(event) => event.preventDefault()} 
                      width="82%" height="88%"
          /><div className="inventory-square-hover">
-            <span>{el.item_name}</span>
+            <span style={el.rarity === 'epic' ? {color: 'indigo'} : el.rarity === 'rare' ? {color: 'darkblue', fontWeight: '600'} : el.rarity === 'legendary' ? {color: '#600000'} : null}>{el.item_name}</span>
             <div className="i-square-hover-stats">
                <div><span>Attack: </span>{el.attack}</div>
                <div><span>Armor: </span>{el.armor}</div>
@@ -183,9 +186,7 @@ const Inventory = (props) => {
             </div>)  : i < 8 ? <div className="inventory-square"></div> : null
          })
 
-      console.log(props)
-
-   console.log("props", props)
+   console.log("props-inventory", props)
    return (
       <>
          {overlayToggle ? (
@@ -210,7 +211,8 @@ const Inventory = (props) => {
             <>
                <section className="inventory-container"
                               onDrop={(event) => unEquipItem(event)}
-                              onDragOver={(event) => event.preventDefault()}>
+                              onDragOver={(event) => event.preventDefault()}
+                              >
                   {mappedInventory}
 
                <div className="currency-container"><span>{currency}</span><GiTwoCoins color={"yellow"} /></div>
