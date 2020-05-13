@@ -34,6 +34,7 @@
     // padding-top: 20%;
 
     border: 4px solid black;
+    box-shadow: 0 0 55px 23px black;
 }
 
 // .char-container {
@@ -42,14 +43,59 @@
 //     border: 100px solid yellow;
 // }
 
-.hero-div {
-    background: url('../pictures/warrior.svg');
-    background-size: 100%;
+// .hero-div {
+//     background: url('../pictures/warrior.svg');
+//     background-size: 100%;
+//     height: 100%;
+//     width: 100%;
+//     position: relative;
+//     z-index: 10;
+//     position: absolute;
+// }
+
+.hero-div-up {
+    background: url('../pictures/character/trimmed-test-char.png');
+    background-size: 900%;
+    background-repeat: no-repeat;
     height: 100%;
     width: 100%;
     position: relative;
     z-index: 10;
     position: absolute;
+    overflow: hidden;
+}.hero-div-right {
+    background: url('../pictures/character/trimmed-test-char.png');
+    background-size: 900%;
+    background-position-y: 100%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    position: absolute;
+    overflow: hidden;
+}.hero-div-down {
+    background: url('../pictures/character/trimmed-test-char.png');
+    background-size: 900%;
+    background-position-y: 66%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    position: absolute;
+    overflow: hidden;
+}.hero-div-left {
+    background: url('../pictures/character/trimmed-test-char.png');
+    background-size: 900%;
+    background-position-y: 33%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    position: absolute;
+    overflow: hidden;
 }
 
 .char-view {

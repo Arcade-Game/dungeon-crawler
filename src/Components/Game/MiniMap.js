@@ -15,11 +15,14 @@ const MiniMap = (props) => {
         overflow: "hidden"
     }
     return (
+        <>
+        <div className="mini-map-leather"></div>
         <div className="mini-map-container" style={miniStyle}>
             {mappedGrid}
             {/* <Map /> */}
 
         </div>
+        </>
     )
 }
 

@@ -16,7 +16,7 @@ import {tutorial} from './Map Variables/tutorial';
 import {puzzles, levelOne, demoMap} from './Map Variables/puzzles';
 import {connect} from 'react-redux';
 import { updateInventory, deathCounter } from '../../Redux/reducers/heroReducer';
-import {TweenMax, Power3} from 'gsap';
+import {TweenMax, Power3, TweenLite} from 'gsap';
 import {setHonor, setLevel} from '../../Redux/reducers/titlesReducer';
 
 const Game = (props) => {
@@ -45,7 +45,8 @@ const Game = (props) => {
     [hero, setHero] = useState(props.hero),
     [heroStats, setHeroStats] = useState(props.stats),
     [equipment, setEquipment] = useState(props.equipment),
-    [inventory, setInventory] = useState(props.inventory);
+    [inventory, setInventory] = useState(props.inventory),
+    [direction, setDirection] = useState('up');
 
 
     let coinFade = useRef('');
@@ -72,6 +73,7 @@ const Game = (props) => {
 
   const getKeyCode = (keyCode) => {
     if(keyCode === 37 || keyCode === 65){
+      setDirection('left')
       if(grid[charY][charX-1].itemObject){
         determineObject(charX-1, charY)
       } else if(grid[charY][charX-1].pushable){ // Push Left
@@ -79,6 +81,7 @@ const Game = (props) => {
       } else {checkTile(charX-1, charY)}
       
     } else if(keyCode === 38 || keyCode === 87){ // Push Up
+      setDirection('up')
       if(grid[charY-1][charX].itemObject){
         determineObject(charX, charY-1)
       } else
@@ -87,6 +90,7 @@ const Game = (props) => {
       } else {checkTile(charX, charY-1)}
       
     } else if(keyCode === 39 || keyCode === 68){ // Push Right
+      setDirection('right')
       if(grid[charY][charX].itemObject){
         determineObject(charX+1, charY)
       } else
@@ -95,6 +99,7 @@ const Game = (props) => {
       } else {checkTile(charX+1, charY)}
       
     } else if(keyCode === 40 || keyCode === 83){ // Push Down
+      setDirection('down')
       if(grid[charY+1][charX].itemObject){
         determineObject(charX, charY+1)
       } else
@@ -539,6 +544,7 @@ const Game = (props) => {
           exploreTileFn={exploreTile}
           isFight={isFight} 
           setNewLava={setNewLava}
+          direction={direction}
         />
         {
           isFight ? 
