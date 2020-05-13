@@ -32,7 +32,6 @@ const CombatStats = props => {
       }
    }, [stats, monsterHealth, characterHealth, monsterStats])
 
-   console.log(props)
    return (
       <div className='stat-container'>
          <div className='char-stats'>
@@ -63,6 +62,5 @@ const CombatStats = props => {
    )
 }
 
-const mapStateToProps = reduxState => reduxState.hero
 
-export default connect(mapStateToProps)(CombatStats);
+export default CombatStats;

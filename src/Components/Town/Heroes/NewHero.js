@@ -73,6 +73,10 @@ const NewHeros = (props) => {
             setHeroStats({health:60,attack: 2,armor: 0, strength: 0, agility: 6 })
          break;
       }
+   },
+   handleInput = (event) => {
+      // event.target.value.length <= 20;
+      setHeroName(event.target.value)
    }
 
 
@@ -124,7 +128,7 @@ const NewHeros = (props) => {
                   </div>
 
                </div>
-               <h3 className="new-hero-name-input">Name: <input placeholder="Name" value={heroName} onChange={(event) => setHeroName(event.target.value)} /></h3> 
+               <h3 className="new-hero-name-input">Name: <input placeholder="Name" value={heroName} onChange={(event) => handleInput(event)} /></h3> 
                </div>
             <div className="new-hero-info-container" >
                <div>

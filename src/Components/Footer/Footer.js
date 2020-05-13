@@ -7,8 +7,8 @@ import titlesReducer from '../../Redux/reducers/titlesReducer';
 // import {BsArrowLeft} from 'react-icons/bs';
 
 const Footer = props => {
-   const {inventory, stats, hero, experience, characterHealth} = props.hero
-   const {title, equipmentToggle, inventoryToggle, newMoney, level} = props
+   const {inventory, stats, hero, characterHealth} = props.hero
+   const {title, equipmentToggle, inventoryToggle, newMoney, level, experience} = props
    const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
    const [totalHealth, setTotalHealth] = useState(5)
    const [statsToggle, setStatsToggle] = useState(false)

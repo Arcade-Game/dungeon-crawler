@@ -6,8 +6,6 @@ import Map from './Map';
 import {mapObject} from './Map Variables/mapObjects';
 import Footer from '../Footer/Footer';
 import axios from 'axios';
-import Inventory from './Character/Inventory/Inventory';
-import Equipment from "./Character/Inventory/Equipment";
 import MiniMap from './MiniMap';
 import CombatView from './CombatView/CombatView';
 import CombatStats from '../CombatStats/CombatStats';
@@ -37,19 +35,21 @@ const Game = (props) => {
     [newMoney, setNewMoney] = useState(0),
     [isFight, setIsFight] = useState(false),
     [monsterType, setMonsterType] = useState(''),
-    [monsterStats, setMonsterStats] = useState({}),
     [characterHealth, setCharacterHealth] = useState(0),
     [monsterCoor, setMonsterCoor] = useState([0,0]),
     [experience, setExperience] = useState(0),
     [level, setLevel] = useState(1),
     [quicksandCounter, setQuicksandCounter] = useState(0),
     [lavaRockCounter, setLavaRockCounter] = useState([{}]),
-    [XPforLevel, setXPforLevel] = useState()
+    [XPforLevel, setXPforLevel] = useState(),
+    [hero, setHero] = useState(props.hero),
+    [heroStats, setHeroStats] = useState(props.stats),
+    [equipment, setEquipment] = useState(props.equipment),
+    [inventory, setInventory] = useState(props.inventory);
+
 
     let coinFade = useRef('');
     let newXP = useRef('');
-
-  const {stats} = props;
     
     useEffect(() => {
       let needXP = ((level*100)+((level-1)*.5))
@@ -58,7 +58,7 @@ const Game = (props) => {
     }, [experience, level])
 
     useEffect(() => {
-      setCharacterHealth(props.stats.health)
+      setCharacterHealth(heroStats.health)
       let newGrid = [...grid]
       newGrid.forEach((e,i,a) => i > 8 && i < a.length-8 ? e.forEach((f,j,z) => {
         return (j > 8 && j < z.length-8 ? (newGrid[i][j].type === 'monster' ? getMonster(j, i) : null) : null)
@@ -519,24 +519,11 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
-  // const stats = async()=> {
-  //   const arr = {}
-  //   await axios.get(`/api/monster-stats/${monsterType}`)
-  //   .then((res) => {
-  //       setMonsterStats(res.data)
-  //       arr = res.data
-  //   })
-  //   .catch(err => console.log(err))
-  //   console.log(arr)
-  //   return arr
-  // }
-
   const die = ()  => {
     props.deathCounter()
     props.history.push('/death')
   }
   // console.log("music", dungeonMusic[musicNumber])s
-  console.log('PROPS', props)
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
       <audio src={`${dungeonMusic[musicNumber]}`} autoPlay />
@@ -558,13 +545,16 @@ const Game = (props) => {
           <CombatView 
             monsterType={monsterType.toLowerCase()}
             toggleFight = {setIsFight}
-            // getStats={stats}
             isFightFn={setIsFight}
             setGridFn = {setGrid}
             clearMonster = {clearMonster}
             monsterCoor = {monsterCoor}
             characterHealth = {characterHealth}
             setCharacterHealthFn = {setCharacterHealth}
+            level = {level}
+            heroStats = {heroStats}
+            equipment = {equipment}
+            hero = {hero}
           /> : null
         }
         <div className="coin-icon" ref={e => {coinFade = e}}></div>
