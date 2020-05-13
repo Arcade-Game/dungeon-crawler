@@ -20,9 +20,9 @@ getClasses: (req, res) => {
 },
 
       createHero: async (req, res) => {
-            const { player_id, heroName, class_id } = req.body;
+            const { player_id, heroName, gender, class_id } = req.body;
                         db = req.app.get("db");
-            let saveFile = await db.hero.create_hero(player_id, heroName, class_id)
+            let saveFile = await db.hero.create_hero(player_id, heroName, gender, class_id)
             let newHero = await db.hero.get_hero(saveFile[0].file_id)
                   newHero.forEach(el => {
                         el.inventory = [0, 0, 0, 0, 0, 0, 0, 0],

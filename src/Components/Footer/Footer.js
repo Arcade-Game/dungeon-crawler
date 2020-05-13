@@ -59,7 +59,6 @@ const Footer = props => {
             </div>
          </div>
          <div className="title-container">
-            {/* {props.title.title} */}
          </div>
       </div>
       <div className="footer-right">
