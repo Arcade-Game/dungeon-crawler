@@ -6,7 +6,7 @@ import "./Heroes.scss";
 import axios from "axios";
 const NewHeros = (props) => {
    const [classToggle, setClassToggle] = useState("Warrior"),
-             [genderToggle, setGenderToggle] = useState("Male"),
+             [genderToggle, setGenderToggle] = useState("male"),
              [heroName, setHeroName] = useState("Jon"),
             //  [heroClasses, setHeroClasses] = useState(),
              [heroStats, setHeroStats] = useState()
@@ -20,8 +20,8 @@ const NewHeros = (props) => {
    const  Warrior = "Warrior",
                Ranger = "Ranger",
                Rogue = "Rogue",
-               Male = "Male",
-               Female = "Female";
+               male = "male",
+               female = "female";
 
    const createHero = () => {
       const {player_id} = props.auth
@@ -37,7 +37,7 @@ const NewHeros = (props) => {
                class_id = 3;
                break;
          }
-      axios.post("/api/heroes", {player_id, heroName, class_id}).then(res => {
+      axios.post("/api/heroes", {player_id, heroName, genderToggle, class_id}).then(res => {
          props.selectHero(res.data[0])
          props.history.push("/game")
       })
@@ -46,17 +46,17 @@ const NewHeros = (props) => {
    const getHeroImage = () => {
       console.log(classToggle, genderToggle)
          switch (classToggle+genderToggle){
-            case (Warrior+Male):
+            case (Warrior+male):
                return "https://i.pinimg.com/originals/31/ea/08/31ea08491663a9c922db8b7a5fa3d392.jpg"
-            case (Warrior+Female):
+            case (Warrior+female):
                return "https://i.pinimg.com/564x/a6/d6/0a/a6d60abe7752b8154c94f0ac576a9adc.jpg" // ArtStation Pinterest
-            case (Ranger+Male):
+            case (Ranger+male):
                return "https://i.pinimg.com/564x/ea/a6/38/eaa6384524e226f3da9cb839d781aa10.jpg" // menofcolorfantasyart.tumbler.com Pinterest
-            case (Ranger+Female):
+            case (Ranger+female):
                return "https://i.pinimg.com/564x/0b/36/b3/0b36b35853eb23d7a740ca389ade89da.jpg" // Nv, by Masway - heroineimages.wordpress.com Pinterest
-               case (Rogue+Male):
+               case (Rogue+male):
                   return "https://i.pinimg.com/originals/4d/9d/47/4d9d47202f9bcfacfc3982fe65d2eea1.png" // Fantasy Pics Inc Pinterest
-               case (Rogue+Female):
+               case (Rogue+female):
                   return "https://i.pinimg.com/originals/27/f3/4e/27f34ee5490f6ee9bfcffeb7497fe6c6.jpg" // ArtStation Pinterest
          }
    }
@@ -115,11 +115,11 @@ const NewHeros = (props) => {
                   <div className="new-hero-gender-selector">
                      <img className="male-icon" 
                               src="https://cdn0.iconfinder.com/data/icons/dating-icon-set/512/male_sign-512.png"
-                              onClick={() => setGenderToggle(Male)}
+                              onClick={() => setGenderToggle(male)}
                               height="40px" width="25px"/>
                      <img className="female-icon" 
                               src="https://cdn0.iconfinder.com/data/icons/dating-icon-set/512/female_sign-512.png"
-                              onClick={() => setGenderToggle(Female)}
+                              onClick={() => setGenderToggle(female)}
                               height="40px"/>
                   </div>
                   <div className="char-image-container">

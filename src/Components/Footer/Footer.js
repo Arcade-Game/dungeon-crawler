@@ -7,8 +7,6 @@ import titlesReducer from '../../Redux/reducers/titlesReducer';
 
 const Footer = props => {
    const {inventory, equipment, updateSessionInventory,equipmentToggle, inventoryToggle, heroStats, hero,  newMoney, experience, level, characterHealth} = props
-
-   const {title, equipmentToggle, inventoryToggle, newMoney, level, experience} = props
    const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
    const [totalHealth, setTotalHealth] = useState(heroStats.health)
    const [statsToggle, setStatsToggle] = useState(false)
@@ -61,7 +59,6 @@ const Footer = props => {
             </div>
          </div>
          <div className="title-container">
-            {props.title.title}
          </div>
       </div>
       <div className="footer-right">
