@@ -72,6 +72,19 @@
     cursor: url('../pictures/cursors/Mouse09YellowResize.png'), auto;
 }
 
+.char-view-monster {
+    // border: 1px solid yellow;
+    // border: 1px solid rgba(53, 52, 52, 40%);
+    background: url('../pictures/cave-floor.jpg');
+    // background: url('../pictures/terrain/ForestDirt_diffuse.png');
+    filter: blur(.4px);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .char-view-pushable {
     // border: 1px solid grey;
     // background: url('../pictures/terrain/ForestRock_basecolor.png');
@@ -193,6 +206,26 @@
     // background-position: 5% 12%;
 }
 
+.char-view-chest-cliff {
+    height: 100%;
+    width: 100%;
+    background: url('../pictures/terrain/dark-cliff.png'), black;
+    position: relative;
+    background-size: 135%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.char-view-monster-cliff {
+    height: 100%;
+    width: 100%;
+    background: url('../pictures/terrain/dark-cliff.png'), darkred;
+    position: relative;
+    background-size: 135%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 
 .char-view-quicksand {
     background: url('../pictures/terrain/ForestWetMud_baseColor.png');
@@ -289,7 +322,7 @@
     background-position: bottom;
     background-repeat: no-repeat;
     &:hover {
-        opacity: 90%;
+        opacity: 85%;
     }
 }
 

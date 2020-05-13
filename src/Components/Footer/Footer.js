@@ -3,10 +3,12 @@ import {connect} from "react-redux";
 import './Footer.scss';
 import {withRouter} from 'react-router-dom';
 import Inventory from '../Game/Character/Inventory/Inventory';
+import titlesReducer from '../../Redux/reducers/titlesReducer';
 // import {BsArrowLeft} from 'react-icons/bs';
 
 const Footer = props => {
-   const {inventory, stats, hero, equipmentToggle, inventoryToggle, newMoney, experience, level, characterHealth} = props
+   const {inventory, stats, hero, experience, characterHealth} = props.hero
+   const {title, equipmentToggle, inventoryToggle, newMoney, level} = props
    const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
    const [totalHealth, setTotalHealth] = useState(5)
    const [statsToggle, setStatsToggle] = useState(false)
@@ -17,7 +19,7 @@ const Footer = props => {
       setMenuToggle(!menuToggle)
    }
 
-   const equArr = Object.values(props.equipment)
+   const equArr = Object.values(props.hero.equipment)
    const heroArmor = (+stats.armor) + (+equArr.reduce((acc, el) => {
       return acc += ((el.armor) ? el.armor : 0)}, 0));
 
@@ -25,7 +27,7 @@ const Footer = props => {
          return acc += ((el.attack) ? el.attack : 0)}, 0));
 
 
-
+      console.log("props", props)
    return (
       <>
       <div className="footer-top" onClick={handleMenuClick}>
@@ -42,7 +44,6 @@ const Footer = props => {
                <div className="menu-x-button" onClick={handleMenuClick}><span>X</span></div>   </div> : null
          }
       <div className="footer-left">
-         
          <Inventory 
             equipmentToggle={equipmentToggle}
             inventoryToggle={inventoryToggle}
@@ -56,6 +57,9 @@ const Footer = props => {
             <div className="character-icon" onClick={() => props.setEquipmentToggle()}>
             </div>
          </div>
+         <div className="title-container">
+            {props.title.title}
+         </div>
       </div>
       <div className="footer-right">
          <div className="experience-bar">
@@ -63,6 +67,7 @@ const Footer = props => {
          </div>
             <div className="health-bar" onClick={() => setStatsToggle(!statsToggle)}>
          {characterHealth}
+         {}
             
             
          </div>
@@ -79,7 +84,7 @@ const Footer = props => {
                            <div><span>Damage:</span>{heroAttack} - {heroAttack + stats.strength}</div>
                         </div>
                   </div>
-                  <div className="stats-level"><span>{level}</span></div>
+                  <div className="stats-level" style={{color: 'white'}}><span>{level}</span></div>
                </section> : null
             }
       </div>
@@ -87,7 +92,7 @@ const Footer = props => {
    )
 }
 
-const MapStateToProps = reduxState => reduxState.hero
-export default withRouter(connect(MapStateToProps)(Footer));
+const MapStateToProps = reduxState => reduxState
+export default withRouter(connect(MapStateToProps, {titlesReducer})(Footer));
 //AiFillHeart
 //AiOutlineHeart

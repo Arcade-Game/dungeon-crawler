@@ -9,7 +9,7 @@ import Lookout from './Lookout/Lookout';
 
 
 const Tile = (props) => {
-    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item} = props
+    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item, elevation} = props
 
     // const [monType, setMonType] = useState('')
     useEffect(() => {
@@ -27,6 +27,9 @@ const Tile = (props) => {
             break;
         case "chest":
             cName = "char-view-chest"
+            break;
+        case "monster":
+            cName = 'char-view-monster'
             break;
         case "exit":
             cName = "char-view-exit-tile"
@@ -62,7 +65,7 @@ const Tile = (props) => {
             cName ="char-view-uneven"
             break;
         case "platform":
-            tileStyle = {background: "#181818", border: "none"}
+            tileStyle = {background: "black", border: "none"}
             break;
         case "cliff":
             tileStyle = {background: "black", border: "none"}
@@ -85,7 +88,7 @@ const Tile = (props) => {
     }
         
     return (
-            <div className={cName} style={tileStyle}>
+            <div className={elevation === 3 && type !== 'cliff' ? `${cName}-cliff` : elevation === 2 && type !== 'platform' ? `${cName}-platform` : cName} style={tileStyle}>
                 {
                 !isFight ? (<div className="monster-data-hidden">
                     <div className="monster-picture-hidden"></div>
@@ -93,8 +96,8 @@ const Tile = (props) => {
                     <div className="monster-stats-hidden"></div>
                 </div>) : null
                 }
-                {
-                    gridX === 4 && gridY === 4 ? <div className="hero-div"></div> : null}    
+                {gridX === 4 && gridY === 4 ? <div className="hero-div"></div> : null}  
+                  
                 {
                     type === 'locked-door' ? <div className="char-view-locked-door"></div>
                     : type === 'cliff' ? <div className="char-view-cliff"></div> 

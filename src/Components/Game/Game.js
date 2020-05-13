@@ -15,16 +15,17 @@ import {withRouter} from 'react-router-dom';
 import { dungeonMusic, musicNumber } from './dungeonMusic';
 import {pushObstacle} from './pushObstacle';
 import {tutorial} from './Map Variables/tutorial';
-import {puzzles, levelOne} from './Map Variables/puzzles';
+import {puzzles, levelOne, demoMap} from './Map Variables/puzzles';
 import {connect} from 'react-redux';
-import { updateInventory } from '../../Redux/reducers/heroReducer';
+import { updateInventory, deathCounter } from '../../Redux/reducers/heroReducer';
 import {TweenMax, Power3} from 'gsap';
-// import {setHonor, setLevel} from '../../Redux/reducers/titlesReducer';
+import {setHonor, setLevel} from '../../Redux/reducers/titlesReducer';
 
 const Game = (props) => {
   // const {mapArray, mapX, mapY} = mapObject
-  const {mapArray, mapX, mapY} = tutorial
+  // const {mapArray, mapX, mapY} = tutorial
   // const {mapArray, mapX, mapY} = levelOne
+  const {mapArray, mapX, mapY} = demoMap
 
   const [grid, setGrid] = useState([...mapArray]),
     [charX, setCharX] = useState(mapX),
@@ -169,6 +170,14 @@ const Game = (props) => {
           setCharX(x)
           setCharY(y)
           break;
+        case "push-bridge-lava-bridge1":
+          setCharX(x)
+          setCharY(y)
+        break;
+        case "push-bridge-lava-bridge2":
+          setCharX(x)
+          setCharY(y)
+        break;
         case "lookout":
           seeLookout(x,y)
           setCharX(x)
@@ -241,6 +250,12 @@ const Game = (props) => {
         if (boulder.elevation < pushTo.elevation){return}
         else if (boulder.elevation === pushTo.elevation && pushTo.pushable === true){return}
         else if (boulder.elevation > pushTo.elevation){
+          if(grid[yy][xx].type === 'chest'){
+            newGrid[yy][xx] = {...newGrid[yy][xx], type: 'empty', pushable: 'true'}
+            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+            setCharX(x)
+            setCharY(y)
+          }
           if(grid[yy][xx].type === 'monster'){
             newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true, type: 'empty', monsterType: null}
             updateExperience(x, y, "crush")
@@ -373,7 +388,7 @@ const Game = (props) => {
   const clearMonster = (x, y) => {
     let newGrid = [...grid]
     updateExperience(x, y, "monster", grid[y][x].level)
-    newGrid[y][x] = {...newGrid[y][x], type: "empty", monsterType: "", level: ''}
+    newGrid[y][x] = {...newGrid[y][x], type: grid[y][x].elevation === 3 ? 'cliff' : grid[y][x].elevation === 2 ? 'platform' : 'empty', monsterType: "", level: ''}
     setCharX(x)
     setCharY(y)
     setMonsterCoor([0,0])
@@ -517,11 +532,11 @@ const Game = (props) => {
   // }
 
   const die = ()  => {
+    props.deathCounter()
     props.history.push('/death')
-
   }
   // console.log("music", dungeonMusic[musicNumber])s
-  // console.log('PROPS', props)
+  console.log('PROPS', props)
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
       <audio src={`${dungeonMusic[musicNumber]}`} autoPlay />
@@ -562,6 +577,7 @@ const Game = (props) => {
           experience={experience}
           level={level}
           characterHealth = {characterHealth}
+          newMoney={newMoney}
         />
         {/* <Inventory 
           equipmentToggle={equipmentToggle}

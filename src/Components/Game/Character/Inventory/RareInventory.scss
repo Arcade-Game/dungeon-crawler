@@ -1,0 +1,120 @@
+@import  "../../../../modules/mixins";
+@import "../../../../modules/variables";
+
+* {
+    margin: 0;
+    border: none;
+ }
+ 
+ .inventory-screen-container{
+ @include column;
+ justify-content: center;
+ // box-shadow: 10px 15px 25px;
+ // min-height: 0px;
+ width:  320px;
+ background-color: $inventory;
+ border-radius: 10px 10px 0 0;
+ position: absolute;
+ left: -4px;
+ bottom: 100%;
+ // z-index: 1;
+ font-size: 17px;
+ font-weight: 800;
+ border: 4px solid black;
+ border-bottom: none;
+ }
+ 
+ 
+.helm-container-rare {
+    border-radius: 10px;
+    height: 90px;
+    width: 75px;
+    background: radial-gradient(steelblue, black);
+    background: radial-gradient(darkblue, black 90%);
+    border: 4px solid black;
+
+}
+
+
+.middle-container-rare {
+    border-radius: 10px;
+    height: 90px;
+    width: 75px;
+    background: radial-gradient(steelblue, black);
+    background: radial-gradient(black, black, darkblue);
+    background: radial-gradient(darkblue, black 90%);
+    border: 4px solid black;
+
+}
+
+.boot-container-rare {
+    border-radius: 10px;
+    height: 90px;
+    width: 75px;
+    background: radial-gradient(steelblue, black);
+    background: radial-gradient(darkblue, black 90%);
+    border: 4px solid black;
+
+}
+
+// Epic
+
+.helm-container-epic {
+    border-radius: 10px;
+    height: 90px;
+    width: 75px;
+    background: radial-gradient(indigo, black 90%);
+    border: 4px solid black;
+
+}
+
+
+.middle-container-epic {
+    border-radius: 10px;
+    height: 90px;
+    width: 75px;
+    background: radial-gradient(indigo, black 90%);
+    border: 4px solid black;
+
+}
+
+.boot-container-epic {
+    border-radius: 10px;
+    height: 90px;
+    width: 75px;
+    background: radial-gradient(indigo, black 90%);
+    border: 4px solid black;
+
+}
+
+// Legendary
+ 
+
+.helm-container-legendary {
+    border-radius: 10px;
+    height: 90px;
+    width: 75px;
+    background: radial-gradient(#600000, black 90%);
+    border: 4px solid black;
+
+}
+
+
+.middle-container-legendary {
+    border-radius: 10px;
+    height: 90px;
+    width: 75px;
+    background: radial-gradient(#600000, black 90%);
+    // background: radial-gradient(black 90%, #600000 90%);
+    border: 4px solid black;
+
+}
+
+.boot-container-legendary {
+    border-radius: 10px;
+    height: 90px;
+    width: 75px;
+    background: radial-gradient(#600000, black 90%);
+    border: 4px solid black;
+
+}
