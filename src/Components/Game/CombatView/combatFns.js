@@ -39,17 +39,17 @@ export function attackType (weapon) {
   let arr = [];
   switch(weapon) {
      case 'Iron Shortsword':
-        return arr = ['Stab', 'Slash', 'Lunge']
+        return arr = ['Stab' /*, 'Slash', 'Lunge'*/]
      case 'Steel Shortsword':
-        return arr = ['Stab', 'Slash', 'Lunge']
+        return arr = ['Stab' /*, 'Slash', 'Lunge'*/]
      case 'Stone Dagger':
-        return arr = ['Stab', 'Slash', 'Lunge']
+        return arr = ['Stab'/*, 'Slash', 'Lunge'*/]
      case 'Spear':
-        return arr = ['Stab', 'Lunge']
+        return arr = ['Stab' /*, 'Lunge'*/]
      case 'Axe':
-        return arr = ['Slash', 'Slash']
+        return arr = ['Slash'/*, 'Slash'*/]
       default:
-        return arr = ['punch', 'kick', 'block']
+        return arr = ['punch'/*, 'kick', 'block'*/]
   }
   return arr
 }

@@ -60,6 +60,11 @@ const Game = (props) => {
 
     useEffect(() => {
       setCharacterHealth(heroStats.health)
+      setHeroStats({
+        ...heroStats,
+        attack: heroAttack + heroStats.attack,
+        armor: heroArmor + heroStats.armor
+      })
       let newGrid = [...grid]
       newGrid.forEach((e,i,a) => i > 8 && i < a.length-8 ? e.forEach((f,j,z) => {
         return (j > 8 && j < z.length-8 ? (newGrid[i][j].type === 'monster' ? getMonster(j, i) : null) : null)
@@ -69,7 +74,13 @@ const Game = (props) => {
   const move = ({keyCode}) => {
     return !isFight ? getKeyCode(keyCode) :  null
   }
+  
+  const equArr = Object.values(props.equipment)
+   const heroArmor = (+heroStats.armor) + (+equArr.reduce((acc, el) => {
+      return acc += ((el.armor) ? el.armor : 0)}, 0));
 
+   const heroAttack = (+heroStats.attack) + (+equArr.reduce((acc, el) => {
+         return acc += ((el.attack) ? el.attack : 0)}, 0));
 
   const getKeyCode = (keyCode) => {
     if(keyCode === 37 || keyCode === 65){
