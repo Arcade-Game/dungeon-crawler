@@ -8,13 +8,13 @@ const Hero = (props) => {
                 heroAttack = (hero.attack) + (+hero.equipment.map(el => el.attack));
 
    const handleHeroSelect = async () => {
+      console.log (hero.equipment)
       props.selectHero(hero)
    }
 
       const handleDelete = () => {
          console.log("are you sure you want to delete?")
       }
-      console.log (props.hero.equipment)
    return (
       <>
          <div className="hero-title"
