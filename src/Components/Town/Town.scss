@@ -8,6 +8,15 @@
    height:100vh;
    cursor: url('../pictures/cursors/Mouse10standartResize.png'), auto;
 
+   .town-title-container {
+      position: absolute;
+      right: 40px;
+      top: 40px;
+      color: white;
+      font-size: 30px;
+      font-weight: 800;
+   }
+
    .town-name {
       position:fixed;
       top: 1vh;

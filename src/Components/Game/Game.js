@@ -13,16 +13,17 @@ import {withRouter} from 'react-router-dom';
 import { dungeonMusic, musicNumber } from './dungeonMusic';
 import {pushObstacle} from './pushObstacle';
 import {tutorial} from './Map Variables/tutorial';
-import {puzzles, levelOne} from './Map Variables/puzzles';
+import {puzzles, levelOne, demoMap} from './Map Variables/puzzles';
 import {connect} from 'react-redux';
-import { updateInventory } from '../../Redux/reducers/heroReducer';
-import {TweenMax, Power3} from 'gsap';
-// import {setHonor, setLevel} from '../../Redux/reducers/titlesReducer';
+import { updateInventory, deathCounter } from '../../Redux/reducers/heroReducer';
+import {TweenMax, Power3, TweenLite} from 'gsap';
+import {setHonor, setLevel} from '../../Redux/reducers/titlesReducer';
 
 const Game = (props) => {
   // const {mapArray, mapX, mapY} = mapObject
-  const {mapArray, mapX, mapY} = tutorial
+  // const {mapArray, mapX, mapY} = tutorial
   // const {mapArray, mapX, mapY} = levelOne
+  const {mapArray, mapX, mapY} = demoMap
 
   const [grid, setGrid] = useState([...mapArray]),
     [charX, setCharX] = useState(mapX),
@@ -44,7 +45,8 @@ const Game = (props) => {
     [hero, setHero] = useState(props.hero),
     [heroStats, setHeroStats] = useState(props.stats),
     [equipment, setEquipment] = useState(props.equipment),
-    [inventory, setInventory] = useState(props.inventory);
+    [inventory, setInventory] = useState(props.inventory),
+    [direction, setDirection] = useState('up');
 
 
     let coinFade = useRef('');
@@ -82,6 +84,7 @@ const Game = (props) => {
 
   const getKeyCode = (keyCode) => {
     if(keyCode === 37 || keyCode === 65){
+      setDirection('left')
       if(grid[charY][charX-1].itemObject){
         determineObject(charX-1, charY)
       } else if(grid[charY][charX-1].pushable){ // Push Left
@@ -89,6 +92,7 @@ const Game = (props) => {
       } else {checkTile(charX-1, charY)}
       
     } else if(keyCode === 38 || keyCode === 87){ // Push Up
+      setDirection('up')
       if(grid[charY-1][charX].itemObject){
         determineObject(charX, charY-1)
       } else
@@ -97,6 +101,7 @@ const Game = (props) => {
       } else {checkTile(charX, charY-1)}
       
     } else if(keyCode === 39 || keyCode === 68){ // Push Right
+      setDirection('right')
       if(grid[charY][charX].itemObject){
         determineObject(charX+1, charY)
       } else
@@ -105,6 +110,7 @@ const Game = (props) => {
       } else {checkTile(charX+1, charY)}
       
     } else if(keyCode === 40 || keyCode === 83){ // Push Down
+      setDirection('down')
       if(grid[charY+1][charX].itemObject){
         determineObject(charX, charY+1)
       } else
@@ -180,6 +186,14 @@ const Game = (props) => {
           setCharX(x)
           setCharY(y)
           break;
+        case "push-bridge-lava-bridge1":
+          setCharX(x)
+          setCharY(y)
+        break;
+        case "push-bridge-lava-bridge2":
+          setCharX(x)
+          setCharY(y)
+        break;
         case "lookout":
           seeLookout(x,y)
           setCharX(x)
@@ -252,6 +266,12 @@ const Game = (props) => {
         if (boulder.elevation < pushTo.elevation){return}
         else if (boulder.elevation === pushTo.elevation && pushTo.pushable === true){return}
         else if (boulder.elevation > pushTo.elevation){
+          if(grid[yy][xx].type === 'chest'){
+            newGrid[yy][xx] = {...newGrid[yy][xx], type: 'empty', pushable: 'true'}
+            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+            setCharX(x)
+            setCharY(y)
+          }
           if(grid[yy][xx].type === 'monster'){
             newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true, type: 'empty', monsterType: null}
             updateExperience(x, y, "crush")
@@ -384,7 +404,7 @@ const Game = (props) => {
   const clearMonster = (x, y) => {
     let newGrid = [...grid]
     updateExperience(x, y, "monster", grid[y][x].level)
-    newGrid[y][x] = {...newGrid[y][x], type: "empty", monsterType: "", level: ''}
+    newGrid[y][x] = {...newGrid[y][x], type: grid[y][x].elevation === 3 ? 'cliff' : grid[y][x].elevation === 2 ? 'platform' : 'empty', monsterType: "", level: ''}
     setCharX(x)
     setCharY(y)
     setMonsterCoor([0,0])
@@ -516,6 +536,7 @@ const Game = (props) => {
   }
 
   const die = ()  => {
+    props.deathCounter()
     props.history.push('/death')
   }
   // console.log("music", dungeonMusic[musicNumber])s
@@ -534,6 +555,7 @@ const Game = (props) => {
           exploreTileFn={exploreTile}
           isFight={isFight} 
           setNewLava={setNewLava}
+          direction={direction}
         />
         {
           isFight ? 
@@ -562,6 +584,7 @@ const Game = (props) => {
           experience={experience}
           level={level}
           characterHealth = {characterHealth}
+          newMoney={newMoney}
         />
         {/* <Inventory 
           equipmentToggle={equipmentToggle}
@@ -573,4 +596,4 @@ const Game = (props) => {
   );
 }
 const mapStateToProps = reduxState => reduxState.hero
-export default withRouter(connect(mapStateToProps, {updateInventory}, )(Game));
+export default withRouter(connect(mapStateToProps, {updateInventory, deathCounter})(Game));

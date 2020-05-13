@@ -5,17 +5,19 @@ import {withRouter} from 'react-router-dom';
 import Lava from '../Animations/Lava/Lava';
 import Quicksand from '../Animations/Quicksand/Quicksand';
 import Lookout from './Lookout/Lookout';
+import {TweenMax, SteppedEase} from 'gsap';
 
 
 
 const Tile = (props) => {
-    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item} = props
+    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item, elevation, direction} = props
 
     // const [monType, setMonType] = useState('')
     useEffect(() => {
 
     }, [isFight])
 
+    let animate = ['0%', '12.5%', '25%', '37.5%', '50%', '62.5%', '75%', '87.5%', '100%']
     let tileStyle = null
     let cName = "char-view"
     let mName = ''
@@ -27,6 +29,9 @@ const Tile = (props) => {
             break;
         case "chest":
             cName = "char-view-chest"
+            break;
+        case "monster":
+            cName = 'char-view-monster'
             break;
         case "exit":
             cName = "char-view-exit-tile"
@@ -62,7 +67,7 @@ const Tile = (props) => {
             cName ="char-view-uneven"
             break;
         case "platform":
-            tileStyle = {background: "#181818", border: "none"}
+            tileStyle = {background: "black", border: "none"}
             break;
         case "cliff":
             tileStyle = {background: "black", border: "none"}
@@ -85,7 +90,7 @@ const Tile = (props) => {
     }
         
     return (
-            <div className={cName} style={tileStyle}>
+            <div className={elevation === 3 && type !== 'cliff' ? `${cName}-cliff` : elevation === 2 && type !== 'platform' ? `${cName}-platform` : cName} style={tileStyle}>
                 {
                 !isFight ? (<div className="monster-data-hidden">
                     <div className="monster-picture-hidden"></div>
@@ -93,8 +98,8 @@ const Tile = (props) => {
                     <div className="monster-stats-hidden"></div>
                 </div>) : null
                 }
-                {
-                    gridX === 4 && gridY === 4 ? <div className="hero-div"></div> : null}    
+                {gridX === 4 && gridY === 4 ? <div className={`hero-div-${direction}`} style={{backgroundPositionX: `${animate[Math.floor(Math.random() * animate.length)]}`}}></div> : null}  
+                  
                 {
                     type === 'locked-door' ? <div className="char-view-locked-door"></div>
                     : type === 'cliff' ? <div className="char-view-cliff"></div> 
