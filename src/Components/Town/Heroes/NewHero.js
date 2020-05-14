@@ -7,13 +7,13 @@ import axios from "axios";
 const NewHeros = (props) => {
    const [classToggle, setClassToggle] = useState("Warrior"),
              [genderToggle, setGenderToggle] = useState("male"),
-             [heroName, setHeroName] = useState("Jon"),
-            //  [heroClasses, setHeroClasses] = useState(),
-             [heroStats, setHeroStats] = useState()
+             [heroName, setHeroName] = useState("HeroDude"),
+             [heroClasses, setHeroClasses] = useState(),
+             [heroStats, setHeroStats] = useState({health: 100, attack: 1,armor: 1, strength: 4, agility: 0})
 
       useEffect (() => {
-         // axios.get("/api/classes").then(res => {
-            // setHeroClasses(res.data)})
+         axios.get("/api/classes").then(res => {
+            setHeroClasses(res.data)})
             setStartingStats()
       },[classToggle])
 
@@ -45,7 +45,6 @@ const NewHeros = (props) => {
    }
 
    const getHeroImage = () => {
-      console.log(classToggle, genderToggle)
          switch (classToggle+genderToggle){
             case (Warrior+male):
                return "https://i.pinimg.com/originals/31/ea/08/31ea08491663a9c922db8b7a5fa3d392.jpg"
@@ -62,28 +61,26 @@ const NewHeros = (props) => {
          }
    }
    const setStartingStats = () => {
-      switch (classToggle) {
-         case Warrior:
-
-               setHeroStats({health:100, attack: 1,armor: 1, strength: 4, agility: 0 })
-         break;
-         case Ranger:
-            setHeroStats({health: 80, attack: 1,armor: 0, strength: 1, agility: 4 })
-            break;
-         case Rogue:
-            setHeroStats({health:60,attack: 2,armor: 0, strength: 0, agility: 6 })
-         break;
+      if (heroClasses){
+         switch (classToggle) {
+            case Warrior:
+               setHeroStats({...heroClasses[0]})
+               break;
+            case Ranger:
+               setHeroStats({...heroClasses[1]})
+               break;
+            case Rogue:
+               setHeroStats({...heroClasses[2]})
+               break;
+         }
       }
    },
+
    handleInput = (event) => {
       // event.target.value.length <= 20;
       setHeroName(event.target.value)
    }
 
-
-
-   console.log(props)
-   console.log(heroStats)
    return (
       <div className="new-hero-screen-container"
               onClick={(event)=> props.stopPropagation(event)}> 
@@ -129,7 +126,7 @@ const NewHeros = (props) => {
                   </div>
 
                </div>
-               <h3 className="new-hero-name-input">Name: <input placeholder="Name" value={heroName} onChange={(event) => handleInput(event)} /></h3> 
+               <h3 className="new-hero-name-input">Name: <input placeholder="Name" maxLength="20" value={heroName} onChange={(event) => handleInput(event)} /></h3> 
                </div>
             <div className="new-hero-info-container" >
                <div>
@@ -139,13 +136,14 @@ const NewHeros = (props) => {
             <div className="new-hero-stats-container">
 
             <div className="new-hero-stats">Health: 
-            <h3>100</h3>
+            <h3>{heroStats.health}</h3>
             </div>
-            <div className="new-hero-stats">Strength:<h3>4</h3></div>
-            <div className="new-hero-stats">Agility:<h3>1</h3></div>
-            <div className="new-hero-stats">Armor:<h3>1</h3></div>
-            <div className="new-hero-stats">Other:<h3>unknown</h3></div>
-            <div className="new-hero-stats">Other:<h3>unknown</h3></div>
+            <div className="new-hero-stats">Attack:<h3>{heroStats.attack}</h3></div>
+            <div className="new-hero-stats">Armor:<h3>{heroStats.armor}</h3></div>
+            <div className="new-hero-stats">Strength:<h3>{heroStats.strength}</h3></div>
+            <div className="new-hero-stats">Agility:<h3>{heroStats.agility}</h3></div>
+            {/* <div className="new-hero-stats">Other:<h3>unknown</h3></div>
+            <div className="new-hero-stats">Other:<h3>unknown</h3></div> */}
                </div>
             </div>
             <button className="create-hero"

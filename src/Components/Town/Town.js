@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from "react";
-import {connect} from "react-redux"
-import {setHeroList} from "../../Redux/reducers/heroesReducer"
-import Trainer from "./Trainer/Trainer"
+import React, {useState, useEffect, useRef} from "react";
+import {TweenMax, Power2} from "gsap";
+import {connect} from "react-redux";
+import {setHeroList} from "../../Redux/reducers/heroesReducer";
+import { useLastLocation } from 'react-router-last-location';
+import Trainer from "./Trainer/Trainer";
 import Market from "./Market/Market";
 import LeaderBoard from "./LeaderBoard/LeaderBoard";
 import Heroes from "./Heroes/Heroes";
@@ -15,7 +17,9 @@ import {setHonor} from '../../Redux/reducers/titlesReducer';
 const Town = (props) => {
    const {hero} = props.hero
    const [overlayToggle, setOverlayToggle] = useState(false),
-             [toggleType, setToggleType] = useState();
+             [toggleType, setToggleType] = useState(),
+             [saveToggle, setSaveToggle] = useState(false);
+   const lastLocation = useLastLocation();
 
    const trainer = "trainer",
              market = "market",
@@ -24,9 +28,19 @@ const Town = (props) => {
              newHero = "newHero",
              inn = "inn";
    
+             let saveBanner = useRef(null)
+
    useEffect( () => {
       getHeroes()
+
    },[])
+
+   useEffect (() => {
+      if (lastLocation && lastLocation.pathname === "/game"){
+         saveGame()
+      }
+   },[])
+
    
    const setToggle = (toggleType) => {
       setToggleType(toggleType)
@@ -50,12 +64,33 @@ const Town = (props) => {
    // }
    },
 
+   saveGame = () => {
+      const {player_id} = props.auth,
+                {file_id, gold, deaths} = props.hero.hero,
+                {equipment, inventory} = props.hero
+         let saveData = {
+            player_id,
+            gold,
+            deaths,
+            equipment,
+            inventory
+         }
+         TweenMax.fromTo(saveBanner, 6, {opacity: 1, x: 18, ease: Power2.easeIn}, {opacity: 0, x:-250, ease: Power2.easeOut})
+
+         console.log(saveData)
+         axios.put(`/api/hero/${file_id}`, saveData).then(res => {
+            console.log(res.data)
+         })
+         // getHeroes()
+   },
+
    stopPropagation = (event) => {
       event.stopPropagation();
       event.nativeEvent.stopImmediatePropagation();
    }
 
    console.log(props)
+   console.log(lastLocation)
    let musicNumber = Math.floor(Math.random() * townMusic.length)
    console.log('musicNumber', musicNumber)
    return (
@@ -75,6 +110,7 @@ const Town = (props) => {
                <Heroes stopPropagation = {stopPropagation}
                               setToggle = {setToggle} 
                               resetToggle = {resetToggle}
+                              
                               /> : null }
             {toggleType === newHero ? 
                <NewHero stopPropagation = {stopPropagation}/> : null }
@@ -123,7 +159,8 @@ const Town = (props) => {
             <div className="minstrel2"></div>
             <div className="minstrel3"></div>
             <div className="minstrel4"></div> */}
-         <h3 className="copyright"> Picture Credit: Deep_Rights - Reddit </h3>
+            <h2 className="save-banner" ref={el => {saveBanner = el}}>SAVING GAME ...</h2>
+         {/* <h3 className="copyright"> Picture Credit: Deep_Rights - Reddit </h3> */}
       </div>
    )
 }

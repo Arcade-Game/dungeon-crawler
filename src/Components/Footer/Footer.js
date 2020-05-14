@@ -6,7 +6,7 @@ import titlesReducer from '../../Redux/reducers/titlesReducer';
 // import {BsArrowLeft} from 'react-icons/bs';
 
 const Footer = props => {
-   const {inventory, equipment, updateSessionInventory,equipmentToggle, inventoryToggle, heroStats, hero,  newMoney, experience, level, characterHealth} = props
+   const {inventory, equipment, updateSessionInventory,equipmentToggle, inventoryToggle, heroStats, hero,  newMoney, experience, level, characterHealth, wipeHeroState} = props
    const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
    const [totalHealth, setTotalHealth] = useState(heroStats.health),
    [heroAttack, setHeroAttack] = useState(),
@@ -35,8 +35,11 @@ const Footer = props => {
          {
          menuToggle === true ? <div className="game-menu">
                <div className="menu-title"><span>indermere</span></div>
-               <button className="return-to-town" onClick={() => props.history.push('/town')}>Return to Town</button>
-               <button className="return" onClick={() => window.location.reload(false)}>Restart Dungeon</button>
+               <button className="return-to-town" onClick={() => {wipeHeroState()
+                     props.history.push('/town')}}>Return to Town</button>
+               <button className="return" onClick={() =>{
+                  wipeHeroState() 
+                  window.location.reload(false)}}>Restart Dungeon</button>
                <button className="return">Settings</button>
                <button className="return">Quests</button>
                <button className="return">Key</button>

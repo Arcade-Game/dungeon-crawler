@@ -562,6 +562,13 @@ const Game = (props) => {
     props.deathCounter()
     props.history.push('/death')
   }
+
+  const wipeHeroState  = () => {
+    setHero()
+    setInventory()
+    setEquipment()
+
+  }
   // console.log("music", dungeonMusic[musicNumber])s
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
@@ -607,6 +614,7 @@ const Game = (props) => {
           inventory = {inventory}
           equipment = {equipment}
           updateSessionInventory = {updateSessionInventory}
+          wipeHeroState = {wipeHeroState}
           heroStats = {heroStats}
           hero = {hero}
           experience={experience}

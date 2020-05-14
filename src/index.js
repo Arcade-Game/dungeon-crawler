@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter} from "react-router-dom";
+import { BrowserRouter as Router} from 'react-router-dom';
+import { LastLocationProvider } from 'react-router-last-location';
 import {Provider} from "react-redux";
 import './index.css';
 import App from './App';
@@ -10,13 +11,15 @@ import configureStore from "./Redux/configureStore"
 const store = configureStore();
 
 ReactDOM.render(
-  <HashRouter>
+  <Router>
+    < LastLocationProvider >
     <Provider store={store}> 
       <React.StrictMode>
         <App />
       </React.StrictMode>
     </Provider>
-  </HashRouter>,
+    </LastLocationProvider>
+  </Router>,
   document.getElementById('root')
 );
 

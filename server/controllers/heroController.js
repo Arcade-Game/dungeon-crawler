@@ -16,7 +16,7 @@ getClasses: (req, res) => {
       const db = req.app.get("db");
             db.hero.get_classes().then(classes => {
                   res.status(200).send(classes)
-            })
+            }).catch(err => res.status(500).send(err))
 },
 
       createHero: async (req, res) => {
@@ -30,6 +30,14 @@ getClasses: (req, res) => {
                   })
                   res.status(201).send(newHero)
 },
+
+      deleteHero: (req, res) => {
+            const {id} = req.params;
+                  db = req.app.get("db");
+            db.hero.delete_hero(id).then(() => {
+                  res.sendStatus(200)
+            }).catch(err => res.status(500).send(err))
+      },
 
       saveHero: async (req, res) => {
             const {id} = req.params,

@@ -35,6 +35,7 @@ const Heroes = (props) => {
                                              hero = {hero}
                                              index = {index}
 
+                                             heroes = {heroes}
                                              handleHeroToggle = {handleHeroToggle}
                                              resetToggle = {props.resetToggle}
                                              expand = {expand}
