@@ -38,6 +38,10 @@ export const statSetupMon = ({attack, strength, armor, agility}) => {
 export function attackType (weapon) {
   let arr = [];
   let weaponType;
+  if(!weapon) {
+    weapon = 'unarmed'
+    weaponType ='unarmed'
+  }
   weapon = weapon.toLowerCase()
   if (weapon.includes('sword')){
     weaponType = 'sword'
@@ -56,18 +60,18 @@ export function attackType (weapon) {
   }
 
   switch(weaponType) {
-     case 'shortsword':
-        return arr = ['Stab' /*, 'Slash', 'Lunge'*/]
+    //  case 'shortsword':
+    //     return arr = ['Stab' /*, 'Slash', 'Lunge'*/]
      case 'sword':
-        return arr = ['Stab' /*, 'Slash', 'Lunge'*/]
+        return arr = ['Stab' , 'Slash'/*, 'Lunge'*/]
      case 'dagger':
         return arr = ['Stab'/*, 'Slash', 'Lunge'*/]
      case 'spear':
         return arr = ['Stab' /*, 'Lunge'*/]
      case 'axe':
-        return arr = ['Chop'/*, 'Slash'*/]
-      default:
-        return arr = ['Punch'/*, 'Kick', 'Block'*/]
+        return arr = ['Chop', 'Slash']
+    case 'unarmed':
+        return arr = ['Punch', 'Kick', 'Block']
   }
 }
 

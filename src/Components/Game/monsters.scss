@@ -2,54 +2,155 @@
 @import "../../modules/variables";
 
 .char-view-goblin {
-    background: url('../pictures/gblin2.png');
+    background: url('https://res.cloudinary.com/desyiuzzn/image/upload/v1589417043/refternu/Monsters/endg3wztak4rmsjtgbbu.png');
     @include mon-pic;
 }
 
 .char-view-demon {
-    background: url('../pictures/demon.png');
+    background: url('https://res.cloudinary.com/desyiuzzn/image/upload/v1589416997/refternu/Monsters/x9t7lx9augdojwkqxtfu.png');
     @include mon-pic;
 }
 
 .char-view-imp {
-    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR-mbmeBtUSFUTDkW6Wbi2WLe2nBIrk5HXPmXSOi24T-TrKbBYF&usqp=CAU");
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417077/refternu/Monsters/ra2jpktel0gsgcwgbwkm.png");
     @include mon-pic;
 }
 
 .char-view-dragon {
-    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRXHklPcBsDmjY1L0s74WVK3q9NXp-cAbWy8b0fb3GQ8b8CQ36z&usqp=CAU");
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417008/refternu/Monsters/qlvksybgdld84fq2ffpu.png");
     @include mon-pic;
 }
 
 .char-view-skeleton {
-    background: url("../pictures/skeleton2.png");
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417135/refternu/Monsters/nycekgsqleo46m6rbgoh.png");
     @include mon-pic;
 }
 
 .char-view-beholder {
-    background: url("../pictures/beholder.png");
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589416964/refternu/Monsters/yjebgbeag6vehtbj6deb.png");
     @include mon-pic;
 }
 
 .char-view-wraith {
-    background: url("../pictures/reaper.png");
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417163/refternu/Monsters/o5jbp5lynm0w6df2bhqx.png");
     @include mon-pic;
 }
 
 .char-view-gargoyle {
-    background: url("../pictures/gargoyle.png");
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417025/refternu/Monsters/mcaqjxdk89bo3sq89dcs.png");
     @include mon-pic;
 }
 
 .char-view-werewolf {
-    background: url("../pictures/werewolf.png");
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589416950/refternu/Monsters/tgfosxkxjyzwncht1woj.png");
     @include mon-pic;
 }
 
 .char-view-leviathan {
-    background: url("../pictures/leviathan.png");
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417130/refternu/Monsters/bly7sdrd02qdhf1czvuy.png");
     @include mon-pic;
 }
+
+.char-view-basilisk {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589416955/refternu/Monsters/xslmigrpoppgb6xhvpkj.png");
+    @include mon-pic;
+}
+
+.char-view-cyclops {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589416976/refternu/Monsters/kvu7skknuhxbqjbtfhzs.png");
+    @include mon-pic;
+}
+
+.char-view-elemental {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417014/refternu/Monsters/tcu7rm9g4ftpdftuacjc.png");
+    @include mon-pic;
+}
+
+.char-view-wurm {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417091/refternu/Monsters/it6ye9hfeyzhxg7xvar4.png");
+    @include mon-pic;
+}
+
+.char-view-minotaur {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417104/refternu/Monsters/udjgeculewbw6dpvqngr.png");
+    @include mon-pic;
+}
+
+.char-view-crab {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589416971/refternu/Monsters/zumpmizqgzbsttthlrhs.png");
+    @include mon-pic;
+}
+
+.char-view-golem {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417050/refternu/Monsters/mh5npsspmepoqhojft73.png");
+    @include mon-pic;
+}
+
+.char-view-harpy {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417060/refternu/Monsters/scktwnvdu4gb9fqhsp6u.png");
+    @include mon-pic;
+}
+
+.char-view-giant {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417066/refternu/Monsters/st9dau6idglq9szwiebj.png");
+    @include mon-pic;
+}
+
+.char-view-gryphon {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417055/refternu/Monsters/awi1kk90mbfgndktivtq.png");
+    @include mon-pic;
+}
+
+.char-view-hydra {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417071/refternu/Monsters/pfy49hygxmau1ho2nwft.png");
+    @include mon-pic;
+}
+
+.char-view-kobold {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417084/refternu/Monsters/m67krqomjvvortclqpnh.png");
+    @include mon-pic;
+}
+
+.char-view-ogre {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417112/refternu/Monsters/poenkydqcl0etdo7n1cg.png");
+    @include mon-pic;
+}
+
+.char-view-spider {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417143/refternu/Monsters/fq8q5viil8cgzxgir1kr.png");
+    @include mon-pic;
+}
+
+.char-view-troll {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589416981/refternu/Monsters/glzuawgaxsqaasenxv24.png");
+    @include mon-pic;
+}
+
+.char-view-vampire {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417149/refternu/Monsters/z1nxch2do514w19cec89.png");
+    @include mon-pic;
+}
+
+.char-view-yeti {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417168/refternu/Monsters/eze2wufrldpzlhynqerw.png");
+    @include mon-pic;
+}
+
+.char-view-zombie {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417038/refternu/Monsters/ktokj9o1owcg6p9c4niv.png");
+    @include mon-pic;
+}
+
+.char-view-phoenix {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417123/refternu/Monsters/wgvrchvh6awp1wrbfpsh.png");
+    @include mon-pic;
+}
+
+.char-view-orc {
+    background: url("https://res.cloudinary.com/desyiuzzn/image/upload/v1589417117/refternu/Monsters/hkhas9j55ixbr6h5yfxp.png");
+    @include mon-pic;
+}
+
 
 // ON-HOVER
 
