@@ -102,6 +102,9 @@
     height: 100%;
     width: 100%;
     z-index: 5;
+    &:hover .hover-info {
+        visibility: visible;
+    }
 }
 
 .char-view-water {
@@ -259,12 +262,18 @@
     background: url('../pictures/terrain/ForestRoad_diffuse.png');
     position: relative;
     background-size: 150%;
+    &:hover .hover-info {
+        visibility: visible;
+    }
 }
 
 .char-view-teleporter-1 {
     background: url('../pictures/terrain/teleporter.png');
     background-size: 135%;
     background-position: center;
+    &:hover .hover-info {
+        visibility: visible;
+    }
 
     // background-size: 200%;
     // background-position: 100% 0;
@@ -289,6 +298,9 @@
    opacity: 100%;
    z-index: 100;
    position: absolute;
+   &:hover .hover-info {
+    visibility: visible;
+}
 }
 
 .char-view-hidden-door {
@@ -308,6 +320,9 @@
     height: 100%;
     width: 100%;
     background: skyblue;
+    &:hover .hover-info {
+        visibility: visible;
+    }
 }
 
 .char-view-exit {
@@ -347,6 +362,9 @@
     background-size: 66%;
     background-position: bottom;
     background-repeat: no-repeat;
+    &:hover .hover-info {
+        visibility: visible;
+    }
     &:hover {
         opacity: 85%;
     }
