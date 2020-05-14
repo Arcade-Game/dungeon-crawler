@@ -41,9 +41,9 @@ getClasses: (req, res) => {
 
       saveHero: async (req, res) => {
             const {id} = req.params,
-                      {player_id, gold, deaths, equipment, inventory} = req.body;
+                      {player_id, gold, deaths, honor, equipment, inventory} = req.body;
                   db = req.app.get("db")
-            db.hero.save_hero(id, gold, deaths)
+            db.hero.save_hero(id, gold, deaths, honor)
             await db.session.delete_inventory(id)
             await db.session.delete_equipment(id)
             await inventory.forEach (el => ( el.item_id ? ( console.log("inv map", el),

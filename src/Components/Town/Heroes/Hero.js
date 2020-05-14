@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {connect} from "react-redux" 
-import {selectHero, updateInventory, deleteHero} from "../../../Redux/reducers/heroReducer";
+import {selectHero, deleteHero} from "../../../Redux/reducers/heroReducer";
 import axios from "axios";
 const Hero = (props) => {
    const { hero, index, handleHeroToggle, resetToggle, expand, heroes} = props;
@@ -73,4 +73,4 @@ const Hero = (props) => {
    )
 }
 
-export default connect(null, {selectHero, updateInventory, deleteHero})(Hero);
+export default connect(null, {selectHero, deleteHero})(Hero);
