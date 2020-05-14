@@ -2,11 +2,11 @@
 
 .inn-screen-container{
    position: fixed;
-   bottom: 15vh;
-   left: 3vw;
+   top: 2vh;
+   left: 37vw;
    @include column;
    border-radius: 10px;
-   width: 15%;
+   width: 16vw;
    height:200px;
    z-index: 2;
    background-color: grey;

@@ -535,6 +535,23 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
+  const updateSessionInventory = (inventory, equipment) => {
+    setInventory(inventory);
+    setEquipment(equipment)
+  }
+
+  // const stats = async()=> {
+  //   const arr = {}
+  //   await axios.get(`/api/monster-stats/${monsterType}`)
+  //   .then((res) => {
+  //       setMonsterStats(res.data)
+  //       arr = res.data
+  //   })
+  //   .catch(err => console.log(err))
+  //   console.log(arr)
+  //   return arr
+  // }
+
   const die = ()  => {
     props.deathCounter()
     props.history.push('/death')
@@ -581,16 +598,16 @@ const Game = (props) => {
           setInventoryToggle={inventoryToggleFn}
           equipmentToggle={equipmentToggle}
           inventoryToggle={inventoryToggle}
+          inventory = {inventory}
+          equipment = {equipment}
+          updateSessionInventory = {updateSessionInventory}
+          heroStats = {setHeroStats}
+          hero = {hero}
           experience={experience}
           level={level}
           characterHealth = {characterHealth}
           newMoney={newMoney}
         />
-        {/* <Inventory 
-          equipmentToggle={equipmentToggle}
-          inventoryToggle={inventoryToggle}
-          newMoney={newMoney}
-        /> */}
       </div>
     </div>
   );
