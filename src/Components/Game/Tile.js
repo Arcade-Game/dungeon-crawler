@@ -6,16 +6,20 @@ import Lava from '../Animations/Lava/Lava';
 import Quicksand from '../Animations/Quicksand/Quicksand';
 import Lookout from './Lookout/Lookout';
 import {TweenMax, SteppedEase} from 'gsap';
+import './hero.scss';
 
 
 
 const Tile = (props) => {
-    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item, elevation, direction} = props
+    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item, elevation, direction, heroGuy, monsterType, monsterInfoToggle, setMonsterInfoToggle} = props;
+
+    
 
     // const [monType, setMonType] = useState('')
     useEffect(() => {
 
     }, [isFight])
+    console.log(heroGuy)
 
     let animate = ['0%', '12.5%', '25%', '37.5%', '50%', '62.5%', '75%', '87.5%', '100%']
     let tileStyle = null
@@ -88,23 +92,32 @@ const Tile = (props) => {
         newMonster = grid[y][x].monsterType
         mName = `char-view-${grid[y][x].monsterType.toLowerCase()}`
     }
-        
+
+
+    const getMonType = (x,y) => {
+        return grid[y][x]
+    }
+
     return (
-            <div className={elevation === 3 && type !== 'cliff' ? `${cName}-cliff` : elevation === 2 && type !== 'platform' ? `${cName}-platform` : cName} style={tileStyle}>
+            <>
                 {
-                !isFight ? (<div className="monster-data-hidden">
-                    <div className="monster-picture-hidden"></div>
-                    <h3>{newMonster}</h3>
-                    <div className="monster-stats-hidden"></div>
-                </div>) : null
-                }
-                {gridX === 4 && gridY === 4 ? <div className={`hero-div-${direction}`} style={{backgroundPositionX: `${animate[Math.floor(Math.random() * animate.length)]}`}}></div> : null}  
+                    monsterInfoToggle ? (<div className="monster-data-hidden">
+                        <div className="monster-picture-hidden"></div>
+                        <h3>{newMonster}</h3>
+                        <div className="monster-stats-hidden"></div>
+                    </div>) : null
+                    }
+            <div className={elevation === 3 && type !== 'cliff' ? `${cName}-cliff` : elevation === 2 && type !== 'platform' ? `${cName}-platform` : cName} onClick={grid[y][x].monsterType ? (() => setMonsterInfoToggle(!monsterInfoToggle)) : null} style={tileStyle}>
+            <div className="hover-info">{type !== 'monster' ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div>
+                
+                
+                {gridX === 4 && gridY === 4 ? <div className={`${heroGuy.gender}-${heroGuy.class_name.toLowerCase()}-${direction}`} style={{backgroundPositionX: `${animate[Math.floor(Math.random() * animate.length)]}`}}></div> : null}  
                   
                 {
                     type === 'locked-door' ? <div className="char-view-locked-door"></div>
-                    : type === 'cliff' ? <div className="char-view-cliff"></div> 
-                    : type === 'platform' ? <div className="char-view-platform"></div>
-                    : type === 'monster' ? <div className={`${mName}`}></div>  
+                    : type === 'cliff' ? <div className="char-view-cliff"><div className="hover-info">{type !== 'monster' ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div></div> 
+                    : type === 'platform' ? <div className="char-view-platform"><div className="hover-info">{type !== 'monster' ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div></div>
+                    : type === 'monster' ? <div className={`${mName}`} ></div>  
                     : type === "chest" ? <Chest /> 
                     : type === 'quicksand' ? <Quicksand />
                     : type === "exit" ? <div className="char-view-exit"></div>
@@ -122,6 +135,7 @@ const Tile = (props) => {
                 {mist ? <div className="mist-div"></div> : null}
                 {itemObject === 'broken-teleporter' ? <div className="char-view-broken-teleporter"></div> : null}
             </div>
+            </>
     )
 }
 

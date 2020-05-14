@@ -3,18 +3,40 @@ import './Footer.scss';
 import {withRouter} from 'react-router-dom';
 import Inventory from '../Game/Character/Inventory/Inventory';
 import titlesReducer from '../../Redux/reducers/titlesReducer';
+import {TweenLite, Power3, Power2} from 'gsap';
+import { GiBlood } from 'react-icons/gi';
 // import {BsArrowLeft} from 'react-icons/bs';
 
 const Footer = props => {
-   const {inventory, equipment, updateSessionInventory,equipmentToggle, inventoryToggle, heroStats, hero,  newMoney, experience, level, characterHealth} = props
-   const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
-   const [totalHealth, setTotalHealth] = useState(heroStats.health),
-   [heroAttack, setHeroAttack] = useState(),
-   [heroArmor, setHeroArmor] = useState()
-   const [statsToggle, setStatsToggle] = useState(false)
-   const [menuToggle, setMenuToggle] = useState(false)
+   const {inventory, equipment, updateSessionInventory,equipmentToggle, inventoryToggle, heroStats, hero,  newMoney, experience, level, characterHealth, isFight, setEquipmentToggleState, setInventoryToggleState} = props;
+   const {gender, class_name} = hero, 
+              [heroAttack, setHeroAttack] = useState(),
+              [heroArmor, setHeroArmor] = useState()
+   const [statsToggle, setStatsToggle] = useState(false);
+   const [menuToggle, setMenuToggle] = useState(false);
 
+   let didMountRef = useRef(false)
+   let animateBlood = useRef(null)
+   
+   useEffect(() => {
+      
+      if (didMountRef.current){
+        TweenLite.to(
+         animateBlood,
+         5,
+         {
+            height: `${class_name === 'Warrior' ? ((characterHealth/100)*100) : class_name === 'Ranger' ? ((characterHealth/80)*100) : class_name === 'Rogue' ? ((characterHealth/60)*100) : null}%`
+         }
+      ) 
+      } else didMountRef.current = true
+      
 
+      if(isFight === true){
+         setEquipmentToggleState(false)
+         setInventoryToggleState(false)
+      }
+   }, [isFight])
+   
    const handleMenuClick = () => {
       setMenuToggle(!menuToggle)
    }
@@ -23,7 +45,7 @@ const Footer = props => {
       console.log("footer effect hit")
       setHeroArmor ((+heroStats.armor) + (+equipment.reduce((acc, el) => {
          return acc += ((el.armor) ? el.armor : 0)}, 0)));
-   setHeroAttack ((+heroStats.attack) + (+equipment.reduce((acc, el) => {
+      setHeroAttack ((+heroStats.attack) + (+equipment.reduce((acc, el) => {
          return acc += ((el.attack) ? el.attack : 0)}, 0)));
       },[props])
 
@@ -55,11 +77,11 @@ const Footer = props => {
             newMoney={newMoney}
          />
          <div className="inventory-icon-container">
-            <div className="inventory-icon" onClick={() => props.setInventoryToggle()}> 
+            <div className="inventory-icon" onClick={() => isFight ? alert("You're in combat!") : props.setInventoryToggle()}> 
             </div>
          </div>
          <div className ="character-icon-container">
-            <div className="character-icon" onClick={() => props.setEquipmentToggle()}>
+            <div className="character-icon" onClick={() => isFight ? alert("You're in combat!") : props.setEquipmentToggle()}>
             </div>
          </div>
          <div className="title-container">
@@ -69,12 +91,15 @@ const Footer = props => {
          <div className="experience-bar">
             {`XP: ${experience}`}
          </div>
-            <div className="health-bar" onClick={() => setStatsToggle(!statsToggle)}>
-         {characterHealth}
-         {}
-            
-            
-         </div>
+            <div className="health-bar" onClick={() => !isFight ? setStatsToggle(!statsToggle) : null}>
+               <div className="health-bar-blood" ref={el => {animateBlood = el}} 
+               // style={{height: `${class_name === 'Warrior' ? ((characterHealth/100)*100) : class_name === 'Ranger' ? ((characterHealth/80)*100) : class_name === 'Rogue' ? ((characterHealth/60)*100) : null}%`}}
+               >
+
+               </div>
+            </div>
+               
+               
          {
                statsToggle === true ?
                <section className="stats-container">
@@ -88,7 +113,7 @@ const Footer = props => {
                            <div><span>Damage:</span>{heroAttack} - {heroAttack + heroStats.strength}</div>
                         </div>
                   </div>
-                  <div className="stats-level" style={{color: 'white'}}><span>{level}</span></div>
+                  <div className="stats-level" ><span>{level}</span></div>
                </section> : null
             }
       </div>

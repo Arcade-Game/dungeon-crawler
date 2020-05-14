@@ -223,15 +223,27 @@
     bottom: 11px;
     height: 160px;
     width: 160px;
-    justify-content: center;
     border: 6px solid black;
     border-radius: 50%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
-    background: radial-gradient(#600000, black 90%);
+    background: radial-gradient(rgb(110, 87, 87) -5%, rgb(61, 52, 52), black, black);
+    // background: radial-gradient(#600000, black 90%);
     cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
     z-index: 2;
+    overflow: hidden;
+}
+
+.health-bar-blood {
+    background: radial-gradient(#600000, #000000 70%);
+    border-top: 2px solid black;
+    // border-top: 1px solid red;
+    border-radius: 50%;
+    height: 150%;
+    width: 175%;
+    // border: 1px solid blue;
 }
 
 .stats-container {
@@ -275,6 +287,10 @@
 
  .stats-level {
     //  border: 1px solid black;
+    // text-shadow: 3px 3px #010f00;
+    // color: rgb(1, 58, 1);
+    text-shadow: 3px 3px #000000;
+    color: rgb(175, 175, 175);
      width: 62px;
      height: 37%;
      display: flex;
