@@ -3,11 +3,11 @@ import './CombatStats.scss'
 
 
 const CombatStats = props => {
-   const [health, setHealth] = useState(0);
-   const [attack, setAttack] = useState(0);
-   const [armor, setArmor] = useState(0);
-   const [agility, setAgility] = useState(0);
-   const [strength, setStrength] = useState(0);
+   // const [health, setHealth] = useState(0);
+   // const [attack, setAttack] = useState(0);
+   // const [armor, setArmor] = useState(0);
+   // const [agility, setAgility] = useState(0);
+   // const [strength, setStrength] = useState(0);
    const [mAttack, setMAttack] = useState(0);
    const [mHealth, setMHealth] = useState(0);
    const [mArmor, setMArmor] = useState(0);
@@ -17,12 +17,12 @@ const CombatStats = props => {
 
    useEffect(()=> {
       if(monsterStats && stats){
-         const {attack, armor, agility, strength} = stats;
-         setAttack(+attack)
-         setArmor(+armor)
-         setHealth(+characterHealth)
-         setAgility(+agility)
-         setStrength(+strength)
+         // const {attack, armor, agility, strength} = stats;
+         // setAttack(+attack)
+         // setArmor(+armor)
+         // setHealth(+characterHealth)
+         // setAgility(+agility)
+         // setStrength(+strength)
          setMStrength(+monsterStats.strength)
          setMHealth(+monsterHealth)
          setMAgility(+monsterStats.agility)
@@ -33,7 +33,7 @@ const CombatStats = props => {
 
    return (
       <div className='stat-container'>
-         <div className='char-stats'>
+         {/* <div className='char-stats'>
             <div className='title'>Your Stats</div>
             <div className='stat-labels'>
                <div>
@@ -44,7 +44,7 @@ const CombatStats = props => {
                   <p>Strength: {strength} </p>
                </div>
             </div>
-         </div>
+         </div> */}
          <div className='monster-stats'>
             <div className='title'>{props.monsterType.charAt(0).toUpperCase() + props.monsterType.slice(1)} Stats</div>
             <div  className='stat-labels'>

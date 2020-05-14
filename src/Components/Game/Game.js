@@ -61,13 +61,13 @@ const Game = (props) => {
 
     useEffect(() => {
       setCharacterHealth(heroStats.health)
-      console.log('Hero stats before', heroStats)
-      setHeroStats({
-        ...heroStats,
-        attack: heroAttack + heroStats.attack,
-        armor: heroArmor + heroStats.armor
-      })
-      console.log('Hero stats after', heroStats)
+      // console.log('Hero stats before', heroStats)
+      // setHeroStats({
+      //   ...heroStats,
+      //   attack: heroAttack + heroStats.attack,
+      //   armor: heroArmor + heroStats.armor
+      // })
+      // console.log('Hero stats after', heroStats)
       let newGrid = [...grid]
       newGrid.forEach((e,i,a) => i > 8 && i < a.length-8 ? e.forEach((f,j,z) => {
         return (j > 8 && j < z.length-8 ? (newGrid[i][j].type === 'monster' ? getMonster(j, i) : null) : null)
@@ -78,12 +78,12 @@ const Game = (props) => {
     return !isFight ? getKeyCode(keyCode) :  null
   }
   
-  const equArr = Object.values(props.equipment)
-   const heroArmor = (+heroStats.armor) + (+equArr.reduce((acc, el) => {
-      return acc += ((el.armor) ? el.armor : 0)}, 0));
+  // const equArr = Object.values(props.equipment)
+  //  const heroArmor = (+heroStats.armor) + (+equArr.reduce((acc, el) => {
+  //     return acc += ((el.armor) ? el.armor : 0)}, 0));
 
-   const heroAttack = (+heroStats.attack) + (+equArr.reduce((acc, el) => {
-         return acc += ((el.attack) ? el.attack : 0)}, 0));
+  //  const heroAttack = (+heroStats.attack) + (+equArr.reduce((acc, el) => {
+  //        return acc += ((el.attack) ? el.attack : 0)}, 0));
 
   const getKeyCode = (keyCode) => {
     if(keyCode === 37 || keyCode === 65){
@@ -412,7 +412,7 @@ const Game = (props) => {
   }
 
   const updateExperience = (x, y, type, monsterLevel) => {
-    console.log("first", level, XPforLevel)
+    // console.log("first", level, XPforLevel)
     let xpVar = XPforLevel
     switch(type){
       case "monster":
@@ -445,7 +445,7 @@ const Game = (props) => {
     //   updateLevel(x, y)}
     
     let expRemaining = (XPforLevel - experience)
-    console.log(level, XPforLevel, expRemaining)
+    // console.log(level, XPforLevel, expRemaining)
   }
 
   const updateLevel = (x,y) => {

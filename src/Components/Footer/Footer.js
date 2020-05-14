@@ -104,7 +104,7 @@ const Footer = props => {
                   <div className="stats-container-for-styling">
                      <div><span>{hero.hero_name}</span></div>
                         <div className="stats-container-stats">
-                           <div><span>Health:</span>{heroStats.health}</div>
+                           <div><span>Health:</span>{characterHealth}</div>
                            <div><span>Armor:</span>{heroArmor}</div>
                            <div><span>Strength:</span>{heroStats.strength}</div>
                            <div><span>Agility:</span>{heroStats.agility}</div>
