@@ -89,6 +89,7 @@
    width: 100%;
 
    input {
+      margin-top: 5px;
       font-family: 'Philosopher', sans-serif;
       width: 60%;
       height: 40px;
@@ -183,4 +184,31 @@ select:-webkit-autofill:focus {
 
 .register-toggle:hover {
    cursor: url('../Components/pictures/cursors/Mouse10GreenResize.png'), auto;
+}
+
+.register-button {
+   font-family: 'Philosopher', sans-serif;
+   font-size: 20px;
+   font-weight: 600;
+   position: absolute;
+   bottom: 250px;
+   height: 40px;
+   width: 90px;
+   right: 120px;
+   background: linear-gradient(135deg, transparent, rgba(139, 69, 19, 0.637));
+   border-bottom: 1px solid black;
+   border-right: 1px solid black;
+}
+
+.login-toggle {
+   font-family: 'Philosopher', sans-serif;
+   font-size: 25px;
+   font-weight: bold;
+   text-shadow: 1px 0 2px saddlebrown;
+   position: absolute;
+   bottom: 210px;
+   left: 150px;
+   &:active {
+      transform: translateY(2px)
+   }
 }

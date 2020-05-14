@@ -4,6 +4,7 @@ import axios from "axios";
 import { setUser } from "../Redux/reducers/authReducer";
 import {TweenMax, Power1} from 'gsap';
 import './auth.scss';
+import { Tween } from "gsap/gsap-core";
 
 const Auth = (props) => {
    const [username, setUsername] = useState(""),
@@ -20,8 +21,9 @@ const Auth = (props) => {
    let botScroll = useRef(null);
    let logCon = useRef(null);
    let inCon = useRef(null);
-   let regButt = useRef(null);
-   let logButt = useRef(null);
+   let regBut = useRef(null);
+   let logBut = useRef(null);
+   let butCon = useRef(null);
 
    useEffect(() => {
       TweenMax.fromTo(
@@ -59,6 +61,17 @@ const Auth = (props) => {
             opacity: 1
          }
       ).delay(5)
+
+      TweenMax.fromTo(
+         butCon,
+         2,
+         {
+            opacity: 0
+         },
+         {
+            opacity: 1
+         }
+      ).delay(8)
 
       TweenMax.to(
          logCon,
@@ -147,7 +160,7 @@ const Auth = (props) => {
             <div className="scroll-top" ref={el => {topScroll = el}}></div>
             
             <div className='login-register' ref={el => {logReg = el}}>
-               <div className='input-container' ref={el => {inCon = el}}>
+               <div className='input-container' ref={el => {inCon = el}} style={registerToggle ? {height: "150px", width: "120%"} : null}>
                   <input id="login" value={username} placeholder="Username"
                               onClick={() => setLoginToggle(true)} 
                               onChange={(event) => setUsername(event.target.value)}
@@ -173,24 +186,38 @@ const Auth = (props) => {
                   }
                </div>
             </div>
-            <div className="button-container">
-               {!registerToggle 
+            <div className="button-container" ref={el => {butCon = el}}>
+
+                  {
+                     !registerToggle ? (
+                        <>
+                        <span className="register-toggle" onClick={() => setRegisterToggle(!registerToggle)}>Register</span>
+                        <button className='login-button' ref={el => {logBut = el}} onClick={() => handleLogin()}>Login</button></>) 
+                        : 
+                        <>
+                        <button className='register-button' onClick={() => handleRegister()}>Register</button>
+                        <span className="login-toggle"onClick={() => setRegisterToggle(!registerToggle)}>Login</span>
+                        </>
+                  }
+               
+               
+{/*                
+               <span className="register-toggle" ref={el => {regBut = el}}>Register</span>
+               
+               <span className="register-toggle" onClick={() => setRegisterToggle(!registerToggle)}>Register</span>) */}
+
+
+               {/* {!registerToggle 
                ? (loginToggle ? (
                   <>
-                     <button className='login-button' ref={el => {logButt = el}} onClick={() => handleLogin()}>Login</button>
                      <p> 
-                     <span className="register-toggle" onClick={() => setRegisterToggle(!registerToggle)}>Register</span>
                      </p>
                   </>
-                  ) : <span className="register-toggle" onClick={() => setRegisterToggle(!registerToggle)}>Register</span>) : (
                   <>
-                     <button className='button' onClick={() => handleRegister()}>Register</button>
                      <p> 
-                     <span className="register-toggle" ref={el => {regButt = el}}>Register</span>
-                     <span className="login-toggle"onClick={() => setRegisterToggle(!registerToggle)}>Login</span>
                      </p>
                   </>)
-               }
+               } */}
             </div>
          </div>
 
