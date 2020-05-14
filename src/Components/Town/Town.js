@@ -36,7 +36,7 @@ const Town = (props) => {
    },[])
 
    useEffect (() => {
-      if (lastLocation && lastLocation.pathname === "/game"){
+      if (lastLocation && lastLocation.pathname === "/game" || lastLocation && lastLocation.pathname === "/death" ){
          saveGame()
       }
    },[])
