@@ -8,7 +8,9 @@ import titlesReducer from '../../Redux/reducers/titlesReducer';
 const Footer = props => {
    const {inventory, equipment, updateSessionInventory,equipmentToggle, inventoryToggle, heroStats, hero,  newMoney, experience, level, characterHealth} = props
    const [heartArr, setHeartArr] = useState([0, 0, 0, 0, 0]);
-   const [totalHealth, setTotalHealth] = useState(heroStats.health)
+   const [totalHealth, setTotalHealth] = useState(heroStats.health),
+   [heroAttack, setHeroAttack] = useState(),
+   [heroArmor, setHeroArmor] = useState()
    const [statsToggle, setStatsToggle] = useState(false)
    const [menuToggle, setMenuToggle] = useState(false)
 
@@ -17,15 +19,14 @@ const Footer = props => {
       setMenuToggle(!menuToggle)
    }
 
-   const equArr = Object.values(props.equipment)
-   const heroArmor = (+heroStats.armor) + (+equArr.reduce((acc, el) => {
-      return acc += ((el.armor) ? el.armor : 0)}, 0));
+   useEffect (() => {
+      setHeroArmor ((+heroStats.armor) + (+equipment.reduce((acc, el) => {
+         return acc += ((el.armor) ? el.armor : 0)}, 0)));
+   setHeroAttack ((+heroStats.attack) + (+equipment.reduce((acc, el) => {
+         return acc += ((el.attack) ? el.attack : 0)}, 0)));
+      },[props])
 
-   const heroAttack = (+heroStats.attack) + (+equArr.reduce((acc, el) => {
-         return acc += ((el.attack) ? el.attack : 0)}, 0));
-
-
-      console.log("props", props)
+      console.log("footer-props", props)
    return (
       <>
       <div className="footer-top" onClick={handleMenuClick}>

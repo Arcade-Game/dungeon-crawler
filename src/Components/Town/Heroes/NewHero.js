@@ -26,6 +26,7 @@ const NewHeros = (props) => {
    const createHero = () => {
       const {player_id} = props.auth
       let class_id = 0
+      let gender = genderToggle
          switch (classToggle){
             case Warrior:
               class_id = 1;
@@ -37,7 +38,7 @@ const NewHeros = (props) => {
                class_id = 3;
                break;
          }
-      axios.post("/api/heroes", {player_id, heroName, genderToggle, class_id}).then(res => {
+      axios.post("/api/heroes", {player_id, heroName, gender, class_id}).then(res => {
          props.selectHero(res.data[0])
          props.history.push("/game")
       })

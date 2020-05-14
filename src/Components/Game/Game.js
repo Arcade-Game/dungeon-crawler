@@ -478,7 +478,13 @@ const Game = (props) => {
     newGrid[y][x] = {...newGrid[y][x], type: "empty"}
     setGrid(newGrid)
     axios.get(`/api/item`).then(res => {
-      console.log("res.data", res.data)
+      // console.log("res.data", res.data)
+      let index = inventory.findIndex(e => e === 0)
+      let newInventory = [...inventory]
+      if (index !== -1){
+        newInventory[index] = res.data
+        setInventory(newInventory)
+       } 
       props.updateInventory(res.data)})
     goldPile(x,y,z)
   }
@@ -535,9 +541,9 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
-  const updateSessionInventory = (inventory, equipment) => {
-    setInventory(inventory);
-    setEquipment(equipment)
+  const updateSessionInventory = (inv, equ) => {
+    setInventory(inv);
+    setEquipment(equ)
   }
 
   // const stats = async()=> {
@@ -601,7 +607,7 @@ const Game = (props) => {
           inventory = {inventory}
           equipment = {equipment}
           updateSessionInventory = {updateSessionInventory}
-          heroStats = {setHeroStats}
+          heroStats = {heroStats}
           hero = {hero}
           experience={experience}
           level={level}
