@@ -61,11 +61,13 @@ const Game = (props) => {
 
     useEffect(() => {
       setCharacterHealth(heroStats.health)
+      console.log('Hero stats before', heroStats)
       setHeroStats({
         ...heroStats,
         attack: heroAttack + heroStats.attack,
         armor: heroArmor + heroStats.armor
       })
+      console.log('Hero stats after', heroStats)
       let newGrid = [...grid]
       newGrid.forEach((e,i,a) => i > 8 && i < a.length-8 ? e.forEach((f,j,z) => {
         return (j > 8 && j < z.length-8 ? (newGrid[i][j].type === 'monster' ? getMonster(j, i) : null) : null)
