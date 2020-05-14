@@ -9,7 +9,9 @@ import { GiBlood } from 'react-icons/gi';
 
 const Footer = props => {
    const {inventory, equipment, updateSessionInventory,equipmentToggle, inventoryToggle, heroStats, hero,  newMoney, experience, level, characterHealth, isFight, setEquipmentToggleState, setInventoryToggleState} = props;
-   const {gender, class_name} = hero;
+   const {gender, class_name} = hero, 
+              [heroAttack, setHeroAttack] = useState(),
+              [heroArmor, setHeroArmor] = useState()
    const [statsToggle, setStatsToggle] = useState(false);
    const [menuToggle, setMenuToggle] = useState(false);
 
@@ -38,17 +40,16 @@ const Footer = props => {
    const handleMenuClick = () => {
       setMenuToggle(!menuToggle)
    }
-   
-   const equArr = Object.values(props.equipment)
-   const heroArmor = (+heroStats.armor) + (+equArr.reduce((acc, el) => {
-      return acc += ((el.armor) ? el.armor : 0)}, 0));
-      
-      const heroAttack = (+heroStats.attack) + (+equArr.reduce((acc, el) => {
-         return acc += ((el.attack) ? el.attack : 0)}, 0));
-         
-         
-      console.log("characterHealth", characterHealth, (characterHealth/80)*100)
-      console.log("props", props)
+
+   useEffect (() => {
+      console.log("footer effect hit")
+      setHeroArmor ((+heroStats.armor) + (+equipment.reduce((acc, el) => {
+         return acc += ((el.armor) ? el.armor : 0)}, 0)));
+      setHeroAttack ((+heroStats.attack) + (+equipment.reduce((acc, el) => {
+         return acc += ((el.attack) ? el.attack : 0)}, 0)));
+      },[props])
+
+      console.log("footer-props", props)
    return (
       <>
       <div className="footer-top" onClick={handleMenuClick}>
@@ -57,8 +58,10 @@ const Footer = props => {
          {
          menuToggle === true ? <div className="game-menu">
                <div className="menu-title"><span>indermere</span></div>
-               <button className="return-to-town" onClick={() => props.history.push('/town')}>Return to Town</button>
-               <button className="return" onClick={() => window.location.reload(false)}>Restart Dungeon</button>
+               <button className="return-to-town" 
+                              onClick={() => window.location.replace("/town")}>Return to Town</button>
+               <button className="return" 
+               onClick={() => window.location.replace("/game")}>Restart Dungeon</button>
                <button className="return">Settings</button>
                <button className="return">Quests</button>
                <button className="return">Key</button>

@@ -174,7 +174,7 @@ const {} = teleporters
         [...WL,              Cl,Pl,Pl,Pl, w,Cl,Cl,Cl,Cl,Cl, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o,                ...WL],
         [...WL,              Cl,pk,Cl,Cl,Cl,ll,Cl,Cl,Cl,Cl,Cl, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o,                ...WL],
         [...WL,              Cl,M6,Cl,Pl, Q, Q, Q, Q, x, x, x,Cl,Cl, o,Cl,Cl, o, o, o, o, o, o, o, o, o, o, o, o, o, o,                ...WL],
-        [...WL,              Cl,Cl,Cl, o, o, w, w, w, p, o, p, o, o, w,Pl, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o,                ...WL],
+        [...WL,              Cl,Cl,Cl, o, o, w, w, w, p, o, p, o, o, w,Pl, o,zz, o, o, o, o, o, o, o, o, o, o, o, o, o,                ...WL],
         [...WL,              ll,ll,ll,ll, F,ll, w, Q, p, o, p, o,Cl, o,Cl, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o,                ...WL],
         [...WL,               o, o, o, o, o,ll, w,ll, m, m, m, o,Cl, o,Cl, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o,                ...WL],
         [...WL,               o, o, o, o,ll, o, o,ll, o,ll, o, o,Cl, o,Cl, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o,                ...WL],

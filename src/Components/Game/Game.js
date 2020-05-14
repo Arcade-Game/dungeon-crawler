@@ -15,7 +15,7 @@ import {pushObstacle} from './pushObstacle';
 import {tutorial} from './Map Variables/tutorial';
 import {puzzles, levelOne, demoMap} from './Map Variables/puzzles';
 import {connect} from 'react-redux';
-import { updateInventory, deathCounter } from '../../Redux/reducers/heroReducer';
+import { updateInventory, deathCounter, saveHero } from '../../Redux/reducers/heroReducer';
 import {TweenMax, Power3, TweenLite} from 'gsap';
 import {setHonor, setLevel} from '../../Redux/reducers/titlesReducer';
 
@@ -71,8 +71,6 @@ const Game = (props) => {
       }) : null)
     }, [])
 
-
-  
   const move = ({keyCode}) => {
     return !isFight ? getKeyCode(keyCode) :  null
   }
@@ -169,6 +167,7 @@ const Game = (props) => {
           setCharX(x)
           setCharY(y)
           setGrid([...mapArray])
+          saveGameLocal()
           props.history.push('/town')
           break;
         case "push-bridge":
@@ -473,8 +472,13 @@ const Game = (props) => {
     newGrid[y][x] = {...newGrid[y][x], type: "empty"}
     setGrid(newGrid)
     axios.get(`/api/item`).then(res => {
-      console.log("res.data", res.data)
-      props.updateInventory(res.data)})
+      let index = inventory.findIndex(e => e === 0)
+      let newInventory = [...inventory]
+      if (index !== -1){
+        newInventory[index] = res.data
+        setInventory(newInventory)
+       } 
+    })
     goldPile(x,y,z)
   }
 
@@ -530,9 +534,9 @@ const Game = (props) => {
     setEquipmentToggle(!equipmentToggle)
   }
 
-  const updateSessionInventory = (inventory, equipment) => {
-    setInventory(inventory);
-    setEquipment(equipment)
+  const updateSessionInventory = (inv, equ) => {
+    setInventory(inv);
+    setEquipment(equ)
   }
 
 
@@ -550,8 +554,21 @@ const Game = (props) => {
 
   const die = ()  => {
     props.deathCounter()
+    saveGameLocal()
     props.history.push('/death')
   }
+
+  const saveGameLocal  = async () => {
+    console.log("SAVE EQU",equipment)
+    console.log("save INV",inventory)
+    props.saveHero({
+      hero: {...hero},
+      equipment: [...equipment],
+      inventory: [...inventory],
+      stats: {...heroStats}
+    })
+  }
+
   // console.log("music", dungeonMusic[musicNumber])s
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
@@ -600,7 +617,8 @@ const Game = (props) => {
           inventory = {inventory}
           equipment = {equipment}
           updateSessionInventory = {updateSessionInventory}
-          heroStats = {setHeroStats}
+          // wipeHeroState = {wipeHeroState}
+          heroStats = {heroStats}
           hero = {hero}
           experience={experience}
           level={level}
@@ -613,4 +631,4 @@ const Game = (props) => {
   );
 }
 const mapStateToProps = reduxState => reduxState.hero
-export default withRouter(connect(mapStateToProps, {updateInventory, deathCounter})(Game));
+export default withRouter(connect(mapStateToProps, {updateInventory, deathCounter, saveHero})(Game));

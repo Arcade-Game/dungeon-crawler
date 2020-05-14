@@ -3,7 +3,6 @@ import Equipment from "./Equipment";
 import "./Inventory.scss";
 import "./RareInventory.scss";
 import {GiTwoCoins} from 'react-icons/gi';
-import { unequipItem } from "../../../../Redux/reducers/heroReducer";
 
 const Inventory = (props) => {
    const {equipmentToggle, inventoryToggle, updateSessionInventory} = props
@@ -21,147 +20,169 @@ const Inventory = (props) => {
                 boots = "boots";
 
       useEffect (() => {
-         console.log("hit")
+         console.log("inv effect hit")
+         setInventory(props.inventory)
+         setEquipment(props.equipment)
       },[props])
+
+      useEffect (() => {
+      updateSessionInventory(inventory, equipment);
+      },[equipment, inventory])
+
 
       useEffect (() => {
          console.log("props.newMoney", props.newMoney)
          setCurrency(currency+props.newMoney)
       }, [props.newMoney])
 
-      const updateInventory = () => {
-         setInventory(inventory)
-         setEquipment(equipment)
-         console.log(equipment)
-         console.log(inventory)
+      const updateInventory = (inv, equ) => {
+         setInventory(inv);
+         setEquipment(equ);
+         updateState()
+      },
+
+      updateState = () => {
+         updateSessionInventory(inventory, equipment);
+         console.log("game update hit")
       },
 
       equipItem = (event) => {
-         setOverlayToggle(!overlayToggle)
+         setOverlayToggle(false);
          event.preventDefault();
          const data = JSON.parse(event.dataTransfer.getData("text"))
          const {id, equipped} = data;
+         const inv = [...inventory],
+                  equ = [...equipment]
          if (equipped === "false") {
-         console.log(inventory)
 
-         switch (inventory[id].item_type) {
+         switch (inv[id].item_type) {
             case weapon:
-               if (equipment[0].item_id){
+               if (equ[0].item_id){
                   replaceItem(id, 0)
                } else {
-                  equipment[0] = inventory[id]
-                  inventory.splice(id, 1, 0)
+                  equ[0] = inv[id]
+                  inv.splice(id, 1, 0)
+                  updateInventory(inv, equ);
                }
                break;
             case twoHand:
-               if (equipment[1].item_id){
-                  replaceItem(id, 1)
+               if (equ[1].item_id){
+                  replaceItem(id, 1);
                } else {
-                  equipment[1] = inventory[id]
-                  inventory.splice(id, 1, 0)
+                  equ[1] = inv[id];
+                  inv.splice(id, 1, 0);
+                  updateInventory(inv, equ);
                }
                   break;
             case offHand:
-               if (equipment[2].item_id){
-                  replaceItem(id, 2)
+               if (equ[2].item_id){
+                  replaceItem(id, 2);
                } else {
-                  equipment[2] = inventory[id]
-                  inventory.splice(id, 1, 0)
+                  equ[2] = inv[id];
+                  inv.splice(id, 1, 0);
+                  updateInventory(inv, equ);
                }
+               break;
             case armor:
-               if (equipment[3].item_id){
-                  replaceItem(id, 3)
+               if (equ[3].item_id){
+                  replaceItem(id, 3);
                } else {
-                  equipment[3] = inventory[id]
-                  inventory.splice(id, 1, 0)
+                  equ[3] = inv[id];
+                  inv.splice(id, 1, 0);
+                  updateInventory(inv, equ);
                }
                break;
             case helm:
-               if (equipment[4].item_id){
-                  replaceItem(id, 4)
+               if (equ[4].item_id){
+                  replaceItem(id, 4);
                } else {
-                  equipment[4] = inventory[id]
-                  inventory.splice(id, 1, 0)
+                  equ[4] = inv[id];
+                  inv.splice(id, 1, 0);
+                  updateInventory(inv, equ);
                }
                break;
             case boots:
-               if (equipment[5].item_id){
-                  replaceItem(id, 5)
+               if (equ[5].item_id){
+                  replaceItem(id, 5);
                } else {
-                  equipment[5] = inventory[id]
-                  inventory.splice(id, 1, 0)
+                  equ[5] = inv[id];
+                  inv.splice(id, 1, 0);
+                  updateInventory(inv, equ);
                }
                break;
             }
-            updateInventory()
          }
       },
 
       replaceItem = (id, equipIndex) => {
-         let copy = {...equipment[equipIndex]}
-         equipment[equipIndex] = inventory[id]
-         inventory.splice(id, 1, copy)
+         const inv = [...inventory],
+                   equ = [...equipment]
+         let copy = {...equ[equipIndex]}
+         equ[equipIndex] = inv[id]
+         inv.splice(id, 1, copy);
+         updateInventory(inv, equ);
       },
 
       unEquipItem = (event) => {
-         setOverlayToggle(!overlayToggle)
+         setOverlayToggle(false);
          event.preventDefault();
          const data = JSON.parse(event.dataTransfer.getData("text"));
          const {id, equipped} = data;
-         console.log("un: ", id, equipped)
+         const inv = [...inventory],
+                   equ = [...equipment];
          if (equipped ==="true"){
-         const equIndex = equipment.findIndex(item => item.item_id === +id);
-            const invIndex = inventory.findIndex(e => e === 0)
-               inventory.splice(invIndex, 1, equipment[equIndex])
-               setInventory(inventory)
-            const itemType = equipment[equIndex].item_type
-               equipment[equIndex] = {type: `${itemType}`}
-               setEquipment(equipment)
-           
+         const equIndex = equ.findIndex(item => item.item_id === +id);
+            const invIndex = inv.findIndex(e => e === 0);
+               inv.splice(invIndex, 1, equ[equIndex]);
+            const itemType = equ[equIndex].item_type
+               equ[equIndex] = {type: `${itemType}`}
          }
-         updateInventory()
+         updateInventory(inv, equ);
       },
 
       deleteItem = (event) => {
-      setOverlayToggle(!overlayToggle)
+      setOverlayToggle(!overlayToggle);
       event.preventDefault();
       const data = JSON.parse(event.dataTransfer.getData("text"));
       const {id, equipped} = data;
+      const inv = [...inventory],
+                equ = [...equipment];
       if (equipped ==="true"){
-         switch (equipment[id].item_type){
+         const equIndex = equ.findIndex(item => item.item_id === +id);
+         switch (equ[equIndex].item_type){
             case weapon:
-               equipment[0] = {type: "weapon"};
+               equ[0] = {type: "weapon"};
                break;
             case twoHand:
-               equipment[1] = {type: "two-hand"};
+               equ[1] = {type: "two-hand"};
                   break;
             case offHand:
-               equipment[2] = {type: "off-hand"};
+               equ[2] = {type: "off-hand"};
                   break;
             case armor:
-               equipment[3] = {type: "armor"};
+               equ[3] = {type: "armor"};
                    break;
             case helm:
-               equipment[4] = {type: "helm"};
+               equ[4] = {type: "helm"};
                    break;
             case boots:
-               equipment[5] = {type: "boots"};
+               equ[5] = {type: "boots"};
                    break;
             }
          } else {
-            setInventory(inventory.splice(+id, 1, 0))
+            setInventory(inv.splice(+id, 1, 0));
          }
-         updateInventory()
+         updateInventory(inv, equ);
       },
 
       handleDrag = (event) => {
-      setOverlayToggle(!overlayToggle)
+      setOverlayToggle(true)
       const {id, className} = event.target;
       const data = JSON.stringify({id: id, equipped: className})
-      console.log(data)
-      event.dataTransfer.setData("text", data)
+      event.dataTransfer.setData("text", data);
       }
 
+      console.log("inv props: ", props)
       const mappedInventory = inventory.map((el, i) => {
          return el.item_type ? (
             <div className="inventory-square" style={el.rarity === 'epic' ? {background: 'radial-gradient(indigo, black 90%)'} : el.rarity === 'rare' ? {background: 'radial-gradient(darkblue, black 90%)'} : el.rarity === 'legendary' ? {background: 'radial-gradient(#600000, black 90%)'} : null}
@@ -170,6 +191,7 @@ const Inventory = (props) => {
                      id={i} 
                      className="false"
                      src={el.image} 
+                     alt={el.item_name}
                      draggable="true" 
                      onDragStart={(event) => handleDrag(event)} 
                      onDrag={(event) => event.preventDefault()} 
@@ -184,9 +206,8 @@ const Inventory = (props) => {
             </div>
             </div>
             </div>)  : i < 8 ? <div className="inventory-square"></div> : null
-         })
+         });
 
-   console.log("props-inventory", props)
    return (
       <>
          {overlayToggle ? (
@@ -226,5 +247,5 @@ const Inventory = (props) => {
    </>
    )
 }
-// const mapStateToProps = reduxState => reduxState.hero
+
 export default Inventory;

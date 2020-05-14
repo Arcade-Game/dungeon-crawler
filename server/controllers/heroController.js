@@ -16,7 +16,7 @@ getClasses: (req, res) => {
       const db = req.app.get("db");
             db.hero.get_classes().then(classes => {
                   res.status(200).send(classes)
-            })
+            }).catch(err => res.status(500).send(err))
 },
 
       createHero: async (req, res) => {
@@ -31,25 +31,27 @@ getClasses: (req, res) => {
                   res.status(201).send(newHero)
 },
 
+      deleteHero: (req, res) => {
+            const {id} = req.params;
+                  db = req.app.get("db");
+            db.hero.delete_hero(id).then(() => {
+                  res.sendStatus(200)
+            }).catch(err => res.status(500).send(err))
+      },
+
       saveHero: async (req, res) => {
             const {id} = req.params,
                       {player_id, gold, deaths, equipment, inventory} = req.body;
                   db = req.app.get("db")
             db.hero.save_hero(id, gold, deaths)
-            db.session.delete_inventory(id)
-            db.session.delete_equipment(id)
-            await inventory.forEach (el => ( el.item_id ? ( console.log(el),
+            await db.session.delete_inventory(id)
+            await db.session.delete_equipment(id)
+            await inventory.forEach (el => ( el.item_id ? ( console.log("inv map", el),
                   db.session.save_inventory(id,el.item_id))
                   : null ))
-            await equipment.forEach (el => ( el.item_id ? ( console.log(el),
+            await equipment.forEach (el => ( el.item_id ? ( console.log("equ map", el),
                   db.session.save_equipment(id,el.item_id))
                   : null ))
-
-            console.log(id)
-            console.log(player_id)
-            console.log(gold)
-            console.log(equipment)
-            console.log(inventory)
 
             res.sendStatus(200)
       }

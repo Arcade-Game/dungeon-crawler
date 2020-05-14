@@ -104,9 +104,9 @@ const Auth = (props) => {
 
      
 
-   // useEffect (() => {
-   //    window.location.reload()
-   // },[props])
+   useEffect (() => {
+      localStorage.clear()
+   },[])
    const clearPlaceholder = (inputId, newValue) => {
       if(newValue){
          document.getElementById(inputId).placeholder = newValue

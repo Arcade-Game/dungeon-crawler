@@ -49,10 +49,11 @@ app.get('/api/monster-stats/:monsterType', combatCtrl.monsterStats);
 app.get('/api/character-stats/:classType', combatCtrl.charStats);
 
 //hero endpoints
+app.get("/api/classes", heroCtrl.getClasses);
 app.get("/api/heroes/player/:id", heroCtrl.getHeroes);
 app.post("/api/heroes", heroCtrl.createHero);
 app.put("/api/hero/:id", heroCtrl.saveHero);
-app.get("/api/classes", heroCtrl.getClasses);
+app.delete("/api/hero/:id", heroCtrl.deleteHero);
 
 
 //monster endpoints

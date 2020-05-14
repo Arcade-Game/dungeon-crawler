@@ -101,6 +101,24 @@
       }
    }
 }
+
+.hero-delete-buttons {
+   margin: 10px 8px 0 8px;
+   background-color: $pal-two;
+               color: $pal-five;
+               border: 2px solid $pal-three;
+               font-size: 20px;
+               box-shadow: 5px 5px 15px;
+               width: 150px;
+               height: 30px;
+}
+.hero-delete-buttons:hover{
+   background-color: $pal-seven;
+   border-color: $pal-six;
+   color:$pal-five;
+}
+
+
 .create-hero{
    @include town-button;
 }
@@ -111,14 +129,21 @@
    opacity: .6;
    width: 40px;
 }
+
+
+
+
+
+
+
 //newHero
 
 .new-hero-screen-container{
    @include row;
    justify-content: space-evenly;
    border-radius: 10px;
-   width: 55%;
-   height:575px;
+   width: 58%;
+   height:75vh;
    z-index: 2;
    background-color: $pal-one;
    box-shadow: 10px 10px 5px black;
@@ -237,7 +262,7 @@
 
             .new-hero-name{
                width:95%;
-               height:50px;
+              min-height:50px;
             }
             .new-hero-class{
                width:95%;
