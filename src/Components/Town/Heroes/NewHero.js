@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {selectHero} from "../../../Redux/reducers/heroReducer";
+import {selectHero , selectNewHero} from "../../../Redux/reducers/heroReducer";
 import "./Heroes.scss";
 import axios from "axios";
 const NewHeros = (props) => {
@@ -39,9 +39,9 @@ const NewHeros = (props) => {
                break;
          }
       axios.post("/api/heroes", {player_id, heroName, gender, class_id}).then(res => {
-         props.selectHero(res.data[0])
-         props.history.push("/game")
+         props.selectNewHero(res.data[0])
       })
+      props.history.push("/game")
    }
 
    const getHeroImage = () => {
@@ -155,4 +155,4 @@ const NewHeros = (props) => {
    )
 }
 const mapStateToProps = reduxState => reduxState
-export default withRouter(connect(mapStateToProps, {selectHero})(NewHeros));
+export default withRouter(connect(mapStateToProps, {selectHero, selectNewHero})(NewHeros));

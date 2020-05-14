@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {connect} from "react-redux" 
-import {selectHero, updateInventory, equipItem} from "../../../Redux/reducers/heroReducer";
+import {selectHero, updateInventory, deleteHero} from "../../../Redux/reducers/heroReducer";
 import axios from "axios";
 const Hero = (props) => {
    const { hero, index, handleHeroToggle, resetToggle, expand, heroes} = props;
@@ -23,9 +23,11 @@ const Hero = (props) => {
       const handleDelete = () => {
          axios.delete(`/api/hero/${hero.file_id}`).then(res => {
             console.log(res.data)
-            props.selectHero(heroes[0])
+            props.deleteHero()
          })
-         props.resetToggle()
+         handleHeroToggle(index)
+         props.getHeroes()
+
       }
 
    console.log(hero)
@@ -71,4 +73,4 @@ const Hero = (props) => {
    )
 }
 
-export default connect(null, {selectHero, updateInventory})(Hero);
+export default connect(null, {selectHero, updateInventory, deleteHero})(Hero);

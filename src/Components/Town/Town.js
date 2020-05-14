@@ -56,7 +56,7 @@ const Town = (props) => {
       // if (props.heroes){
       const {player_id} = props.auth
       axios.get(`api/heroes/player/${player_id}`).then(res => {
-         console.log(res.data)
+         console.log("HERO LIST SET", res.data)
          props.setHeroList(res.data)
       })
    // } else {
@@ -81,7 +81,6 @@ const Town = (props) => {
          axios.put(`/api/hero/${file_id}`, saveData).then(res => {
             console.log(res.data)
          })
-         // getHeroes()
    },
 
    stopPropagation = (event) => {
@@ -108,12 +107,14 @@ const Town = (props) => {
                <LeaderBoard stopPropagation = {stopPropagation} /> : null }
             {toggleType === heroes ? 
                <Heroes stopPropagation = {stopPropagation}
+                              getHeroes = {getHeroes}
                               setToggle = {setToggle} 
                               resetToggle = {resetToggle}
                               
                               /> : null }
             {toggleType === newHero ? 
-               <NewHero stopPropagation = {stopPropagation}/> : null }
+               <NewHero stopPropagation = {stopPropagation}
+                                 /> : null }
             {toggleType === inn ? 
                <Inn stopPropagation = {stopPropagation}
                      hero = {props.hero}/> : null }

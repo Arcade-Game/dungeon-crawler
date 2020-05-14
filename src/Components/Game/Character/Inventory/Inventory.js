@@ -20,8 +20,15 @@ const Inventory = (props) => {
                 boots = "boots";
 
       useEffect (() => {
-         updateSessionInventory(inventory, equipment);
+         console.log("inv effect hit")
+         setInventory(props.inventory)
+         setEquipment(props.equipment)
+      },[props])
+
+      useEffect (() => {
+      updateSessionInventory(inventory, equipment);
       },[equipment, inventory])
+
 
       useEffect (() => {
          console.log("props.newMoney", props.newMoney)
@@ -31,10 +38,16 @@ const Inventory = (props) => {
       const updateInventory = (inv, equ) => {
          setInventory(inv);
          setEquipment(equ);
+         updateState()
+      },
+
+      updateState = () => {
+         updateSessionInventory(inventory, equipment);
+         console.log("game update hit")
       },
 
       equipItem = (event) => {
-         setOverlayToggle(!overlayToggle);
+         setOverlayToggle(false);
          event.preventDefault();
          const data = JSON.parse(event.dataTransfer.getData("text"))
          const {id, equipped} = data;
@@ -48,7 +61,7 @@ const Inventory = (props) => {
                   replaceItem(id, 0)
                } else {
                   equ[0] = inv[id]
-                  inventory.splice(id, 1, 0)
+                  inv.splice(id, 1, 0)
                   updateInventory(inv, equ);
                }
                break;
@@ -111,7 +124,7 @@ const Inventory = (props) => {
       },
 
       unEquipItem = (event) => {
-         setOverlayToggle(!overlayToggle);
+         setOverlayToggle(false);
          event.preventDefault();
          const data = JSON.parse(event.dataTransfer.getData("text"));
          const {id, equipped} = data;
@@ -135,7 +148,8 @@ const Inventory = (props) => {
       const inv = [...inventory],
                 equ = [...equipment];
       if (equipped ==="true"){
-         switch (equ[id].item_type){
+         const equIndex = equ.findIndex(item => item.item_id === +id);
+         switch (equ[equIndex].item_type){
             case weapon:
                equ[0] = {type: "weapon"};
                break;
@@ -162,12 +176,13 @@ const Inventory = (props) => {
       },
 
       handleDrag = (event) => {
-      setOverlayToggle(!overlayToggle)
+      setOverlayToggle(true)
       const {id, className} = event.target;
       const data = JSON.stringify({id: id, equipped: className})
       event.dataTransfer.setData("text", data);
       }
 
+      console.log("inv props: ", props)
       const mappedInventory = inventory.map((el, i) => {
          return el.item_type ? (
             <div className="inventory-square" style={el.rarity === 'epic' ? {background: 'radial-gradient(indigo, black 90%)'} : el.rarity === 'rare' ? {background: 'radial-gradient(darkblue, black 90%)'} : el.rarity === 'legendary' ? {background: 'radial-gradient(#600000, black 90%)'} : null}
@@ -176,6 +191,7 @@ const Inventory = (props) => {
                      id={i} 
                      className="false"
                      src={el.image} 
+                     alt={el.item_name}
                      draggable="true" 
                      onDragStart={(event) => handleDrag(event)} 
                      onDrag={(event) => event.preventDefault()} 

@@ -12,9 +12,9 @@ const Auth = (props) => {
              [registerToggle, setRegisterToggle] = useState(false);
 
 
-   // useEffect (() => {
-   //    window.location.reload()
-   // },[props])
+   useEffect (() => {
+      localStorage.clear()
+   },[])
    const clearPlaceholder = (inputId, newValue) => {
       if(newValue){
          document.getElementById(inputId).placeholder = newValue

@@ -44,20 +44,14 @@ getClasses: (req, res) => {
                       {player_id, gold, deaths, equipment, inventory} = req.body;
                   db = req.app.get("db")
             db.hero.save_hero(id, gold, deaths)
-            db.session.delete_inventory(id)
-            db.session.delete_equipment(id)
-            await inventory.forEach (el => ( el.item_id ? ( console.log(el),
+            await db.session.delete_inventory(id)
+            await db.session.delete_equipment(id)
+            await inventory.forEach (el => ( el.item_id ? ( console.log("inv map", el),
                   db.session.save_inventory(id,el.item_id))
                   : null ))
-            await equipment.forEach (el => ( el.item_id ? ( console.log(el),
+            await equipment.forEach (el => ( el.item_id ? ( console.log("equ map", el),
                   db.session.save_equipment(id,el.item_id))
                   : null ))
-
-            console.log(id)
-            console.log(player_id)
-            console.log(gold)
-            console.log(equipment)
-            console.log(inventory)
 
             res.sendStatus(200)
       }
