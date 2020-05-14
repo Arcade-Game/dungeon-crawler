@@ -36,24 +36,28 @@ export const statSetupMon = ({attack, strength, armor, agility}) => {
 ///////////////////////////////////////////
 
 export function attackType (weapon) {
+  
   let arr = [];
   let weaponType;
-  weapon = weapon.toLowerCase()
-  if (weapon.includes('sword')){
-    weaponType = 'sword'
-  } else if(weapon.includes('axe')) {
-    weaponType = 'axe'
-  } else if (weapon.includes('dagger')) {
-    weaponType = 'dagger'
-  } else if (weapon.includes('spear')) {
-    weaponType = 'spear'
-  } else if (weapon.includes('falchion')) {
-    weaponType = 'dagger'
-  } else if (weapon.includes('frostbite')) {
-    weaponType = 'sword'
-  } else if (weapon.includes('Echo')) {
-    weaponType = 'sword'
+  if(weapon){
+    weapon = weapon.toLowerCase()
+      if (weapon.includes('sword')){
+        weaponType = 'sword'
+      } else if(weapon.includes('axe')) {
+        weaponType = 'axe'
+      } else if (weapon.includes('dagger')) {
+        weaponType = 'dagger'
+      } else if (weapon.includes('spear')) {
+        weaponType = 'spear'
+      } else if (weapon.includes('falchion')) {
+        weaponType = 'dagger'
+      } else if (weapon.includes('frostbite')) {
+        weaponType = 'sword'
+      } else if (weapon.includes('Echo')) {
+        weaponType = 'sword'
+      }
   }
+ 
 
   switch(weaponType) {
      case 'shortsword':

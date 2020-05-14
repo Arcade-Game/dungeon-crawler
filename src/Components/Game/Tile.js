@@ -11,12 +11,13 @@ import './hero.scss';
 
 
 const Tile = (props) => {
-    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item, elevation, direction, hero} = props
+    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item, elevation, direction, heroGuy} = props;
 
     // const [monType, setMonType] = useState('')
     useEffect(() => {
 
     }, [isFight])
+    console.log(heroGuy)
 
     let animate = ['0%', '12.5%', '25%', '37.5%', '50%', '62.5%', '75%', '87.5%', '100%']
     let tileStyle = null
@@ -89,7 +90,7 @@ const Tile = (props) => {
         newMonster = grid[y][x].monsterType
         mName = `char-view-${grid[y][x].monsterType.toLowerCase()}`
     }
-        
+
     return (
             <div className={elevation === 3 && type !== 'cliff' ? `${cName}-cliff` : elevation === 2 && type !== 'platform' ? `${cName}-platform` : cName} style={tileStyle}>
                 {
@@ -99,7 +100,7 @@ const Tile = (props) => {
                     <div className="monster-stats-hidden"></div>
                 </div>) : null
                 }
-                {gridX === 4 && gridY === 4 ? <div className={`hero-div-${direction}`} style={{backgroundPositionX: `${animate[Math.floor(Math.random() * animate.length)]}`}}></div> : null}  
+                {gridX === 4 && gridY === 4 ? <div className={`${heroGuy.gender}-${heroGuy.class_name.toLowerCase()}-${direction}`} style={{backgroundPositionX: `${animate[Math.floor(Math.random() * animate.length)]}`}}></div> : null}  
                   
                 {
                     type === 'locked-door' ? <div className="char-view-locked-door"></div>

@@ -70,6 +70,8 @@ const Game = (props) => {
         return (j > 8 && j < z.length-8 ? (newGrid[i][j].type === 'monster' ? getMonster(j, i) : null) : null)
       }) : null)
     }, [])
+
+
   
   const move = ({keyCode}) => {
     return !isFight ? getKeyCode(keyCode) :  null
@@ -540,6 +542,7 @@ const Game = (props) => {
     setEquipment(equipment)
   }
 
+
   // const stats = async()=> {
   //   const arr = {}
   //   await axios.get(`/api/monster-stats/${monsterType}`)
@@ -573,6 +576,7 @@ const Game = (props) => {
           isFight={isFight} 
           setNewLava={setNewLava}
           direction={direction}
+          heroGuy={hero}
         />
         {
           isFight ? 
@@ -596,6 +600,8 @@ const Game = (props) => {
           newMoney={newMoney}
           setEquipmentToggle={equipmentToggleFn}
           setInventoryToggle={inventoryToggleFn}
+          setInventoryToggleState={setInventoryToggle}
+          setEquipmentToggleState={setEquipmentToggle}
           equipmentToggle={equipmentToggle}
           inventoryToggle={inventoryToggle}
           inventory = {inventory}
@@ -607,6 +613,7 @@ const Game = (props) => {
           level={level}
           characterHealth = {characterHealth}
           newMoney={newMoney}
+          isFight={isFight}
         />
       </div>
     </div>

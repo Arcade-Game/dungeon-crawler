@@ -9,47 +9,141 @@
     overflow: hidden;
  }
 
-.hero-div-up {
-    background: url('../pictures/character/trimmed-test-char.png');
-    background-size: 900%;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    z-index: 10;
-    position: absolute;
-    overflow: hidden;
-}.hero-div-right {
-    background: url('../pictures/character/trimmed-test-char.png');
-    background-size: 900%;
+.male-warrior-up {
+    background: url('../pictures/character/male-warrior-clipped.png');
+    @include hero;
+}.male-warrior-right {
+    background: url('../pictures/character/male-warrior-clipped.png');
     background-position-y: 100%;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    z-index: 10;
-    position: absolute;
-    overflow: hidden;
-}.hero-div-down {
-    background: url('../pictures/character/trimmed-test-char.png');
-    background-size: 900%;
+    @include hero;
+}.male-warrior-down {
+    background: url('../pictures/character/male-warrior-clipped.png');
     background-position-y: 66%;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    z-index: 10;
-    position: absolute;
-    overflow: hidden;
-}.hero-div-left {
-    background: url('../pictures/character/trimmed-test-char.png');
-    background-size: 900%;
+    @include hero;
+}.male-warrior-left {
+    background: url('../pictures/character/male-warrior-clipped.png');
     background-position-y: 33%;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    z-index: 10;
-    position: absolute;
-    overflow: hidden;
+    @include hero;
+}.female-warrior-up {
+    background: url('../pictures/character/female-warrior-clipped.png');
+    @include hero;
+}.female-warrior-right {
+    background: url('../pictures/character/female-warrior-clipped.png');
+    background-position-y: 100%;
+    @include hero;
+}.female-warrior-down {
+    background: url('../pictures/character/female-warrior-clipped.png');
+    background-position-y: 66%;
+    @include hero;
+}.female-warrior-left {
+    background: url('../pictures/character/female-warrior-clipped.png');
+    background-position-y: 33%;
+    @include hero;
+}.male-ranger-up {
+    background: url('../pictures/character/male-ranger-clipped.png');
+    @include hero;
+}.male-ranger-right {
+    background: url('../pictures/character/male-ranger-clipped.png');
+    background-position-y: 100%;
+    @include hero;
+}.male-ranger-down {
+    background: url('../pictures/character/male-ranger-clipped.png');
+    background-position-y: 66%;
+    @include hero;
+}.male-ranger-left {
+    background: url('../pictures/character/male-ranger-clipped.png');
+    background-position-y: 33%;
+    @include hero;
+}.female-ranger-up {
+    background: url('../pictures/character/female-ranger-clipped.png');
+    @include hero;
+}.female-ranger-right {
+    background: url('../pictures/character/female-ranger-clipped.png');
+    background-position-y: 100%;
+    @include hero;
+}.female-ranger-down {
+    background: url('../pictures/character/female-ranger-clipped.png');
+    background-position-y: 66%;
+    @include hero;
+}.female-ranger-left {
+    background: url('../pictures/character/female-ranger-clipped.png');
+    background-position-y: 33%;
+    @include hero;
+}.male-rogue-up {
+    background: url('../pictures/character/male-rogue-clipped.png');
+    @include hero;
+}.male-rogue-right {
+    background: url('../pictures/character/male-rogue-clipped.png');
+    background-position-y: 100%;
+    @include hero;
+}.male-rogue-down {
+    background: url('../pictures/character/male-rogue-clipped.png');
+    background-position-y: 66%;
+    @include hero;
+}.male-rogue-left {
+    background: url('../pictures/character/male-rogue-clipped.png');
+    background-position-y: 33%;
+    @include hero;
+}.female-rogue-up {
+    background: url('../pictures/character/female-rogue-clipped.png');
+    @include hero;
+}.female-rogue-right {
+    background: url('../pictures/character/female-rogue-clipped.png');
+    background-position-y: 100%;
+    @include hero;
+}.female-rogue-down {
+    background: url('../pictures/character/female-rogue-clipped.png');
+    background-position-y: 66%;
+    @include hero;
+}.female-rogue-left {
+    background: url('../pictures/character/female-rogue-clipped.png');
+    background-position-y: 33%;
+    @include hero;
 }
+
+
+
+// .hero-div-up {
+//     background: url('../pictures/character/trimmed-test-char.png');
+//     background-size: 900%;
+//     background-repeat: no-repeat;
+//     height: 100%;
+//     width: 100%;
+//     position: relative;
+//     z-index: 10;
+//     position: absolute;
+//     overflow: hidden;
+// }.hero-div-right {
+//     background: url('../pictures/character/trimmed-test-char.png');
+//     background-size: 900%;
+//     background-position-y: 100%;
+//     background-repeat: no-repeat;
+//     height: 100%;
+//     width: 100%;
+//     position: relative;
+//     z-index: 10;
+//     position: absolute;
+//     overflow: hidden;
+// }.hero-div-down {
+//     background: url('../pictures/character/trimmed-test-char.png');
+//     background-size: 900%;
+//     background-position-y: 66%;
+//     background-repeat: no-repeat;
+//     height: 100%;
+//     width: 100%;
+//     position: relative;
+//     z-index: 10;
+//     position: absolute;
+//     overflow: hidden;
+// }.hero-div-left {
+//     background: url('../pictures/character/trimmed-test-char.png');
+//     background-size: 900%;
+//     background-position-y: 33%;
+//     background-repeat: no-repeat;
+//     height: 100%;
+//     width: 100%;
+//     position: relative;
+//     z-index: 10;
+//     position: absolute;
+//     overflow: hidden;
+// }
