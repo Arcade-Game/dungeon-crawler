@@ -100,7 +100,7 @@ const Town = (props) => {
             <div className="town-overlay" 
                      onClick={()=>{resetToggle()}}>
             {toggleType === trainer ? (
-            <Trainer stopPropagation = {stopPropagation}/>) : null }
+               <Trainer stopPropagation = {stopPropagation}/>) : null }
             {toggleType === market ? 
                <Market stopPropagation = {stopPropagation}/> : null }
             {toggleType === leaderBoard ? 
@@ -110,14 +110,14 @@ const Town = (props) => {
                               getHeroes = {getHeroes}
                               setToggle = {setToggle} 
                               resetToggle = {resetToggle}
-                              
-                              /> : null }
+                                 /> : null }
             {toggleType === newHero ? 
                <NewHero stopPropagation = {stopPropagation}
                                  /> : null }
             {toggleType === inn ? 
                <Inn stopPropagation = {stopPropagation}
-                     hero = {props.hero}/> : null }
+                        hero = {props.hero}
+                           /> : null }
              </div> ) : null
          }
             
@@ -152,8 +152,9 @@ const Town = (props) => {
             </div>
          
          <div className="play-game-container">
-               <p className="play-game"
-               onClick={()=> props.history.push(`/game`)}> {`< Play >`} </p>
+               <div className="play-game"
+               onClick={()=> props.history.push(`/game`)}> 
+               <span> {`<`} </span>{`Play`} <span>{`>`}</span></div>
          </div>
          </>
          ): null}

@@ -24,9 +24,18 @@
       left: 1vw;
       width:20vw;
       font-size: 50px;
-      color:white;
-      text-shadow: 5px 5px 8px black;
+      color:black;
+      text-shadow: 5px 5px 8px black;      
+      -webkit-text-stroke-width: .05px;
+      -webkit-text-stroke-color: rgba(253, 253, 253, 0.781);
       background-color: rgba(0, 0, 0, 0.65);
+      box-shadow: 5px 5px 5px black;
+      // color:black;
+      // text-shadow: 2px 4px 8px black;
+      // -webkit-text-stroke-width: .15px;
+      // -webkit-text-stroke-color: white;
+      // background-color: rgba(190, 118, 66, 0.699);
+      // box-shadow: 5px 5px 5px black;
    }
 }
    .town-trainer-container{
@@ -50,6 +59,8 @@
          font-size: 22px;
          text-shadow: 5px 5px 12px black;
          position: fixed;
+         // -webkit-text-stroke-width: .05px;
+         // -webkit-text-stroke-color: white;
          top:25%;
          left: 30%
       }
@@ -150,8 +161,9 @@
          color:white;
          font-weight: bold;
          position: fixed;
+         // glyph-orientation-horizontal: center;
          height: 12vh;
-         width: 100%;
+         left: 38vw;
          bottom: 2vh;
          
 
@@ -186,9 +198,18 @@
       background-color: rgba(41, 199, 41, 0.25);
       color: black;
    }
+   .play-game span {
+      opacity: 0;
+   }
    .play-game:hover{
       color: $pal-seven;
+      
+      transition: .05s;
    }
+   .play-game:hover span{
+      opacity: 1;
+   }
+
 
    .save-banner{
       position: fixed;
@@ -230,7 +251,7 @@
    .town-hero-name{
       width: 20%;
    }
-   
+
  .town-overlay {
     @include row;
    background-color:rgba(0, 0, 0, 0.65);
