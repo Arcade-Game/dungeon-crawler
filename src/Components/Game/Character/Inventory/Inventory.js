@@ -182,7 +182,6 @@ const Inventory = (props) => {
       event.dataTransfer.setData("text", data);
       }
 
-      console.log("inv props: ", props)
       const mappedInventory = inventory.map((el, i) => {
          return el.item_type ? (
             <div className="inventory-square" style={el.rarity === 'epic' ? {background: 'radial-gradient(indigo, black 90%)'} : el.rarity === 'rare' ? {background: 'radial-gradient(darkblue, black 90%)'} : el.rarity === 'legendary' ? {background: 'radial-gradient(#600000, black 90%)'} : null}

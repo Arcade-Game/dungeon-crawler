@@ -11,7 +11,7 @@ import './hero.scss';
 
 
 const Tile = (props) => {
-    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item, elevation, direction, heroGuy, monsterType, monsterInfoToggle, setMonsterInfoToggle} = props;
+    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item, elevation, direction, heroGuy, monsterType, monsterInfoToggle, setMonsterInfoToggle, keyToggle} = props;
 
     
 
@@ -98,6 +98,8 @@ const Tile = (props) => {
         return grid[y][x]
     }
 
+    console.log("keyToggle", keyToggle)
+
     return (
             <>
                 {
@@ -108,19 +110,19 @@ const Tile = (props) => {
                     </div>) : null
                     }
             <div className={elevation === 3 && type !== 'cliff' ? `${cName}-cliff` : elevation === 2 && type !== 'platform' ? `${cName}-platform` : cName} onClick={grid[y][x].monsterType ? (() => setMonsterInfoToggle(!monsterInfoToggle)) : null} style={tileStyle}>
-            <div className="hover-info">{type !== 'monster' ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div>
+            <div className="hover-info">{type !== 'monster' && keyToggle ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div>
                 
                 
                 {gridX === 4 && gridY === 4 ? <div className={`${heroGuy.gender}-${heroGuy.class_name.toLowerCase()}-${direction}`} style={{backgroundPositionX: `${animate[Math.floor(Math.random() * animate.length)]}`}}></div> : null}  
                   
                 {
-                    type === 'locked-door' ? <div className="char-view-locked-door"></div>
-                    : type === 'cliff' ? <div className="char-view-cliff"><div className="hover-info">{type !== 'monster' ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div></div> 
-                    : type === 'platform' ? <div className="char-view-platform"><div className="hover-info">{type !== 'monster' ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div></div>
+                    type === 'locked-door' ? <div className="char-view-locked-door" style={{color: "white"}}><div className="hover-info">{type !== 'monster' && keyToggle ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div></div>
+                    : type === 'cliff' ? <div className="char-view-cliff"><div className="hover-info">{type !== 'monster' && keyToggle ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div></div> 
+                    : type === 'platform' ? <div className="char-view-platform"><div className="hover-info">{type !== 'monster' && keyToggle ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div></div>
                     : type === 'monster' ? <div className={`${mName}`} ></div>  
                     : type === "chest" ? <Chest /> 
                     : type === 'quicksand' ? <Quicksand />
-                    : type === "exit" ? <div className="char-view-exit"></div>
+                    : type === "exit" ? <div className="char-view-exit"><div className="hover-info">{type !== 'monster' && keyToggle ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div></div>
                     : type === 'lava' ? <Lava /> 
                     : type === 'lookout' ? <Lookout />
                     : type === "push-bridge" 
@@ -129,7 +131,7 @@ const Tile = (props) => {
                     || type === "push-bridge-lava2" ? <div className="push-bridge"></div> 
                     : null
                 }
-                {pushable ? <div className="char-view-pushable"></div> : null}
+                {pushable ? <div className="char-view-pushable" style={{color: "white"}}><div className="hover-info">{type !== 'monster' && keyToggle ? "Boulder (pushable)" : null}</div></div> : null}
                 {itemObject === 'door-key' ? <div className="char-view-door-key"></div> : null}
                 {hidden ? <div className="hidden">HIDDEN</div> : null}
                 {mist ? <div className="mist-div"></div> : null}

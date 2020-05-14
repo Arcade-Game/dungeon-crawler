@@ -8,7 +8,7 @@ import { GiBlood } from 'react-icons/gi';
 // import {BsArrowLeft} from 'react-icons/bs';
 
 const Footer = props => {
-   const {inventory, equipment, updateSessionInventory,equipmentToggle, inventoryToggle, heroStats, hero,  newMoney, experience, level, characterHealth, isFight, setEquipmentToggleState, setInventoryToggleState} = props;
+   const {inventory, equipment, updateSessionInventory,equipmentToggle, inventoryToggle, heroStats, hero,  newMoney, experience, level, characterHealth, isFight, setEquipmentToggleState, setInventoryToggleState, setKeyToggleFn} = props;
    const {gender, class_name} = hero, 
               [heroAttack, setHeroAttack] = useState(),
               [heroArmor, setHeroArmor] = useState()
@@ -42,14 +42,12 @@ const Footer = props => {
    }
 
    useEffect (() => {
-      // console.log("footer effect hit")
       setHeroArmor ((+heroStats.armor) + (+equipment.reduce((acc, el) => {
          return acc += ((el.armor) ? el.armor : 0)}, 0)));
       setHeroAttack ((+heroStats.attack) + (+equipment.reduce((acc, el) => {
          return acc += ((el.attack) ? el.attack : 0)}, 0)));
       },[props])
 
-      // console.log("footer-props", props)
    return (
       <>
       <div className="footer-top" onClick={handleMenuClick}>
@@ -59,12 +57,12 @@ const Footer = props => {
          menuToggle === true ? <div className="game-menu">
                <div className="menu-title"><span>indermere</span></div>
                <button className="return-to-town" 
-                              onClick={() => window.location.replace("/town")}>Return to Town</button>
+                              onClick={() => window.location.replace("#/town")}>Return to Town</button>
                <button className="return" 
-               onClick={() => window.location.replace("/game")}>Restart Dungeon</button>
+               onClick={() => window.location.replace("#/game")}>Restart Dungeon</button>
                <button className="return">Settings</button>
                <button className="return">Quests</button>
-               <button className="return">Key</button>
+               <button className="return" onClick={setKeyToggleFn}>Terrain Info</button>
                <div className="menu-x-button" onClick={handleMenuClick}><span>X</span></div>   </div> : null
          }
       <div className="footer-left">
