@@ -84,7 +84,9 @@
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;&:hover .monster-data-hidden {
+        visibility: visible;
+    }
 }
 
 
@@ -107,6 +109,9 @@
     background-size: 240%;
     background-position-y: 100%;
     position: relative;
+    &:hover .hover-info {
+        visibility: visible;
+    }
 }
 
 .char-view-push-bridge {
@@ -142,6 +147,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    &:hover .hover-info {
+        visibility: visible;
+    }
 }
 .char-view-push-lava2 {
     .push-bridge {
@@ -184,6 +192,9 @@
     background-size: 100%;
     background-repeat: no-repeat;
     background-position-x: center;
+    &:hover .hover-info {
+        visibility: visible;
+    }
     
 }
 
@@ -196,6 +207,9 @@
     background-position-y: 350%;
     background-position-x: 58%;
     position: relative;
+    &:hover .hover-info {
+        visibility: visible;
+    }
 }
 
 .char-view-cliff {
@@ -206,6 +220,9 @@
     background-size: 135%;
     background-position: center;
     background-repeat: no-repeat;
+    &:hover .hover-info {
+        visibility: visible;
+    }
     // background-position: 5% 12%;
 }
 
@@ -233,6 +250,9 @@
 .char-view-quicksand {
     background: url('../pictures/terrain/ForestWetMud_baseColor.png');
     position: relative;
+    &:hover .hover-info {
+        visibility: visible;
+    }
 }
 
 .char-view-uneven {
@@ -293,6 +313,9 @@
 .char-view-exit {
     height: 100%;
     width: 100%;
+    &:hover .hover-info {
+        visibility: visible;
+    }
 
     background: url('../pictures/terrain/city-gate.png');
     background-size: 116%;
@@ -376,14 +399,14 @@
 
 
 .monster-data-hidden {
-    visibility: hidden;
+    visibility: visible;
     position: absolute;
     height: 45%;
     width: 15%;
     bottom: 16%;
     right: 15%;
     z-index: 10;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, 1);
     color: white;
     font-size: 17px;
     overflow: visible;
@@ -405,6 +428,16 @@
     margin-top: 10px;
 }
 
+.hover-info {
+    visibility: hidden;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    color: white;
+    font-size: 18px;
+    z-index: 25;
+
+}
 
 
 

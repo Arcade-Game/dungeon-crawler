@@ -151,8 +151,11 @@ select:-webkit-autofill:focus {
    border-bottom: 1px solid black;
 }
 
-.button:Hover {
+.login-button:hover {
    cursor: url('../Components/pictures/cursors/Mouse10GreenResize.png'), auto;
+   background: linear-gradient(135deg, transparent, rgba(139, 69, 19, 0.947));
+
+
 }
 
 .register-toggle {
@@ -184,6 +187,8 @@ select:-webkit-autofill:focus {
 
 .register-toggle:hover {
    cursor: url('../Components/pictures/cursors/Mouse10GreenResize.png'), auto;
+   
+      
 }
 
 .register-button {
@@ -198,6 +203,10 @@ select:-webkit-autofill:focus {
    background: linear-gradient(135deg, transparent, rgba(139, 69, 19, 0.637));
    border-bottom: 1px solid black;
    border-right: 1px solid black;
+   &:hover {
+   background: linear-gradient(135deg, transparent, rgba(139, 69, 19, 0.947));
+
+   }
 }
 
 .login-toggle {
