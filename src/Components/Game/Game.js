@@ -27,7 +27,7 @@ const Game = (props) => {
 
   const [grid, setGrid] = useState([...mapArray]),
     [charX, setCharX] = useState(mapX),
-    [charY, setCharY] = useState(mapY),
+    [charY, setCharY] = useState(mapArray.length-11),
     [heightWidth, setHeightWidth] = useState(650),
     [viewRowCols, setViewRowCols] = useState(9),
     [inventoryToggle, setInventoryToggle] = useState(false),
@@ -46,7 +46,8 @@ const Game = (props) => {
     [heroStats, setHeroStats] = useState(props.stats),
     [equipment, setEquipment] = useState(props.equipment),
     [inventory, setInventory] = useState(props.inventory),
-    [direction, setDirection] = useState('up');
+    [direction, setDirection] = useState('up'),
+    [keyToggle, setKeyToggle] = useState(false)
 
 
     let coinFade = useRef('');
@@ -60,11 +61,13 @@ const Game = (props) => {
 
     useEffect(() => {
       setCharacterHealth(heroStats.health)
-      setHeroStats({
-        ...heroStats,
-        attack: heroAttack + heroStats.attack,
-        armor: heroArmor + heroStats.armor
-      })
+      // console.log('Hero stats before', heroStats)
+      // setHeroStats({
+      //   ...heroStats,
+      //   attack: heroAttack + heroStats.attack,
+      //   armor: heroArmor + heroStats.armor
+      // })
+      // console.log('Hero stats after', heroStats)
       let newGrid = [...grid]
       newGrid.forEach((e,i,a) => i > 8 && i < a.length-8 ? e.forEach((f,j,z) => {
         return (j > 8 && j < z.length-8 ? (newGrid[i][j].type === 'monster' ? getMonster(j, i) : null) : null)
@@ -75,12 +78,12 @@ const Game = (props) => {
     return !isFight ? getKeyCode(keyCode) :  null
   }
   
-  const equArr = Object.values(props.equipment)
-   const heroArmor = (+heroStats.armor) + (+equArr.reduce((acc, el) => {
-      return acc += ((el.armor) ? el.armor : 0)}, 0));
+  // const equArr = Object.values(props.equipment)
+  //  const heroArmor = (+heroStats.armor) + (+equArr.reduce((acc, el) => {
+  //     return acc += ((el.armor) ? el.armor : 0)}, 0));
 
-   const heroAttack = (+heroStats.attack) + (+equArr.reduce((acc, el) => {
-         return acc += ((el.attack) ? el.attack : 0)}, 0));
+  //  const heroAttack = (+heroStats.attack) + (+equArr.reduce((acc, el) => {
+  //        return acc += ((el.attack) ? el.attack : 0)}, 0));
 
   const getKeyCode = (keyCode) => {
     if(keyCode === 37 || keyCode === 65){
@@ -409,10 +412,11 @@ const Game = (props) => {
   }
 
   const updateExperience = (x, y, type, monsterLevel) => {
-    console.log("first", level, XPforLevel)
+    // console.log("first", level, XPforLevel)
     let xpVar = XPforLevel
     switch(type){
       case "monster":
+        console.log("monster XP", )
         if(experience + (20 + (20 * (level - monsterLevel) * -.25)) > xpVar){
           xpVar = experience + (20 + (20 * (level - monsterLevel) * -.25)) - XPforLevel
           setExperience(xpVar)
@@ -441,7 +445,7 @@ const Game = (props) => {
     //   updateLevel(x, y)}
     
     let expRemaining = (XPforLevel - experience)
-    console.log(level, XPforLevel, expRemaining)
+    // console.log(level, XPforLevel, expRemaining)
   }
 
   const updateLevel = (x,y) => {
@@ -552,6 +556,10 @@ const Game = (props) => {
   //   return arr
   // }
 
+  const handleKeyToggle = () => {
+    setKeyToggle(!keyToggle)
+  }
+
   const die = ()  => {
     props.deathCounter()
     saveGameLocal()
@@ -568,7 +576,7 @@ const Game = (props) => {
       stats: {...heroStats}
     })
   }
-
+  
   // console.log("music", dungeonMusic[musicNumber])s
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
@@ -587,6 +595,7 @@ const Game = (props) => {
           setNewLava={setNewLava}
           direction={direction}
           heroGuy={hero}
+          keyToggle={keyToggle}
         />
         {
           isFight ? 
@@ -625,6 +634,7 @@ const Game = (props) => {
           characterHealth = {characterHealth}
           newMoney={newMoney}
           isFight={isFight}
+          setKeyToggleFn={handleKeyToggle}
         />
       </div>
     </div>

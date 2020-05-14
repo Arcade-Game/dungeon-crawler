@@ -54,6 +54,7 @@
     width: 160px;
     border: 6px solid black;
     border-radius: 50%;
+    z-index: 5;
     background: radial-gradient(black 10%, #003000 70%);
     &:hover {
         background: #013f01;
@@ -68,6 +69,7 @@
         background-position-x: 50%;
         background-size: 140%;
         background-repeat: no-repeat;
+        z-index: 5;
         cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
         // &:hover {
         //     opacity: 90%;
@@ -79,6 +81,7 @@
 
 .character-icon-container{
 
+    z-index: 5;
     height: 100%;
     width: 30%;
     height: 110px;

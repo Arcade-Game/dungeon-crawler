@@ -16,6 +16,8 @@ const CombatView = (props) => {
         [stats, setStats] = useState({}),
         [classType, setClassType] = useState(''),
         [log, setLog] = useState([]),
+        [heroAt, setHeroAt] = useState(),
+        [heroA, setHeroA] = useState(),
         [endFight, setEndFight] = useState(false)
 
     useEffect(()=> {
@@ -39,6 +41,16 @@ const CombatView = (props) => {
         }  
 
     }, [stats.health])
+    
+
+    useEffect (() => {
+        setHeroA ((+props.heroStats.armor) + (+props.equipment.reduce((acc, el) => {
+           return acc += ((el.armor) ? el.armor : 0)}, 0)));
+        setHeroAt ((+props.heroStats.attack) + (+props.equipment.reduce((acc, el) => {
+           return acc += ((el.attack) ? el.attack : 0)}, 0)));
+        },[props.heroStats])
+  
+  
 
     const getStats = async()=> {
         await axios.get(`/api/monster-stats/${monsterType}`)
@@ -76,6 +88,8 @@ const CombatView = (props) => {
         }
         let monster = stats
         let character = props.heroStats
+        character.attack = +heroAt
+        character.armor = +heroA
         await statSetupChar(character)
         await statSetupMon(monster)
         if (character.agility > monster.agility) {
@@ -112,16 +126,21 @@ const CombatView = (props) => {
                 })
             }
             charHealth -= mDamage
+            if(charHealth < 0) {
+                props.setCharacterHealthFn(0)
+            } else {
+                props.setCharacterHealthFn(charHealth)
+            }
             if (charHealth <= 0 || monHealth <= 0) {
                 if (charHealth <= 0) {
                     arr.push({
                         id: 'm',
                         message: `You have Died!`
                     })
-                    setTimeout(() => {props.history.push('/death')}, 2000)
+                   return setTimeout(() => {props.history.push('/death')}, 2000)
                 }
                 if(monHealth <= 0) {
-                    arr.push({
+                    return arr.push({
                         id: 'c',
                         message: `You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`
                     })
@@ -144,16 +163,21 @@ const CombatView = (props) => {
                 })
             }
             charHealth -= mDamage
+            if(charHealth < 0) {
+                props.setCharacterHealthFn(0)
+            } else {
+                props.setCharacterHealthFn(charHealth)
+            }
             if (charHealth <= 0 || monHealth <= 0) {
                 if (charHealth <= 0) {
                     arr.push({
                         id: 'm',
                         message: `You have Died!`
                     })
-                    setTimeout(() => {props.history.push('/death')}, 2000)
+                    return setTimeout(() => {props.history.push('/death')}, 2000)
                 }
                 if(monHealth <= 0) {
-                    arr.push({
+                    return arr.push({
                         id: 'c',
                         message: `You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`
                     })
