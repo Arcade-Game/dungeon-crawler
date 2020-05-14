@@ -40,10 +40,18 @@ const Death = (props) => {
             }
         ).delay(3.5)
     }, [])
+
+    const handleClick = () => {
+        props.history.push('/town')
+        window.location.reload(false)
+        
+        
+    }
+
     return (
         <div className="death-container" ref={el => {deathScreen = el}}>
             <span className="you-dead" ref={el => {youDead = el}}>YOU DIED.</span>
-            <div className="to-town" ref={el => {townReturn = el}} onClick={() => props.history.push('/town')}><span>RETURN TO TOWN</span></div>
+            <div className="to-town" ref={el => {townReturn = el}} onClick={handleClick}><span>RETURN TO TOWN</span></div>
         </div>
     )
 }
