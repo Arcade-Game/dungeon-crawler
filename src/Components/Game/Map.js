@@ -6,8 +6,9 @@ import { GiHidden } from 'react-icons/gi';
 const Map = (props) => {
     const [charView, setCharView] = useState([])
     const [displayView, setDisplayView] = useState([])
+    const [monsterInfoToggle, setMonsterInfoToggle] = useState(false)
 
-    const {charX, charY, heightWidth, viewRowCols, grid, getMonsterFn, exploreTileFn, isFight, setNewLava, direction} = props
+    const {charX, charY, heightWidth, viewRowCols, grid, getMonsterFn, exploreTileFn, isFight, setNewLava, direction, heroGuy} = props
 
     const charContainerStyle = {
         display: "grid",
@@ -26,8 +27,8 @@ const Map = (props) => {
         height: "250px",
         width: "250px",
         position: "absolute",
-        top: "80px",
-        right: "80px",
+        top: "30px",
+        right: "30px",
         display: "grid",
         gridTemplateColumns: `repeat(${viewRowCols}, 1fr)`,
         gridTemplateRows: `repeat(${viewRowCols}, 1fr)`,
@@ -53,7 +54,12 @@ const Map = (props) => {
 
     useEffect(() => {
         let mappedCharView = charView.map((e,i) => e.map((f,j) => {
-            return <Tile type={f.type} mist={f.mist} pushable={f.pushable} hidden={f.hidden} itemObject={f.itemObject} key={j} setNewLava={setNewLava} charX={charX} charY={charY} gridX={j} gridY={i} heightWidth={heightWidth} elevation={f.elevation} viewRowCols={viewRowCols} y={charY+((4-i)*-1)} x={charX+((4-j)*-1)} getMonsterFn={getMonsterFn} grid={grid} exploreTileFn={exploreTileFn} isFight={isFight} direction={direction} />
+            return (
+                <>
+            <Tile type={f.type} mist={f.mist} pushable={f.pushable} hidden={f.hidden} itemObject={f.itemObject} key={j} setNewLava={setNewLava} charX={charX} charY={charY} gridX={j} gridY={i} heightWidth={heightWidth} elevation={f.elevation} viewRowCols={viewRowCols} y={charY+((4-i)*-1)} x={charX+((4-j)*-1)} getMonsterFn={getMonsterFn} grid={grid} exploreTileFn={exploreTileFn} isFight={isFight} direction={direction} heroGuy={heroGuy} monsterType={f.monsterType} monsterInfoToggle={monsterInfoToggle} setMonsterInfoToggle={setMonsterInfoToggle} />
+            {f.monsterType ? (monsterInfoToggle ? <div className="monster-data-hidden" monsterType={f.monsterType}>{f.monsterType}</div> : null) : null}
+                </>
+            )
         }))
 
         setDisplayView(mappedCharView)

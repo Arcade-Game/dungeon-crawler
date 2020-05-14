@@ -91,7 +91,7 @@ export default function reducer (state = initialState, action) {
                    return state.equipment[5] = item
             }})
          return {...state, 
-            hero: {file_id: payload.file_id, hero_name: payload.hero_name, class_name: payload.class_name, level: payload.level, gold: payload.gold, deaths: payload.deaths}, 
+            hero: {file_id: payload.file_id, hero_name: payload.hero_name, class_name: payload.class_name, gender: payload.gender, level: payload.level, gold: payload.gold, deaths: payload.deaths}, 
             stats: {health: payload.health, attack: payload.attack, armor: payload.armor, strength: payload.strength, agility: payload.agility},
             equipment: [...state.equipment],
             inventory: 

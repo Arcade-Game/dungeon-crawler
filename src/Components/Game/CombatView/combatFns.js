@@ -36,6 +36,7 @@ export const statSetupMon = ({attack, strength, armor, agility}) => {
 ///////////////////////////////////////////
 
 export function attackType (weapon) {
+  
   let arr = [];
   let weaponType;
   if(!weapon) {
@@ -58,6 +59,7 @@ export function attackType (weapon) {
   } else if (weapon.includes('Echo')) {
     weaponType = 'sword'
   }
+ 
 
   switch(weaponType) {
     //  case 'shortsword':

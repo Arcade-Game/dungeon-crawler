@@ -70,6 +70,8 @@ const Game = (props) => {
         return (j > 8 && j < z.length-8 ? (newGrid[i][j].type === 'monster' ? getMonster(j, i) : null) : null)
       }) : null)
     }, [])
+
+
   
   const move = ({keyCode}) => {
     return !isFight ? getKeyCode(keyCode) :  null
@@ -247,7 +249,6 @@ const Game = (props) => {
     let pushTo = grid[yy][xx]
 
     if (hero.elevation < boulder.elevation){
-      console.log("CLIMP UP")
       if (hero.pushable !== true || pushTo.elevation > boulder.elevation){return}
       else if (boulder.elevation > pushTo.elevation){
         newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true}
@@ -256,13 +257,11 @@ const Game = (props) => {
         setCharY(y)
       }
     } else if (hero.elevation === boulder.elevation){
-      console.log('PUSH ME')
       if (hero.pushable === true){
         setCharX(x)
         setCharY(y)
       }
       if (hero.pushable !== true){
-        console.log('NOT STANDING ON A ROCK')
         if (boulder.elevation < pushTo.elevation){return}
         else if (boulder.elevation === pushTo.elevation && pushTo.pushable === true){return}
         else if (boulder.elevation > pushTo.elevation){
@@ -312,7 +311,7 @@ const Game = (props) => {
           
         }
         else if (boulder.elevation === pushTo.elevation){
-          if(pushTo.type === 'uneven' || pushTo.type === 'monster'){return}
+          if(pushTo.type === 'uneven' || pushTo.type === 'monster' || pushTo.type === 'gold-pile' || pushTo.type === 'chest'){return}
           if (pushTo.type === 'water'){
                   newGrid[yy][xx] = {...newGrid[yy][xx], type: 'push-bridge', pushable: false}
                   newGrid[y][x] = {...newGrid[y][x], pushable: false}
@@ -344,7 +343,6 @@ const Game = (props) => {
         }
       }
     } else if (hero.elevation > boulder.elevation){
-      console.log('JUMP DOWN')
       setCharX(x)
       setCharY(y)
     }
@@ -358,7 +356,6 @@ const Game = (props) => {
   }
 
   const findHidden = (x,y) => {
-    console.log('DING')
     let newGrid =[...grid]
     let north = y-1
     let east = x+1
@@ -417,7 +414,6 @@ const Game = (props) => {
     let xpVar = XPforLevel
     switch(type){
       case "monster":
-        console.log("ding")
         if(experience + (20 + (20 * (level - monsterLevel) * -.25)) > xpVar){
           xpVar = experience + (20 + (20 * (level - monsterLevel) * -.25)) - XPforLevel
           setExperience(xpVar)
@@ -444,7 +440,6 @@ const Game = (props) => {
 
     // if(experience + (20 * (level - grid[y][x].level)) >= XPforLevel){
     //   updateLevel(x, y)}
-      console.log("NEW", experience + (20 + (20 * (level - monsterLevel) * -.25)))
     
     let expRemaining = (XPforLevel - experience)
     console.log(level, XPforLevel, expRemaining)
@@ -540,6 +535,7 @@ const Game = (props) => {
     setEquipment(equipment)
   }
 
+
   // const stats = async()=> {
   //   const arr = {}
   //   await axios.get(`/api/monster-stats/${monsterType}`)
@@ -573,6 +569,7 @@ const Game = (props) => {
           isFight={isFight} 
           setNewLava={setNewLava}
           direction={direction}
+          heroGuy={hero}
         />
         {
           isFight ? 
@@ -596,6 +593,8 @@ const Game = (props) => {
           newMoney={newMoney}
           setEquipmentToggle={equipmentToggleFn}
           setInventoryToggle={inventoryToggleFn}
+          setInventoryToggleState={setInventoryToggle}
+          setEquipmentToggleState={setEquipmentToggle}
           equipmentToggle={equipmentToggle}
           inventoryToggle={inventoryToggle}
           inventory = {inventory}
@@ -607,6 +606,7 @@ const Game = (props) => {
           level={level}
           characterHealth = {characterHealth}
           newMoney={newMoney}
+          isFight={isFight}
         />
       </div>
     </div>

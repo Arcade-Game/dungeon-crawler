@@ -216,7 +216,7 @@ const CombatView = (props) => {
                     (endFight)?
                     <div 
                     className = 'ability-buttons'
-                    onClick={() => {
+                    onClick={() => {            
                     setEndFight(false)
                     isFightFn(false)
                     }}>End Combat</div>
