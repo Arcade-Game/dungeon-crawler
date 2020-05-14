@@ -15,7 +15,7 @@ import {pushObstacle} from './pushObstacle';
 import {tutorial} from './Map Variables/tutorial';
 import {puzzles, levelOne, demoMap} from './Map Variables/puzzles';
 import {connect} from 'react-redux';
-import { updateInventory, deathCounter, saveHero } from '../../Redux/reducers/heroReducer';
+import {deathCounter, saveHero } from '../../Redux/reducers/heroReducer';
 import {TweenMax, Power3, TweenLite} from 'gsap';
 import {setHonor, setLevel} from '../../Redux/reducers/titlesReducer';
 
@@ -641,4 +641,4 @@ const Game = (props) => {
   );
 }
 const mapStateToProps = reduxState => reduxState.hero
-export default withRouter(connect(mapStateToProps, {updateInventory, deathCounter, saveHero})(Game));
+export default withRouter(connect(mapStateToProps, {deathCounter, saveHero})(Game));
