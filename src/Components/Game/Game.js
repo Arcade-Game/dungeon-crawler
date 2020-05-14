@@ -21,9 +21,9 @@ import {setHonor, setLevel} from '../../Redux/reducers/titlesReducer';
 
 const Game = (props) => {
   // const {mapArray, mapX, mapY} = mapObject
-  // const {mapArray, mapX, mapY} = tutorial
+  const {mapArray, mapX, mapY} = tutorial
   // const {mapArray, mapX, mapY} = levelOne
-  const {mapArray, mapX, mapY} = demoMap
+  // const {mapArray, mapX, mapY} = demoMap
 
   const [grid, setGrid] = useState([...mapArray]),
     [charX, setCharX] = useState(mapX),
