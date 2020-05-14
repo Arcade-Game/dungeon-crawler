@@ -42,14 +42,14 @@ const Footer = props => {
    }
 
    useEffect (() => {
-      console.log("footer effect hit")
+      // console.log("footer effect hit")
       setHeroArmor ((+heroStats.armor) + (+equipment.reduce((acc, el) => {
          return acc += ((el.armor) ? el.armor : 0)}, 0)));
       setHeroAttack ((+heroStats.attack) + (+equipment.reduce((acc, el) => {
          return acc += ((el.attack) ? el.attack : 0)}, 0)));
       },[props])
 
-      console.log("footer-props", props)
+      // console.log("footer-props", props)
    return (
       <>
       <div className="footer-top" onClick={handleMenuClick}>
@@ -106,7 +106,7 @@ const Footer = props => {
                   <div className="stats-container-for-styling">
                      <div><span>{hero.hero_name}</span></div>
                         <div className="stats-container-stats">
-                           <div><span>Health:</span>{heroStats.health}</div>
+                           <div><span>Health:</span>{characterHealth}</div>
                            <div><span>Armor:</span>{heroArmor}</div>
                            <div><span>Strength:</span>{heroStats.strength}</div>
                            <div><span>Agility:</span>{heroStats.agility}</div>
