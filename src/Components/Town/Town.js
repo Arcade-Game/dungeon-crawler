@@ -38,6 +38,7 @@ const Town = (props) => {
    },[])
 
    useEffect (() => {
+      console.log(lastLocation)
       if (lastLocation && lastLocation.pathname === "/game" || lastLocation && lastLocation.pathname === "/death" ){
          saveGame()
       }
@@ -93,6 +94,11 @@ const Town = (props) => {
    stopPropagation = (event) => {
       event.stopPropagation();
       event.nativeEvent.stopImmediatePropagation();
+   },
+
+   handlePlay = () => {
+      props.history.push(`/game`)
+      window.location.reload(false)
    }
 
    let musicNumber = Math.floor(Math.random() * townMusic.length)
@@ -159,8 +165,8 @@ const Town = (props) => {
          
          <div className="play-game-container">
                <div className="play-game"
-               onClick={()=> props.history.push(`/game`)}> 
-               <span>{`<`}</span>{`Play`}<span>{`>`}</span></div>
+               onClick={handlePlay}> 
+               <span> {`<`} </span>{`Play`} <span>{`>`}</span></div>
          </div>
          </>
          ): null}

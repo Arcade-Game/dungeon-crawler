@@ -4,34 +4,57 @@
    display: flex;
    flex-direction: column;
    justify-content: space-evenly;
-   background: grey;
-   width: 10%;
+   background: $iCon;
+   width: 12%;
    height: 17%;
-   border: 1px solid black;
+   border: 3px solid black;
    position: absolute;
-   right: 300px;
-   top: 400px;
+   right: 1.5%;
+   bottom: 45%;
+   font-weight: 800;
+   text-align: left;
+   font-size: 17px;
 }
-
-// .char-stats {
-//    display: flex;
-//    flex-direction: column;
-//    justify-content: center;
-//    width: 150px;
-// }
 
 .stat-labels {
    display: flex;
-   justify-content: space-around;
+   justify-content: flex-start;
    align-items: center;
+   margin: 5%;
 }
 
-.monster-stats {
+.stat1 {
+   position: absolute;
+   right: 5%;
+   top: 25%;
+}
 
+.stat2 {
+   position: absolute;
+   right: 5%;
+   top: 38.5%;
+}
+
+.stat3 {
+   position: absolute;
+   right: 5%;
+   top: 51.5%;
+}
+
+.stat4 {
+   position: absolute;
+   right: 5%;
+   top: 65%;
+}
+
+.stat5 {
+   position: absolute;
+   right: 5%;
+   top: 78%;
 }
 
 .title {
-   text-decoration: underline;
    font-size: 18px;
-   font-weight: bold;
+   font-weight: 800;
+   padding-left: 2%
 }

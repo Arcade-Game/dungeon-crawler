@@ -319,6 +319,7 @@
 .char-view-exit-tile {
     height: 100%;
     width: 100%;
+    position: relative;
     background: skyblue;
     &:hover .hover-info {
         visibility: visible;
@@ -331,6 +332,7 @@
     &:hover .hover-info {
         visibility: visible;
     }
+    position: relative;
 
     background: url('../pictures/terrain/city-gate.png');
     background-size: 116%;
