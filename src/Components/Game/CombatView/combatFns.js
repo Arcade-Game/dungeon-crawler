@@ -56,7 +56,7 @@ export function attackType (weapon) {
     weaponType = 'dagger'
   } else if (weapon.includes('frostbite')) {
     weaponType = 'sword'
-  } else if (weapon.includes('Echo')) {
+  } else if (weapon.includes('echo')) {
     weaponType = 'sword'
   }
  
