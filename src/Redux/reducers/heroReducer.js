@@ -50,12 +50,12 @@ export const deleteHero = () => {
    }
 }
 
-export const updateInventory = (item) => {
-   return {
-      type: UPDATE_INVENTORY,
-      payload: item
-   }
-}
+// export const updateInventory = (item) => {
+//    return {
+//       type: UPDATE_INVENTORY,
+//       payload: item
+//    }
+// }
 
 export const equipItem = (item, index) => {
 
@@ -101,7 +101,7 @@ export default function reducer (state = initialState, action) {
          case SELECT_NEW_HERO:
 
             return {...state, 
-               hero: {file_id: payload.file_id, hero_name: payload.hero_name, class_name: payload.class_name, gender: payload.gender, level: payload.level, gold: payload.gold, deaths: payload.deaths}, 
+               hero: {file_id: payload.file_id, hero_name: payload.hero_name, class_name: payload.class_name, gender: payload.gender, level: payload.level, gold: payload.gold, deaths: payload.deaths, honor: payload.honor}, 
                stats: {health: payload.health, attack: payload.attack, armor: payload.armor, strength: payload.strength, agility: payload.agility},
                equipment: [{type: "weapon"}, {type: "two-hand"}, {type: "off-hand"}, {type: "armor"}, {type: "helm"}, {type: "boots"}],
             inventory: [0, 0, 0, 0, 0, 0, 0, 0]
@@ -126,7 +126,7 @@ export default function reducer (state = initialState, action) {
                   console.log("SELECT_HERO error");
             }})
          return {...state, 
-            hero: {file_id: payload.file_id, hero_name: payload.hero_name, class_name: payload.class_name, gender: payload.gender, level: payload.level, gold: payload.gold, deaths: payload.deaths}, 
+            hero: {file_id: payload.file_id, hero_name: payload.hero_name, class_name: payload.class_name, gender: payload.gender, level: payload.level, gold: payload.gold, deaths: payload.deaths, honor: payload.honor}, 
             stats: {health: payload.health, attack: payload.attack, armor: payload.armor, strength: payload.strength, agility: payload.agility},
             equipment: [...state.equipment],
             inventory: 
@@ -147,15 +147,15 @@ export default function reducer (state = initialState, action) {
             equipment: [...payload.equipment], 
             inventory: [...payload.inventory]};
 
-      case UPDATE_INVENTORY:
-         console.log("ding")
-         let index = state.inventory.findIndex(e => e === 0)
-         state.inventory[index] = payload
-         console.log("UPDATED INVENTORY", state)
-         if (index !== -1){
-            return {...state}
-         } 
-         break;
+      // case UPDATE_INVENTORY:
+      //    console.log("ding")
+      //    let index = state.inventory.findIndex(e => e === 0)
+      //    state.inventory[index] = payload
+      //    console.log("UPDATED INVENTORY", state)
+      //    if (index !== -1){
+      //       return {...state}
+      //    } 
+      //    break;
 
          case DELETE_HERO:
             return {
@@ -193,9 +193,9 @@ export default function reducer (state = initialState, action) {
                }
             return {
                hero: {...state.hero},
-                        stats: {...state.stats},
-                        equipment: [...state.equipment],
-                        inventory: [...state.inventory]
+               stats: {...state.stats},
+               equipment: [...state.equipment],
+               inventory: [...state.inventory]
                }
 
       case UNEQUIP_ITEM:
@@ -204,10 +204,12 @@ export default function reducer (state = initialState, action) {
                state.inventory.splice(invIndex, 1, state.equipment[equIndex])
             const itemType = state.equipment[equIndex].item_type
                state.equipment[equIndex] = {type: `${itemType}`}
-            return {hero: {...state.hero},
-            stats: {...state.stats},
-            equipment: [...state.equipment], 
-            inventory: [...state.inventory]}
+            return {
+               hero: {...state.hero},
+               stats: {...state.stats},
+               equipment: [...state.equipment], 
+               inventory: [...state.inventory]
+            }
 
          case DELETE_ITEM:
                if (payload.equipped === "false") {
@@ -236,10 +238,11 @@ export default function reducer (state = initialState, action) {
                   console.log("DELETE_ITEM error");
                }
             }
-            return {hero: {...state.hero},
-                        stats: {...state.stats},
-                        equipment: [...state.equipment],
-                        inventory: [...state.inventory]
+            return {
+               hero: {...state.hero},
+               stats: {...state.stats},
+               equipment: [...state.equipment],
+               inventory: [...state.inventory]
                }
 
       default:

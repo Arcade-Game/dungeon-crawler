@@ -36,7 +36,7 @@ const Town = (props) => {
    },[])
 
    useEffect (() => {
-      if (lastLocation && lastLocation.pathname === "/game"){
+      if (lastLocation && lastLocation.pathname === "/game" || lastLocation && lastLocation.pathname === "/death" ){
          saveGame()
       }
    },[])
@@ -107,7 +107,7 @@ const Town = (props) => {
             <div className="town-overlay" 
                      onClick={()=>{resetToggle()}}>
             {toggleType === trainer ? (
-            <Trainer stopPropagation = {stopPropagation}/>) : null }
+               <Trainer stopPropagation = {stopPropagation}/>) : null }
             {toggleType === market ? 
                <Market stopPropagation = {stopPropagation}/> : null }
             {toggleType === leaderBoard ? 
@@ -117,14 +117,14 @@ const Town = (props) => {
                               getHeroes = {getHeroes}
                               setToggle = {setToggle} 
                               resetToggle = {resetToggle}
-                              
-                              /> : null }
+                                 /> : null }
             {toggleType === newHero ? 
                <NewHero stopPropagation = {stopPropagation}
                                  /> : null }
             {toggleType === inn ? 
                <Inn stopPropagation = {stopPropagation}
-                     hero = {props.hero}/> : null }
+                        hero = {props.hero}
+                           /> : null }
              </div> ) : null
          }
             
@@ -154,12 +154,14 @@ const Town = (props) => {
             onClick={() => {setToggle(heroes)}}>
                <h2 className="town-hero-name">{hero.hero_name}</h2>
                <h2>{hero.class_name}</h2>
+               <h2>{hero.honor} Honor</h2>
                <h2>{hero.deaths} Deaths</h2>
             </div>
          
          <div className="play-game-container">
-               <p className="play-game"
-               onClick={handlePlay}> {`< Play >`} </p>
+               <div className="play-game"
+               onClick={handlePlay}> 
+               <span> {`<`} </span>{`Play`} <span>{`>`}</span></div>
          </div>
          </>
          ): null}

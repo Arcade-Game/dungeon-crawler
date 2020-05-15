@@ -45,6 +45,7 @@ create table save_files (
    hero_level INT,
    gold INT,
    deaths INT,
+   honor INT,
 );
 
 create table items (

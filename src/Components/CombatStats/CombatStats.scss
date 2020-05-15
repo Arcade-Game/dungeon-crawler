@@ -5,20 +5,20 @@
    flex-direction: column;
    justify-content: space-evenly;
    background: grey;
-   width: 150px;
-   height: 300px;
+   width: 10%;
+   height: 17%;
    border: 1px solid black;
    position: absolute;
    right: 300px;
    top: 400px;
 }
 
-.char-stats {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   width: 150px;
-}
+// .char-stats {
+//    display: flex;
+//    flex-direction: column;
+//    justify-content: center;
+//    width: 150px;
+// }
 
 .stat-labels {
    display: flex;
@@ -27,8 +27,7 @@
 }
 
 .monster-stats {
-   border-top: 2px solid black;
-   padding-top: 10px;
+
 }
 
 .title {

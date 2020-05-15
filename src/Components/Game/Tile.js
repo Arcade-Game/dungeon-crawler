@@ -19,7 +19,7 @@ const Tile = (props) => {
     useEffect(() => {
 
     }, [isFight])
-    console.log("heroGuy", heroGuy)
+    // console.log(heroGuy)
 
     let animate = ['0%', '12.5%', '25%', '37.5%', '50%', '62.5%', '75%', '87.5%', '100%']
     let tileStyle = null

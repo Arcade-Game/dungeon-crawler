@@ -105,7 +105,14 @@ const Auth = (props) => {
      
 
    useEffect (() => {
-      localStorage.clear()
+      // localStorage.clear()
+      console.log(localStorage.length)
+      if (localStorage.length != 0){
+         props.history.push("/town")
+      }
+      else {
+         console.log("sign in")
+      }
    },[])
    const clearPlaceholder = (inputId, newValue) => {
       if(newValue){
