@@ -44,11 +44,13 @@ const CombatView = (props) => {
     
 
     useEffect (() => {
+        console.log(heroA)
+        console.log(props)
         setHeroA ((+props.heroStats.armor) + (+props.equipment.reduce((acc, el) => {
            return acc += ((el.armor) ? el.armor : 0)}, 0)));
         setHeroAt ((+props.heroStats.attack) + (+props.equipment.reduce((acc, el) => {
            return acc += ((el.attack) ? el.attack : 0)}, 0)));
-        },[props.heroStats])
+        },[props])
   
   
 
@@ -82,18 +84,22 @@ const CombatView = (props) => {
         let arr = []
         let charHealth = 0
         let monHealth = 0
+        let mDamage 
+        let cDamage 
         if(charHealth !== props.characterHealth) {
             charHealth = props.characterHealth
             monHealth = monsterHealth
         }
         let monster = stats
         let character = props.heroStats
-        character.attack = +heroAt
-        character.armor = +heroA
+        if(+props.heroStats.attack !== +heroAt){
+            character.attack = +heroAt
+            character.armor = +heroA
+        }
         await statSetupChar(character)
         await statSetupMon(monster)
         if (character.agility > monster.agility) {
-            let cDamage = charAttack(classType, weapon, weaponMove);
+            cDamage = charAttack(classType, weapon, weaponMove);
             if(cDamage === 0) {
                 arr.push(
                     {
@@ -113,7 +119,8 @@ const CombatView = (props) => {
                 setMonsterHealth(monHealth)
             }
 
-            let mDamage = monAttack(classType);
+            mDamage = monAttack(classType);
+
             if(mDamage === 0) {
                 arr.push({
                     id: 'c',
@@ -137,7 +144,7 @@ const CombatView = (props) => {
                         id: 'm',
                         message: `You have Died!`
                     })
-                   return setTimeout(() => {props.history.push('/death')}, 2000)
+                   return setTimeout(() => {props.history.push('/death')}, 1500)
                 }
                 if(monHealth <= 0) {
                     return arr.push({
@@ -150,7 +157,7 @@ const CombatView = (props) => {
             }
             props.setCharacterHealthFn(charHealth)
         } else {
-            let mDamage = monAttack(classType);
+            mDamage = monAttack(classType);
             if(mDamage === 0) {
                 arr.push({
                     id: 'c',

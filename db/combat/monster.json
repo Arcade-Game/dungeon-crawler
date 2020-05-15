@@ -2,7 +2,7 @@
    {
       "id": "0",
       "name": "Goblin",
-      "health": "3",
+      "health": "5",
       "attack": "1",
       "agility": "2",
       "strength": "1",
@@ -20,20 +20,20 @@
    {
       "id": "2",
       "name": "Dragon",
-      "health": "10",
+      "health": "30",
       "attack": "6",
-      "agility": "4",
-      "strength": "5",
+      "agility": "10",
+      "strength": "10",
       "armor": "5"
    },
    {
       "id": "3",
       "name": "Demon",
-      "health": "5",
+      "health": "7",
       "attack": "4",
       "agility": "2",
       "strength": "4",
-      "armor": "2"
+      "armor": "4"
    },
    {
       "id": "4",
@@ -65,7 +65,7 @@
    {
       "id": "7",
       "name": "Gargoyle",
-      "health": "5",
+      "health": "10",
       "attack": "2",
       "agility": "2",
       "strength": "3",
@@ -92,34 +92,34 @@
    {
       "id": "10",
       "name": "Basilisk",
-      "health": "7",
-      "attack": "5",
+      "health": "5",
+      "attack": "4",
       "agility": "2",
-      "strength": "3",
-      "armor": "2"
+      "strength": "2",
+      "armor": "4"
    },
    {
       "id": "11",
       "name": "Cyclops",
-      "health": "7",
+      "health": "10",
       "attack": "5",
-      "agility": "2",
-      "strength": "3",
-      "armor": "2"
+      "agility": "1",
+      "strength": "7",
+      "armor": "4"
    },
    {
       "id": "12",
       "name": "Elemental",
-      "health": "7",
+      "health": "10",
       "attack": "5",
-      "agility": "2",
+      "agility": "5",
       "strength": "3",
       "armor": "2"
    },
    {
       "id": "13",
       "name": "Wurm",
-      "health": "7",
+      "health": "10",
       "attack": "5",
       "agility": "2",
       "strength": "3",
@@ -137,56 +137,56 @@
    {
       "id": "15",
       "name": "Crab",
-      "health": "7",
-      "attack": "5",
-      "agility": "2",
-      "strength": "3",
-      "armor": "2"
+      "health": "5",
+      "attack": "1",
+      "agility": "1",
+      "strength": "1",
+      "armor": "100"
    },
    {
       "id": "16",
       "name": "Golem",
-      "health": "7",
-      "attack": "5",
+      "health": "100",
+      "attack": "2",
       "agility": "2",
-      "strength": "3",
-      "armor": "2"
+      "strength": "4",
+      "armor": "-5"
    },
    {
       "id": "17",
       "name": "Harpy",
       "health": "7",
       "attack": "5",
-      "agility": "2",
-      "strength": "3",
+      "agility": "10",
+      "strength": "4",
       "armor": "2"
    },
    {
       "id": "18",
       "name": "Giant",
-      "health": "7",
-      "attack": "5",
-      "agility": "2",
-      "strength": "3",
-      "armor": "2"
+      "health": "25",
+      "attack": "2",
+      "agility": "1",
+      "strength": "15",
+      "armor": "6"
    },
    {
       "id": "19",
       "name": "Gryphon",
-      "health": "7",
-      "attack": "5",
-      "agility": "2",
-      "strength": "3",
+      "health": "10",
+      "attack": "10",
+      "agility": "10",
+      "strength": "4",
       "armor": "2"
    },
    {
       "id": "20",
       "name": "Hydra",
-      "health": "7",
+      "health": "30",
       "attack": "5",
-      "agility": "2",
+      "agility": "6",
       "strength": "3",
-      "armor": "2"
+      "armor": "3"
    },
    {
       "id": "21",

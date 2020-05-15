@@ -1,6 +1,6 @@
 export const monsterImages = {
     goblin: `url(https://res.cloudinary.com/desyiuzzn/image/upload/v1589417032/refternu/Monsters/osblpyu02ooehuusilo3.png)`,
-    imp: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR-mbmeBtUSFUTDkW6Wbi2WLe2nBIrk5HXPmXSOi24T-TrKbBYF&usqp=CAU")`,
+    imp: `url(https://res.cloudinary.com/desyiuzzn/image/upload/v1589500685/refternu/Monsters/imp_tl6poi.png)`,
     dragon: `url(https://res.cloudinary.com/desyiuzzn/image/upload/v1589417003/refternu/Monsters/fpbdm1d2naap5yaw0snn.png)`,
     demon: `url(https://res.cloudinary.com/desyiuzzn/image/upload/v1589475609/refternu/Monsters/deamon_xegzc7.png)`,
     skeleton: `url(https://res.cloudinary.com/desyiuzzn/image/upload/v1589419112/refternu/Monsters/skeleton_pphy1o.png)`,
