@@ -28,11 +28,11 @@ const Town = (props) => {
              newHero = "newHero",
              inn = "inn";
    
+            let musicNumber = Math.floor(Math.random() * townMusic.length)
              let saveBanner = useRef(null)
 
    useEffect( () => {
       getHeroes()
-
    },[])
 
    useEffect (() => {
@@ -97,12 +97,13 @@ const Town = (props) => {
 
    console.log(props)
    console.log(lastLocation)
-   let musicNumber = Math.floor(Math.random() * townMusic.length)
+   
    console.log('musicNumber', musicNumber)
    return (
+      <>
+      <audio src={`${townMusic[musicNumber]}`} autoPlay />
       <div className="town-map">
          <div className="town-title-container">{props.title.title}</div>
-      <audio src={`${townMusic[musicNumber]}`} autoPlay />
          {overlayToggle ? (
             <div className="town-overlay" 
                      onClick={()=>{resetToggle()}}>
@@ -172,6 +173,7 @@ const Town = (props) => {
             <h2 className="save-banner" ref={el => {saveBanner = el}}>SAVING GAME ...</h2>
          {/* <h3 className="copyright"> Picture Credit: Deep_Rights - Reddit </h3> */}
       </div>
+      </>
    )
 }
 const mapStateToProps = (reduxState) => reduxState

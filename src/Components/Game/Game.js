@@ -13,7 +13,8 @@ import {withRouter} from 'react-router-dom';
 import { dungeonMusic, musicNumber } from './dungeonMusic';
 import {pushObstacle} from './pushObstacle';
 import {tutorial} from './Map Variables/tutorial';
-import {puzzles, levelOne, demoMap} from './Map Variables/puzzles';
+// import {puzzles, levelOne, demoMap} from './Map Variables/puzzles';
+import {puzzles} from './Map Variables/puzzles';
 import {connect} from 'react-redux';
 import {deathCounter, saveHero } from '../../Redux/reducers/heroReducer';
 import {TweenMax, Power3, TweenLite} from 'gsap';
@@ -23,11 +24,11 @@ const Game = (props) => {
   // const {mapArray, mapX, mapY} = mapObject
   // const {mapArray, mapX, mapY} = tutorial
   // const {mapArray, mapX, mapY} = levelOne
-  const {mapArray, mapX, mapY} = demoMap
+  // const {mapArray, mapX, mapY} = demoMap
 
-  const [grid, setGrid] = useState([...mapArray]),
-    [charX, setCharX] = useState(mapX),
-    [charY, setCharY] = useState(mapArray.length-11),
+  const [grid, setGrid] = useState([...puzzles[2].mapArray]),
+    [charX, setCharX] = useState(puzzles[2].mapX),
+    [charY, setCharY] = useState(puzzles[2].mapArray.length-11),
     [heightWidth, setHeightWidth] = useState(650),
     [viewRowCols, setViewRowCols] = useState(9),
     [inventoryToggle, setInventoryToggle] = useState(false),
@@ -169,7 +170,7 @@ const Game = (props) => {
           updateExperience(x,y,"complete")
           setCharX(x)
           setCharY(y)
-          setGrid([...mapArray])
+          // setGrid([...mapArray])
           saveGameLocal()
           props.history.push('/town')
           window.location.reload(false)

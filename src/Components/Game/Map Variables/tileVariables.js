@@ -22,7 +22,8 @@ export const tileVariables = {
     Pl: {type: "platform", elevation: 2},
     PP: {type: "platform", pushable: true, elevation: 2},
     G: {type: "gold-pile", elevation: 0, level: 1},
-    WL: [ll, ll, ll, ll, ll, ll, ll, ll, ll, ll]
+    WL: [ll, ll, ll, ll, ll, ll, ll, ll, ll, ll],
+    hp: {type: "empty", hidden: true, pushable: true, elevation: 0}
 }
 
 export const treasureChests = {
@@ -65,9 +66,9 @@ export const doors = {
 }
 
 export const teleporters = {
-    t1: {type: "teleporter-1", end: [15, 42], elevation: 0},
-    t2: {type: "teleporter-2", end: [15, 42], elevation: 0},
-    t3: {type: "teleporter-3", end: [15, 42], elevation: 0},
+    t1: {type: "teleporter-1", end: [11, 30], elevation: 0},
+    t2: {type: "teleporter-1", end: [17, 33], elevation: 0},
+    t3: {type: "teleporter-1", end: [39, 12], elevation: 0},
     t4: {type: "teleporter-4", end: [15, 42], elevation: 0},
     t5: {type: "teleporter-5", end: [15, 42], elevation: 0},
 }
