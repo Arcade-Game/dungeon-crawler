@@ -21,7 +21,7 @@ export const tileVariables = {
     Cl: {type: "cliff", elevation: 3},
     Pl: {type: "platform", elevation: 2},
     PP: {type: "platform", pushable: true, elevation: 2},
-    G: {type: "gold-pile", level: 0, level: 1},
+    G: {type: "gold-pile", elevation: 0, level: 1},
     WL: [ll, ll, ll, ll, ll, ll, ll, ll, ll, ll]
 }
 

@@ -155,7 +155,7 @@ const Game = (props) => {
           setQuicksandCounter(0)
           break;
         case "monster":
-          fightMonster(x, y)
+          fightMonster(x, y, grid[y][x].level)
           setQuicksandCounter(0)
           break;
         case "chest":
@@ -172,6 +172,7 @@ const Game = (props) => {
           setGrid([...mapArray])
           saveGameLocal()
           props.history.push('/town')
+          window.location.reload(false)
           break;
         case "push-bridge":
           setQuicksandCounter(0)
@@ -402,13 +403,17 @@ const Game = (props) => {
 
   const clearMonster = (x, y) => {
     let newGrid = [...grid]
+    console.log("monster level", grid[y][x].level)
     updateExperience(x, y, "monster", grid[y][x].level)
-    newGrid[y][x] = {...newGrid[y][x], type: grid[y][x].elevation === 3 ? 'cliff' : grid[y][x].elevation === 2 ? 'platform' : 'empty', monsterType: "", level: ''}
-    setCharX(x)
-    setCharY(y)
-    setMonsterCoor([0,0])
+    setTimeout(() => {
+      newGrid[y][x] = {...newGrid[y][x], type: grid[y][x].elevation === 3 ? 'cliff' : grid[y][x].elevation === 1 ? 'platform' : 'empty', monsterType: "", level: ''}
+      setCharX(x)
+      setCharY(y)
+      setMonsterCoor([0,0])
+      setGrid(newGrid)
+    }, 10)
     
-    setGrid(newGrid)
+    
   }
 
   const updateExperience = (x, y, type, monsterLevel) => {
@@ -417,12 +422,14 @@ const Game = (props) => {
     switch(type){
       case "monster":
         console.log("monster XP", )
-        if(experience + (20 + (20 * (level - monsterLevel) * -.25)) > xpVar){
-          xpVar = experience + (20 + (20 * (level - monsterLevel) * -.25)) - XPforLevel
+        if(experience + (20 + (20 * ((level - monsterLevel) * -.25))) > xpVar){
+          xpVar = experience + (20 + (20 * ((level - monsterLevel) * -.25))) - XPforLevel
           setExperience(xpVar)
           updateLevel(x, y)
         } else {
-          setExperience(experience + (20 + (20 * (level - monsterLevel) * -.25)) > XPforLevel ? (experience + (20 + (20 * (level - monsterLevel) * -.25)) - XPforLevel) : experience + (20 + (20 * (level - monsterLevel) * -.25)))
+          console.log("level", level)
+          console.log("monsterLevel", monsterLevel)
+          setExperience(experience + (20 + (20 * ((level - monsterLevel) * -.25))) > XPforLevel ? (experience + (20 + (20 * ((level - monsterLevel) * -.25))) - XPforLevel) : experience + (20 + (20 * ((level - monsterLevel) * -.25))))
         }
       break;
       case "crush":
@@ -473,17 +480,19 @@ const Game = (props) => {
 
   const openChest = (x, y, z) => {
     let newGrid = [...grid]
-    newGrid[y][x] = {...newGrid[y][x], type: "empty"}
-    setGrid(newGrid)
-    axios.get(`/api/item`).then(res => {
-      let index = inventory.findIndex(e => e === 0)
-      let newInventory = [...inventory]
-      if (index !== -1){
-        newInventory[index] = res.data
-        setInventory(newInventory)
-       } 
-    })
-    goldPile(x,y,z)
+    newGrid[y][x] = {...newGrid[y][x], type: newGrid[y][x].elevation === 3 ? 'cliff' : newGrid[y][x].elevation === 1 ? 'platform' : 'empty'}
+    setTimeout(() => {
+      setGrid(newGrid)
+      axios.get(`/api/item`).then(res => {
+        let index = inventory.findIndex(e => e === 0)
+        let newInventory = [...inventory]
+        if (index !== -1){
+          newInventory[index] = res.data
+          setInventory(newInventory)
+         } 
+      })
+      goldPile(x,y,z)
+    }, 50)
   }
 
   const goldPile = (x, y, z) => { // NEED MINIMUMS SET AND CORRECT NUMBERS. Z STANDS FOR THE LEVEL OF CHEST/GOLD PILE.

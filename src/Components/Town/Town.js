@@ -86,7 +86,14 @@ const Town = (props) => {
    stopPropagation = (event) => {
       event.stopPropagation();
       event.nativeEvent.stopImmediatePropagation();
+   },
+
+   handlePlay = () => {
+      props.history.push(`/game`)
+      window.location.reload(false)
    }
+
+
 
    console.log(props)
    console.log(lastLocation)
@@ -152,7 +159,7 @@ const Town = (props) => {
          
          <div className="play-game-container">
                <p className="play-game"
-               onClick={()=> props.history.push(`/game`)}> {`< Play >`} </p>
+               onClick={handlePlay}> {`< Play >`} </p>
          </div>
          </>
          ): null}
