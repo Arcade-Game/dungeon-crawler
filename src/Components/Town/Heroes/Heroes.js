@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
+import {TweenMax, Power3} from "gsap";
 import {connect} from "react-redux";
 import Hero from "./Hero";
 import "./Heroes.scss";
@@ -8,6 +9,13 @@ const Heroes = (props) => {
    const [expand, setExpand] = useState([]);
    const newHero = "newHero";
       
+   let heroesContainer = useRef(null)
+ 
+
+   useEffect (() => {
+      TweenMax.fromTo(heroesContainer, .7, {opacity: 0, ease: Power3.easeIn}, {opacity: 1, ease: Power3.easeOut})
+   },[])
+
    const toggleSetup = () => {
       let arr = [];
       for (let i = 0; i < heroes[0].length; i++) 
@@ -24,7 +32,7 @@ const Heroes = (props) => {
    console.log(props)
 
    return (
-      <div className="hero-selector-container"
+      <div className="hero-selector-container" ref={el => {heroesContainer = el}}
               onClick={(event)=> props.stopPropagation(event)}> 
         {heroes[0] && heroes[0].length !== 0 ?  (
            <>
