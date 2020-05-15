@@ -16,8 +16,8 @@ const CombatView = (props) => {
         [stats, setStats] = useState({}),
         [classType, setClassType] = useState(''),
         [log, setLog] = useState([]),
-        [heroAt, setHeroAt] = useState(),
-        [heroA, setHeroA] = useState(),
+        [heroAt, setHeroAt] = useState(0),
+        [heroA, setHeroA] = useState(0),
         [endFight, setEndFight] = useState(false)
 
     useEffect(()=> {
@@ -43,14 +43,12 @@ const CombatView = (props) => {
     }, [stats.health])
     
 
-    useEffect (() => {
-        console.log(heroA)
-        console.log(props)
-        setHeroA ((+props.heroStats.armor) + (+props.equipment.reduce((acc, el) => {
-           return acc += ((el.armor) ? el.armor : 0)}, 0)));
-        setHeroAt ((+props.heroStats.attack) + (+props.equipment.reduce((acc, el) => {
-           return acc += ((el.attack) ? el.attack : 0)}, 0)));
-        },[props])
+    // useEffect (() => {
+    //         setHeroA ((+props.heroStats.armor) + (+props.equipment.reduce((acc, el) => {
+    //            return acc += ((el.armor) ? el.armor : 0)}, 0)));
+    //         setHeroAt ((+props.heroStats.attack) + (+props.equipment.reduce((acc, el) => {
+    //            return acc += ((el.attack) ? el.attack : 0)}, 0)));
+    //     },[])
   
   
 
@@ -86,6 +84,10 @@ const CombatView = (props) => {
         let monHealth = 0
         let mDamage 
         let cDamage 
+        let heroArmor =(+props.heroStats.armor) + (+props.equipment.reduce((acc, el) => {
+            return acc += ((el.armor) ? el.armor : 0)}, 0));
+         let heroAttack = (+props.heroStats.attack) + (+props.equipment.reduce((acc, el) => {
+            return acc += ((el.attack) ? el.attack : 0)}, 0));
         if(charHealth !== props.characterHealth) {
             charHealth = props.characterHealth
             monHealth = monsterHealth
@@ -93,8 +95,8 @@ const CombatView = (props) => {
         let monster = stats
         let character = props.heroStats
         if(+props.heroStats.attack !== +heroAt){
-            character.attack = +heroAt
-            character.armor = +heroA
+            character.attack = +heroAttack
+            character.armor = +heroArmor
         }
         await statSetupChar(character)
         await statSetupMon(monster)

@@ -46,7 +46,7 @@ const Footer = props => {
          return acc += ((el.armor) ? el.armor : 0)}, 0)));
       setHeroAttack ((+heroStats.attack) + (+equipment.reduce((acc, el) => {
          return acc += ((el.attack) ? el.attack : 0)}, 0)));
-      },[props])
+      },[props.equipment])
 
    return (
       <>
