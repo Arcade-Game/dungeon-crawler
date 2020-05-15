@@ -10,6 +10,13 @@
    height:200px;
    z-index: 2;
    background-color: grey;
+   opacity:0;
+   
+
+   in-screen-container {
+      opacity: 1;
+      transition: 3s;
+   }
 
    .inn-container {
       @include column;

@@ -8,6 +8,7 @@
    height:600px;
    z-index: 2;
    background-color: grey;
+   opacity:0;
 
    .scores-container {
       @include column;

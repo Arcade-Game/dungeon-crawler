@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import {TweenMax, Power3} from "gsap";
 import "./Trainer.scss";
 const Trainer = (props) => {
    const {character} = props
 
+   let trainerContainer = useRef()
+
+   useEffect (() => {
+      TweenMax.fromTo(trainerContainer, 2, {opacity: 0, ease: Power3.easeIn}, {opacity: 1, ease: Power3.easeOut})
+   },[])
 
    console.log(character);
    return (
-      <div className="trainer-container"
+      <div className="trainer-container" ref={el => {trainerContainer = el}}
       onClick={(event)=> props.stopPropagation(event)}> 
       {character ? (
          <>

@@ -10,6 +10,7 @@
    z-index: 2;
    background-color: $pal-one;
    box-shadow: 10px 10px 5px black;
+   opacity: 0;
    
    .hero-summary-container{
       @include column;
@@ -127,7 +128,7 @@
 }
 .create-hero:disabled{
    opacity: .6;
-   width: 40px;
+   width: 10vw;
 }
 
 
@@ -145,6 +146,7 @@
    width: 58%;
    height:75vh;
    z-index: 2;
+   opacity:0;
    background-color: $pal-one;
    box-shadow: 10px 10px 5px black;
 
@@ -160,6 +162,7 @@
             justify-content: flex-start;
             height: 100%;
             width: 15%;
+            font-size: 20px;
             color:$pal-eight;
             // background-color: $pal-four;
 
@@ -232,6 +235,7 @@
                   height: 450px;
                   min-width:200px;
                   background-color: $pal-five;
+                  // opacity:0;
 
                   .char-image{
                      border-radius: 10px;
@@ -278,11 +282,14 @@
                   @include row;
                   margin-left: 35px;
                   align-items: flex-start;
+                  font-size: 20px;
+                  font-weight: bold;
                   justify-content: space-between;
                   width:100%;
                   
                   h3{
                      width: 60%;
+                     font-size: 20px;
                   }
                }
             } 
