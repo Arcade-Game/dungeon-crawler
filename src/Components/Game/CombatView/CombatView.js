@@ -226,7 +226,7 @@ const CombatView = (props) => {
                 }
             }
             if(monHealth <= 0) {
-                if (!arr.find(e => e.message === 'You have Died!')) {
+                if (!arr.find(e => e.message === `You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`)) {
                     arr.push({
                         id: 'c',
                         message: `You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`
