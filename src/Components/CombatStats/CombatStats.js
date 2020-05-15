@@ -33,27 +33,15 @@ const CombatStats = props => {
 
    return (
       <div className='stat-container'>
-         {/* <div className='char-stats'>
-            <div className='title'>Your Stats</div>
-            <div className='stat-labels'>
-               <div>
-                  <p>Health: {health} </p>
-                  <p>Attack: {attack}</p>
-                  <p>Armor: {armor}</p>
-                  <p>Agility: {agility} </p>
-                  <p>Strength: {strength} </p>
-               </div>
-            </div>
-         </div> */}
          <div className='monster-stats'>
-            <div className='title'>{props.monsterType.charAt(0).toUpperCase() + props.monsterType.slice(1)} Stats</div>
+            <div className='title'>{props.monsterType.charAt(0).toUpperCase() + props.monsterType.slice(1)} </div>
             <div  className='stat-labels'>
                <div>
-                  <p>Health: {mHealth} </p>
-                  <p>Attack: {mAttack}</p>
-                  <p>Armor: {mArmor}</p>
-                  <p>Agility: {mAgility}</p>
-                  <p>Strength: {mStrength}</p>
+                  <p>Health:  </p> <span className='stat1'>{mHealth}</span>
+                  <p>Attack: </p> <span className='stat2'>{mAttack}</span>
+                  <p>Armor: </p> <span className='stat3'>{mArmor}</span>
+                  <p>Agility: </p> <span className='stat4'>{mAgility}</span>
+                  <p>Strength: </p> <span className='stat5'>{mStrength}</span>
                </div>
             </div>
          </div>

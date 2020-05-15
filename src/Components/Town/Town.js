@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from "react";
-import {TweenMax, Power2} from "gsap";
+import {TweenMax, Power2, Power3} from "gsap";
 import {connect} from "react-redux";
 import {setHeroList} from "../../Redux/reducers/heroesReducer";
 import { useLastLocation } from 'react-router-last-location';
@@ -29,17 +29,26 @@ const Town = (props) => {
              inn = "inn";
    
             let musicNumber = Math.floor(Math.random() * townMusic.length)
-             let saveBanner = useRef(null)
+             let saveBanner = useRef(null),
+            //  let saveBanner = useRef(null),
+                  selectHeroLight = useRef(null),
+                  selectHeroText= useRef(null)
 
    useEffect( () => {
       getHeroes()
    },[])
 
    useEffect (() => {
+      console.log(lastLocation)
       if (lastLocation && lastLocation.pathname === "/game" || lastLocation && lastLocation.pathname === "/death" ){
          saveGame()
       }
+      if (!hero.hero_name){
+         TweenMax.to(selectHeroText, .8, {alpha:.4, color:"rgb(200, 200, 200)", repeat: -1, yoyo:true, ease:Power3.easeIn})
+      }
    },[])
+
+
 
    
    const setToggle = (toggleType) => {
@@ -48,6 +57,7 @@ const Town = (props) => {
    },
 
    resetToggle = () => {
+
       setToggleType();
       setOverlayToggle(false);
    },
@@ -75,8 +85,7 @@ const Town = (props) => {
             equipment,
             inventory
          }
-         TweenMax.fromTo(saveBanner, 6, {opacity: 1, x: 18, ease: Power2.easeIn}, {opacity: 0, x:-250, ease: Power2.easeOut})
-
+         TweenMax.fromTo(saveBanner, 6, {opacity: 1, x: 18, ease: Power2.easeIn},{opacity: 0, x:-250, ease: Power2.easeOut})
          console.log(saveData)
          axios.put(`/api/hero/${file_id}`, saveData).then(res => {
             console.log(res.data)
@@ -99,13 +108,14 @@ const Town = (props) => {
    console.log(lastLocation)
    
    console.log('musicNumber', musicNumber)
+
    return (
       <>
       <audio src={`${townMusic[musicNumber]}`} autoPlay />
       <div className="town-map">
          <div className="town-title-container">{props.title.title}</div>
          {overlayToggle ? (
-            <div className="town-overlay" 
+            <div id="one" className="town-overlay"
                      onClick={()=>{resetToggle()}}>
             {toggleType === trainer ? (
                <Trainer stopPropagation = {stopPropagation}/>) : null }
@@ -145,9 +155,9 @@ const Town = (props) => {
                  onClick={() => {setToggle(leaderBoard)}}>
                <p className="town-leader-board">Leader Board</p>
          </div>
-         <div className="town-select-hero-container"
+         <div className="town-select-hero-container" ref={el => {selectHeroLight = el}}
                  onClick={() => {setToggle(heroes)}}>
-               <p className="town-select-hero">Heroes</p>
+               <p className="town-select-hero" ref={el => {selectHeroText = el}}>Heroes</p>
          </div>
          {hero.hero_name ? (
             <>

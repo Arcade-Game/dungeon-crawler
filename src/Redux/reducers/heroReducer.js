@@ -10,9 +10,10 @@ const SELECT_NEW_HERO = "SELECT_NEW_HERO",
           SELECT_HERO = "SELECT_HERO",
           SAVE_HERO = "SAVE_HERO",
           DELETE_HERO = "DELETE_HERO",
-          UPDATE_INVENTORY = "UPDATE_INVENTORY",
+         //  UPDATE_INVENTORY = "UPDATE_INVENTORY",
           EQUIP_ITEM = "EQUIP_ITEM",
           UNEQUIP_ITEM = "UNEQUIP_ITEM",
+          REPLACE_ITEM = "REPLACE_ITEM",
           DELETE_ITEM = "DELETE_ITEM",
           weapon = "weapon",
           twoHand = "two-hand",
@@ -72,6 +73,11 @@ export const equipItem = (item, index) => {
          payload: id
       }
    }
+   
+   export const replaceItem = (inv, equ)=> ({
+      type: REPLACE_ITEM,
+      payload: {inv, equ}
+   })
 
    export const deleteItem = (data, equipped) => {
       return {
@@ -165,7 +171,10 @@ export default function reducer (state = initialState, action) {
                equipment: [{type: "weapon"}, {type: "two-hand"}, {type: "off-hand"}, {type: "armor"}, {type: "helm"}, {type: "boots"}]
             };
 
-
+         case REPLACE_ITEM:
+            return {
+               
+            }
 
       case EQUIP_ITEM:
             state.inventory.splice(+payload.index, 1, 0)

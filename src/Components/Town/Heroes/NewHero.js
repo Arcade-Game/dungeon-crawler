@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {selectHero , selectNewHero} from "../../../Redux/reducers/heroReducer";
+import {TweenMax, Power3, Power2} from "gsap";
 import "./Heroes.scss";
 import axios from "axios";
 const NewHeros = (props) => {
@@ -11,19 +12,26 @@ const NewHeros = (props) => {
              [heroClasses, setHeroClasses] = useState(),
              [heroStats, setHeroStats] = useState({health: 100, attack: 1,armor: 1, strength: 4, agility: 0})
 
+             let newHeroContainer = useRef(),
+                  imageChange = useRef()
+
       useEffect (() => {
          axios.get("/api/classes").then(res => {
             setHeroClasses(res.data)})
             setStartingStats()
       },[classToggle])
 
+      useEffect (() => {
+         TweenMax.fromTo(newHeroContainer, 2, {opacity: 0, ease: Power3.easeIn}, {opacity: 1, ease: Power3.easeOut})
+      },[])
+         
    const  Warrior = "Warrior",
                Ranger = "Ranger",
                Rogue = "Rogue",
                male = "male",
                female = "female";
 
-   const createHero = () => {
+   const createHero = async () => {
       const {player_id} = props.auth
       let class_id = 0
       let gender = genderToggle
@@ -38,13 +46,14 @@ const NewHeros = (props) => {
                class_id = 3;
                break;
          }
-      axios.post("/api/heroes", {player_id, heroName, gender, class_id}).then(res => {
+      await axios.post("/api/heroes", {player_id, heroName, gender, class_id}).then(res => {
          props.selectNewHero(res.data[0])
       })
       props.history.push("/game")
    }
 
    const getHeroImage = () => {
+      // TweenMax.fromTo(imageChange, 2, {opacity: 0, ease: Power3.easeIn}, {opacity: 1, ease: Power3.easeOut})
          switch (classToggle+genderToggle){
             case (Warrior+male):
                return "https://i.pinimg.com/originals/31/ea/08/31ea08491663a9c922db8b7a5fa3d392.jpg"
@@ -77,12 +86,11 @@ const NewHeros = (props) => {
    },
 
    handleInput = (event) => {
-      // event.target.value.length <= 20;
       setHeroName(event.target.value)
    }
 
    return (
-      <div className="new-hero-screen-container"
+      <div className="new-hero-screen-container"  ref={el => {newHeroContainer = el}}
               onClick={(event)=> props.stopPropagation(event)}> 
          <div className="new-hero-screen"> 
             <div className="new-hero-class-container" >
@@ -108,7 +116,9 @@ const NewHeros = (props) => {
                   )
                }
             </div>
-            <div className="new-hero-container" >
+            <div className="new-hero-container" 
+            ref={el => {imageChange = el}}
+            >
                <div className="new-hero-image-container">
                   <div className="new-hero-gender-selector">
                      <img className="male-icon" 
@@ -124,13 +134,11 @@ const NewHeros = (props) => {
                     <img className="char-image" 
                               src={getHeroImage()} height="450px"/>
                   </div>
-
                </div>
                <h3 className="new-hero-name-input">Name: <input placeholder="Name" maxLength="20" value={heroName} onChange={(event) => handleInput(event)} /></h3> 
                </div>
             <div className="new-hero-info-container" >
                <div>
-
             <h1 className="new-hero-name"> {heroName}</h1>
             <h3 className="new-hero-class">Level 1 {classToggle}</h3>
             <div className="new-hero-stats-container">

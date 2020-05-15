@@ -53,6 +53,7 @@
       // transform: skewX(8deg);
       // transform: skewY(-20deg);
       cursor: url('../pictures/cursors/Mouse10PlusgreenResize.png'), auto;
+
      
       .town-trainer{
          transform:skew(66deg, -27deg);
@@ -76,6 +77,7 @@
          // border: 2px solid black;
          transform:skew(-40deg, 25deg);
          cursor: url('../pictures/cursors/Mouse10RedResize.png'), auto;
+         transition: .5s;
 
          .town-inn {
             transform:skew(40deg, -25deg);
@@ -83,8 +85,8 @@
             text-shadow: 5px 5px 12px black;
             position: fixed;
             line-height: 25px;
-            top:20%;
-            left: 15%
+            top:30%;
+            left: 30%
          }
       }
 
@@ -100,7 +102,7 @@
          // border: 2px solid black;
          transform:skew(-64deg, 20deg);
          cursor: url('../pictures/cursors/Mouse10PlusYellowResize.png'), auto;
-
+         transition: .5s;
 
          .town-market {
             transform:skew(64deg, -20deg);
@@ -122,6 +124,7 @@
          // border: 2px solid black;
          transform:skew(-30deg, 24deg);
          cursor: url('../pictures/cursors/Mouse10GreenResize.png'), auto;
+         transition: .5s;
 
 
          .town-leader-board {
@@ -130,7 +133,8 @@
             text-shadow: 5px 5px 12px black;
             position: fixed;
             top:30%;
-            left: 22%
+            left: 22%;
+
          }
       }
       .town-select-hero-container{
@@ -145,6 +149,7 @@
          // border: 2px solid black;
          transform:skew(-62deg, 22deg);
       cursor: url('../pictures/cursors/Mouse10GreenResize.png'), auto;
+      transition: .5s;
 
 
          .town-select-hero {
@@ -181,6 +186,7 @@
    .town-trainer-container:hover{
       background-color: rgba(41, 199, 41, 0.25);
       color: black;
+      transition:1s;
    }
    .town-inn-container:hover{
       background-color: rgba(199, 41, 41, 0.25);
@@ -199,15 +205,21 @@
       color: black;
    }
    .play-game span {
+      font-size: 72px;
       opacity: 0;
+      color:$pal-seven;
    }
    .play-game:hover{
+      font-size: 72px;
+      letter-spacing: 3px;
       color: $pal-seven;
-      
-      transition: .05s;
+      transition: .5s;
    }
    .play-game:hover span{
+      padding: 0 13px 0 13px;
+      letter-spacing: 3px;
       opacity: 1;
+      transition: .7s;
    }
 
 
@@ -261,6 +273,7 @@
    z-index:1;
    height: 100%;
    width: 100%;
+   transform: 2s;
 }
 
 
