@@ -45,9 +45,9 @@
             grid-template-rows: repeat(4, 1fr);
          }
 
-         .market-vendor-square-image {
+         // .market-vendor-square-image {
 
-         }
+         // }
 
          .market-vendor-square {
             @include row;
@@ -156,6 +156,21 @@
                width: 75px;
                background-color: $pal-three;
                border: 3px solid $pal-four;
+            }
+         }
+         .market-gold-container {
+            @include row;
+            justify-content: flex-end;
+            height: 35px;
+            width: 90%;
+
+            .market-gold {
+               @include row;
+               height: 35px;
+               min-width: 30%;
+               padding: 0 10px 0 10px;
+               background-color: lightgoldenrodyellow;
+
             }
          }
 
