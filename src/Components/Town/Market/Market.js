@@ -13,12 +13,18 @@ const Market = (props) => {
                 [helm, setHelm] = useState(props.equipment[4]),
                 [boots, setBoots] = useState(props.equipment[5]);
 
-                const itemList = ["sword","axe","mace","armor","armor","shield", "sword","axe","mace","armor","armor","shield"]
+                const itemList = [{item_id:6, item_name:"Iron Axe",	attack:2, armor:	-1, image:"https://res.cloudinary.com/desyiuzzn/image/upload/v1589328802/refternu/pq6xevay9hzpqfxtq5ux.png",	item_type:"weapon", rarity:	"common", price:	25},
+               {item_id:7, item_name:"Steel Axe",	attack:3, armor:	-1, image:"https://res.cloudinary.com/desyiuzzn/image/upload/v1589339737/refternu/rceamsfs1qit4seclwwv.png",	item_type:"weapon",	rarity: "common",	price:50},
+               {item_id:8, item_name:"Wooden Sword",	attack:1, armor:	0, image:"https://res.cloudinary.com/desyiuzzn/image/upload/v1589348638/refternu/decfiywnw3ctdbnt1ptt.png",	item_type:"weapon",	rarity:"common",	price:15},
+               {item_id:9, item_name:"Iron Dagger",	attack:1, armor:	0, image:"https://res.cloudinary.com/desyiuzzn/image/upload/v1589342764/refternu/pqgoavlwipgvkboeuou4.png",	item_type:"off-hand",	rarity:"common",	price:25},
+               {item_id:10, item_name:"Steel Dagger",	attack:2, armor:	0, image:"https://res.cloudinary.com/desyiuzzn/image/upload/v1589339790/refternu/nprv2gge8ocayy0drots.png",	item_type:"off-hand",	rarity:"common",	price:50},
+               {item_id:12, item_name:"Broad Sword",	attack:3, armor:	0, image:"https://res.cloudinary.com/desyiuzzn/image/upload/v1589337583/refternu/naqao6uxwozfl2ay3gbf.png",	item_type:"weapon",	rarity:"uncommon",	price:125},
+                {item_id:13, item_name:"Falchion",	attack:3, armor:	0, image:"https://res.cloudinary.com/desyiuzzn/image/upload/v1589349902/refternu/dgiaixfofjne1sqt8ffx.png",	item_type:"weapon",	rarity:"uncommon",	price:125}]
                 const potionList = ["health","health","health","health","strength","strength"]
                 const data3 = ["unknown", "unknown", "unknown", "unknown", "unknown", "unknown", "unknown", "unknown", "unknown"]
                 const data4 = ["unknown", "unknown", "unknown", "unknown"]
                 const data5 = ["unknown", "unknown", "unknown", "unknown", "unknown", "unknown","unknown"]
-
+               
    
       let marketContainer = useRef()
 
@@ -39,16 +45,72 @@ const Market = (props) => {
                potions = "potions",
                tab3 = "tab3",
                tab4 = "tab4",
-               tab5 = "tab5"
+               tab5 = "tab5",
+               typeWeapon = "weapon",
+               typeTwoHand = "two-hand",
+               typeArmor = "armor",
+               typeOffHand = "off-hand",
+               typeHelm = "helm",
+               typeBoots = "boots";
+
+               console.log(itemList)
 
       const equipItem = (event) => {
          // setOverlayToggle(false);
          event.preventDefault();
          const data = JSON.parse(event.dataTransfer.getData("text"))
          const {id, equipped} = data;
+         const inv = [...props.inventory],
+         equ = [...props.equipment]
          if (equipped === "false") {
-         console.log(props.inventory[id], id)
-         props.equipItem(props.inventory[id], id)
+            console.log("false", inv, equ)
+            console.log("switch", inv[id].item_type)
+            switch (inv[id].item_type) {
+               case typeWeapon:
+                  if (equ[0].item_id){
+                     console.log("weapon  replace reducer hit")
+                     handleReplaceItem(id, 0)
+                  } else {
+                     console.log("weapon reducer hit")
+                     props.equipItem(props.inventory[id], id)
+                  }
+                  break;
+               case typeTwoHand:
+                  if (equ[1].item_id){
+                     handleReplaceItem(id, 1);
+                  } else {
+                     props.equipItem(props.inventory[id], id)
+                  }
+                     break;
+               case typeOffHand:
+                  if (equ[2].item_id){
+                     handleReplaceItem(id, 2);
+                  } else {
+                     props.equipItem(props.inventory[id], id)
+                  }
+                  break;
+               case typeArmor:
+                  if (equ[3].item_id){
+                     handleReplaceItem(id, 3);
+                  } else {
+                     props.equipItem(props.inventory[id], id)
+                  }
+                  break;
+               case typeHelm:
+                  if (equ[4].item_id){
+                     handleReplaceItem(id, 4);
+                  } else {
+                     props.equipItem(props.inventory[id], id)
+                  }
+                  break;
+               case typeBoots:
+                  if (equ[5].item_id){
+                     handleReplaceItem(id, 5);
+                  } else {
+                     props.equipItem(props.inventory[id], id)
+                  }
+                  break;
+               }
          }
       },
 
@@ -78,8 +140,22 @@ const Market = (props) => {
          event.preventDefault();
          const data = JSON.parse(event.dataTransfer.getData("text"));
          const {id, equipped} = data;
-         console.log("sell: ", id, equipped)
+         if (equipped ==="true"){
+            console.log("sell: ", id, equipped)
+         } else if (equipped === "false") {
+            console.log("sell inv: ", id, equipped)
+         }
       },
+
+      buyItem = (event) => {
+         // setOverlayToggle(false)
+         event.preventDefault();
+         const data = JSON.parse(event.dataTransfer.getData("text"));
+         const {id, equipped} = data;
+         if (equipped ==="buy"){
+         console.log("buy: ", id, equipped)
+      }
+   },
 
       handleDrag = (event) => {
          // setOverlayToggle(true)
@@ -93,8 +169,8 @@ const Market = (props) => {
          return el ? (
             <div className="market-vendor-square"> <img className="market-vendor-square-image" key ={i} 
                      id={i} 
-                     className="false"
-                     alt={el} 
+                     className="buy"
+                     src={el.image} 
                      draggable="true" 
                      // onDragStart={(event) => handleDrag(event)} 
                      // onDrag={(event) => event.preventDefault()} 
@@ -106,10 +182,10 @@ const Market = (props) => {
       
       const mappedInventory = props.inventory.map((el, i) => {
          return el.item_type ? (
-            <div className="market-inventory-square"> <img className="market-inventory-square-image" key ={el.item_id} 
+            <div className="market-inventory-square"> {console.log(el.image)}<img className="market-inventory-square-image" key ={el.item_id} 
                      id={i} 
                      className="false"
-                     src={el.image} 
+                     src={el.image}
                      draggable="true" 
                      onDragStart={(event) => handleDrag(event)} 
                      onDrag={(event) => event.preventDefault()} 
@@ -124,14 +200,18 @@ console.log(props)
          <div className="vendor-container">
             {tabToggle === items ? (
                <div className="vendor-shop">
-                  <div className="vendor-item-grid">
+                  <div className="vendor-item-grid"
+                          onDrop={(event) => sellItem(event)} 
+                          onDragOver={(event) => event.preventDefault()}>
                      {mapVender(itemList)}
                      </div>
                </div>
             ) : null}
             {tabToggle === potions ? (
                <div className="vendor-shop">
-                  <div className="vendor-item-grid">
+                  <div className="vendor-item-grid"
+                          onDrop={(event) => sellItem(event)} 
+                          onDragOver={(event) => event.preventDefault()}>
                      {mapVender(potionList)}
                      </div>
                </div>
@@ -164,7 +244,8 @@ console.log(props)
                 <section className="market-equipment">
                               <section className="market-equipment-top-container">
                                     <div className="market-helm-container" 
-                                          onDrop={(event) => equipItem(event)} 
+                                          onDrop={(event) => {buyItem(event)
+                                                                             equipItem(event)}} 
                                           onDragOver={(event) => event.preventDefault()}>
                                        {helm.item_id ? (
                                           <img id={helm.item_id} className="true"
@@ -189,7 +270,8 @@ console.log(props)
 
                   <section className="market-equipment-middle-container">
                               <div className="market-middle-container" value={weapon}
-                                                onDrop={(event) => equipItem(event)} 
+                                                onDrop={(event) => {buyItem(event)
+                                                   equipItem(event)}} 
                                                 onDragOver={(event) => event.preventDefault()}
                                                 >
                                              {weapon.item_id ? (
@@ -211,7 +293,8 @@ console.log(props)
                               </div>
          
                               <div className="market-middle-container" value={armor}
-                                                onDrop={(event) => equipItem(event)} 
+                                                onDrop={(event) => {buyItem(event)
+                                                   equipItem(event)}}
                                                 onDragOver={(event) => event.preventDefault()}
                                                 >
                                              {armor.item_id ? (
@@ -235,7 +318,8 @@ console.log(props)
                
             
                               <div className="market-middle-container" value={offHand}
-                                       onDrop={(event) => equipItem(event)} 
+                                       onDrop={(event) => {buyItem(event)
+                                          equipItem(event)}} 
                                        onDragOver={(event) => event.preventDefault()}
                                        >
                                           {offHand.item_id ? (
@@ -270,7 +354,8 @@ console.log(props)
                   </section>
                   <section className="market-equipment-bottom-container">
                                           <div className="market-boots-container" 
-                                                onDrop={(event) => equipItem(event)} 
+                                                onDrop={(event) => {buyItem(event)
+                                                   equipItem(event)}} 
                                                 onDragOver={(event) => event.preventDefault()}
                                                 >
                                                          {boots.item_id ? (
@@ -290,10 +375,14 @@ console.log(props)
                                                             </div> */}
                                           </div>
                   </section>
+                  <div className="market-gold-container">
+                     <div className="market-gold">{props.hero.gold} Gold</div>
+                  </div>
             </section>
          
                 <section className="market-inventory-container"
-                onDrop={(event) => unEquipItem(event)}
+                onDrop={(event) => {buyItem(event)
+                                                   unEquipItem(event)}}
                 onDragOver={(event) => event.preventDefault()}
                 >
                {mappedInventory}
