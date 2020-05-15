@@ -217,17 +217,21 @@ const CombatView = (props) => {
         
         if (charHealth <= 0 || monHealth <= 0) {
             if (charHealth <= 0) {
-                arr.push({
-                    id: 'm',
-                    message: `You have Died!`
-                })
-                setTimeout(() => {props.history.push('/death')}, 2000)
+                if (!arr.find(e => e.message === 'You have Died!')) {
+                    arr.push({
+                        id: 'm',
+                        message: `You have Died!`
+                    })
+                    setTimeout(() => {props.history.push('/death')}, 2000)
+                }
             }
             if(monHealth <= 0) {
-                arr.push({
-                    id: 'c',
-                    message: `You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`
-                })
+                if (!arr.find(e => e.message === 'You have Died!')) {
+                    arr.push({
+                        id: 'c',
+                        message: `You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`
+                    })
+                }
             }
             setEndFight(true)
             clearMonster(monsterCoor[0], monsterCoor[1])
