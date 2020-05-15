@@ -144,10 +144,10 @@ const CombatView = (props) => {
                         id: 'm',
                         message: `You have Died!`
                     })
-                   return setTimeout(() => {props.history.push('/death')}, 1500)
+                   setTimeout(() => {props.history.push('/death')}, 500)
                 }
                 if(monHealth <= 0) {
-                    return arr.push({
+                    arr.push({
                         id: 'c',
                         message: `You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`
                     })
@@ -181,10 +181,10 @@ const CombatView = (props) => {
                         id: 'm',
                         message: `You have Died!`
                     })
-                    return setTimeout(() => {props.history.push('/death')}, 2000)
+                    setTimeout(() => {props.history.push('/death')}, 500)
                 }
                 if(monHealth <= 0) {
-                    return arr.push({
+                    arr.push({
                         id: 'c',
                         message: `You have killed ${monsterType.charAt(0).toUpperCase() + monsterType.slice(1)}!`
                     })
