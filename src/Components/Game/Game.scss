@@ -175,6 +175,17 @@
     background: linear-gradient(to right, yellow, orange, orangered, red, darkred, red, orangered, orange, yellow)
 }
 
+.mini-map-teleporter-1 {
+    @include mm;
+    background: purple;
+    border: 1.9px solid pink;
+}
+
+.mini-map-broken-teleporter {
+    @include mm;
+    background: rgb(95, 19, 19);
+}
+
 .mini-map-mist {
     @include mm;
     background: grey;

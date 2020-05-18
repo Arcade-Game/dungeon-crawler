@@ -17,6 +17,7 @@ const Footer = props => {
 
    let didMountRef = useRef(false)
    let animateBlood = useRef(null)
+   let animateXP = useRef(null)
    
    useEffect(() => {
       
@@ -87,7 +88,8 @@ const Footer = props => {
       </div>
       <div className="footer-right">
          <div className="experience-bar">
-            {`XP: ${experience}`}
+            <div className="experience-points" ref={el => {animateXP = el}}>{`XP: ${experience}`}</div>
+            
          </div>
             <div className="health-bar" onClick={() => !isFight ? setStatsToggle(!statsToggle) : null}>
                <div className="health-bar-blood" ref={el => {animateBlood = el}} 

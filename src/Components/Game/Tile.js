@@ -102,13 +102,13 @@ const Tile = (props) => {
 
     return (
             <>
-                {
+                {/* {
                     monsterInfoToggle ? (<div className="monster-data-hidden">
                         <div className="monster-picture-hidden"></div>
                         <h3>{newMonster}</h3>
                         <div className="monster-stats-hidden"></div>
                     </div>) : null
-                    }
+                    } */}
             <div className={elevation === 3 && type !== 'cliff' ? `${cName}-cliff` : elevation === 2 && type !== 'platform' ? `${cName}-platform` : cName} onClick={grid[y][x].monsterType ? (() => setMonsterInfoToggle(!monsterInfoToggle)) : null} style={tileStyle}>
             <div className="hover-info">{type !== 'monster' && keyToggle ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div>
                 
