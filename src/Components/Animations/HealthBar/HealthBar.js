@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {TweenMax, Power3} from 'gsap';
 import './HealthBar.scss';
 
@@ -17,8 +17,6 @@ const HealthBar = (props) => {
             }
         )
     }, [])
-
-    console.log(logoItem)
 
     return (
         <div

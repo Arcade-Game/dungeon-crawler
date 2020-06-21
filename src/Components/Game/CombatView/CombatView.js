@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './CombatView.scss';
 import {monsterImages, heroImages} from './imageVariables';
-import { AiOutlineConsoleSql } from 'react-icons/ai';
 import CombatStats from '../../CombatStats/CombatStats';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
@@ -44,8 +43,6 @@ const CombatView = (props) => {
     
 
     useEffect (() => {
-        console.log(heroA)
-        console.log(props)
         setHeroA ((+props.heroStats.armor) + (+props.equipment.reduce((acc, el) => {
            return acc += ((el.armor) ? el.armor : 0)}, 0)));
         setHeroAt ((+props.heroStats.attack) + (+props.equipment.reduce((acc, el) => {

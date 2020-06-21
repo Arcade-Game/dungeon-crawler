@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react';
-// import Character from './CharView';
 import Tile from './Tile';
-import { GiHidden } from 'react-icons/gi';
 
 const Map = (props) => {
     const [charView, setCharView] = useState([])
@@ -10,7 +8,7 @@ const Map = (props) => {
 
     const {charX, charY, heightWidth, viewRowCols, grid, getMonsterFn, exploreTileFn, isFight, setNewLava, direction, heroGuy, keyToggle} = props
 
-    const charContainerStyle = {
+    const charContainerStyle = { // Styling for character grid.
         display: "grid",
         gridTemplateColumns: `repeat(${viewRowCols}, 1fr)`,
         gridTemplateRows: `repeat(${viewRowCols}, 1fr)`,
@@ -20,7 +18,7 @@ const Map = (props) => {
         overflow: "hidden",
     };
 
-    const charMiniContainerStyle = {
+    const charMiniContainerStyle = { // Styling for mini-map.
         border: "3px dotted black",
         textAlign: "center",
         borderRadius: "50%",
@@ -37,7 +35,7 @@ const Map = (props) => {
         boxShadow: "0px 0px 1px 1px black"
     };
 
-    useEffect(() => {
+    useEffect(() => { // Iterates over seed map with a for loop and slices segments of each array to create a 9x9 grid which centers on (charX, charY). Re-renders each time charX or charY is changed (with arrow keys).  Updates state with the new 9x9 character view grid. 
         const makeBlock = () => {
             let x1 = charX - 4
             let x2 = charX + 4
@@ -52,7 +50,7 @@ const Map = (props) => {
         makeBlock()
     }, [charX, charY])
 
-    useEffect(() => {
+    useEffect(() => { // Iterates over 9x9 character view grid on state and renders a Tile component for each index.
         let mappedCharView = charView.map((e,i) => e.map((f,j) => {
             return <Tile type={f.type} mist={f.mist} pushable={f.pushable} hidden={f.hidden} itemObject={f.itemObject} key={j} setNewLava={setNewLava} charX={charX} charY={charY} gridX={j} gridY={i} heightWidth={heightWidth} elevation={f.elevation} viewRowCols={viewRowCols} y={charY+((4-i)*-1)} x={charX+((4-j)*-1)} getMonsterFn={getMonsterFn} grid={grid} exploreTileFn={exploreTileFn} isFight={isFight} direction={direction} heroGuy={heroGuy} monsterType={f.monsterType} monsterInfoToggle={monsterInfoToggle} setMonsterInfoToggle={setMonsterInfoToggle} keyToggle={keyToggle} />
         }))
