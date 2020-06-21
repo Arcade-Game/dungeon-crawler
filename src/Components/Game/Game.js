@@ -41,16 +41,16 @@ const Game = (props) => {
   // Seed maps
 
   // const {mapArray, mapX, mapY} = mapObject
-  // const {mapArray, mapX, mapY} = tutorial
+  const {mapArray, mapX, mapY} = tutorial
   // const {mapArray, mapX, mapY} = levelOne
   // const {mapArray, mapX, mapY} = demoMap
 
   // State
   
-  const [grid, setGrid] = useState([...puzzles[1].mapArray]), // Current map.
+  const [grid, setGrid] = useState(mapArray), // Current map.
 
-    [charX, setCharX] = useState(puzzles[1].mapX),
-    [charY, setCharY] = useState(puzzles[1].mapArray.length-11), // CharX and CharY set the index from which the character view takes the seed map and creates a 9x9 grid with the character in the middle. These indexes change with arrow keys or WASD key presses.
+    [charX, setCharX] = useState(mapX),
+    [charY, setCharY] = useState(mapY), // CharX and CharY set the index from which the character view takes the seed map and creates a 9x9 grid with the character in the middle. These indexes change with arrow keys or WASD key presses.
 
     [heightWidth, setHeightWidth] = useState(650), // Used to determine the size of the character grid in pixels.
     [viewRowCols, setViewRowCols] = useState(9), // Number of rows and columns in character grid.
@@ -82,6 +82,8 @@ const Game = (props) => {
 
     let coinFade = useRef(''); // Animates gold coin when stepping on chests or gold piles.
     let newXP = useRef(''); // Will animate experience bar.
+
+    console.log("map array", mapArray)
 
     // useEffects
     
