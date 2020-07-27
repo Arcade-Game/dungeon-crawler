@@ -1,3 +1,5 @@
+Game is playable and hosted on Digital Ocean, and can be found at http://vindermere.com/#/.
+
 Game starts in Auth.js.  Scroll animation done with GreenSock.  Authentication encryption done with the Bcrypt package.  
 
 Upon registration and login, you are routed to the "Town View", held in Town.js.  If you have a hero selected, it will show in the bottom left corner.  If there is no hero selected, than the "Heroes" div will blink in the center of the screen, prompting you to create your character.  Choose between three classes with different stats, and two genders.  
@@ -47,8 +49,6 @@ In addition to terrain "types", there are additional properties to each Tile com
 Game state saves to the SQL database anytime player returns to Town.js or creates a new character.  Redux is also saved to local storage to allow refreshing without logging the player out, and to allow the player to stay logged in even if they exit out of their browser.  Scroll, gold coin, and health bar animations were done with the GreenSock library.  Terrain animations (lava, quicksand) were done using CSS.  
 
 Database was created using PostGreSQL.  Server was created using Node, Massive, and Express.
-
-Game is playable and hosted on Digital Ocean, and can be found at http://vindermere.com/#/.
 
 Game created by: 
   Ryan Aposhian: https://github.com/RAposhian,
