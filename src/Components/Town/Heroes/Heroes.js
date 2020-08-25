@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import {TweenMax, Power3} from "gsap";
+import {selectHero} from "../../../Redux/reducers/heroReducer";
 import {connect} from "react-redux";
 import Hero from "./Hero";
 import "./Heroes.scss";
@@ -57,7 +58,8 @@ const Heroes = (props) => {
             </>
          ) : (<>
          <div><h1> Welcome to Vindermere!</h1> <h2>Please create your hero</h2></div>
-            <button className="create-hero" onClick={() => props.setToggle(newHero)}>Create Hero</button> 
+            <button className="create-hero" onClick={() => {props.selectHero()
+               props.setToggle(newHero)}}>Create Hero</button> 
             </>
          )}
       </div>
@@ -65,4 +67,4 @@ const Heroes = (props) => {
    )
 }
 const mapStateToProps = (reduxState) => reduxState
-export default connect(mapStateToProps)(Heroes);
+export default connect(mapStateToProps, {selectHero})(Heroes);
