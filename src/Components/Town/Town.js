@@ -29,7 +29,9 @@ const Town = (props) => {
              newHero = "newHero",
              inn = "inn";
    
+            let musicNumber = Math.floor(Math.random() * townMusic.length)
              let saveBanner = useRef(null),
+            //  let saveBanner = useRef(null),
                   selectHeroLight = useRef(null),
                   selectHeroText= useRef(null)
 
@@ -111,13 +113,18 @@ const Town = (props) => {
       window.location.reload(false)
    }
 
-   let musicNumber = Math.floor(Math.random() * townMusic.length)
+
+
+   console.log(props)
+   console.log(lastLocation)
+   
    console.log('musicNumber', musicNumber)
 
    return (
+      <>
+      <audio src={`${townMusic[musicNumber]}`} autoPlay />
       <div className="town-map">
          <div className="town-title-container">{props.title.title}</div>
-      <audio src={`${townMusic[musicNumber]}`} autoPlay />
          {overlayToggle ? (
             <div id="one" className="town-overlay"
                      onClick={()=>{resetToggle()}}>
@@ -191,6 +198,7 @@ const Town = (props) => {
             <h2 className="save-banner" ref={el => {saveBanner = el}}>SAVING GAME ...</h2>
          {/* <h3 className="copyright"> Picture Credit: Deep_Rights - Reddit </h3> */}
       </div>
+      </>
    )
 }
 const mapStateToProps = (reduxState) => reduxState

@@ -8,11 +8,11 @@ import { Tween } from "gsap/gsap-core";
 
 const Auth = (props) => {
    const [username, setUsername] = useState(""),
-             [password, setPassword] = useState(""),
-             [verPassword, setVerPassword] = useState(""),
-             [email, setEmail] = useState(""),
-             [registerToggle, setRegisterToggle] = useState(false),
-             [loginToggle, setLoginToggle] = useState(false);
+         [password, setPassword] = useState(""),
+         [verPassword, setVerPassword] = useState(""),
+         [email, setEmail] = useState(""),
+         [registerToggle, setRegisterToggle] = useState(false),
+         [loginToggle, setLoginToggle] = useState(false);
 
    let authScreen = useRef(null);
    let authTitle = useRef(null);
@@ -155,8 +155,20 @@ const Auth = (props) => {
       console.log(loginToggle)
    }
 
+   const handleBypass = () => {
+      axios.post("/api/auth/login", {username: "BirdMan", password: "birdman"}).then(res => {
+         props.setUser(res.data)
+         if (res.data) {
+            props.history.push("/town")
+         }
+      }).catch(err => console.log(err))
+   }
+
    return (
       <div className='auth-background' >
+         <button className="bypass" onClick={handleBypass}>
+            BYPASS
+         </button>
          <audio src={require("../music/Soliloquy.mp3")} autoPlay />
          <div className="auth-container" ref={el => {authScreen = el}}>
 

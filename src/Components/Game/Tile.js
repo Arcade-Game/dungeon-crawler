@@ -1,33 +1,25 @@
-import React, {useState, useEffect} from 'react';
-import {monsterImages, heroImages} from '../Game/CombatView/imageVariables';
+import React, {useEffect} from 'react';
 import Chest from '../Animations/Chest';
 import {withRouter} from 'react-router-dom';
 import Lava from '../Animations/Lava/Lava';
 import Quicksand from '../Animations/Quicksand/Quicksand';
 import Lookout from './Lookout/Lookout';
-import {TweenMax, SteppedEase} from 'gsap';
 import './hero.scss';
 
-
-
 const Tile = (props) => {
-    const {charX, charY, viewRowCols, type, viewHeightWidth, grid, getMonsterFn, x, y, exploreTileFn, tileClassName, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, item, elevation, direction, heroGuy, monsterType, monsterInfoToggle, setMonsterInfoToggle, keyToggle} = props;
+    const {type, grid, x, y, exploreTileFn, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, elevation, direction, heroGuy, monsterInfoToggle, setMonsterInfoToggle, keyToggle} = props;
 
-    
-
-    // const [monType, setMonType] = useState('')
-    useEffect(() => {
+    useEffect(() => { // Re-renders when combat view is toggled.
 
     }, [isFight])
-    // console.log(heroGuy)
 
-    let animate = ['0%', '12.5%', '25%', '37.5%', '50%', '62.5%', '75%', '87.5%', '100%']
-    let tileStyle = null
-    let cName = "char-view"
-    let mName = ''
-    exploreTileFn(x, y)
+    let animate = ['0%', '12.5%', '25%', '37.5%', '50%', '62.5%', '75%', '87.5%', '100%'] // Used to randomize the sprite position for character sprite animation.
+    let tileStyle = null // Variable for conditional tile styling.
+    let cName = "char-view" // Variable for conditional classNames.
+    let mName = '' // Variable for conditional monster names.
+    exploreTileFn(x, y) // Calls explore tile, which reveals tiles on the minimap when they are rendered on the character grid.
 
-    switch(type){
+    switch(type){ // Determines how to render each tile in the character view.  Changes cName, which is the variable used as the conditional className.  Most of the this could be easily done with simple template strings without the extra steps if there had been stricter naming conventions from the beginning.
         case "wall":
             tileStyle = {background: "black", border: "none"}
             break;
@@ -88,27 +80,25 @@ const Tile = (props) => {
     }
 
     let newMonster =''
-    if(grid[y][x].monsterType){
+    if(grid[y][x].monsterType){ // Sets className for monsters.
         newMonster = grid[y][x].monsterType
         mName = `char-view-${grid[y][x].monsterType.toLowerCase()}`
     }
 
 
-    const getMonType = (x,y) => {
+    const getMonType = (x,y) => { // Will be used for retrieving monster info for an on hover or on click div that displays monster info.
         return grid[y][x]
     }
 
-    console.log("keyToggle", keyToggle)
-
     return (
             <>
-                {
+                {/* {
                     monsterInfoToggle ? (<div className="monster-data-hidden">
                         <div className="monster-picture-hidden"></div>
                         <h3>{newMonster}</h3>
                         <div className="monster-stats-hidden"></div>
                     </div>) : null
-                    }
+                    } */}
             <div className={elevation === 3 && type !== 'cliff' ? `${cName}-cliff` : elevation === 2 && type !== 'platform' ? `${cName}-platform` : cName} onClick={grid[y][x].monsterType ? (() => setMonsterInfoToggle(!monsterInfoToggle)) : null} style={tileStyle}>
             <div className="hover-info">{type !== 'monster' && keyToggle ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div>
                 
