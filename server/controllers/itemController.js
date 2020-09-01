@@ -35,11 +35,17 @@ module.exports = {
       // equipped.image ="";
       res.status(200).send({equipment, inventory});
    },
-   findItem: async(req, res) => {
+   getRandomItem: async(req, res) => {
       const db = req.app.get('db')
-      let item = await db.session.get_item()
+      let item = await db.session.get_random_item()
       console.log(item)
       res.status(200).send(item[0]);
+   },
+   getRandomItems: async(req, res) => {
+      const { quantity } = req.params
+      const db = req.app.get('db')
+      let items = await db.session.get_random_items(quantity)
+      res.status(200).send(items);
    },
    findKey: (req, res) => {
       let index = inventory.findIndex(e => e === 0)

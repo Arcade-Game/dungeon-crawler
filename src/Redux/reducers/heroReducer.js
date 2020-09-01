@@ -15,6 +15,7 @@ const SELECT_NEW_HERO = "SELECT_NEW_HERO",
           UNEQUIP_ITEM = "UNEQUIP_ITEM",
           REPLACE_ITEM = "REPLACE_ITEM",
           DELETE_ITEM = "DELETE_ITEM",
+          SELL_ITEM = "SELL_ITEM",
           weapon = "weapon",
           twoHand = "two-hand",
           armor = "armor",
@@ -83,6 +84,13 @@ export const equipItem = (item, index) => {
       return {
          type: DELETE_ITEM,
          payload: {data, equipped}
+      }
+   }
+
+   export const sellItem = (data) => {
+      return {
+         type: SELL_ITEM,
+         payload: data
       }
    }
 
@@ -228,12 +236,14 @@ export default function reducer (state = initialState, action) {
          case DELETE_ITEM:
                if (payload.equipped === "false") {
                state.inventory.splice(+payload.data, 1, 0)
-               } else {
-            switch (payload.data){
-               case weapon:
-                  state.equipment[0] = {type: "weapon"};
-                  break;
-               case twoHand:
+               console.log("inv delete")
+            } else {
+               console.log("equ delete")
+               switch (payload.data){
+                  case weapon:
+                     state.equipment[0] = {type: "weapon"};
+                     break;
+                     case twoHand:
                      state.equipment[1] = {type: "two-hand"};
                      break;
                case offHand:
@@ -259,6 +269,7 @@ export default function reducer (state = initialState, action) {
                inventory: [...state.inventory]
                }
 
+         case SELL_ITEM:
       default:
          return state;
    };

@@ -52,10 +52,9 @@
          .market-vendor-square {
             @include row;
             // box-sizing: border-box;
-            height: 70px;
+            height: 100px;
             width: 70px;
             border-radius: 10px;
-
             background: $pal-three;
          }
       }
@@ -109,14 +108,13 @@
                height: 25%;
                width: 95%;
 
-
                // div:hover .inventory-square-hover {
                //    visibility: visible;
                // }
                   .market-helm-container{
                      border-radius: 10px;
                      height: 75px;
-                     width: 75px;
+                     width: 80px;
                      background-color: $pal-three;
                      border: 3px solid $pal-four;
                   }
@@ -129,6 +127,14 @@
 
                div:hover .inventory-square-hover {
                   visibility: visible;
+                  position: absolute;
+
+                  right: 22vw;
+                  top: 30vh;
+                  height: 150px;
+                  width: 150px;
+                  z-index: 7;
+                  background-color: red;
                }
       
                   .market-middle-container{
@@ -143,11 +149,31 @@
             }
          .market-equipment-bottom-container{
             @include row;
+            justify-content: flex-start;
             height: 25%;
             width: 95%;
 
             div:hover .inventory-square-hover {
                visibility: visible;
+            }
+            .item-stats-hover {
+               visibility: visible;
+               margin: 4.5vh .75vw 0 0;
+               height: 15vh;
+               width: 7.5vw;
+               background-color: red;
+               z-index: 5;
+               .item-name {
+                  text-align: center;
+                  padding-left: 0;
+                  min-height: 2vh;
+                  padding-bottom:1vh;
+               }
+               h4 {
+                  text-align: left;
+                  padding-left: .5vw;
+
+               }
             }
             
             .market-boots-container{

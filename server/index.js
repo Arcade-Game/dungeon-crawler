@@ -39,8 +39,8 @@ app.post("/api/auth/login", authCtrl.login);
 app.post("/api/auth/logout", authCtrl.logout);
 
 //item endpoints
-app.get("/api/item", itemCtrl.findItem);
-app.post("/api/item/:id", itemCtrl.findItem);
+app.get("/api/item", itemCtrl.getRandomItem);
+app.get("/api/items/:quantity", itemCtrl.getRandomItems);
 app.get('/api/equipped-items/:weapon', itemCtrl.equippedItems);
 app.get('/api/key', itemCtrl.findKey);
 
