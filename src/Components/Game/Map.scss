@@ -4,8 +4,8 @@
 
 .map-grid {
     background: url('../pictures/cave-floor.jpg');
-    border: 4px solid black;
-    box-shadow: 0 0 55px 23px black;
+    border: .5vh solid black;
+    box-shadow: 0 0 5.6vh 2.4vh black;
 }
 
 .char-view {
@@ -86,7 +86,7 @@
 .push-bridge {
     border: .3px solid rgb(20, 92, 160);
     // box-shadow: 0 0 2.5px 2px rgb(102, 191, 221);
-    box-shadow: 0 0 5px 2px rgb(0, 45, 128);
+    box-shadow: 0 0 .6vh .2vh rgb(0, 45, 128);
     background: url('../pictures/terrain/ForestRock_basecolor.png');
     border-radius: 50%;
     height: 94%;
@@ -109,7 +109,7 @@
 }
 .char-view-push-lava2 {
     .push-bridge {
-        box-shadow: 0 0 5px 2px rgb(160, 19, 19);
+        box-shadow: 0 0 .5vh .2vh rgb(160, 19, 19);
         background: url('../pictures/terrain/ForestRock_basecolor.png');
         border-radius: 50%;
         height: 94%;
@@ -120,7 +120,7 @@
     background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative; display: flex; justify-content: center; align-items: center;}
 .char-view-push-lava1 {
     .push-bridge {
-        box-shadow: 0 0 3px 2px rgb(243, 26, 26);
+        box-shadow: 0 0 .3vh .2vh rgb(243, 26, 26);
         background: url('../pictures/terrain/ForestRock_basecolor.png');
         border-radius: 50%;
         height: 94%;
@@ -131,7 +131,7 @@
     background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png'); position: relative; display: flex; justify-content: center; align-items: center;}
 .char-view-push-lava-bridge {
     .push-bridge {
-        box-shadow: 0 0 3px 2px rgb(243, 26, 26);
+        box-shadow: 0 0 .3vh .2vh rgb(243, 26, 26);
         background: url('../pictures/terrain/ForestRock_basecolor.png');
         border-radius: 50%;
         height: 94%;
@@ -381,33 +381,33 @@
     z-index: 10;
     background-color: rgba(0, 0, 0, 1);
     color: white;
-    font-size: 17px;
+    font-size: 1.8vh;
     overflow: visible;
-    padding: 10px;
+    padding: 1.1vh;
     text-align: left;
 }
 
 .monster-picture-hidden {
-    border: 1px solid white;
+    border: .2vh solid white;
     height: 57%;
     width: 100%;
     margin-bottom: 5px;
 }
 
 .monster-stats-hidden {
-    border: 1px solid white;
+    border: .1vh solid white;
     height: 32%;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 1.1vh;
 }
 
 .hover-info {
     visibility: hidden;
     position: absolute;
-    top: 4px;
-    left: 4px;
+    top: .5vh;
+    left: .5vh;
     color: white;
-    font-size: 18px;
+    font-size: 1.9vh;
     z-index: 25;
 
 }
