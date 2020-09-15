@@ -1,38 +1,39 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Tile from './Tile';
+import {GameContext} from '../../context/GameContext';
 
-const Map = (props) => {
+const Map = ({getMonsterFn, setNewLava, direction, heroGuy, keyToggle, exploreTileFn}) => {
+
+    const {grid, charX, charY, heightWidth, viewRowCols, isFight} = useContext(GameContext);
     const [charView, setCharView] = useState([])
     const [displayView, setDisplayView] = useState([])
     const [monsterInfoToggle, setMonsterInfoToggle] = useState(false)
 
-    const {charX, charY, heightWidth, viewRowCols, grid, getMonsterFn, exploreTileFn, isFight, setNewLava, direction, heroGuy, keyToggle} = props
-
     const charContainerStyle = { // Styling for character grid.
         display: "grid",
-        gridTemplateColumns: `repeat(${viewRowCols}, 1fr)`,
-        gridTemplateRows: `repeat(${viewRowCols}, 1fr)`,
-        height: heightWidth,
-        width: heightWidth,
+        gridTemplateColumns: `repeat(${viewRowCols}, 9vh)`,
+        gridTemplateRows: `repeat(${viewRowCols}, 9vh)`,
+        // height: heightWidth,
+        // width: heightWidth,
         borderRadius: "50%",
         overflow: "hidden",
     };
 
     const charMiniContainerStyle = { // Styling for mini-map.
-        border: "3px dotted black",
+        border: ".3vh dotted black",
         textAlign: "center",
         borderRadius: "50%",
-        height: "250px",
-        width: "250px",
+        height: "29vh",
+        width: "29vh",
         position: "absolute",
-        top: "30px",
-        right: "30px",
+        top: "2vh",
+        right: "2vh",
         display: "grid",
         gridTemplateColumns: `repeat(${viewRowCols}, 1fr)`,
         gridTemplateRows: `repeat(${viewRowCols}, 1fr)`,
         backgroundPosition: "center",
         overflow: "hidden",
-        boxShadow: "0px 0px 1px 1px black"
+        boxShadow: "0px 0px .1vh .1vh black"
     };
 
     useEffect(() => { // Iterates over seed map with a for loop and slices segments of each array to create a 9x9 grid which centers on (charX, charY). Re-renders each time charX or charY is changed (with arrow keys).  Updates state with the new 9x9 character view grid. 

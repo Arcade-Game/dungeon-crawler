@@ -8,13 +8,14 @@ import Death from './Components/Game/Death/Death';
 import HealthBar from './Components/Animations/HealthBar/HealthBar';
 import MapEditor from './Components/MapEditor/MapEditor';
 import {MapEditorProvider} from './context/MapEditorContext';
+import {GameProvider} from './context/GameContext';
 
 export default (
    <Switch>
       <Route exact path="/" component = {Auth} />
       <Route path="/town" component = {Town} />
       {/* <Route path="/story" component = {Story}/> */}
-      <Route path="/game" component = {Game} />
+      <GameProvider><Route path="/game" component = {Game} /></GameProvider>
       <Route path="/death" component = {Death} />
       <Route path='/health' component = {HealthBar} />
       <MapEditorProvider><Route path='/editor' component = {MapEditor} /></MapEditorProvider>

@@ -4,56 +4,9 @@
 
 .map-grid {
     background: url('../pictures/cave-floor.jpg');
-    // box-shadow: // Experiment for torch/fire effect.
-    //     0 0 5px 1px hsl(0, 20%, 99%),
-    //     0 0 17px 3px yellow,
-    //     0 0 17px 7px red,
-    //     0 0 20px 13px orange,
-    //     0 0 100px 50px orangered,
-    //     0 0 80px 170px black;
-
-    // box-shadow: -120px -70px 5px 20px hsl(0, 0%, 0%),
-    //             120px -70px 5px 20px hsl(0, 0%, 0%),
-    //             0px 80px 5px 20px hsl(0, 0%, 0%),
-
-
-
-
-        // -60px -90px 25px 15px rgb(49, 49, 49),
-        // -60px -90px 55px 75px rgb(27, 27, 27),
-        // -60px -90px 0px 85px black,
-        // -60px -90px 90px 95px black;
-
-
-    // outline: 5px solid hsl(0, 0%, 60%);
-
-
-    // transform-origin:center bottom;
-    // border: 1px solid blue;
-    // width: 20%;
-    // padding-top: 20%;
-
     border: 4px solid black;
     box-shadow: 0 0 55px 23px black;
 }
-
-// .char-container {
-//     text-align: center;
-//     background: url('../pictures/cave-floor.jpg');
-//     border: 100px solid yellow;
-// }
-
-// .hero-div {
-//     background: url('../pictures/warrior.svg');
-//     background-size: 100%;
-//     height: 100%;
-//     width: 100%;
-//     position: relative;
-//     z-index: 10;
-//     position: absolute;
-// }
-
-
 
 .char-view {
     // border: 1px solid yellow;

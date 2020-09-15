@@ -1,8 +1,9 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {TweenMax, Power3, TweenLite} from 'gsap';
 import axios from 'axios';
+import {GameContext} from '../../context/GameContext';
 
 // Styling
 
@@ -42,41 +43,17 @@ const Game = (props) => {
 
   // const {mapArray, mapX, mapY} = mapObject
   const {mapArray, mapX, mapY} = tutorial
+  const {grid, setGrid, heightWidth, charX, setCharX, charY, setCharY, viewRowCols, isFight, setIsFight, inventoryToggle,
+  equipmentToggle, setInventoryToggle, setEquipmentToggle, newMoney, setNewMoney, keyToggle, setKeyToggle, monsterType, setMonsterType, monsterCoor, setMonsterCoor, characterHealth, setCharacterHealth, experience, setExperience, level, setLevel, XPforLevel, setXPforLevel, quicksandCounter, setQuicksandCounter, direction, setDirection} = useContext(GameContext)
   // const {mapArray, mapX, mapY} = levelOne
   // const {mapArray, mapX, mapY} = demoMap
 
   // State
   
-  const [grid, setGrid] = useState(mapArray), // Current map.
-
-    [charX, setCharX] = useState(mapX),
-    [charY, setCharY] = useState(mapY), // CharX and CharY set the index from which the character view takes the seed map and creates a 9x9 grid with the character in the middle. These indexes change with arrow keys or WASD key presses.
-
-    [heightWidth, setHeightWidth] = useState(650), // Used to determine the size of the character grid in pixels.
-    [viewRowCols, setViewRowCols] = useState(9), // Number of rows and columns in character grid.
-
-    [inventoryToggle, setInventoryToggle] = useState(false), // Toggles inventory tab.
-    [equipmentToggle, setEquipmentToggle] = useState(false), // Toggles equipment tab.
-    [newMoney, setNewMoney] = useState(0), // Stores value of money accumulated and displays in the inventory tab.
-    [keyToggle, setKeyToggle] = useState(false),
-
-    [isFight, setIsFight] = useState(false), // Toggle for combat view.
-    [monsterType, setMonsterType] = useState(''), // Stores type of monster to pass to relevant components when combat is triggered.
-    [monsterCoor, setMonsterCoor] = useState([0,0]), // Stores coordinates of the monster to allow for movement after combat view toggles back to normal view.
-
-    [characterHealth, setCharacterHealth] = useState(0),
-    [experience, setExperience] = useState(0),
-    [level, setLevel] = useState(1),
-    [XPforLevel, setXPforLevel] = useState(), // How much experience is needed to level up.
-
-    [quicksandCounter, setQuicksandCounter] = useState(0), // Tallies consecutive movement on quicksand tiles.  More than three in a row triggers death.
-
-    [hero, setHero] = useState(props.hero), // Stores hero information.
-    [heroStats, setHeroStats] = useState(props.stats),
-    [equipment, setEquipment] = useState(props.equipment),
-    [inventory, setInventory] = useState(props.inventory),
-
-    [direction, setDirection] = useState('up') // Determines the direction character sprite is facing for animation purposes.
+    const [hero, setHero] = useState(props.hero), // Stores hero information.
+            [heroStats, setHeroStats] = useState(props.stats),
+            [equipment, setEquipment] = useState(props.equipment),
+            [inventory, setInventory] = useState(props.inventory)
 
     // Refs
 
@@ -589,7 +566,7 @@ const Game = (props) => {
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
       <audio src={`${dungeonMusic[musicNumber]}`} autoPlay />
       <div className="Game">
-        <MiniMap grid={grid} mmX={grid[0].length} mmY={grid.length} isFight={isFight} charX={charX} charY={charY} />
+        <MiniMap grid={grid} mmX={grid[0].length} mmY={grid.length} isFight={isFight} charX={charX} charY={charY} isFight={isFight} />
         <Map 
           charX={charX} 
           charY={charY} 

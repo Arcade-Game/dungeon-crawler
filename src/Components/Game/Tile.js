@@ -1,13 +1,15 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import Chest from '../Animations/Chest';
 import {withRouter} from 'react-router-dom';
 import Lava from '../Animations/Lava/Lava';
 import Quicksand from '../Animations/Quicksand/Quicksand';
 import Lookout from './Lookout/Lookout';
 import './hero.scss';
+import {GameContext} from '../../context/GameContext';
 
 const Tile = (props) => {
-    const {tileType, grid, x, y, exploreTileFn, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, elevation, direction, heroGuy, monsterInfoToggle, setMonsterInfoToggle, keyToggle} = props;
+    // const {exploreTile} = useContext(GameContext);
+    const {tileType, grid, x, y, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, elevation, direction, heroGuy, monsterInfoToggle, setMonsterInfoToggle, keyToggle, exploreTileFn} = props;
 
     useEffect(() => { // Re-renders when combat view is toggled.
 
