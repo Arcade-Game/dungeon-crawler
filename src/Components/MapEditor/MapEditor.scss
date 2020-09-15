@@ -1,0 +1,205 @@
+.map-editor-container {
+    background: white;
+    height: 100%;
+    width: 100%;
+}
+
+.map-editor-header {
+    height: 5%;
+    border: 1px solid black;
+}
+
+.map-editor-footer {
+    height: 5%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .me-footer-one {
+        border: 1px solid black;
+        height: 95%;
+        width: 20%;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+
+        .me-px-size {
+            border: 1px solid black;
+            height: 90%;
+            width: 40%;
+            font-size: 30px;
+            text-align: center;
+        }
+        button {
+            border: 1px solid black;
+            height: 90%;
+            width: 25%;
+        }
+    }
+    .me-footer-two {
+        border: 1px solid black;
+        height: 95%;
+        width: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button {
+            border: 1px solid black;
+            width: 90%;
+            height: 100%;
+        }
+    }
+    .me-footer-three {
+        border: 1px solid black;
+        height: 95%;
+        width: 20%;
+        display: flex;
+        justify-content: space-evenly;
+        button {
+            border: 1px solid black;
+            width: 45%;
+        }
+        input {
+            text-align: center;
+            font-size: 30px;
+            width: 50%;
+        }
+        .save-button-container {
+            height: 100%;
+            border: 1px solid red;
+            width: 40%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            button {
+                height: 100%;
+            }
+        }
+    }
+}
+
+.map-editor-body {
+    height: 90%;
+    border: 1px solid black;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .map-editor-left {
+        left: 0;
+        border: 1px solid black;
+        width: 10%;
+        height: 100%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .tile-editor-container {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid green;
+            div {
+                border: 1px solid black;
+                height: 30px;
+                width: 30px;
+                margin: 2px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .rock {
+                    height: 75%;
+                    width: 75%;
+                    border-radius: 50%;
+                    background: grey;
+                }
+                .me-chest {
+                    height: 85%;
+                    width: 75%;
+                    border-radius: 10%;
+                    background: yellow;
+                }
+            }
+        }
+
+        .current-tile-selected {
+            height: 75px;
+            width: 75px;
+            border: 1px solid black;
+        }
+
+        .create-tile-container {
+            border: 1px solid purple;
+            height: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            overflow: hidden;
+            button {
+                border: 1px solid black;
+                height: 10%;
+                width: 75%;
+            }
+            input {
+                border: 1px solid black;
+                width: 100%;
+            }
+        }
+    }
+
+    .map-editor-right {
+        right: 0;
+        border: 1px solid black;
+        width: 10%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1% 0;
+
+        .generate-container {
+            border: 1px solid black;
+            height: 20%;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+
+            input {
+                height: 25%;
+                border: 1px solid black;
+                text-align: center;
+                font-size: 30px;
+                width: 80%;
+            }
+            button {
+                height: 25%;
+                width: 80%;
+                border: 1px solid black;
+            }
+        }
+    }
+
+    .map-editor-middle {
+        height: 97%;
+        width: 78%;
+        border: 1px solid red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: auto;
+    }
+
+    .map-editor-body-container {
+        display: grid;
+    }
+}
+
+.me-tile-container {
+    border: 0.5px solid grey;
+}

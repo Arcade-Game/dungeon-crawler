@@ -6,7 +6,8 @@ import Town from "./Components/Town/Town";
 import Game from './Components/Game/Game';
 import Death from './Components/Game/Death/Death';
 import HealthBar from './Components/Animations/HealthBar/HealthBar';
-import MapSelector from './Components/Game/MapSelector/MapSelector';
+import MapEditor from './Components/MapEditor/MapEditor';
+import {MapEditorProvider} from './context/MapEditorContext';
 
 export default (
    <Switch>
@@ -16,7 +17,7 @@ export default (
       <Route path="/game" component = {Game} />
       <Route path="/death" component = {Death} />
       <Route path='/health' component = {HealthBar} />
-      <Route path='/select' component = {MapSelector} />
+      <MapEditorProvider><Route path='/editor' component = {MapEditor} /></MapEditorProvider>
    </Switch>
 
 )

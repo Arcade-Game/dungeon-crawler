@@ -1,4 +1,6 @@
 import {tileVariables, treasureChests, monsters, visionTiles, doors, keys, teleporters} from './tileVariables';
+import axios from 'axios';
+
 
 // Tile variables. Each variable represents a different tile type with different properties.
 

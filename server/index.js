@@ -3,13 +3,15 @@ const express = require('express'),
       cors = require("cors"),
       massive = require('massive'),
       session = require("express-session"),
-      {CONNECTION_STRING, SERVER_PORT, SESSION_SECRET} = process.env,
+      {CONNECTION_STRING, SERVER_PORT, SESSION_SECRET, MONGO_STRING} = process.env,
       authCtrl = require("./controllers/authController"),
       itemCtrl = require("./controllers/itemController"),
       combatCtrl = require("./controllers/combatController"),
       monsterCtrl = require("./controllers/monsterController"),
+      mapCtrl = require("./controllers/mapController"),
       heroCtrl = require("./controllers/heroController"),
       port = SERVER_PORT,
+      mongoose = require('mongoose'),
       app = express();
 
 app.use(cors())
@@ -24,6 +26,12 @@ app.use(session({
    cookie: {maxAge: 1000 * 60 * 60 * 24}
 }));
 
+mongoose.connect(
+   MONGO_STRING,
+   {useNewUrlParser: true, useUnifiedTopology: true},
+   () => console.log("MongoDB Connected")
+)
+
 massive({
    connectionString: CONNECTION_STRING,
    ssl: {rejectUnauthorized: false}
@@ -37,6 +45,14 @@ massive({
 app.post("/api/auth/register", authCtrl.register);
 app.post("/api/auth/login", authCtrl.login);
 app.post("/api/auth/logout", authCtrl.logout);
+
+//map endpoints
+app.get("/api/maps", mapCtrl.getMaps);
+app.get("/api/map", mapCtrl.getMap);
+app.post("/api/map/create", mapCtrl.createMap);
+app.put("/api/map/edit", mapCtrl.editMap);
+app.get("/api/tiles", mapCtrl.getTiles);
+app.post("/api/tile/create", mapCtrl.createTile);
 
 //item endpoints
 app.get("/api/item", itemCtrl.findItem);

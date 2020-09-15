@@ -7,7 +7,7 @@ import Lookout from './Lookout/Lookout';
 import './hero.scss';
 
 const Tile = (props) => {
-    const {type, grid, x, y, exploreTileFn, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, elevation, direction, heroGuy, monsterInfoToggle, setMonsterInfoToggle, keyToggle} = props;
+    const {tileType, grid, x, y, exploreTileFn, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, elevation, direction, heroGuy, monsterInfoToggle, setMonsterInfoToggle, keyToggle} = props;
 
     useEffect(() => { // Re-renders when combat view is toggled.
 
@@ -19,7 +19,7 @@ const Tile = (props) => {
     let mName = '' // Variable for conditional monster names.
     exploreTileFn(x, y) // Calls explore tile, which reveals tiles on the minimap when they are rendered on the character grid.
 
-    switch(type){ // Determines how to render each tile in the character view.  Changes cName, which is the variable used as the conditional className.  Most of the this could be easily done with simple template strings without the extra steps if there had been stricter naming conventions from the beginning.
+    switch(tileType){ // Determines how to render each tile in the character view.  Changes cName, which is the variable used as the conditional className.  Most of the this could be easily done with simple template strings without the extra steps if there had been stricter naming conventions from the beginning.
         case "wall":
             tileStyle = {background: "black", border: "none"}
             break;
@@ -99,29 +99,29 @@ const Tile = (props) => {
                         <div className="monster-stats-hidden"></div>
                     </div>) : null
                     } */}
-            <div className={elevation === 3 && type !== 'cliff' ? `${cName}-cliff` : elevation === 2 && type !== 'platform' ? `${cName}-platform` : cName} onClick={grid[y][x].monsterType ? (() => setMonsterInfoToggle(!monsterInfoToggle)) : null} style={tileStyle}>
-            <div className="hover-info">{type !== 'monster' && keyToggle ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div>
+            <div className={elevation === 3 && tileType !== 'cliff' ? `${cName}-cliff` : elevation === 2 && tileType !== 'platform' ? `${cName}-platform` : cName} onClick={grid[y][x].monsterType ? (() => setMonsterInfoToggle(!monsterInfoToggle)) : null} style={tileStyle}>
+            <div className="hover-info">{tileType !== 'monster' && keyToggle ? (tileType.charAt(0).toUpperCase() + tileType.slice(1)) : null}</div>
                 
                 
                 {gridX === 4 && gridY === 4 ? <div className={`${heroGuy.gender}-${heroGuy.class_name.toLowerCase()}-${direction}`} style={{backgroundPositionX: `${animate[Math.floor(Math.random() * animate.length)]}`}}></div> : null}  
                   
                 {
-                    type === 'locked-door' ? <div className="char-view-locked-door" style={{color: "white"}}><div className="hover-info">{type !== 'monster' && keyToggle ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div></div>
-                    : type === 'cliff' ? <div className="char-view-cliff"><div className="hover-info">{type !== 'monster' && keyToggle ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div></div> 
-                    : type === 'platform' ? <div className="char-view-platform"><div className="hover-info">{type !== 'monster' && keyToggle ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div></div>
-                    : type === 'monster' ? <div className={`${mName}`} ></div>  
-                    : type === "chest" ? <Chest /> 
-                    : type === 'quicksand' ? <Quicksand />
-                    : type === "exit" ? <div className="char-view-exit"><div className="hover-info">{type !== 'monster' && keyToggle ? (type.charAt(0).toUpperCase() + type.slice(1)) : null}</div></div>
-                    : type === 'lava' ? <Lava /> 
-                    : type === 'lookout' ? <Lookout />
-                    : type === "push-bridge" 
-                    || type === "push-bridge-lava-bridge" 
-                    || type === "push-bridge-lava1" 
-                    || type === "push-bridge-lava2" ? <div className="push-bridge"></div> 
+                    tileType === 'locked-door' ? <div className="char-view-locked-door" style={{color: "white"}}><div className="hover-info">{tileType !== 'monster' && keyToggle ? (tileType.charAt(0).toUpperCase() + tileType.slice(1)) : null}</div></div>
+                    : tileType === 'cliff' ? <div className="char-view-cliff"><div className="hover-info">{tileType !== 'monster' && keyToggle ? (tileType.charAt(0).toUpperCase() + tileType.slice(1)) : null}</div></div> 
+                    : tileType === 'platform' ? <div className="char-view-platform"><div className="hover-info">{tileType !== 'monster' && keyToggle ? (tileType.charAt(0).toUpperCase() + tileType.slice(1)) : null}</div></div>
+                    : tileType === 'monster' ? <div className={`${mName}`} ></div>  
+                    : tileType === "chest" ? <Chest /> 
+                    : tileType === 'quicksand' ? <Quicksand />
+                    : tileType === "exit" ? <div className="char-view-exit"><div className="hover-info">{tileType !== 'monster' && keyToggle ? (tileType.charAt(0).toUpperCase() + tileType.slice(1)) : null}</div></div>
+                    : tileType === 'lava' ? <Lava /> 
+                    : tileType === 'lookout' ? <Lookout />
+                    : tileType === "push-bridge" 
+                    || tileType === "push-bridge-lava-bridge" 
+                    || tileType === "push-bridge-lava1" 
+                    || tileType === "push-bridge-lava2" ? <div className="push-bridge"></div> 
                     : null
                 }
-                {pushable ? <div className="char-view-pushable" style={{color: "white"}}><div className="hover-info">{type !== 'monster' && keyToggle ? "Boulder (pushable)" : null}</div></div> : null}
+                {pushable ? <div className="char-view-pushable" style={{color: "white"}}><div className="hover-info">{tileType !== 'monster' && keyToggle ? "Boulder (pushable)" : null}</div></div> : null}
                 {itemObject === 'door-key' ? <div className="char-view-door-key"></div> : null}
                 {hidden ? <div className="hidden">HIDDEN</div> : null}
                 {mist ? <div className="mist-div"></div> : null}
