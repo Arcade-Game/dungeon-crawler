@@ -16,30 +16,7 @@ const Inn = (props) => {
       TweenMax.fromTo(innContainer, 1.5, {opacity: 0, ease: Power3.easeIn}, {opacity: 1, ease: Power3.easeOut})
    },[])
 
-   const saveGame = () => {
-      const {player_id} = props.auth,
-                {file_id, gold, deaths} = props.hero.hero,
-                {equipment, inventory} = props.hero
-      let saveData = {
-         player_id,
-         gold,
-         deaths,
-         equipment,
-         inventory
-      }
-      console.log(saveData)
-      axios.put(`/api/hero/${file_id}`, saveData).then(res => {
-         console.log(res.data)
-      })
-
-      //bank
-      // player honor
-      //experience
-      //quests/maps = make a table for each - boolean
-      console.log("Game may have been saved?")
-   },
-
-   handleLogout = async () => {
+   const handleLogout = async () => {
         await  axios.post("/api/auth/logout").then(res => {
            console.log(res.data)
             localStorage.clear()
@@ -58,7 +35,7 @@ console.log(props)
                onClick={(event)=> props.stopPropagation(event)}> 
          <div className="inn-container">
             {props.hero.hero.file_id ? (
-            <button className="inn-option-button" onClick={() => saveGame()}>SAVE</button>
+            <button className="inn-option-button" onClick={() => props.saveGame()}>SAVE</button>
             ) : (<button className="inn-option-button" disabled>SAVE</button>)
             }
             <button className="inn-option-button"

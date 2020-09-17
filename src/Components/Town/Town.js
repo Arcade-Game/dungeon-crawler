@@ -21,7 +21,8 @@ const Town = (props) => {
    const [overlayToggle, setOverlayToggle] = useState(false),
              [toggleType, setToggleType] = useState(),
              [saveToggle, setSaveToggle] = useState(false),
-             [mapSelectorToggle, setMapSelectorToggle] = useState(false);
+             [mapSelectorToggle, setMapSelectorToggle] = useState(false),
+             [vendorEquipmentList, setVendorEquipmentList] = useState();
    const lastLocation = useLastLocation();
 
    const trainer = "trainer",
@@ -39,20 +40,19 @@ const Town = (props) => {
 
    useEffect( () => {
       getHeroes()
+      getVendorEquipmentList(12);
    },[])
 
    useEffect (() => {
       console.log(lastLocation)
       if (lastLocation && lastLocation.pathname === "/game" || lastLocation && lastLocation.pathname === "/death" ){
          saveGame()
+         console.log("save hit")
       }
       if (!hero.hero_name){
          TweenMax.to(selectHeroText, .8, {alpha:.4, color:"rgb(200, 200, 200)", repeat: -1, yoyo:true, ease:Power3.easeIn})
       }
    },[])
-
-
-
    
    const setToggle = (toggleType) => {
       setToggleType(toggleType)
@@ -60,7 +60,6 @@ const Town = (props) => {
    },
 
    resetToggle = () => {
-
       setToggleType();
       setOverlayToggle(false);
    },
@@ -69,30 +68,42 @@ const Town = (props) => {
       // if (props.heroes){
       const {player_id} = props.auth
       axios.get(`api/heroes/player/${player_id}`).then(res => {
-         console.log("HERO LIST SET", res.data)
          props.setHeroList(res.data)
+         console.log("HERO LIST SET", res.data)
       })
    // } else {
    //    console.log("exists")
    // }
+   },
+    getVendorEquipmentList = (quantity) => {
+       console.log("quantity", quantity)
+      axios.get(`/api/items/${quantity}`).then(res => {
+         setVendorEquipmentList(res.data)
+         console.log(res.data)
+      }).catch(err => console.log(err));
    },
 
    saveGame = () => {
       const {player_id} = props.auth,
                 {file_id, gold, deaths} = props.hero.hero,
                 {equipment, inventory} = props.hero
-         let saveData = {
-            player_id,
-            gold,
-            deaths,
-            equipment,
-            inventory
-         }
+      let saveData = {
+         player_id,
+         gold,
+         deaths,
+         equipment,
+         inventory
+      }
          TweenMax.fromTo(saveBanner, 6, {opacity: 1, x: 18, ease: Power2.easeIn},{opacity: 0, x:-250, ease: Power2.easeOut})
          console.log(saveData)
          axios.put(`/api/hero/${file_id}`, saveData).then(res => {
             console.log(res.data)
          })
+               //bank
+      // player honor
+      //experience
+      //quests/maps = make a table for each - boolean
+      console.log("Game may have been saved?")
    },
 
    stopPropagation = (event) => {
@@ -132,7 +143,10 @@ const Town = (props) => {
             {toggleType === trainer ? (
                <Trainer stopPropagation = {stopPropagation}/>) : null }
             {toggleType === market ? 
-               <Market stopPropagation = {stopPropagation}/> : null }
+               <Market stopPropagation = {stopPropagation}
+                              vendorEquipmentList = {vendorEquipmentList}
+                              saveGame = {saveGame}
+               /> : null }
             {toggleType === leaderBoard ? 
                <LeaderBoard stopPropagation = {stopPropagation} /> : null }
             {toggleType === heroes ? 
@@ -146,6 +160,7 @@ const Town = (props) => {
                                  /> : null }
             {toggleType === inn ? 
                <Inn stopPropagation = {stopPropagation}
+                        saveGame = {saveGame}
                         hero = {props.hero}
                            /> : null }
              </div> ) : null

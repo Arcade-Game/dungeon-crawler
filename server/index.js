@@ -55,8 +55,8 @@ app.get("/api/tiles", mapCtrl.getTiles);
 app.post("/api/tile/create", mapCtrl.createTile);
 
 //item endpoints
-app.get("/api/item", itemCtrl.findItem);
-app.post("/api/item/:id", itemCtrl.findItem);
+app.get("/api/item", itemCtrl.getRandomItem);
+app.get("/api/items/:quantity", itemCtrl.getRandomItems);
 app.get('/api/equipped-items/:weapon', itemCtrl.equippedItems);
 app.get('/api/key', itemCtrl.findKey);
 

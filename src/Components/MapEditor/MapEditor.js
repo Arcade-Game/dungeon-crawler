@@ -10,7 +10,7 @@ import {MapEditorContext} from '../../context/MapEditorContext';
 const MapEditor = () => {
 
     
-    const [pxSize, setPxSize] = useState(30)
+    const [pxSize, setPxSize] = useState(45)
     const [heightInput, setHeightInput]= useState(0)
     const [widthInput, setWidthInput]= useState(0)
     const [height, setHeight] = useState(0)
@@ -92,7 +92,7 @@ const MapEditor = () => {
             </div>
             <div className="map-editor-footer">
                 <div className="me-footer-one">
-                    <input className="me-px-size" type="range" min="2" max="250" placeholder={pxSize} onChange={(e) => handlePxInput(e.target.value)}></input>
+                    <input className="me-px-size" type="range" min="25" max="250" placeholder={pxSize} onChange={(e) => handlePxInput(e.target.value)}></input>
                 </div>
                 <div className="me-footer-two">
                     <button className="me-play">PLAY</button>
