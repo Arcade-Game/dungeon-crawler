@@ -9,7 +9,7 @@ import {GameContext} from '../../context/GameContext';
 
 const Tile = (props) => {
     // const {exploreTile} = useContext(GameContext);
-    const {tileType, grid, x, y, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, elevation, direction, heroGuy, monsterInfoToggle, setMonsterInfoToggle, keyToggle, exploreTileFn} = props;
+    const {tileType, grid, x, y, isFight, gridX, gridY, setNewLava, mist, hidden, pushable, itemObject, elevation, direction, heroGuy, monsterInfoToggle, setMonsterInfoToggle, keyToggle, exploreTileFn, objType} = props;
 
     useEffect(() => { // Re-renders when combat view is toggled.
 
@@ -25,21 +25,21 @@ const Tile = (props) => {
         case "wall":
             tileStyle = {background: "black", border: "none"}
             break;
-        case "chest":
-            cName = "char-view-chest"
-            break;
-        case "monster":
-            cName = 'char-view-monster'
-            break;
-        case "exit":
-            cName = "char-view-exit-tile"
-            break;
+        // case "chest":
+        //     cName = "char-view-chest"
+        //     break;
+        // case "monster":
+        //     cName = 'char-view-monster'
+        //     break;
+        // case "exit":
+        //     cName = "char-view-exit-tile"
+        //     break;
         case "water":
             cName ="char-view-water"
             break;
-        case "push-bridge":
-            cName = "char-view-push-bridge"
-            break;
+        // case "push-bridge":
+        //     cName = "char-view-push-bridge"
+        //     break;
         case "quicksand":
             cName = "char-view-quicksand"
             break;
@@ -58,33 +58,33 @@ const Tile = (props) => {
             cName = "char-view-push-lava-bridge"
             setNewLava(x,y)
             break;
-        case "hidden-door":
-            cName = "char-view-hidden-door"
-            break;
+        // case "hidden-door":
+        //     cName = "char-view-hidden-door"
+        //     break;
         case "uneven":
             cName ="char-view-uneven"
             break;
-        case "platform":
-            tileStyle = {background: "black", border: "none"}
-            break;
-        case "cliff":
-            tileStyle = {background: "black", border: "none"}
-            break;
-        case "teleporter-1":
-            cName = "char-view-teleporter-1"
-            break;
-        case "gold-pile":
-            cName = "char-view-gold-pile"
-            break;
-        case "locked-door":
-            tileStyle = {background: "black", border: "none"}
-            break;
+        // case "platform":
+        //     tileStyle = {background: "black", border: "none"}
+        //     break;
+        // case "cliff":
+        //     tileStyle = {background: "black", border: "none"}
+        //     break;
+        // case "teleporter-1":
+        //     cName = "char-view-teleporter-1"
+        //     break;
+        // case "gold-pile":
+        //     cName = "char-view-gold-pile"
+        //     break;
+        // case "locked-door":
+        //     tileStyle = {background: "black", border: "none"}
+        //     break;
     }
 
     let newMonster =''
     if(grid[y][x].monsterType){ // Sets className for monsters.
         newMonster = grid[y][x].monsterType
-        mName = `char-view-${grid[y][x].monsterType.toLowerCase()}`
+        mName = `tile-view-${grid[y][x].monsterType.toLowerCase()}`
     }
 
 
@@ -101,20 +101,28 @@ const Tile = (props) => {
                         <div className="monster-stats-hidden"></div>
                     </div>) : null
                     } */}
-            <div className={elevation === 3 && tileType !== 'cliff' ? `${cName}-cliff` : elevation === 2 && tileType !== 'platform' ? `${cName}-platform` : cName} onClick={grid[y][x].monsterType ? (() => setMonsterInfoToggle(!monsterInfoToggle)) : null} style={tileStyle}>
+            <div className={elevation === 10 ? 'wall' : elevation === 3 ? 'cliff' : elevation === 1 ? `platform` : 'ground'} onClick={grid[y][x].monsterType ? (() => setMonsterInfoToggle(!monsterInfoToggle)) : null} style={tileStyle}>
             <div className="hover-info">{tileType !== 'monster' && keyToggle ? (tileType.charAt(0).toUpperCase() + tileType.slice(1)) : null}</div>
                 
                 
                 {gridX === 4 && gridY === 4 ? <div className={`${heroGuy.gender}-${heroGuy.class_name.toLowerCase()}-${direction}`} style={{backgroundPositionX: `${animate[Math.floor(Math.random() * animate.length)]}`}}></div> : null}  
                   
                 {
-                    tileType === 'locked-door' ? <div className="char-view-locked-door" style={{color: "white"}}><div className="hover-info">{tileType !== 'monster' && keyToggle ? (tileType.charAt(0).toUpperCase() + tileType.slice(1)) : null}</div></div>
+                    tileType === "push-bridge-lava-bridge" 
+                    || tileType === "push-bridge-lava1" 
+                    || tileType === "push-bridge-lava2" ? <div className="lava"><div className="lava-rock-bridge"></div></div> : tileType === "push-bridge" ? <div className="water"><div className={tileType}></div></div> : tileType === "lava" ? <Lava /> : tileType === "quicksand" ? <Quicksand /> : tileType !== 'empty' && <div className={tileType}></div>
+                }
+                  {
+                      objType && (objType === 'chest' ? <Chest /> : <div className={objType === 'monster' ? mName : objType}></div>)
+                  }
+                {/* {
+                    objType === 'locked-door' ? <div className="char-view-locked-door" style={{color: "white"}}><div className="hover-info">{objType !== 'monster' && keyToggle ? (objType.charAt(0).toUpperCase() + tileType.slice(1)) : null}</div></div>
                     : tileType === 'cliff' ? <div className="char-view-cliff"><div className="hover-info">{tileType !== 'monster' && keyToggle ? (tileType.charAt(0).toUpperCase() + tileType.slice(1)) : null}</div></div> 
                     : tileType === 'platform' ? <div className="char-view-platform"><div className="hover-info">{tileType !== 'monster' && keyToggle ? (tileType.charAt(0).toUpperCase() + tileType.slice(1)) : null}</div></div>
                     : tileType === 'monster' ? <div className={`${mName}`} ></div>  
-                    : tileType === "chest" ? <Chest /> 
+                    : objType === "chest" ? <Chest /> 
                     : tileType === 'quicksand' ? <Quicksand />
-                    : tileType === "exit" ? <div className="char-view-exit"><div className="hover-info">{tileType !== 'monster' && keyToggle ? (tileType.charAt(0).toUpperCase() + tileType.slice(1)) : null}</div></div>
+                    : objType === "exit" ? <div className="char-view-exit"><div className="hover-info">{tileType !== 'monster' && keyToggle ? (tileType.charAt(0).toUpperCase() + tileType.slice(1)) : null}</div></div>
                     : tileType === 'lava' ? <Lava /> 
                     : tileType === 'lookout' ? <Lookout />
                     : tileType === "push-bridge" 
@@ -123,8 +131,8 @@ const Tile = (props) => {
                     || tileType === "push-bridge-lava2" ? <div className="push-bridge"></div> 
                     : null
                 }
-                {pushable ? <div className="char-view-pushable" style={{color: "white"}}><div className="hover-info">{tileType !== 'monster' && keyToggle ? "Boulder (pushable)" : null}</div></div> : null}
-                {itemObject === 'door-key' ? <div className="char-view-door-key"></div> : null}
+                {objType === "pushable" ? <div className="char-view-pushable" style={{color: "white"}}><div className="hover-info">{objType !== 'monster' && keyToggle ? "Boulder (pushable)" : null}</div></div> : null}
+                {objType === 'door-key' ? <div className="char-view-door-key"></div> : null} */}
                 {hidden ? <div className="hidden">HIDDEN</div> : null}
                 {mist ? <div className="mist-div"></div> : null}
                 {itemObject === 'broken-teleporter' ? <div className="char-view-broken-teleporter"></div> : null}

@@ -60,7 +60,7 @@ const Game = (props) => {
     let coinFade = useRef(''); // Animates gold coin when stepping on chests or gold piles.
     let newXP = useRef(''); // Will animate experience bar.
 
-    console.log("map array", mapArray)
+    // console.log("map array", mapArray)
 
     // useEffects
     
@@ -74,7 +74,7 @@ const Game = (props) => {
       setCharacterHealth(heroStats.health)
       let newGrid = [...grid]
       newGrid.forEach((e,i,a) => i > 8 && i < a.length-8 ? e.forEach((f,j,z) => { // Iterates over a copy of the grid, and if type is monster, calls getMonster, passing in the indexes, which updates state grid with a monster type.
-        return (j > 8 && j < z.length-8 ? (newGrid[i][j].tileType === 'monster' ? getMonster(j, i) : null) : null)
+        return (j > 8 && j < z.length-8 ? (newGrid[i][j].objType === 'monster' ? getMonster(j, i) : null) : null)
       }) : null)
     }, [])
 
@@ -85,99 +85,119 @@ const Game = (props) => {
   }
 
   const getKeyCode = (keyCode) => { // Uses keyCode to determine movement direction, then calls functions to determine what to do with target tile.
-    if(keyCode === 37 || keyCode === 65){ // Checks keyCode for direction.
+    if (keyCode === 37 || keyCode === 65){ // Checks keyCode for direction.
       setDirection('left') // Sets sprite animation direction.
-      if(grid[charY][charX-1].itemObject){ // Checks the target tile for an object.
-        determineObject(charX-1, charY) // Determines what object is on target tile.
-      } else if(grid[charY][charX-1].pushable){ // If target object is a pushable, pushes Left.
-        pushObstacle(charX-1, charY, charX-2, charY, charX, charY, setCharX, setCharY, grid, getType, setGrid) // Passes in all of the relevant data for pushing an object, including the data that would be needed if I took the pushObstacle function out of Game.js.
-      } else {checkTile(charX-1, charY)} // If target has no objects or pushables, checks tile for terrain type.
-      
-    } else if(keyCode === 38 || keyCode === 87){ // Push Up
+      if (grid[charY][charX-1].objType === "pushable"){
+        pushObstacle(charX-1, charY, charX-2, charY, charX, charY, setCharX, setCharY, grid, setGrid)
+      } else if (checkElevation(charX, charY, charX-1, charY)) {
+        checkTile(charX-1, charY)
+      } else {return}
+    
+    } else if (keyCode === 38 || keyCode === 87){ // Push Up
       setDirection('up')
-      if(grid[charY-1][charX].itemObject){
-        determineObject(charX, charY-1)
-      } else
-      if(grid[charY-1][charX].pushable){
-        pushObstacle(charX, charY-1, charX, charY-2, charX, charY, setCharX, setCharY, grid, getType, setGrid)
-      } else {checkTile(charX, charY-1)}
-      
-    } else if(keyCode === 39 || keyCode === 68){ // Push Right
+      if (grid[charY-1][charX].objType === "pushable"){
+        pushObstacle(charX, charY-1, charX, charY-2, charX, charY, setCharX, setCharY, grid, setGrid)
+      } else if (checkElevation(charX, charY, charX, charY-1)) {
+        checkTile(charX, charY-1)
+      } else {return}
+
+    } else if (keyCode === 39 || keyCode === 68){ // Push Right
       setDirection('right')
-      if(grid[charY][charX].itemObject){
-        determineObject(charX+1, charY)
-      } else
-      if(grid[charY][charX+1].pushable){
-        pushObstacle(charX+1, charY, charX+2, charY, charX, charY, setCharX, setCharY, grid, getType, setGrid)
-      } else {checkTile(charX+1, charY)}
-      
-    } else if(keyCode === 40 || keyCode === 83){ // Push Down
+      if (grid[charY][charX+1].objType === "pushable"){
+        pushObstacle(charX+1, charY, charX+2, charY, charX, charY, setCharX, setCharY, grid, setGrid)
+      } else if (checkElevation(charX, charY, charX+1, charY)) {
+        checkTile(charX+1, charY)
+      } else {return}
+
+    } else if (keyCode === 40 || keyCode === 83){ // Push Down
       setDirection('down')
-      if(grid[charY+1][charX].itemObject){
-        determineObject(charX, charY+1)
-      } else
-      if(grid[charY+1][charX].pushable){
-        pushObstacle(charX, charY+1, charX, charY+2, charX, charY, setCharX, setCharY, grid, getType, setGrid)
-      } else {checkTile(charX, charY+1)}
+      if (grid[charY+1][charX].objType === "pushable"){
+        pushObstacle(charX, charY+1, charX, charY+2, charX, charY, setCharX, setCharY, grid, setGrid)
+      } else if (checkElevation(charX, charY, charX, charY+1)) {
+        checkTile(charX, charY+1)
+      } else {return}
       
     } 
-    else if(keyCode ===  66){
+    else if (keyCode ===  66){
       inventoryToggleFn()
-    } else if(keyCode === 72){
+    } else if (keyCode === 72){
       equipmentToggleFn()
     }
   }
+  
+  const checkElevation = (x, y, x2, y2) => {
+    const getMyElevation = () => {
+      let elevation = grid[y][x].elevation
+      if (grid[y][x].objType === "pushable") {
+        elevation = elevation + 2
+      }
+      return elevation
+    }
+    let myElevation = getMyElevation()
+    let newElevation = grid[y2][x2].elevation
+    console.log("myElevation", myElevation, "newElevation", newElevation)
+    return newElevation - myElevation < 2
+  }
 
-  const determineObject = (x, y) => { // Determines if target tile has an object i.e. a key.
-    let tileObject = grid[y][x].itemObject
+  const determineObject = (whatObject, x, y) => { // Determines if target tile has an object i.e. a key.
     let newGrid = [...grid]
-    switch (tileObject) {
+    switch (whatObject) {
+      case "monster": // Toggle combat view.
+        fightMonster(x, y, grid[y][x].level)
+        setQuicksandCounter(0)
+        break;
+      case "chest": // Move into target and call chest function.
+        openChest(x, y, grid[y][x].level)
+        setCharX(x)
+        setCharY(y)
+        setQuicksandCounter(0)
+        break;
+      case "exit": // Receive experience for completion, save game, and push to town view.
+        setQuicksandCounter(0)
+        updateExperience(x,y,"complete")
+        setCharX(x)
+        setCharY(y)
+        // setGrid([...mapArray])
+        saveGameLocal()
+        props.history.push('/town')
+        window.location.reload(false) // Reload in order to reset map.
+        break;
+      case "lookout": // Move into target. Extends visible tiles on the mini-map.
+        seeLookout(x,y)
+        setCharX(x)
+        setCharY(y)
+        break;
+      case "hidden-door": // Move into target. Call findHidden which will search each tile that shares a side with target tile and if property "hidden" is true, changes "hidden" to false which reveals the tile, and then calls findHidden again passing in the indexes of the tile(s) which were hidden, so that all successive adjacent hidden tiles are revealed.
+        setCharX(x)
+        setCharY(y)
+        findHidden(x, y)
+        break;
+      case "teleporter-1": // Move into tile at the index specified in the teleporter object.
+        setCharX(x)
+        setCharY(y)
+        teleport(x,y)
+        break;
+      case "gold-pile": // Move into target.  Call gold function.
+        goldPile(x,y,grid[y][x].level)
+        let newGrid = [...grid]
+        newGrid[y][x] = {...newGrid[y][x], objType: null}
+        setGrid(newGrid)
+        setCharX(x)
+        setCharY(y)
+        break;
       case 'door-key':
         setCharX(x)
         setCharY(y)
         axios.get('/api/key').then(res => console.log(res.data))
-        newGrid[y][x] = {...newGrid[y][x], itemObject: ''}
-      break;
+        newGrid[y][x] = {...newGrid[y][x], objType: ''}
+        break;
     }
-  }
-  
-  const getType = (x, y) => { // Returns terrain type of target tile.
-    return grid[y][x].tileType 
   }
 
   const checkTile = (x, y) => { // Determines the outcome of stepping on target tile. 
-    let whatType = getType(x, y)
-      switch(whatType){
-        case "empty": // Move into target.
-          setCharX(x)
-          setCharY(y)
-          setQuicksandCounter(0) // Resets quicksand accumulator.
-          break;
-        case "monster": // Toggle combat view.
-          fightMonster(x, y, grid[y][x].level)
-          setQuicksandCounter(0)
-          break;
-        case "chest": // Move into target and call chest function.
-          openChest(x, y, grid[y][x].level)
-          setCharX(x)
-          setCharY(y)
-          setQuicksandCounter(0)
-          break;
-        case "exit": // Receive experience for completion, save game, and push to town view.
-          setQuicksandCounter(0)
-          updateExperience(x,y,"complete")
-          setCharX(x)
-          setCharY(y)
-          // setGrid([...mapArray])
-          saveGameLocal()
-          props.history.push('/town')
-          window.location.reload(false) // Reload in order to reset map.
-          break;
-        case "push-bridge": // Move into target.
-          setQuicksandCounter(0)
-          setCharX(x)
-          setCharY(y)
-          break;
+    let whatTerrain = grid[y][x].tileType
+    let whatObject = grid[y][x].objType
+      switch(whatTerrain){
         case "quicksand": // Move into target and increment quicksand counter.
           walkQuicksand(x,y)
           setCharX(x)
@@ -186,6 +206,25 @@ const Game = (props) => {
         case "lava": // Die.
           die()
           break;
+        case "uneven": // Move into target.
+          setCharX(x)
+          setCharY(y)
+          break;
+        case "empty": // Move into target.
+        if (whatObject){
+          determineObject(whatObject, x, y)
+        }
+          setCharX(x)
+          setCharY(y)
+          setQuicksandCounter(0) // Resets quicksand accumulator.
+          break;
+        
+        case "push-bridge": // Move into target.
+          setQuicksandCounter(0)
+          setCharX(x)
+          setCharY(y)
+          break;
+        
         case "push-bridge-lava-bridge": // Move into target.
           setCharX(x)
           setCharY(y)
@@ -198,20 +237,8 @@ const Game = (props) => {
           setCharX(x)
           setCharY(y)
         break;
-        case "lookout": // Move into target. Extends visible tiles on the mini-map.
-          seeLookout(x,y)
-          setCharX(x)
-          setCharY(y)
-          break;
-        case "hidden-door": // Move into target. Call findHidden which will search each tile that shares a side with target tile and if property "hidden" is true, changes "hidden" to false which reveals the tile, and then calls findHidden again passing in the indexes of the tile(s) which were hidden, so that all successive adjacent hidden tiles are revealed.
-          setCharX(x)
-          setCharY(y)
-          findHidden(x, y)
-          break;
-        case "uneven": // Move into target.
-          setCharX(x)
-          setCharY(y)
-          break;
+        
+        
         case "cliff": // Check for conditions which would allow character to move into target, and if satisfied, move into target.
           if(
             grid[charY][charX].pushable === true || grid[charY][charX].tileType === 'cliff'){
@@ -223,120 +250,111 @@ const Game = (props) => {
           setCharX(x)
           setCharY(y)
           break;
-        case "teleporter-1": // Move into tile at the index specified in the teleporter object.
-          setCharX(x)
-          setCharY(y)
-          teleport(x,y)
-          break;
-        case "broken-teleporter": // Move into target.
-          setCharX(x)
-          setCharY(y)
-          break;
-        case "gold-pile": // Move into target.  Call gold function.
-          goldPile(x,y,grid[y][x].level)
-          let newGrid = [...grid]
-          newGrid[y][x] = {...newGrid[y][x], tileType: "empty"}
-          setGrid(newGrid)
-          setCharX(x)
-          setCharY(y)
-          break;
+          case "broken-teleporter": // Move into target.
+            setCharX(x)
+            setCharY(y)
+            break;
+        
       }
   }
 
-  const pushObstacle = (x,y,xx,yy, charX, charY, setCharX, setCharY, grid, getType, setGrid) => { // Checks target tile (x, y) and the tile the pushable on target tile will be pushed to (xx, yy) to determine outcome.  Dependent on which of the four elevations character is on, and what the terrain types of (x,y) and (xx,yy) are.
+  const pushObstacle = (x,y,xx,yy, charX, charY, setCharX, setCharY, grid, setGrid) => { // Checks target tile (x, y) and the tile the pushable on target tile will be pushed to (xx, yy) to determine outcome.  Dependent on which of the four elevations character is on, and what the terrain types of (x,y) and (xx,yy) are.
     let newGrid = [...grid]
     let hero = grid[charY][charX]
     let boulder = grid[y][x]
     let pushTo = grid[yy][xx]
 
     if (hero.elevation < boulder.elevation){
-      if (hero.pushable !== true || pushTo.elevation > boulder.elevation){return}
+      if (hero.objType !== "pushable" || pushTo.elevation > boulder.elevation){return}
       else if (boulder.elevation > pushTo.elevation){
-        newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true}
-        newGrid[y][x] = {...newGrid[y][x], pushable: false}
+        newGrid[yy][xx] = {...newGrid[yy][xx], objType: "pushable"}
+        newGrid[y][x] = {...newGrid[y][x], objType: null}
         setCharX(x)
         setCharY(y)
       }
     } else if (hero.elevation === boulder.elevation){
-      if (hero.pushable === true){
+      if (hero.objType === "pushable"){
         setCharX(x)
         setCharY(y)
       }
-      if (hero.pushable !== true){
+      if (hero.objType !== "pushable"){
         if (boulder.elevation < pushTo.elevation){return}
-        else if (boulder.elevation === pushTo.elevation && pushTo.pushable === true){return}
+        else if (boulder.elevation === pushTo.elevation && pushTo.objType === "pushable"){return}
         else if (boulder.elevation > pushTo.elevation){
-          if(grid[yy][xx].tileType === 'chest'){
-            newGrid[yy][xx] = {...newGrid[yy][xx], type: 'empty', pushable: 'true'}
-            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+          if(grid[yy][xx].objType === 'chest'){
+            newGrid[yy][xx] = {...newGrid[yy][xx], objType: 'pushable'}
+            newGrid[y][x] = {...newGrid[y][x], objType: null}
             setCharX(x)
             setCharY(y)
           }
-          if(grid[yy][xx].tileType === 'monster'){
-            newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true, tileType: 'empty', monsterType: null}
+          if(grid[yy][xx].objType === 'monster'){
+            newGrid[yy][xx] = {...newGrid[yy][xx], objType: "pushable",  monsterType: null}
+            newGrid[y][x] = {...newGrid[y][x], objType: null}
+            setCharX(x)
+            setCharY(y)
             updateExperience(x, y, "crush")
           }
           if (pushTo.tileType === 'uneven'){
-            newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true}
-            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+            newGrid[yy][xx] = {...newGrid[yy][xx], objType: "pushable"}
+            newGrid[y][x] = {...newGrid[y][x], objType: null}
             setCharX(x)
             setCharY(y)
           }
           if (pushTo.tileType === 'water'){
-            newGrid[yy][xx] = {...newGrid[yy][xx], tileType: 'push-bridge', pushable: false}
-            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+            newGrid[yy][xx] = {...newGrid[yy][xx], tileType: 'push-bridge', objType: null}
+            newGrid[y][x] = {...newGrid[y][x], objType: null}
           } else if (pushTo.tileType === 'quicksand'){
-            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+            newGrid[y][x] = {...newGrid[y][x], objType: null}
           } else if (pushTo.tileType === 'lava'){
-            newGrid[yy][xx] = {...newGrid[yy][xx], tileType: 'push-bridge-lava2', pushable: false}
+            newGrid[yy][xx] = {...newGrid[yy][xx], tileType: 'push-bridge-lava2', objType: null}
+            newGrid[y][x] = {...newGrid[y][x], objType: null}
+            setCharX(x)
+            setCharY(y)
+          } else if (pushTo.objType === 'teleporter-1'){
+            newGrid[newGrid[yy][xx].end[1]][newGrid[yy][xx].end[0]] = {...newGrid[newGrid[yy][xx].end[1]][newGrid[yy][xx].end[0]], objType: "pushable"}
+            newGrid[yy][xx] = {...newGrid[yy][xx], objType: 'broken-teleporter', pushable: false}
             newGrid[y][x] = {...newGrid[y][x], pushable: false}
             setCharX(x)
             setCharY(y)
-          } else if (pushTo.tileType === 'teleporter-1'){
-            newGrid[newGrid[yy][xx].end[1]][newGrid[yy][xx].end[0]] = {...newGrid[newGrid[yy][xx].end[1]][newGrid[yy][xx].end[0]], pushable: true}
-            newGrid[yy][xx] = {...newGrid[yy][xx], tileType: 'broken-teleporter', pushable: false}
-            newGrid[y][x] = {...newGrid[y][x], pushable: false}
-            setCharX(x)
-            setCharY(y)
-          } else if (pushTo.tileType === "empty" && grid[yy][xx].pushable !== true){
-            newGrid[yy][xx].pushable = true
-            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+          } else if (pushTo.tileType === "empty" && grid[yy][xx].objType !== "pushable"){
+            newGrid[yy][xx].objType = "pushable"
+            newGrid[y][x] = {...newGrid[y][x], objType: null}
             setCharX(x)
             setCharY(y)
           } else {
-            newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true}
-            newGrid[y][x] = {...newGrid[y][x], pushable: false}
+            newGrid[yy][xx] = {...newGrid[yy][xx], objType: "pushable"}
+            newGrid[y][x] = {...newGrid[y][x], objType: null}
             setCharX(x)
             setCharY(y)
           }
           
         }
         else if (boulder.elevation === pushTo.elevation){
-          if(pushTo.tileType === 'uneven' || pushTo.tileType === 'monster' || pushTo.tileType === 'gold-pile' || pushTo.tileType === 'chest'){return}
+          if(pushTo.tileType === 'uneven' || pushTo.objType === 'monster' || pushTo.objType === 'gold-pile' || pushTo.objType === 'chest'){return}
           if (pushTo.tileType === 'water'){
-                  newGrid[yy][xx] = {...newGrid[yy][xx], tileType: 'push-bridge', pushable: false}
-                  newGrid[y][x] = {...newGrid[y][x], pushable: false}
+                  newGrid[yy][xx] = {...newGrid[yy][xx], tileType: 'push-bridge', objType: null}
+                  newGrid[y][x] = {...newGrid[y][x], objType: null}
                 } else if (pushTo.tileType === 'quicksand'){
-                  newGrid[y][x] = {...newGrid[y][x], pushable: false}
+                  newGrid[y][x] = {...newGrid[y][x], objType: null}
                 } else if (pushTo.tileType === 'lava'){
-                  newGrid[yy][xx] = {...newGrid[yy][xx], tileType: 'push-bridge-lava2', pushable: false}
-                  newGrid[y][x] = {...newGrid[y][x], pushable: false}
+                  newGrid[yy][xx] = {...newGrid[yy][xx], tileType: 'push-bridge-lava2', objType: null}
+                  newGrid[y][x] = {...newGrid[y][x], objType: null}
                   setCharX(x)
                   setCharY(y)
-                } else if (pushTo.tileType === 'teleporter-1'){
-                  newGrid[newGrid[yy][xx].end[1]][newGrid[yy][xx].end[0]] = {...newGrid[newGrid[yy][xx].end[1]][newGrid[yy][xx].end[0]], pushable: true}
+                } else if (pushTo.objType === 'teleporter-1'){
+                  newGrid[newGrid[yy][xx].end[1]][newGrid[yy][xx].end[0]] = {...newGrid[newGrid[yy][xx].end[1]][newGrid[yy][xx].end[0]], objType: null}
                   newGrid[yy][xx] = {...newGrid[yy][xx], tileType: 'broken-teleporter', pushable: false}
                   newGrid[y][x] = {...newGrid[y][x], pushable: false}
                   setCharX(x)
                   setCharY(y)
-                } else if (pushTo.tileType === "empty" && grid[yy][xx].pushable !== true){
-                  newGrid[yy][xx].pushable = true
-                  newGrid[y][x] = {...newGrid[y][x], pushable: false}
+                } else if (pushTo.tileType === "empty" && grid[yy][xx].objType !== "pushable"){
+                  newGrid[yy][xx].objType = "pushable"
+                  newGrid[y][x] = {...newGrid[y][x], objType: null}
                   setCharX(x)
                   setCharY(y)
                 } else {
-                  newGrid[yy][xx] = {...newGrid[yy][xx], pushable: true}
-                  newGrid[y][x] = {...newGrid[y][x], pushable: false}
+                  newGrid[yy][xx] = {...newGrid[yy][xx], objType: "pushable"}
+                  newGrid[y][x] = {...newGrid[y][x], objType: null}
                   setCharX(x)
                   setCharY(y)
                 }
@@ -403,7 +421,7 @@ const Game = (props) => {
     console.log("monster level", grid[y][x].level)
     updateExperience(x, y, "monster", grid[y][x].level)
     setTimeout(() => {
-      newGrid[y][x] = {...newGrid[y][x], tileType: grid[y][x].elevation === 3 ? 'cliff' : grid[y][x].elevation === 1 ? 'platform' : 'empty', monsterType: "", level: ''}
+      newGrid[y][x] = {...newGrid[y][x], objType: null, monsterType: "", level: ''}
       setCharX(x)
       setCharY(y)
       setMonsterCoor([0,0])
@@ -474,7 +492,7 @@ const Game = (props) => {
 
   const openChest = (x, y, z) => { // Checks level of chest, and returns an item and a gold amount dependent on level. Clears chest from the map.
     let newGrid = [...grid]
-    newGrid[y][x] = {...newGrid[y][x], tileType: newGrid[y][x].elevation === 3 ? 'cliff' : newGrid[y][x].elevation === 1 ? 'platform' : 'empty'}
+    newGrid[y][x] = {...newGrid[y][x], objType: null}
     setTimeout(() => {
       setGrid(newGrid)
       axios.get(`/api/item`).then(res => {

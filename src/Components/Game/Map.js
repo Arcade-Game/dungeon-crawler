@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import Tile from './Tile';
 import {GameContext} from '../../context/GameContext';
+import './Tile.scss';
 
 const Map = ({getMonsterFn, setNewLava, direction, heroGuy, keyToggle, exploreTileFn}) => {
 
@@ -53,7 +54,7 @@ const Map = ({getMonsterFn, setNewLava, direction, heroGuy, keyToggle, exploreTi
 
     useEffect(() => { // Iterates over 9x9 character view grid on state and renders a Tile component for each index.
         let mappedCharView = charView.map((e,i) => e.map((f,j) => {
-            return <Tile tileType={f.tileType} mist={f.mist} pushable={f.pushable} hidden={f.hidden} itemObject={f.itemObject} key={j} setNewLava={setNewLava} charX={charX} charY={charY} gridX={j} gridY={i} heightWidth={heightWidth} elevation={f.elevation} viewRowCols={viewRowCols} y={charY+((4-i)*-1)} x={charX+((4-j)*-1)} getMonsterFn={getMonsterFn} grid={grid} exploreTileFn={exploreTileFn} isFight={isFight} direction={direction} heroGuy={heroGuy} monsterType={f.monsterType} monsterInfoToggle={monsterInfoToggle} setMonsterInfoToggle={setMonsterInfoToggle} keyToggle={keyToggle} />
+            return <Tile objType={f.objType} tileType={f.tileType} mist={f.mist} pushable={f.pushable} hidden={f.hidden} itemObject={f.itemObject} key={j} setNewLava={setNewLava} charX={charX} charY={charY} gridX={j} gridY={i} heightWidth={heightWidth} elevation={f.elevation} viewRowCols={viewRowCols} y={charY+((4-i)*-1)} x={charX+((4-j)*-1)} getMonsterFn={getMonsterFn} grid={grid} exploreTileFn={exploreTileFn} isFight={isFight} direction={direction} heroGuy={heroGuy} monsterType={f.monsterType} monsterInfoToggle={monsterInfoToggle} setMonsterInfoToggle={setMonsterInfoToggle} keyToggle={keyToggle} />
         }))
 
         setDisplayView(mappedCharView)
