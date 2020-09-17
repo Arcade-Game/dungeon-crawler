@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import './Footer.scss';
 import {withRouter} from 'react-router-dom';
 import Inventory from '../Game/Character/Inventory/Inventory';
@@ -6,8 +6,10 @@ import titlesReducer from '../../Redux/reducers/titlesReducer';
 import {TweenLite, Power3, Power2} from 'gsap';
 import { GiBlood } from 'react-icons/gi';
 // import {BsArrowLeft} from 'react-icons/bs';
+import {GameContext} from '../../context/GameContext';
 
 const Footer = props => {
+   const {keyToggle} = useContext(GameContext);
    const {inventory, equipment, updateSessionInventory,equipmentToggle, inventoryToggle, heroStats, hero,  newMoney, experience, level, characterHealth, isFight, setEquipmentToggleState, setInventoryToggleState, setKeyToggleFn} = props;
    const {gender, class_name} = hero, 
               [heroAttack, setHeroAttack] = useState(),
@@ -63,7 +65,7 @@ const Footer = props => {
                onClick={() => window.location.replace("#/game")}>Restart Dungeon</button>
                <button className="return">Settings</button>
                <button className="return">Quests</button>
-               <button className="return" onClick={setKeyToggleFn}>Terrain Info</button>
+               <button className="return" onClick={setKeyToggleFn}>{`Terrain Info (${keyToggle ? "ON" : "OFF"})`}</button>
                <div className="menu-x-button" onClick={handleMenuClick}><span>X</span></div>   </div> : null
          }
       <div className="footer-left">

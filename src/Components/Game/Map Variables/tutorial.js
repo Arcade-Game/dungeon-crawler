@@ -1,4 +1,4 @@
-import {tileVariables, treasureChests, monsters, keys, doors, visionTiles} from './tileVariables';
+import {tileVariables, treasureChests, monsters, keys, doors, visionTiles} from './tileVariables2';
 
 const {o, ll, zz, wl, p, pk, w, Q, F, uT, MI, h, mi, MX, hc, Cl, Pl, PP, T, G, WL} = tileVariables;
 const {x, x2, x3, x4, x5, X, X2, X3, X4, X5, X6, X7, X8, X9, XX, xt} = treasureChests;

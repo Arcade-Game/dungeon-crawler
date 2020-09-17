@@ -7,7 +7,7 @@
     // background: $inventory;
     background: url('../pictures/menus/dark-brown-leather.jpg');
     background-position-y: 100%;
-    border: 4px solid black;
+    border: .4vh solid black;
     width: 30%;
     height: 12%;
     position: absolute;
@@ -32,7 +32,7 @@
     // background: $inventory;
     background: url('../pictures/menus/dark-brown-leather.jpg');
     background-position-y: 100%;
-    border: 4px solid black;
+    border: .4vh solid black;
     width: 30%;
     height: 12%;
     position: absolute;
@@ -48,11 +48,11 @@
 
 .inventory-icon-container {
     position: absolute;
-    bottom: 11px;
-    left: 11px;
-    height: 160px;
-    width: 160px;
-    border: 6px solid black;
+    bottom: 1.1vh;
+    left: 1.1vh;
+    height: 16vh;
+    width: 16vh;
+    border: .6vh solid black;
     border-radius: 50%;
     z-index: 5;
     background: radial-gradient(black 10%, #003000 70%);
@@ -84,15 +84,15 @@
     z-index: 5;
     height: 100%;
     width: 30%;
-    height: 110px;
-    width: 110px;
-    bottom: 11px;
+    height: 13vh;
+    width: 13vh;
+    bottom: 1.1vh;
     position: absolute; 
-    left: 182px;
+    left: 18.2vh;
     background: radial-gradient(#04028d, black 200%);
     border-radius: 50%;
     overflow: hidden;
-    border: 5px solid black;
+    border: .7vh solid black;
     &:hover {
         background: #161496;
     }
@@ -114,16 +114,16 @@
     // left: 4%;
     top: 0;
     left: 0;
-    height: 80px;
-    width: 80px;
+    height: 8.5vh;
+    width: 8.5vh;
     // background: $inventory;
     background: url('../pictures/menus/dark-brown-leather.jpg');
     background-position-y: 100%;
     border: 4px solid black;
     font-family: 'Bilbo Swash Caps', cursive;
-    font-size: 30px;
+    font-size: 3.1vh;
     display: flex;
-    padding: 5px;
+    padding: .5vh;
     border-bottom-right-radius: 30px;
     cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
     z-index: 2;
@@ -132,9 +132,9 @@
 
 .menu-title {
     width: 100%;
-    height: 80px;
-    font-size: 30px;
-    margin-left: 140px;
+    height: 8vh;
+    font-size: 3.1vh;
+    margin-left: 14.2vh;
     text-align: left;
 }
 
@@ -142,17 +142,17 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
     // background: url('../pictures/menus/papyrus.jpg');
     background: $inventory;
-    height: 25px;
-    width: 25px;
-    border: 3px solid black;
+    height: 2.6vh;
+    width: 2.6vh;
+    border: .3vh solid black;
     border-radius: 50%;
     position: absolute;
-    bottom: -12px;
-    right: -12px;
+    bottom: -1.2vh;
+    right: -1.2vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 16px;
+    font-size: 1.6vh;
     font-weight: 600;
     cursor: url('../pictures/cursors/Mouse09RedResize.png'), auto;
     &:hover {
@@ -166,9 +166,9 @@
     z-index: 1;
     font-family: 'Playball', cursive;
     position: absolute;
-    height: 330px;
-    width: 230px;
-    border: 4px solid black;
+    height: 34.5vh;
+    width: 26vh;
+    border: .5vh solid black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -178,19 +178,19 @@
     top: 0;
     left: 0;
     background: url('https://res.cloudinary.com/desyiuzzn/image/upload/v1589320233/refternu/uy0xuxmsflk2hwkvd34s.jpg');
-    padding: 10px;
+    padding: 1.1vh;
     border-radius: 0 20px 0 20px;
     button {
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
         border: none;
         background: transparent;
-        font-size: 22px;
+        font-size: 2.3vh;
         font-weight: bold;
-        height: 40px;
+        height: 4.1vh;
         width: 90%;
         text-align: start;
-        padding-left: 4px;
+        padding-left: .4vh;
         border-radius: 15px;
     }
     button:hover {
@@ -204,7 +204,7 @@
 
 .menu-button { 
     @include row;
-    border: 1px solid green;
+    border: .1vh solid green;
     height: 100%;
     width: 20%;
     cursor: url('../pictures/cursors/Mouse09Green-resize.png'), auto;
@@ -218,16 +218,16 @@
     // min-width: 35%;
     // max-width: 35%;
     // border: 1px solid black;
-    margin-right: 180px;
+    margin-right: 20vh;
     border-radius: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
+    font-size: 4vh;
     font-weight: 700;
     color: rgb(0, 0, 150);
     overflow: hidden;
-    border: 4px solid black;
+    border: .4vh solid black;
 }
 
 .experience-points {
@@ -243,11 +243,11 @@
 
 .health-bar {
     position: absolute;
-    right: 11px;
-    bottom: 11px;
-    height: 160px;
-    width: 160px;
-    border: 6px solid black;
+    right: 1.1vh;
+    bottom: 1.1vh;
+    height: 17vh;
+    width: 17vh;
+    border: .7vh solid black;
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -262,7 +262,7 @@
 
 .health-bar-blood {
     background: radial-gradient(#600000, #000000 70%);
-    border-top: 2px solid black;
+    border-top: .2vh solid black;
     // border-top: 1px solid red;
     border-radius: 50%;
     height: 150%;
@@ -271,36 +271,36 @@
 }
 
 .stats-container {
-    font-size: 17px;
+    font-size: 1.8vh;
     font-weight: 800;
     position: absolute;
-    right: -8px;
+    right: -.8vh;
     // bottom: 160px;
     bottom: 100%;
     font-weight: 800px;
-    font-size: 17px;
+    font-size: 1.8vh;
     // justify-content: flex-end;
     // align-items: flex-start;
     // margin-top: 15px;
-    height: 270px;
-    width:  250px;
+    height: 27.5vh;
+    width:  25.7vh;
     background: none;
     border-radius: 10px 10px 0 0;
     box-sizing: border-box;
-    padding: 8px;
+    padding: .9vh;
     border: none;
     border-bottom: none;
     text-align: start;
-    padding-right: 13px;
+    padding-right: 1.4vh;
 
     
  }
 
  .stats-container-for-styling {
     background: $pal-three;
-    padding: 8px;
+    padding: .9vh;
     border-radius: 5px;
-    border: 3px solid black;
+    border: .4vh solid black;
     div {
             display: flex;
             justify-content: space-between;
@@ -313,19 +313,19 @@
     //  border: 1px solid black;
     // text-shadow: 3px 3px #010f00;
     // color: rgb(1, 58, 1);
-    text-shadow: 3px 3px #000000;
+    text-shadow: .3vh .3vh #000000;
     color: rgb(175, 175, 175);
-     width: 62px;
+     width: 6.3vh;
      height: 37%;
      display: flex;
-     font-size: 70px;
+     font-size: 7.2vh;
      justify-content: center;
      align-items: flex-end;
  }
 
  .stats-container-stats {
-     margin-top: 10px;
-    margin-left: 10px;
+     margin-top: 1.1vh;
+    margin-left: 1.1vh;
     
     display: flex;
     flex-direction: column;

@@ -16,33 +16,33 @@
 }
 
 .inventory-screen-container{
-@include column;
-justify-content: center;
-width:  320px;
-// background-color: $inventory;
-background: radial-gradient(#3d0c02, black);
-border-radius: 10px 10px 0 0;
-position: absolute;
-left: -4px;
-bottom: 100%;
-z-index: 1;
-font-size: 17px;
-font-weight: 800;
-border: 4px solid black;
-border-bottom: none;
+   @include column;
+   justify-content: center;
+   width:  32.1vh;
+   // background-color: $inventory;
+   background: radial-gradient(#3d0c02, black);
+   border-radius: 10px 10px 0 0;
+   position: absolute;
+   left: -.4vh;
+   bottom: 100%;
+   z-index: 1;
+   font-size: 1.8vh;
+   font-weight: 800;
+   border: .5vh solid black;
+   border-bottom: none;
 
    .equipment-container{
       @include column;
       position: relative;
-      margin-top: 15px;
+      margin-top: 1.6vh;
       border-radius: 10px;
       justify-content: space-evenly;
-      height: 300px;
+      height: 30.1vh;
       width: 90%;
       // background-color: $iCon;
       background: radial-gradient($iSlot, black);
-      margin-bottom: 12px;
-      border: 4px solid black;
+      margin-bottom: 1.3vh;
+      border: .5vh solid black;
       img {
          height: 100%;
          width: 100%;
@@ -59,10 +59,10 @@ border-bottom: none;
 
             .helm-container{
                border-radius: 10px;
-               height: 75px;
-               width: 75px;
+               height: 7.6vh;
+               width: 7.6vh;
                background: radial-gradient(grey, black);
-               border: 4px solid black;
+               border: .5vh solid black;
 
             }
       }
@@ -78,10 +78,10 @@ border-bottom: none;
 
             .middle-container{
                border-radius: 10px;
-               height: 90px;
-               width: 75px;
+               height: 9.1vh;
+               width: 7.6vh;
                background: radial-gradient(grey, black);
-               border: 4px solid black;
+               border: .5vh solid black;
 
             }
       }
@@ -96,10 +96,10 @@ border-bottom: none;
    }
          .boot-container{
             border-radius: 10px;
-            height: 75px;
-            width: 75px;
+            height: 7.6vh;
+            width: 7.6vh;
             background: radial-gradient(grey, black);
-            border: 4px solid black;
+            border: .5vh solid black;
 
          }
 }
@@ -110,24 +110,24 @@ border-bottom: none;
 
 .inventory-container{
    position: relative;
-   margin-top: 10px;
-   margin-bottom: 88px;
-   border-radius: 10px;
-   height: 160px;
+   margin-top: 1.1vh;
+   margin-bottom: 8.9vh;
+   border-radius: 1.1vh;
+   height: 16.1vh;
    width: 95%;
    background-color: $iCon;
    display: grid;
    grid-template-columns: repeat(4, 1fr);
    grid-template-rows: repeat(2, 1fr);
-   grid-row-gap: 2px;
-   grid-column-gap: 2px;
-   border: 3px solid $iCon;
+   grid-row-gap: .3vh;
+   grid-column-gap: .3vh;
+   border: .4vh solid $iCon;
    
    .inventory-square {
       box-sizing: border-box;
       min-height: 100%;
       min-width: 100%;
-      border-radius: 10px;
+      border-radius: 1.1vh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -137,55 +137,55 @@ border-bottom: none;
       visibility: visible;
    }
    img {
-      border-radius: 10px;
+      border-radius: 1.1vh;
    }
 }
 }
 
 .inventory-square-hover {
-   font-size: 18px;
+   font-size: 1.9vh;
    font-weight: 650;
    color: white;
    font-weight: 500;
    visibility: hidden;
    position: absolute;
-   // right: -210px;
+   // right: -21.1vh;
    right: -77%;
-   border: 3px solid black;
+   border: .4vh solid black;
    border-radius: 10%;
-   height: 180px;
-   width: 200px;
+   height: 18.1vh;
+   width: 20.1vh;
    top: 0px;
    text-align: start;
-   padding: 8px;
+   padding: .9vh;
    // background: grey;
    background: radial-gradient(#383838, black);
 }
 
 .inventory-square-hover-e {
    color: white;
-   font-size: 18px;
+   font-size: 1.9vh;
    font-weight: 650;
    visibility: hidden;
    position: absolute;
-   // right: -210px;
+   // right: -21.1vh;
    right: -85%;
-   border: 3px solid black;
+   border: .4vh solid black;
    border-radius: 10%;
-   height: 180px;
-   width: 200px;
+   height: 18.1vh;
+   width: 20.1vh;
    top: 0px;
    text-align: start;
-   padding: 8px;
+   padding: .9vh;
    // background: grey;
    background: radial-gradient(#383838, black);
 }
 
 .i-square-hover-stats {
-   font-size: 16px;
-   margin-top: 10px;
-   margin-left: 10px;
-   margin-right: 5px;
+   font-size: 1.7vh;
+   margin-top: 1.1vh;
+   margin-left: 1.1vh;
+   margin-right: .6vh;
    display: flex;
    // color: white;
    flex-direction: column-reverse;
@@ -197,19 +197,19 @@ border-bottom: none;
 }
 
 .currency-container {
-   border: 2px solid $iCon;
+   border: .3vh solid $iCon;
    background: $iSlot;
    position: absolute;
-   height: 40px;
-   width: 115px;
-   right: 13px;
-   bottom: -40px;
+   height: 4.1vh;
+   width: 11.6vh;
+   right: 1.4vh;
+   bottom: -4.1vh;
    border-radius: 0 0 9px 9px;
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding: 5px;
-   padding-top: 10px;
+   padding: .6vh;
+   padding-top: 1.1vh;
    color: yellow;
    font-weight: 550;
    // border-top: none;

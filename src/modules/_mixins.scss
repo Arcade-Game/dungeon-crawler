@@ -42,9 +42,11 @@
 }
 
 @mixin mm{
+   height: 100%;
+   width: 100%;
    // height: 7px;
    // width: 7px;
-   border: 1px solid black;
+   border: .005vh solid rgba(0, 0, 0, 0.219);
    // border-radius: 40%;
 }
 

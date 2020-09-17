@@ -8,6 +8,9 @@
    font-family: 'Philosopher', sans-serif;
    height:100vh;
    cursor: url('../pictures/cursors/Mouse10standartResize.png'), auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 
    .town-title-container {
       position: absolute;
@@ -276,6 +279,25 @@
    transform: 2s;
 }
 
+.map-editor-icon {
+   position: absolute;
+   right: 50px;
+   bottom: 175px;
+   height: 100px;
+   width: 100px;
+   border: 2px solid white;
+   color: white;
+}
+
+.map-selector-icon {
+   position: absolute;
+   right: 50px;
+   bottom: 50px;
+   height: 100px;
+   width: 100px;
+   border: 2px solid white;
+   color: white;
+}
 
 // .minstrel1, .minstrel2, .minstrel3, .minstrel4 {
 //    background-image: url('../pictures/minstrel/minstrel\ play\ 1.png');

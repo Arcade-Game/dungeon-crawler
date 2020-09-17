@@ -7,18 +7,25 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import configureStore from "./Redux/configureStore"
+import {MapEditorProvider} from './context/MapEditorContext';
+import {GameProvider} from './context/GameContext';
 
 const store = configureStore();
 
 ReactDOM.render(
   <Router>
-    < LastLocationProvider >
-    <Provider store={store}> 
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </Provider>
-    </LastLocationProvider>
+    <MapEditorProvider>
+      <GameProvider>
+        < LastLocationProvider >
+          <Provider store={store}> 
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>
+          </Provider>
+        </LastLocationProvider>
+      </GameProvider>
+    </MapEditorProvider>
+    
   </Router>,
   document.getElementById('root')
 );

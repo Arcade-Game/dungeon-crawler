@@ -1,0 +1,163 @@
+@import '../../modules/variables.scss';
+@import '../../modules/mixins';
+
+.mini-map-container {
+    box-sizing: border-box;
+    border: .2vh solid black;
+    box-shadow: 0 0 1.5vh .2vh black;
+    text-align: center;
+    border-radius: 50%;
+    height: 26vh;
+    width: 26vh;
+    position: relative;
+    // top: 3vh;
+    // right: 3vh;
+    display: grid;
+    grid-template-columns: repeat(auto, 1fr);
+    grid-template-rows: repeat(auto, 1fr);
+    // background: url('../pictures/ireland-map.jpg');
+    
+    background: url('../pictures/menus/dark-ireland-map.jpg');
+    background-position: center;
+    background-size: 100%;
+    background-blend-mode: soft-light;
+    filter: blur(.2px);
+}
+
+.mini-map-leather {
+    position: absolute;
+    // clip-path: polygon(25% 0, 100% 0, 100% 75%, 0 96%);
+    border: .4vh solid black;
+    // border-radius: 0px 0 0px 160px;
+    border-radius: 50%;
+    background: url('../pictures/menus/Oak-Dark-Wood.jpg');
+    top: 2vh;
+    right: 2vh;
+    height: 29vh;
+    width: 29vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mini-map-empty {
+    @include mm;
+    background: rgb(95, 19, 19); 
+}
+
+.mini-map-wall {
+    @include mm;
+    background: black;
+}
+
+.mini-map-monster {
+    @include mm;
+    background: red;
+}
+
+.mini-map-chest {
+    @include mm;
+    border: .01vh solid yellow;
+    background: black;
+}
+
+.mini-map-char {
+    @include mm;
+    background: green;
+}
+
+.mini-map-pushable {
+    @include mm;
+    background: grey;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.mini-map-water {
+    @include mm;
+    background: blue;
+}
+
+.mini-map-push-bridge {
+    @include mm;
+    background: rgb(99, 98, 98);
+    border: 1.4px solid blue
+}
+
+.mini-map-quicksand {
+    @include mm;
+    background: rgb(151, 96, 24);
+}
+
+.mini-map-hidden-door {
+    @include mm;
+    background: black;
+}
+
+.mini-map-cliff {
+    @include mm;
+    background: linear-gradient(black, rgb(145, 145, 145))
+}
+
+.mini-map-platform {
+    @include mm;
+    background: linear-gradient(black, white, black)
+}
+
+.mini-map-lookout {
+    @include mm;
+    background: rgb(172, 5, 172);
+}
+
+.mini-map-locked-door {
+    @include mm;
+    background: linear-gradient(to right, black, black, red, black, black)
+}
+
+.mini-map-gold-pile {
+    @include mm;
+    background: yellow;
+}
+
+.mini-map-lava {
+    @include mm;
+    background: linear-gradient(to right, yellow, orange, orangered, red, darkred, red, orangered, orange, yellow)
+}
+
+.mini-map-push-bridge-lava-bridge {
+    @include mm;
+    background: grey;
+    border: .13vh solid darkred;
+
+}
+.mini-map-lava-bridge1 {
+    @include mm;
+    background: linear-gradient(to right, yellow, orange, orangered, red, darkred, red, orangered, orange, yellow)
+}
+.mini-map-lava-bridge2 {
+    @include mm;
+    background: linear-gradient(to right, yellow, orange, orangered, red, darkred, red, orangered, orange, yellow)
+}
+
+.mini-map-teleporter-1 {
+    @include mm;
+    background: purple;
+    border: 1.9px solid pink;
+}
+
+.mini-map-broken-teleporter {
+    @include mm;
+    background: rgb(95, 19, 19);
+}
+
+.mini-map-mist {
+    @include mm;
+    background: grey;
+    border: 1px solid white;
+}
+.hidden {
+    @include mm;
+    background: black;
+}

@@ -13,12 +13,15 @@ import "./Town.scss"
 import axios from "axios";
 import {townMusic} from './townMusic';
 import {setHonor} from '../../Redux/reducers/titlesReducer';
+import './MapSelector.scss';
+import MapSelector from './MapSelector';
 
 const Town = (props) => {
    const {hero} = props.hero
    const [overlayToggle, setOverlayToggle] = useState(false),
              [toggleType, setToggleType] = useState(),
              [saveToggle, setSaveToggle] = useState(false),
+             [mapSelectorToggle, setMapSelectorToggle] = useState(false),
              [vendorEquipmentList, setVendorEquipmentList] = useState();
    const lastLocation = useLastLocation();
 
@@ -111,6 +114,14 @@ const Town = (props) => {
    handlePlay = () => {
       props.history.push(`/game`)
       window.location.reload(false)
+   },
+
+   handleMapSelector = () => {
+      setMapSelectorToggle(true)
+   },
+
+   handleMapEditor = () => {
+      props.history.push('/editor')
    }
 
 
@@ -124,6 +135,7 @@ const Town = (props) => {
       <>
       <audio src={`${townMusic[musicNumber]}`} autoPlay />
       <div className="town-map">
+         {mapSelectorToggle && <MapSelector {...{setMapSelectorToggle}}/>}
          <div className="town-title-container">{props.title.title}</div>
          {overlayToggle ? (
             <div id="one" className="town-overlay"
@@ -197,6 +209,12 @@ const Town = (props) => {
             <div className="minstrel4"></div> */}
             <h2 className="save-banner" ref={el => {saveBanner = el}}>SAVING GAME ...</h2>
          {/* <h3 className="copyright"> Picture Credit: Deep_Rights - Reddit </h3> */}
+      </div>
+      <div className="map-editor-icon" onClick={handleMapEditor}>
+         Map-Editor
+      </div>
+      <div className="map-selector-icon" onClick={handleMapSelector}>
+            Map Selector
       </div>
       </>
    )

@@ -1,0 +1,65 @@
+.map-selector-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border: 4px solid white;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-selector {
+    position: relative;
+    height: 80%;
+    width: 80%;
+    border: 5px solid white;
+    background: brown;
+    z-index: 10000;
+}
+
+.exit-map-selector {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    color: white;
+    border: 2px solid white;
+    font-size: 25px;
+}
+
+.map-selector-tutorial {
+    border: 1px solid white;
+    height: 8vh;
+    width: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-selector-cave {
+    border: 1px solid white;
+    height: 8vh;
+    width: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-selector-forest {
+    border: 1px solid white;
+    height: 8vh;
+    width: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-selector-lake {
+    border: 1px solid white;
+    height: 8vh;
+    width: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

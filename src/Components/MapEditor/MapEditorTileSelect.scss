@@ -1,0 +1,33 @@
+.chest {
+    // height: 85%;
+    // width: 75%;
+    border-radius: 10%;
+    background: url('../pictures/chest-icon-png-12-transparent.png');
+    background-size: 100%;
+    background-position: center;
+    cursor: auto;
+}
+
+.water {
+    background: url('../pictures/terrain/water.png');
+    background-size: 470%;
+    background-position-y: 100%;
+    background-position: center;
+}
+
+.platform {
+    background-size: 100%;
+    background-position: center;
+}
+
+.quicksand {
+    background: url('../pictures/terrain/ForestWetMud_baseColor.png');
+    background-size: 100%;
+    background-position: center;
+}
+
+.lava {
+    background: url('../pictures/terrain/pngkey.com-lava-png-2333904-resize2.png');
+    background-size: 400%;
+    background-position: center;
+}
