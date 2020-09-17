@@ -5,7 +5,6 @@ import TileEditor from './TileEditor';
 import CreateTile from './CreateTile';
 import './MapEditor.scss';
 import './MapEditorTileSelect.scss';
-import {MapEditorProvider} from '../../context/MapEditorContext';
 import {MapEditorContext} from '../../context/MapEditorContext';
 
 const MapEditor = () => {
@@ -20,7 +19,7 @@ const MapEditor = () => {
     const [title, setTitle] = useState('')
     const [newTileInput, setNewTileInput] = useState('')
 
-    const {isMouseDown, currentTile, currentMap, setCurrentMap} = useContext(MapEditorContext)
+    const {isMouseDown, setIsMouseDown, currentTile, currentMap, setCurrentMap} = useContext(MapEditorContext)
 
     const handleGetMapsDev = () => {
         console.log("ding")
@@ -69,7 +68,7 @@ const MapEditor = () => {
             <div className="map-editor-header">
 
             </div>
-            <div className="map-editor-body">
+            <div className="map-editor-body" onMouseDown={() => setIsMouseDown(true)} onMouseUp={() => setIsMouseDown(false)}>
                 <div className="map-editor-left">
                     <TileEditor />
                     <div className="current-tile-selected">

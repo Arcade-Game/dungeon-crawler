@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {MapEditorContext} from '../../context/MapEditorContext';
 
 const MeTile = ( {f, i, j} ) => {
-    const {currentTile, currentMap, setCurrentMap} = useContext(MapEditorContext);
+    const {isMouseDown, currentTile, currentMap, setCurrentMap} = useContext(MapEditorContext);
 
     // console.log("f", f)
 
@@ -14,7 +14,7 @@ const MeTile = ( {f, i, j} ) => {
     }
 
     return (
-        <div className="me-tile-container" onClick={handleTileClick}>
+        <div className="me-tile-container" onClick={handleTileClick} onMouseOver={isMouseDown ? handleTileClick : null}>
             <div className={f.elevation === 10 ? 'wall' : f.elevation === 3 ? 'cliff' : f.elevation === 1 ? `platform` : 'ground'}> 
                 {
                     f.tileType === "push-bridge-lava-bridge" 

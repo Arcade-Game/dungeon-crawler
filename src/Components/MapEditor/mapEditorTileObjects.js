@@ -19,11 +19,14 @@ export const terrainVariables = [
 ]
 
 export const objectVariables = [
-    {title: "chest", modifier: {objType: "chest"}},
-    {title: "monster", modifier: {objType: "monster"}},
     {title: "pushable", modifier: {objType: "pushable"}},
+    {title: "chest", modifier: {objType: "chest"}},
     {title: "gold-pile", modifier: {objType: "gold-pile"}},
     {title: "delete", modifier: {objType: null}},
+]
+
+export const monsterVariables = [
+    {title: "monster", modifier: {objType: "monster"}},
 ]
 
 // export const tileVariables = {
