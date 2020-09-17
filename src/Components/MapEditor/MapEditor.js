@@ -19,7 +19,7 @@ const MapEditor = () => {
     const [title, setTitle] = useState('')
     const [newTileInput, setNewTileInput] = useState('')
 
-    const {isMouseDown, setIsMouseDown, currentTile, currentMap, setCurrentMap} = useContext(MapEditorContext)
+    const {isMouseDown, setIsMouseDown, currentTile, currentMap, setCurrentMap, startingTile, setStartingTile} = useContext(MapEditorContext)
 
     const handleGetMapsDev = () => {
         console.log("ding")
@@ -27,7 +27,8 @@ const MapEditor = () => {
     }
 
     const handleSaveNew = () => {
-        axios.post("/api/map/create", {map: currentMap, title}).then(res => console.log("save data", res.data))
+        console.log("ding")
+        axios.post("/api/map/create", {map: currentMap, title, startingTile}).then(res => console.log("save data", res.data)).catch(err => console.log(err))
         setSaveToggle(false)
         setTitle('')
     }
@@ -49,6 +50,7 @@ const MapEditor = () => {
                 elevation: 0
             }
         }))
+        setStartingTile([newMap.length-1, Math.floor(newMap[newMap.length-1].length/2)])
         setCurrentMap(newMap)
     }
 

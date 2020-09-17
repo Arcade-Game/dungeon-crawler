@@ -2,20 +2,28 @@ import React, {useContext} from 'react';
 import {MapEditorContext} from '../../context/MapEditorContext';
 
 const MeTile = ( {f, i, j} ) => {
-    const {isMouseDown, currentTile, currentMap, setCurrentMap} = useContext(MapEditorContext);
+    const {isMouseDown, currentTile, currentMap, setCurrentMap, startingTile, setStartingTile} = useContext(MapEditorContext);
 
     // console.log("f", f)
 
     const handleTileClick = () => {
-        console.log("ding")
-        let newMap = [...currentMap]
-        newMap[i][j] = {...newMap[i][j], ...currentTile.modifier}
-        setCurrentMap(newMap)
+        if (currentTile.title === "start") {
+            setStartingTile([i,j])
+        } else {
+            let newMap = [...currentMap]
+            newMap[i][j] = {...newMap[i][j], ...currentTile.modifier}
+            setCurrentMap(newMap)
+        }
     }
 
+    const handleStart = () => {
+    }
+
+    // console.log("startingTile", startingTile)
     return (
-        <div className="me-tile-container" onClick={handleTileClick} onMouseOver={isMouseDown ? handleTileClick : null}>
+        <div className="me-tile-container" onClick={currentTile ? handleTileClick : null} onMouseOver={isMouseDown ? handleTileClick : null}>
             <div className={f.elevation === 10 ? 'wall' : f.elevation === 3 ? 'cliff' : f.elevation === 1 ? `platform` : 'ground'}> 
+                {(i === startingTile[0] && j === startingTile[1]) && <div className="start"></div>}
                 {
                     f.tileType === "push-bridge-lava-bridge" 
                     || f.tileType === "push-bridge-lava1" 

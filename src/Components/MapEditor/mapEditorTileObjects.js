@@ -23,6 +23,8 @@ export const objectVariables = [
     {title: "chest", modifier: {objType: "chest"}},
     {title: "gold-pile", modifier: {objType: "gold-pile"}},
     {title: "delete", modifier: {objType: null}},
+    {title: "start"},
+    {title: "exit", modifier: {objType: "exit"}},
 ]
 
 export const monsterVariables = [
