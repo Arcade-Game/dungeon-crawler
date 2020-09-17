@@ -18,7 +18,7 @@ const MapEditorBody = ({currentMap, pxSize, height, width, setHeight, setWidth})
     }
 
     const myMap = currentMap.map((e,i) => e.map((f,j) => {
-        return <MeTile {...{i, j}}/>
+        return <MeTile {...{f, i, j}}/>
     }))
 
     return (

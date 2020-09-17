@@ -51,6 +51,7 @@
     height: 100%;
     width: 100%;
     position: relative;
+    z-index: 6;
     cursor: url('../pictures/cursors/Mouse09YellowResize.png'), auto;
 }
 
@@ -304,6 +305,7 @@
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
+    z-index: 6;
 }
 
 .door-key {

@@ -4,12 +4,13 @@ import MapEditorBody from './MapEditorBody';
 import TileEditor from './TileEditor';
 import CreateTile from './CreateTile';
 import './MapEditor.scss';
+import './MapEditorTileSelect.scss';
 import {MapEditorProvider} from '../../context/MapEditorContext';
 import {MapEditorContext} from '../../context/MapEditorContext';
 
 const MapEditor = () => {
 
-    const [currentMap, setCurrentMap] = useState([[{type: 'empty'}], [{type: 'chest'}], [{type: 'wall'}]])
+    
     const [pxSize, setPxSize] = useState(30)
     const [heightInput, setHeightInput]= useState(0)
     const [widthInput, setWidthInput]= useState(0)
@@ -19,7 +20,7 @@ const MapEditor = () => {
     const [title, setTitle] = useState('')
     const [newTileInput, setNewTileInput] = useState('')
 
-    const {isMouseDown} = useContext(MapEditorContext)
+    const {isMouseDown, currentTile, currentMap, setCurrentMap} = useContext(MapEditorContext)
 
     const handleGetMapsDev = () => {
         console.log("ding")
@@ -45,7 +46,7 @@ const MapEditor = () => {
         console.log("input1", heightInput, widthInput)
         const newMap = [...Array(+heightInput)].map((e,i) => [...Array(+widthInput)].map((f,j) => {
             return {
-                type: "empty",
+                tileType: "empty",
                 elevation: 0
             }
         }))
@@ -57,9 +58,10 @@ const MapEditor = () => {
     }
 
 
-        console.log("input2", heightInput, widthInput)
-        console.log("tileInput", newTileInput)
-        console.log("context check", isMouseDown)
+        // console.log("input2", heightInput, widthInput)
+        // console.log("tileInput", newTileInput)
+        // console.log("context check", isMouseDown)
+        console.log("currentTile", currentTile)
 
     return (
         // <MapEditorProvider>
@@ -71,7 +73,7 @@ const MapEditor = () => {
                 <div className="map-editor-left">
                     <TileEditor />
                     <div className="current-tile-selected">
-                        
+                        {currentTile && <div className={currentTile.title}></div>}
                     </div>
                     <CreateTile />
                 </div>

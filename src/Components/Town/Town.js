@@ -14,6 +14,7 @@ import axios from "axios";
 import {townMusic} from './townMusic';
 import {setHonor} from '../../Redux/reducers/titlesReducer';
 import './MapSelector.scss';
+import MapSelector from './MapSelector';
 
 const Town = (props) => {
    const {hero} = props.hero
@@ -123,15 +124,7 @@ const Town = (props) => {
       <>
       <audio src={`${townMusic[musicNumber]}`} autoPlay />
       <div className="town-map">
-         {
-            mapSelectorToggle && <div className="map-selector-container">
-               <div className="map-selector">
-                  <div className="exit-map-selector" onClick={() => setMapSelectorToggle(false)}>X</div>
-
-               </div>
-         </div>
-         }
-         
+         {mapSelectorToggle && <MapSelector {...{setMapSelectorToggle}}/>}
          <div className="town-title-container">{props.title.title}</div>
          {overlayToggle ? (
             <div id="one" className="town-overlay"

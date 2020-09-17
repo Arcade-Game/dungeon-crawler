@@ -1,15 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {MapEditorContext} from '../../context/MapEditorContext';
 
 const MeTileSelect = ({e}) => {
+    const {setCurrentTile} = useContext(MapEditorContext);
 
     return (
         <div className="me-tile-select-container">
-            {
-                e.pushable === true && <div className="rock"></div>
-            }
-            {
-                e.tileType === "chest" && <div className="me-chest"></div>
-            }
+            <div className={e.title} onClick={() => setCurrentTile(e)}></div>
         </div>
     )
 }

@@ -12,13 +12,13 @@ import {GameProvider} from './context/GameContext';
 
 export default (
    <Switch>
+      <Route path='/editor' component = {MapEditor} />
       <Route exact path="/" component = {Auth} />
       <Route path="/town" component = {Town} />
       {/* <Route path="/story" component = {Story}/> */}
-      <GameProvider><Route path="/game" component = {Game} /></GameProvider>
+      <Route path="/game" component = {Game} />
       <Route path="/death" component = {Death} />
       <Route path='/health' component = {HealthBar} />
-      <MapEditorProvider><Route path='/editor' component = {MapEditor} /></MapEditorProvider>
    </Switch>
 
 )
