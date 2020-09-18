@@ -13,7 +13,7 @@ export const selectMap = (map) => {
 };
 
 export default function reducer (state = initialState, action) {
-    console.log("MAP REDUCER")
+    // console.log("MAP REDUCER")
     const {type, payload} = action
     switch(type) {
         case SELECT_MAP:

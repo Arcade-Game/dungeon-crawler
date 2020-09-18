@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {TweenMax, Power3, TweenLite} from 'gsap';
 import axios from 'axios';
 import {GameContext} from '../../context/GameContext';
+import {MapEditorContext} from '../../context/MapEditorContext';
 
 // Styling
 
@@ -42,6 +43,8 @@ const Game = (props) => {
 
   // const {mapArray, mapX, mapY} = mapObject
   const {grid, setGrid, heightWidth, charX, setCharX, charY, setCharY, viewRowCols, isFight, setIsFight, inventoryToggle, equipmentToggle, setInventoryToggle, setEquipmentToggle, newMoney, setNewMoney, keyToggle, setKeyToggle, monsterType, setMonsterType, monsterCoor, setMonsterCoor, characterHealth, setCharacterHealth, experience, setExperience, level, setLevel, XPforLevel, setXPforLevel, quicksandCounter, setQuicksandCounter, direction, setDirection, rawMap} = useContext(GameContext)
+  const {currentMap} = useContext(MapEditorContext);
+  console.log("currentMap Game.js", currentMap)
   // const {mapArray, mapX, mapY} = levelOne
   // const {mapArray, mapX, mapY} = demoMap
 

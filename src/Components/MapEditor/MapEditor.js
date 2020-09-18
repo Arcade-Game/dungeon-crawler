@@ -28,12 +28,12 @@ const MapEditor = () => {
     const {isMouseDown, setIsMouseDown, currentTile, currentMap, setCurrentMap, startingTile, setStartingTile} = useContext(MapEditorContext);
     const {setMyMap, setGrid, setCharX, setCharY, allMaps, setAllMaps} = useContext(GameContext);
 
-    const handleGetMapsDev = () => {
-        // console.log("ding")
-        axios.get("/api/maps").then(res => {
-            setAllMaps(res.data)
-        })
-    }
+    // const handleGetMapsDev = () => {
+    //     // console.log("ding")
+    //     axios.get("/api/maps").then(res => {
+    //         setAllMaps(res.data)
+    //     })
+    // }
 
     const handleSaveNew = () => {
         // console.log("ding")
@@ -76,8 +76,8 @@ const MapEditor = () => {
 
     const handlePlayClick = () => {
         // console.log("currentMap", currentMap)
-        setMyMap({title: "test", start: startingTile, map: currentMap})
-        setGrid(currentMap)
+        setMyMap({title: "test", start: startingTile, map: currentMap.slice()})
+        // setGrid(currentMap.slice())
         setCharX(startingTile[1])
         setCharY(startingTile[0])
         push('/game')
@@ -121,7 +121,7 @@ const MapEditor = () => {
                     <MapEditorBody {...{currentMap, pxSize, height, width, setHeight, setWidth}}/>
                 </div>
                 <div className="map-editor-right">
-                    <button className="get-maps-dev" onClick={handleGetMapsDev}>GET MAPS</button>
+                    {/* <button className="get-maps-dev" onClick={handleGetMapsDev}>GET MAPS</button> */}
                     <div className="all-maps-selector">
                         {
                             allMaps && allMaps.map((e,i) => {

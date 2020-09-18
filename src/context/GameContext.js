@@ -7,8 +7,8 @@ export const GameContext = createContext(null);
 export const GameProvider = ({ children }) => {
     const {mapArray, mapX, mapY} = tutorial;
     const [heightWidth, setHeightWidth] = useState(650), // Used to determine the size of the character grid in pixels.
-            [myMap, setMyMap] = useState([]),
-            [grid, setGrid] = useState([]), // Current map.
+            [myMap, setMyMap] = useState({map: []}),
+            [grid, setGrid] = useState([]), // 
             [charX, setCharX] = useState(null),
             [charY, setCharY] = useState(null), // CharX and CharY set the index from which the character view takes the seed map and creates a 9x9 grid with the character in the middle. These indexes change with arrow keys or WASD key presses.
             [viewRowCols, setViewRowCols] = useState(9), // Number of rows and columns in character grid.
@@ -25,9 +25,11 @@ export const GameProvider = ({ children }) => {
             [XPforLevel, setXPforLevel] = useState(), // How much experience is needed to level up.
             [quicksandCounter, setQuicksandCounter] = useState(0), // Tallies consecutive movement on quicksand tiles.  More than three in a row triggers death.
             [direction, setDirection] = useState('up'), // Determines the direction character sprite is facing for animation purposes.
-            [allMaps, setAllMaps] = useState([])
+            [allMaps, setAllMaps] = useState([]),
+            [wallSize, setWallSize] = useState(10)
 
             useEffect(() => {
+                console.log("GameContext Rendered")
                 async function getMaps() {
                     await axios.get("/api/maps").then(res => {
                     setAllMaps(res.data)
@@ -35,39 +37,35 @@ export const GameProvider = ({ children }) => {
                     setGrid(res.data[0].map)
                     setCharX(res.data[0].start[1])
                     setCharX(res.data[0].start[0])
-                    console.log("RAW MAP", res.data[0])
-                    console.log("GRID", res.data[0].map)
                     })
                 }
                 getMaps()
-                console.log("RERENDER")
             }, [])
 
             useEffect(() => {
-                console.log("OTHER RERENDER")
-                // let length2 = grid[0].length+18
                 setGrid(() => {
-                    let newRawMap = [...grid]
-                    console.log("context newRawMap", newRawMap)
-                    let length1 = grid[0] && grid[0].length+20
-                    newRawMap.forEach((e,i) => {
-                        e.unshift(...[...Array(10)].map((f,j) => {
+                    const newGrid = myMap.map.map(arr => arr.slice())
+                    console.log("context newGrid", newGrid)
+                    let length1 = myMap.map[0] && myMap.map[0].length+(wallSize*2)
+                    let newestGrid = newGrid.map((e,i) => {
+                        newGrid[i].unshift(...[...Array(wallSize)].map((f,j) => {
                             return {tileType: "empty", elevation: 10}
                         }))
-                        e.push(...[...Array(10)].map((f,j) => {
+                        newGrid[i].push(...[...Array(wallSize)].map((f,j) => {
                             return {tileType: "empty", elevation: 10}
                         }))
+                        return e
                     })
-                    newRawMap.unshift(...[...Array(10)].map((e,i) => [...Array(length1)].map((e,i) => {
+                    newestGrid.unshift(...[...Array(10)].map((e,i) => [...Array(length1)].map((e,i) => {
                         return {tileType: "empty", elevation: 10}
                     })))
-                    newRawMap.push(...[...Array(10)].map((e,i) => [...Array(length1)].map((e,i) => {
+                    newestGrid.push(...[...Array(10)].map((e,i) => [...Array(length1)].map((e,i) => {
                         return {tileType: "empty", elevation: 10}
                     })))
-                    return newRawMap
+                    return newestGrid
                 })
-                setCharX((charX) => charX+10)
-                setCharY((charY) => charY+10)
+                setCharX((charX) => charX+wallSize)
+                setCharY((charY) => charY+wallSize)
             }, [myMap])
 
     // const exploreTile = (x, y) => { // Reveals tiles on the minimap.

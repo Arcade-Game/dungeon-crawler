@@ -15,9 +15,9 @@ const MeTile = ( {f, i, j} ) => {
         if (currentTile.title === "start") {
             setStartingTile([i,j])
         } else {
-            let newMap = [...currentMap]
-            newMap[i][j] = {...newMap[i][j], ...currentTile.modifier}
-            setCurrentMap(newMap)
+            let tileMap = [...currentMap]
+            tileMap[i][j] = {...tileMap[i][j], ...currentTile.modifier}
+            setCurrentMap(tileMap)
         }
     }
 
