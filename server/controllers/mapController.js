@@ -4,7 +4,7 @@ const tile = require("../models/tileModel");
 module.exports = {
     getMaps: async (req, res) => {
         try {
-            const allMaps = await maps.find();
+            const allMaps = await Map.find();
             res.status(200).send(allMaps);
         } catch (err) {
             res.status(500).send(err);
@@ -25,6 +25,7 @@ module.exports = {
         })
 
         console.log("newMap", newMap)
+
         try {
             const savedMap = await newMap.save();
             res.status(201).send(savedMap);
@@ -34,7 +35,7 @@ module.exports = {
     },
 
     editMap: async (req, res) => {
-
+        
     },
 
     getTiles: async (req, res) => {

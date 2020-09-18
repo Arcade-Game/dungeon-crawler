@@ -11,6 +11,7 @@ export const MapEditorProvider = ({ children }) => {
         }))
     }));
     const [startingTile, setStartingTile] = useState([null, null])
+    
 
     useEffect(() => {
         setStartingTile(() => {
@@ -25,7 +26,8 @@ export const MapEditorProvider = ({ children }) => {
                 isMouseDown, setIsMouseDown,
                 currentTile, setCurrentTile,
                 currentMap, setCurrentMap,
-                startingTile, setStartingTile
+                startingTile, setStartingTile,
+                
             }}
         >
             {children}

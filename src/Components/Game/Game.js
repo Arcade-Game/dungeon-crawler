@@ -23,7 +23,6 @@ import Map from './Map';
 
 import {mapObject} from './Map Variables/mapObjects';
 import {puzzles} from './Map Variables/puzzles';
-import {tutorial} from './Map Variables/tutorial';
 // import {puzzles, levelOne, demoMap} from './Map Variables/puzzles';
 
 // Reducers
@@ -42,9 +41,7 @@ const Game = (props) => {
   // Seed maps
 
   // const {mapArray, mapX, mapY} = mapObject
-  const {mapArray, mapX, mapY} = tutorial
-  const {grid, setGrid, heightWidth, charX, setCharX, charY, setCharY, viewRowCols, isFight, setIsFight, inventoryToggle,
-  equipmentToggle, setInventoryToggle, setEquipmentToggle, newMoney, setNewMoney, keyToggle, setKeyToggle, monsterType, setMonsterType, monsterCoor, setMonsterCoor, characterHealth, setCharacterHealth, experience, setExperience, level, setLevel, XPforLevel, setXPforLevel, quicksandCounter, setQuicksandCounter, direction, setDirection} = useContext(GameContext)
+  const {grid, setGrid, heightWidth, charX, setCharX, charY, setCharY, viewRowCols, isFight, setIsFight, inventoryToggle, equipmentToggle, setInventoryToggle, setEquipmentToggle, newMoney, setNewMoney, keyToggle, setKeyToggle, monsterType, setMonsterType, monsterCoor, setMonsterCoor, characterHealth, setCharacterHealth, experience, setExperience, level, setLevel, XPforLevel, setXPforLevel, quicksandCounter, setQuicksandCounter, direction, setDirection, rawMap} = useContext(GameContext)
   // const {mapArray, mapX, mapY} = levelOne
   // const {mapArray, mapX, mapY} = demoMap
 
@@ -579,6 +576,9 @@ const Game = (props) => {
       stats: {...heroStats}
     })
   }
+
+  console.log("game.js GRID", grid)
+  console.log("game.js rawMap", rawMap)
   
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>

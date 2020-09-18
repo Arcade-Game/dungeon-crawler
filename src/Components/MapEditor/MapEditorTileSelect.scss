@@ -37,3 +37,29 @@
     height: 100%;
     width: 100%;
 }
+
+.monster {
+    position: relative;
+    color: white;
+    font-size: 4vh;
+    background-size: 100%;
+    background-position: center;
+    background: transparent;
+    span {
+        outline: none;
+        border: none;
+        background: none;
+        position: absolute;
+        font-size: 2.5vh;
+    }
+}
+
+.hidden {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mist {
+    
+}

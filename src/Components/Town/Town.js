@@ -113,7 +113,7 @@ const Town = (props) => {
 
    handlePlay = () => {
       props.history.push(`/game`)
-      window.location.reload(false)
+      // window.location.reload(false)
    },
 
    handleMapSelector = () => {
@@ -126,10 +126,10 @@ const Town = (props) => {
 
 
 
-   console.log(props)
-   console.log(lastLocation)
+   // console.log(props)
+   // console.log(lastLocation)
    
-   console.log('musicNumber', musicNumber)
+   // console.log('musicNumber', musicNumber)
 
    return (
       <>

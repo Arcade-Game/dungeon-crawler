@@ -7,8 +7,6 @@ import Game from './Components/Game/Game';
 import Death from './Components/Game/Death/Death';
 import HealthBar from './Components/Animations/HealthBar/HealthBar';
 import MapEditor from './Components/MapEditor/MapEditor';
-import {MapEditorProvider} from './context/MapEditorContext';
-import {GameProvider} from './context/GameContext';
 
 export default (
    <Switch>

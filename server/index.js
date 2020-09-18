@@ -36,9 +36,9 @@ massive({
    connectionString: CONNECTION_STRING,
    ssl: {rejectUnauthorized: false}
 }).then(db => {
+   app.listen(port, () => console.log(`Server running on port: ${port}`))
    app.set("db", db)
    console.log("DB connected")
-   app.listen(port, () => console.log(`Server running on port: ${port}`))
 })
 
 //auth endpoints 

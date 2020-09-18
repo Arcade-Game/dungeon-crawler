@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const mapSchema = new Schema({
-    title: String,
+const MapSchema = mongoose.Schema({
+    title: {type: String, required: true},
     start: [Number, Number],
     map: [[{
 
     }]]
 })
 
-module.exports = mongoose.model("Map", mapSchema);
+module.exports = mongoose.model("Map", MapSchema);

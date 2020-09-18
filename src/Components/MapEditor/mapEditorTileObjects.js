@@ -19,16 +19,24 @@ export const terrainVariables = [
 ]
 
 export const objectVariables = [
+    {title: "start"},
+    {title: "exit", modifier: {objType: "exit"}},
     {title: "pushable", modifier: {objType: "pushable"}},
     {title: "chest", modifier: {objType: "chest"}},
     {title: "gold-pile", modifier: {objType: "gold-pile"}},
-    {title: "delete", modifier: {objType: null}},
-    {title: "start"},
-    {title: "exit", modifier: {objType: "exit"}},
+    {title: "hidden-door", modifier: {objType: "hidden-door"}},
+    {title: "clear", modifier: {objType: null}},
 ]
 
 export const monsterVariables = [
-    {title: "monster", modifier: {objType: "monster"}},
+    {title: "monster", modifier: {objType: "monster", level: 1}},
+    {title: "monster", modifier: {objType: "monster", level: 2}},
+    {title: "monster", modifier: {objType: "monster", level: 3}},
+]
+
+export const modVariables = [
+    {title: "hidden", modifier: {hidden: true}},
+    {title: "mist", modifier: {mist: true}},
 ]
 
 // export const tileVariables = {
