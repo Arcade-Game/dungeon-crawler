@@ -44,12 +44,12 @@ const Map = ({getMonsterFn, setNewLava, direction, heroGuy, keyToggle, exploreTi
             // let y1 = grid[charY - 4] ? charY - 4 : 0
             // let y2 = grid[charY + 4] ? charY + 4 : grid.length-1
             let x1 = charX - 4
-            let x2 = charX + 4
+            let x2 = charX + 5
             let y1 = charY - 4
             let y2 = charY + 4
             let display = []
             for(let i = y1; i <= y2; i++){
-                display.push(grid[i].slice(grid[x1] ? x1 : 0, x2+1))
+                display.push(grid[i].slice(x1, x2))
             }
             setCharView(display)
         }

@@ -7,7 +7,7 @@ export const MapEditorProvider = ({ children }) => {
     const [currentTile, setCurrentTile] = useState(null);
     const [currentMap, setCurrentMap] = useState((() => {
         return [...Array(15)].map((e,i) => [...Array(25)].map((f,j) => {
-            return {tileType: "empty"}
+            return {tileType: "empty", elevation: 0}
         }))
     }));
     const [startingTile, setStartingTile] = useState([null, null])
