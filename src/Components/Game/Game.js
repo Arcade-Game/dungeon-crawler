@@ -72,10 +72,8 @@ const Game = (props) => {
 
     useEffect(() => { // Sets character health and monster types.
       setCharacterHealth(heroStats.health)
-      let newGrid = [...grid]
-      newGrid.forEach((e,i,a) => i > 8 && i < a.length-8 ? e.forEach((f,j,z) => { // Iterates over a copy of the grid, and if type is monster, calls getMonster, passing in the indexes, which updates state grid with a monster type.
-        return (j > 8 && j < z.length-8 ? (newGrid[i][j].objType === 'monster' ? getMonster(j, i) : null) : null)
-      }) : null)
+      // let newGrid = grid.map(e => e.slice())
+      // console.log("MONSTER", newGrid)
     }, [])
 
     // Functions
@@ -541,16 +539,7 @@ const Game = (props) => {
     setGrid(exploreGrid)
   }
 
-  const getMonster = (x, y) => { // Fetches monstertypes from the database and sets them when a monster tile is rendered.
-    if(grid[y][x].monsterType){
-      return grid[y][x].monsterType
-    }
-    axios.get(`/api/monster`).then(res => {
-      let newGrid = [...grid]
-      newGrid[y][x] = {...newGrid[y][x], monsterType: res.data.name}
-      setGrid(newGrid)
-    })
-  }
+ 
   
   const inventoryToggleFn = () => { // Toggles inventory.
     setInventoryToggle(!inventoryToggle)
@@ -597,7 +586,7 @@ const Game = (props) => {
           heightWidth={heightWidth}    
           viewRowCols={viewRowCols} 
           grid={grid} 
-          getMonsterFn={getMonster}
+          // getMonsterFn={getMonster}
           exploreTileFn={exploreTile}
           isFight={isFight} 
           setNewLava={setNewLava}
@@ -608,7 +597,7 @@ const Game = (props) => {
         {
           isFight ? 
           <CombatView 
-            monsterType={monsterType.toLowerCase()}
+            monsterType={monsterType.name.toLowerCase()}
             toggleFight = {setIsFight}
             isFightFn={setIsFight}
             setGridFn = {setGrid}

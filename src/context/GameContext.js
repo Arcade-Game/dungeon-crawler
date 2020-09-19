@@ -43,30 +43,58 @@ export const GameProvider = ({ children }) => {
             }, [])
 
             useEffect(() => {
-                setGrid(() => {
-                    const newGrid = myMap.map.map(arr => arr.slice())
-                    console.log("context newGrid", newGrid)
-                    let length1 = myMap.map[0] && myMap.map[0].length+(wallSize*2)
-                    let newestGrid = newGrid.map((e,i) => {
-                        newGrid[i].unshift(...[...Array(wallSize)].map((f,j) => {
-                            return {tileType: "empty", elevation: 10}
+                const wallGrid = addWalls()
+                console.log("wallGrid", wallGrid)
+
+                const getData = () => {
+                    wallGrid.forEach((e,i,a) => e.forEach(async (f,j,z) => { 
+                        if (wallGrid[i][j].objType === 'monster' && !wallGrid[i][j].monsterType) {
+                            const monster = await getMonster()
+                            console.log("monster getData", monster)
+                            wallGrid[i][j].monsterType = monster
+                        }
+
+                        // return ((newGrid[i][j].objType === 'monster' && !newGrid[i][j].monsterType) ? newGrid[i][j].monsterType = getMonster() : null)
                         }))
-                        newGrid[i].push(...[...Array(wallSize)].map((f,j) => {
-                            return {tileType: "empty", elevation: 10}
-                        }))
-                        return e
+                    setCharX((charX) => charX+wallSize)
+                    setCharY((charY) => charY+wallSize)
+                    return wallGrid
+                }
+                const finalGrid = getData()
+                setTimeout(() => {
+                    console.log("finalGrid", finalGrid)
+                    setGrid(() => {
+                        return finalGrid
                     })
-                    newestGrid.unshift(...[...Array(10)].map((e,i) => [...Array(length1)].map((e,i) => {
+                }, 400)
+            }, [myMap]);
+
+            const getMonster = async () => {
+                const monsters = await axios.get(`/api/monster`)
+                console.log("monsters", monsters.data)
+                return monsters.data
+            }
+
+            const addWalls = () => {
+                let newGrid = myMap.map.map(e => e.slice())
+                let length1 = myMap.map[0] && myMap.map[0].length+(wallSize*2)
+                let newestGrid = newGrid.map((e,i) => {
+                    newGrid[i].unshift(...[...Array(wallSize)].map((f,j) => {
                         return {tileType: "empty", elevation: 10}
-                    })))
-                    newestGrid.push(...[...Array(10)].map((e,i) => [...Array(length1)].map((e,i) => {
+                    }))
+                    newGrid[i].push(...[...Array(wallSize)].map((f,j) => {
                         return {tileType: "empty", elevation: 10}
-                    })))
-                    return newestGrid
+                    }))
+                    return e
                 })
-                setCharX((charX) => charX+wallSize)
-                setCharY((charY) => charY+wallSize)
-            }, [myMap])
+                newestGrid.unshift(...[...Array(10)].map((e,i) => [...Array(length1)].map((e,i) => {
+                    return {tileType: "empty", elevation: 10}
+                })))
+                newestGrid.push(...[...Array(10)].map((e,i) => [...Array(length1)].map((e,i) => {
+                    return {tileType: "empty", elevation: 10}
+                })))
+                return newestGrid
+            }
 
     // const exploreTile = (x, y) => { // Reveals tiles on the minimap.
     //     let exploreGrid = [...grid]

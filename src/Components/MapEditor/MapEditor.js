@@ -80,7 +80,9 @@ const MapEditor = () => {
         // setGrid(currentMap.slice())
         setCharX(startingTile[1])
         setCharY(startingTile[0])
-        push('/game')
+        setTimeout(() => {
+            push('/game')
+        }, 500);
     }
 
     const handleCreateTile = () => {

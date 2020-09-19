@@ -86,7 +86,7 @@ const Tile = (props) => {
     let newMonster =''
     if(grid[y][x].monsterType){ // Sets className for monsters.
         newMonster = grid[y][x].monsterType
-        mName = `tile-view-${grid[y][x].monsterType.toLowerCase()}`
+        mName = `tile-view-${grid[y][x].monsterType.name.toLowerCase()}`
     }
 
 
