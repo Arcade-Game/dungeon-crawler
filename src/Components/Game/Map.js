@@ -39,13 +39,17 @@ const Map = ({getMonsterFn, setNewLava, direction, heroGuy, keyToggle, exploreTi
 
     useEffect(() => { // Iterates over seed map with a for loop and slices segments of each array to create a 9x9 grid which centers on (charX, charY). Re-renders each time charX or charY is changed (with arrow keys).  Updates state with the new 9x9 character view grid. 
         const makeBlock = () => {
+            // let x1 = grid[charX - 4] ? charX - 4 : 0
+            // let x2 = grid[charX + 4] ? charX + 4 : grid[0].length-1
+            // let y1 = grid[charY - 4] ? charY - 4 : 0
+            // let y2 = grid[charY + 4] ? charY + 4 : grid.length-1
             let x1 = charX - 4
-            let x2 = charX + 4
+            let x2 = charX + 5
             let y1 = charY - 4
             let y2 = charY + 4
             let display = []
             for(let i = y1; i <= y2; i++){
-                display.push(grid[i].slice(x1, x2+1))
+                display.push(grid[i].slice(x1, x2))
             }
             setCharView(display)
         }

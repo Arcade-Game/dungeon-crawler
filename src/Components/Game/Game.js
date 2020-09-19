@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {TweenMax, Power3, TweenLite} from 'gsap';
 import axios from 'axios';
 import {GameContext} from '../../context/GameContext';
+import {MapEditorContext} from '../../context/MapEditorContext';
 
 // Styling
 
@@ -23,7 +24,6 @@ import Map from './Map';
 
 import {mapObject} from './Map Variables/mapObjects';
 import {puzzles} from './Map Variables/puzzles';
-import {tutorial} from './Map Variables/tutorial';
 // import {puzzles, levelOne, demoMap} from './Map Variables/puzzles';
 
 // Reducers
@@ -42,9 +42,9 @@ const Game = (props) => {
   // Seed maps
 
   // const {mapArray, mapX, mapY} = mapObject
-  const {mapArray, mapX, mapY} = tutorial
-  const {grid, setGrid, heightWidth, charX, setCharX, charY, setCharY, viewRowCols, isFight, setIsFight, inventoryToggle,
-  equipmentToggle, setInventoryToggle, setEquipmentToggle, newMoney, setNewMoney, keyToggle, setKeyToggle, monsterType, setMonsterType, monsterCoor, setMonsterCoor, characterHealth, setCharacterHealth, experience, setExperience, level, setLevel, XPforLevel, setXPforLevel, quicksandCounter, setQuicksandCounter, direction, setDirection} = useContext(GameContext)
+  const {grid, setGrid, heightWidth, charX, setCharX, charY, setCharY, viewRowCols, isFight, setIsFight, inventoryToggle, equipmentToggle, setInventoryToggle, setEquipmentToggle, newMoney, setNewMoney, keyToggle, setKeyToggle, monsterType, setMonsterType, monsterCoor, setMonsterCoor, characterHealth, setCharacterHealth, experience, setExperience, level, setLevel, XPforLevel, setXPforLevel, quicksandCounter, setQuicksandCounter, direction, setDirection, myMap} = useContext(GameContext)
+  const {currentMap} = useContext(MapEditorContext);
+  console.log("currentMap Game.js", currentMap)
   // const {mapArray, mapX, mapY} = levelOne
   // const {mapArray, mapX, mapY} = demoMap
 
@@ -72,10 +72,8 @@ const Game = (props) => {
 
     useEffect(() => { // Sets character health and monster types.
       setCharacterHealth(heroStats.health)
-      let newGrid = [...grid]
-      newGrid.forEach((e,i,a) => i > 8 && i < a.length-8 ? e.forEach((f,j,z) => { // Iterates over a copy of the grid, and if type is monster, calls getMonster, passing in the indexes, which updates state grid with a monster type.
-        return (j > 8 && j < z.length-8 ? (newGrid[i][j].objType === 'monster' ? getMonster(j, i) : null) : null)
-      }) : null)
+      // let newGrid = grid.map(e => e.slice())
+      // console.log("MONSTER", newGrid)
     }, [])
 
     // Functions
@@ -154,13 +152,17 @@ const Game = (props) => {
         break;
       case "exit": // Receive experience for completion, save game, and push to town view.
         setQuicksandCounter(0)
-        updateExperience(x,y,"complete")
         setCharX(x)
         setCharY(y)
         // setGrid([...mapArray])
-        saveGameLocal()
-        props.history.push('/town')
-        window.location.reload(false) // Reload in order to reset map.
+        if (myMap.title === "test") {
+          props.history.push('/editor')
+        } else {
+          updateExperience(x,y,"complete")
+          saveGameLocal()
+          props.history.push('/town')
+          window.location.reload(false) // Reload in order to reset map.
+        }
         break;
       case "lookout": // Move into target. Extends visible tiles on the mini-map.
         seeLookout(x,y)
@@ -537,16 +539,7 @@ const Game = (props) => {
     setGrid(exploreGrid)
   }
 
-  const getMonster = (x, y) => { // Fetches monstertypes from the database and sets them when a monster tile is rendered.
-    if(grid[y][x].monsterType){
-      return grid[y][x].monsterType
-    }
-    axios.get(`/api/monster`).then(res => {
-      let newGrid = [...grid]
-      newGrid[y][x] = {...newGrid[y][x], monsterType: res.data.name}
-      setGrid(newGrid)
-    })
-  }
+ 
   
   const inventoryToggleFn = () => { // Toggles inventory.
     setInventoryToggle(!inventoryToggle)
@@ -579,6 +572,8 @@ const Game = (props) => {
       stats: {...heroStats}
     })
   }
+
+  console.log("game.js GRID", grid)
   
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
@@ -591,7 +586,7 @@ const Game = (props) => {
           heightWidth={heightWidth}    
           viewRowCols={viewRowCols} 
           grid={grid} 
-          getMonsterFn={getMonster}
+          // getMonsterFn={getMonster}
           exploreTileFn={exploreTile}
           isFight={isFight} 
           setNewLava={setNewLava}
@@ -602,7 +597,7 @@ const Game = (props) => {
         {
           isFight ? 
           <CombatView 
-            monsterType={monsterType.toLowerCase()}
+            monsterType={monsterType.name.toLowerCase()}
             toggleFight = {setIsFight}
             isFightFn={setIsFight}
             setGridFn = {setGrid}

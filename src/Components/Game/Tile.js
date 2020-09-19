@@ -15,11 +15,13 @@ const Tile = (props) => {
 
     }, [isFight])
 
+    exploreTileFn(x, y) // Calls explore tile, which reveals tiles on the minimap when they are rendered on the character grid.
+    
     let animate = ['0%', '12.5%', '25%', '37.5%', '50%', '62.5%', '75%', '87.5%', '100%'] // Used to randomize the sprite position for character sprite animation.
     let tileStyle = null // Variable for conditional tile styling.
     let cName = "char-view" // Variable for conditional classNames.
     let mName = '' // Variable for conditional monster names.
-    exploreTileFn(x, y) // Calls explore tile, which reveals tiles on the minimap when they are rendered on the character grid.
+    
 
     switch(tileType){ // Determines how to render each tile in the character view.  Changes cName, which is the variable used as the conditional className.  Most of the this could be easily done with simple template strings without the extra steps if there had been stricter naming conventions from the beginning.
         case "wall":
@@ -84,7 +86,7 @@ const Tile = (props) => {
     let newMonster =''
     if(grid[y][x].monsterType){ // Sets className for monsters.
         newMonster = grid[y][x].monsterType
-        mName = `tile-view-${grid[y][x].monsterType.toLowerCase()}`
+        mName = `tile-view-${grid[y][x].monsterType.name.toLowerCase()}`
     }
 
 

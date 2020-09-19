@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import MeTile from './MeTile';
+import {MapEditorContext} from '../../context/MapEditorContext';
 
-const MapEditorBody = ({currentMap, pxSize, height, width, setHeight, setWidth}) => {
-    console.log("currentMap", currentMap)
+const MapEditorBody = ({pxSize, height, width, setHeight, setWidth}) => {
+    const {currentMap} = useContext(MapEditorContext);
     
 
     useEffect(() => {
@@ -11,19 +12,20 @@ const MapEditorBody = ({currentMap, pxSize, height, width, setHeight, setWidth})
     }, [currentMap])
 
     console.log("size", height, width)
+    console.log("mapEditor currentMap", currentMap)
 
     const gridStyle = {
         gridTemplateColumns: `repeat(${width}, ${pxSize}px)`,
         gridTemplateRows: `repeat(${height}, ${pxSize}px)`,
     }
 
-    const myMap = currentMap.map((e,i) => e.map((f,j) => {
-        return <MeTile {...{f, i, j}}/>
+    const mapEditorMap = currentMap.map((e,i) => e.map((f,j) => {
+        return <MeTile key={j} {...{f, i, j}}/>
     }))
 
     return (
         <div className="map-editor-body-container" style={gridStyle}>
-            {myMap}
+            {mapEditorMap}
         </div>
     )
 }

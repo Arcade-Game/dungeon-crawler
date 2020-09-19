@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import './Footer.scss';
-import {withRouter} from 'react-router-dom';
+import {withRouter, useHistory} from 'react-router-dom';
 import Inventory from '../Game/Character/Inventory/Inventory';
 import titlesReducer from '../../Redux/reducers/titlesReducer';
 import {TweenLite, Power3, Power2} from 'gsap';
 import { GiBlood } from 'react-icons/gi';
 // import {BsArrowLeft} from 'react-icons/bs';
 import {GameContext} from '../../context/GameContext';
+import {MdKeyboardBackspace} from 'react-icons/md';
 
 const Footer = props => {
-   const {keyToggle} = useContext(GameContext);
+   const {push} = useHistory()
+   const {keyToggle, myMap} = useContext(GameContext);
    const {inventory, equipment, updateSessionInventory,equipmentToggle, inventoryToggle, heroStats, hero,  newMoney, experience, level, characterHealth, isFight, setEquipmentToggleState, setInventoryToggleState, setKeyToggleFn} = props;
    const {gender, class_name} = hero, 
               [heroAttack, setHeroAttack] = useState(),
@@ -44,6 +46,10 @@ const Footer = props => {
       setMenuToggle(!menuToggle)
    }
 
+   const handleTestMenuClick = () => {
+      push('/editor')
+   }
+
    useEffect (() => {
       setHeroArmor ((+heroStats.armor) + (+equipment.reduce((acc, el) => {
          return acc += ((el.armor) ? el.armor : 0)}, 0)));
@@ -53,9 +59,14 @@ const Footer = props => {
 
    return (
       <>
-      <div className="footer-top" onClick={handleMenuClick}>
+      {
+         myMap.title === "test" ? 
+         <div className="footer-top-test" onClick={handleTestMenuClick}><MdKeyboardBackspace color={"white"} /></div> : 
+         <div className="footer-top" onClick={handleMenuClick}>
          <h1>V</h1>
-      </div>
+         </div>
+      }
+      
          {
          menuToggle === true ? <div className="game-menu">
                <div className="menu-title"><span>indermere</span></div>

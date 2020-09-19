@@ -1,10 +1,10 @@
-const maps = require("../models/mapModel");
+const Map = require("../models/mapModel");
 const tile = require("../models/tileModel");
 
 module.exports = {
     getMaps: async (req, res) => {
         try {
-            const allMaps = await maps.find();
+            const allMaps = await Map.find();
             res.status(200).send(allMaps);
         } catch (err) {
             res.status(500).send(err);
@@ -16,12 +16,15 @@ module.exports = {
     },
 
     createMap: async (req, res) => {
-        const {map, title} = req.body
+        const {map, title, startingTile} = req.body
 
-        const newMap = new maps({
-            map,
-            title
+        const newMap = new Map({
+            title,
+            start: startingTile,
+            map
         })
+
+        console.log("newMap", newMap)
 
         try {
             const savedMap = await newMap.save();
@@ -32,7 +35,7 @@ module.exports = {
     },
 
     editMap: async (req, res) => {
-
+        
     },
 
     getTiles: async (req, res) => {

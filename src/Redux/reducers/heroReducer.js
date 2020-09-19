@@ -103,9 +103,9 @@ export const equipItem = (item, index) => {
 
 
 export default function reducer (state = initialState, action) {
-   console.log('REDUCER DING')
+   // console.log('REDUCER DING')
    const {type, payload} = action;
-   console.log(payload)
+   // console.log(payload)
    switch(type){
 
       case DEATH_COUNTER:
@@ -137,7 +137,7 @@ export default function reducer (state = initialState, action) {
                case boots:
                    return equipmentInit[5] = item;
                default:
-                  console.log("SELECT_HERO error");
+                  // console.log("SELECT_HERO error");
             }})
          return {...state, 
             hero: {file_id: payload.file_id, hero_name: payload.hero_name, class_name: payload.class_name, gender: payload.gender, level: payload.level, gold: payload.gold, deaths: payload.deaths, honor: payload.honor}, 
@@ -155,7 +155,7 @@ export default function reducer (state = initialState, action) {
          }
 
          case SAVE_HERO:
-            console.log("reducer hit", payload)
+            // console.log("reducer hit", payload)
             return {hero: {...state.hero},
             stats: {...state.stats},
             equipment: [...payload.equipment], 
@@ -180,8 +180,8 @@ export default function reducer (state = initialState, action) {
             };
 
          case REPLACE_ITEM:
-            console.log (payload.inv)
-            console.log(payload.equ)
+            // console.log (payload.inv)
+            // console.log(payload.equ)
             return {
                hero: {...state.hero},
                stats: {...state.stats},
@@ -236,9 +236,9 @@ export default function reducer (state = initialState, action) {
          case DELETE_ITEM:
                if (payload.equipped === "false") {
                state.inventory.splice(+payload.data, 1, 0)
-               console.log("inv delete")
+               // console.log("inv delete")
             } else {
-               console.log("equ delete")
+               // console.log("equ delete")
                switch (payload.data){
                   case weapon:
                      state.equipment[0] = {type: "weapon"};
@@ -259,7 +259,7 @@ export default function reducer (state = initialState, action) {
                       state.equipment[5] = {type: "boots"};
                       break;
                default:
-                  console.log("DELETE_ITEM error");
+                  // console.log("DELETE_ITEM error");
                }
             }
             return {

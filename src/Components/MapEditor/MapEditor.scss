@@ -1,22 +1,22 @@
 .map-editor-container {
-    background: grey;
+    background: rgb(138, 134, 134);
     height: 100%;
     width: 100%;
 }
 
 .map-editor-header {
     height: 5%;
-    border: 1px solid black;
+    // border: 1px solid black;
 }
 
 .map-editor-footer {
     height: 5%;
-    border: 1px solid black;
+    // border: 1px solid black;
     display: flex;
     justify-content: space-between;
     align-items: center;
     .me-footer-one {
-        border: 1px solid black;
+        // border: 1px solid black;
         height: 95%;
         width: 20%;
         display: flex;
@@ -24,11 +24,13 @@
         padding-left: 10px;
 
         .me-px-size {
-            border: 1px solid black;
+            // border: 1px solid black;
             height: 90%;
             width: 40%;
             font-size: 30px;
             text-align: center;
+            background-color: purple;
+
         }
         button {
             border: 1px solid black;
@@ -37,7 +39,7 @@
         }
     }
     .me-footer-two {
-        border: 1px solid black;
+        // border: 1px solid black;
         height: 95%;
         width: 10%;
         display: flex;
@@ -50,7 +52,7 @@
         }
     }
     .me-footer-three {
-        border: 1px solid black;
+        // border: 1px solid black;
         height: 95%;
         width: 20%;
         display: flex;
@@ -80,7 +82,7 @@
 
 .map-editor-body {
     height: 90%;
-    border: 1px solid black;
+    // border: 1px solid black;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -88,7 +90,7 @@
 
     .map-editor-left {
         left: 0;
-        border: 1px solid black;
+        // border: 1px solid black;
         width: 10%;
         height: 100%;
         padding: .3vh;
@@ -100,7 +102,7 @@
         .tile-editor-container {
             display: flex;
             flex-wrap: wrap;
-            border: 1px solid green;
+            // border: 1px solid green;
             background: rgb(80, 80, 80);
             div {
                 position: relative;
@@ -125,18 +127,22 @@
             position: relative;
             height: 7.6vh;
             width: 7.6vh;
-            border: .1vh solid black;
+            border: .5vh solid black;
             background-size: 100%;
             padding: 0;
             background-position: center;
             div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 height: 100%;
                 width: 100%;
+                font-size: 3.5vh;
             }
         }
 
         .create-tile-container {
-            border: 1px solid purple;
+            // border: 1px solid purple;
             height: 25%;
             display: flex;
             flex-direction: column;
@@ -221,4 +227,22 @@
             width: 100%;
         }
     }
+    .hidden {
+        opacity: .5;
+    }
+    .mist-div {
+        opacity: .5;
+    }
+}
+
+.all-maps-selector {
+    border: 1px solid purple;
+    height: 60%;
+    width: 95%;
+}
+
+.all-maps-option {
+    border: 1px solid white;
+    height: 10%;
+    width: 95%;
 }

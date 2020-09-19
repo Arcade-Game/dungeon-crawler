@@ -44,10 +44,10 @@ const Town = (props) => {
    },[])
 
    useEffect (() => {
-      console.log(lastLocation)
+      // console.log(lastLocation)
       if (lastLocation && lastLocation.pathname === "/game" || lastLocation && lastLocation.pathname === "/death" ){
          saveGame()
-         console.log("save hit")
+         // console.log("save hit")
       }
       if (!hero.hero_name){
          TweenMax.to(selectHeroText, .8, {alpha:.4, color:"rgb(200, 200, 200)", repeat: -1, yoyo:true, ease:Power3.easeIn})
@@ -69,17 +69,17 @@ const Town = (props) => {
       const {player_id} = props.auth
       axios.get(`api/heroes/player/${player_id}`).then(res => {
          props.setHeroList(res.data)
-         console.log("HERO LIST SET", res.data)
+         // console.log("HERO LIST SET", res.data)
       })
    // } else {
    //    console.log("exists")
    // }
    },
     getVendorEquipmentList = (quantity) => {
-       console.log("quantity", quantity)
+      //  console.log("quantity", quantity)
       axios.get(`/api/items/${quantity}`).then(res => {
          setVendorEquipmentList(res.data)
-         console.log(res.data)
+         // console.log(res.data)
       }).catch(err => console.log(err));
    },
 
@@ -95,15 +95,15 @@ const Town = (props) => {
          inventory
       }
          TweenMax.fromTo(saveBanner, 6, {opacity: 1, x: 18, ease: Power2.easeIn},{opacity: 0, x:-250, ease: Power2.easeOut})
-         console.log(saveData)
+         // console.log(saveData)
          axios.put(`/api/hero/${file_id}`, saveData).then(res => {
-            console.log(res.data)
+            // console.log(res.data)
          })
                //bank
       // player honor
       //experience
       //quests/maps = make a table for each - boolean
-      console.log("Game may have been saved?")
+      // console.log("Game may have been saved?")
    },
 
    stopPropagation = (event) => {
@@ -113,7 +113,7 @@ const Town = (props) => {
 
    handlePlay = () => {
       props.history.push(`/game`)
-      window.location.reload(false)
+      // window.location.reload(false)
    },
 
    handleMapSelector = () => {
@@ -126,10 +126,10 @@ const Town = (props) => {
 
 
 
-   console.log(props)
-   console.log(lastLocation)
+   // console.log(props)
+   // console.log(lastLocation)
    
-   console.log('musicNumber', musicNumber)
+   // console.log('musicNumber', musicNumber)
 
    return (
       <>

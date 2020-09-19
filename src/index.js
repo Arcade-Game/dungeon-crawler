@@ -14,8 +14,8 @@ const store = configureStore();
 
 ReactDOM.render(
   <Router>
-    <MapEditorProvider>
       <GameProvider>
+    <MapEditorProvider>
         < LastLocationProvider >
           <Provider store={store}> 
             <React.StrictMode>
@@ -23,8 +23,8 @@ ReactDOM.render(
             </React.StrictMode>
           </Provider>
         </LastLocationProvider>
-      </GameProvider>
     </MapEditorProvider>
+      </GameProvider>
     
   </Router>,
   document.getElementById('root')
