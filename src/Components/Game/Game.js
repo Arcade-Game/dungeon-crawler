@@ -42,7 +42,7 @@ const Game = (props) => {
   // Seed maps
 
   // const {mapArray, mapX, mapY} = mapObject
-  const {grid, setGrid, heightWidth, charX, setCharX, charY, setCharY, viewRowCols, isFight, setIsFight, inventoryToggle, equipmentToggle, setInventoryToggle, setEquipmentToggle, newMoney, setNewMoney, keyToggle, setKeyToggle, monsterType, setMonsterType, monsterCoor, setMonsterCoor, characterHealth, setCharacterHealth, experience, setExperience, level, setLevel, XPforLevel, setXPforLevel, quicksandCounter, setQuicksandCounter, direction, setDirection, rawMap} = useContext(GameContext)
+  const {grid, setGrid, heightWidth, charX, setCharX, charY, setCharY, viewRowCols, isFight, setIsFight, inventoryToggle, equipmentToggle, setInventoryToggle, setEquipmentToggle, newMoney, setNewMoney, keyToggle, setKeyToggle, monsterType, setMonsterType, monsterCoor, setMonsterCoor, characterHealth, setCharacterHealth, experience, setExperience, level, setLevel, XPforLevel, setXPforLevel, quicksandCounter, setQuicksandCounter, direction, setDirection, myMap} = useContext(GameContext)
   const {currentMap} = useContext(MapEditorContext);
   console.log("currentMap Game.js", currentMap)
   // const {mapArray, mapX, mapY} = levelOne
@@ -154,13 +154,17 @@ const Game = (props) => {
         break;
       case "exit": // Receive experience for completion, save game, and push to town view.
         setQuicksandCounter(0)
-        updateExperience(x,y,"complete")
         setCharX(x)
         setCharY(y)
         // setGrid([...mapArray])
-        saveGameLocal()
-        props.history.push('/town')
-        window.location.reload(false) // Reload in order to reset map.
+        if (myMap.title === "test") {
+          props.history.push('/editor')
+        } else {
+          updateExperience(x,y,"complete")
+          saveGameLocal()
+          props.history.push('/town')
+          window.location.reload(false) // Reload in order to reset map.
+        }
         break;
       case "lookout": // Move into target. Extends visible tiles on the mini-map.
         seeLookout(x,y)
@@ -581,7 +585,6 @@ const Game = (props) => {
   }
 
   console.log("game.js GRID", grid)
-  console.log("game.js rawMap", rawMap)
   
   return (
     <div className="wrapper" role="button" tabIndex="0" onKeyDown={e => move(e)}>
