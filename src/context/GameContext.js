@@ -53,9 +53,7 @@ export const GameProvider = ({ children }) => {
                             console.log("monster getData", monster)
                             wallGrid[i][j].monsterType = monster
                         }
-
-                        // return ((newGrid[i][j].objType === 'monster' && !newGrid[i][j].monsterType) ? newGrid[i][j].monsterType = getMonster() : null)
-                        }))
+                    }))
                     setCharX((charX) => charX+wallSize)
                     setCharY((charY) => charY+wallSize)
                     return wallGrid

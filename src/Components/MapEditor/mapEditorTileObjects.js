@@ -37,6 +37,7 @@ export const monsterVariables = [
 export const modVariables = [
     {title: "hidden", modifier: {hidden: true}},
     {title: "mist", modifier: {mist: true}},
+    {title: "clear", modifier: {mist: false, hidden: false}},
 ]
 
 // export const tileVariables = {
