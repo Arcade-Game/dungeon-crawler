@@ -17,7 +17,7 @@
     "lodash": "^4.17.15",
     "massive": "^6.3.0",
     "mongoose": "^5.10.0",
-    "node-sass": "^4.14.0",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
